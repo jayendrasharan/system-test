@@ -1,0 +1,57 @@
+$primary-btn-background: #007bff;
+$primary-btn-color: #fff;
+$re-open: #17a2b8;
+$danger: #dc3545;
+$success: #28a745;
+$black: #000;
+$warning: #ffc107;
+
+button {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  outline: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  //   padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  background-color: $primary-btn-background;
+  color: $primary-btn-color;
+  margin-right: 5px;
+  &:hover {
+    background-color: darken($color: $primary-btn-background, $amount: 20%);
+  }
+}
+.re-open {
+  background-color: $re-open;
+  border-color: $re-open;
+  &:hover {
+    background-color: darken($color: $re-open, $amount: 15%);
+  }
+}
+.delete {
+  background-color: $danger;
+  border-color: $danger;
+  &:hover {
+    background-color: darken($color: $danger, $amount: 15%);
+  }
+}
+.done {
+  background-color: $success;
+  border-color: $success;
+  &:hover {
+    background-color: darken($color: $success, $amount: 15%);
+  }
+}
+.edit {
+  color: $black;
+  background-color: $warning;
+  border-color: $warning;
+  &:hover {
+    background-color: darken($color: $warning, $amount: 15%);
+  }
+}

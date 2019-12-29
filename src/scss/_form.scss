@@ -1,0 +1,37 @@
+form {
+  width: 60%;
+  margin: 0 auto;
+  .error {
+    color: red;
+    position: absolute;
+    font-size: 15px;
+  }
+  label span {
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+  }
+  input,
+  textarea {
+    font: 1em sans-serif;
+    width: 250px;
+    box-sizing: border-box;
+    border: 1px solid #999;
+  }
+  fieldset {
+    display: inline-block;
+    border: none;
+  }
+  .radio {
+    margin: 0;
+    input[type="radio"] {
+      width: 20px;
+    }
+    label {
+      span {
+        width: 70px;
+        text-align: left;
+      }
+    }
+  }
+}
