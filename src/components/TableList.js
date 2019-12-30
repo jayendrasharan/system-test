@@ -6,7 +6,7 @@ import EditForm from "./Form";
 import Modal from "./Modal";
 import TableRow from "./TableRow";
 
-import { deleteTodo, reOpenTodo, markDone } from "../store/todo";
+import { deleteTodo, reOpenTodo, markDone, editTodo } from "../store/todo";
 import { setFormToEdit, clearFormToEdit } from "../store/formEdit";
 
 const TableList = ({
@@ -15,7 +15,8 @@ const TableList = ({
   reOpenTodo,
   markDone,
   setFormToEdit,
-  clearFormToEdit
+  clearFormToEdit,
+  editTodo
 }) => {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
@@ -97,7 +98,11 @@ const TableList = ({
           <EditForm
             type="edit"
             handleCancel={onEditDismiss}
-            handleFormSubmit={res => console.log(res)}
+            handleFormSubmit={res => {
+              console.log(res);
+              editTodo(res);
+              onEditDismiss();
+            }}
           />
         }
       />
@@ -148,6 +153,7 @@ const mapDispatchToProps = dispatch => {
     deleteTodo: postId => dispatch(deleteTodo(postId)),
     reOpenTodo: postId => dispatch(reOpenTodo(postId)),
     markDone: postId => dispatch(markDone(postId)),
+    editTodo: postId => dispatch(editTodo(postId)),
     setFormToEdit: postId => dispatch(setFormToEdit(postId)),
     clearFormToEdit: postId => dispatch(clearFormToEdit(postId))
   };

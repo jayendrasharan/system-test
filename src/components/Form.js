@@ -19,13 +19,10 @@ const Form = ({
   const [priority, setPriority] = useState("none");
   const [dueDate, setDueDate] = useState("");
   const [postToEdit, setPostToEdit] = useState(null);
+  const [createdAt, setCreatedAt] = useState(null);
   const handleOptionChange = ev => {
     setSelectedOption(ev.target.value);
   };
-
-  useEffect(() => {
-    populateFields();
-  }, []);
 
   const populateFields = () => {
     if (postIdToEdit !== null) {
@@ -36,6 +33,7 @@ const Form = ({
       setPriority(post.priority);
       setDueDate(post.dueDate);
       setSelectedOption(post.currentState);
+      setCreatedAt(post.createdAt);
     }
   };
 
@@ -47,13 +45,14 @@ const Form = ({
   const getPostById = id => {
     return posts.find(post => post.id === id);
   };
-
+  useEffect(() => populateFields(), []);
   const getDate = () => {
     const today = new Date();
     return today.toISOString().substring(0, 10);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = e => {
+    e.preventDefault();
     if (defaultFormType === 0) {
       if (titleError === "" && descriptionError === "") {
         const newTodo = {
@@ -87,8 +86,8 @@ const Form = ({
         <Button
           name="Save"
           class="submit"
-          type="submit"
-          onClick={e => handleSubmit()}
+          type="button"
+          onClick={e => handleSubmit(e)}
         />
         <Button name="Cancel" class="cancel" onClick={() => handleCancel()} />
       </>
@@ -177,7 +176,7 @@ const Form = ({
             <label>
               <span>Created At:</span>
             </label>
-            <span>Some Date</span>
+            <span>{createdAt}</span>
           </p>
         )}
         <p>
