@@ -22,8 +22,8 @@ const data = [
     currentState: false,
     title: "Treeflex",
     description: "Networked well-modulated local area network",
-    createdAt: "4-17-2019",
-    dueDate: "12-30-2018",
+    createdAt: "2018-08-12",
+    dueDate: "2019-04-12",
     priority: "high"
   },
   {
@@ -31,8 +31,8 @@ const data = [
     currentState: false,
     title: "Greenlam",
     description: "Innovative bandwidth-monitored open system",
-    createdAt: "11-19-2018",
-    dueDate: "3-13-2019",
+    createdAt: "2018-04-02",
+    dueDate: "2018-06-12",
     priority: "low"
   },
   {
@@ -40,8 +40,8 @@ const data = [
     currentState: false,
     title: "Fintone",
     description: "Future-proofed well-modulated standardization",
-    createdAt: "1-14-2019",
-    dueDate: "9-25-2019",
+    createdAt: "2018-09-12",
+    dueDate: "2019-10-14",
     priority: "medium"
   }
 ];
