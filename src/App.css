@@ -1,0 +1,105 @@
+
+
+.app-container {
+  display : flex;
+  flex-direction: column;
+  
+
+}
+.app-container *{
+  margin: 0.5rem;
+}
+
+.search-container{
+  display:flex;
+  align-items: baseline; 
+}
+
+
+
+.tabs-container{
+  display : flex;
+  align-items: center;
+  
+}
+
+.visibility{
+  flex-grow:1;
+  display:flex
+}
+
+.visibility *{
+  margin:0.5rem
+}
+
+nav {
+  color:blue;
+  cursor: pointer;
+  
+}
+
+nav .active{
+  color:red
+}
+
+/* .todo-container{
+  display : flex;
+  flex-direction: column;
+} */
+
+.todo-header{
+  border:1px solid black;
+  display : flex;
+  /* justify-content: space-between; */
+  flex-basis:20px
+
+}
+
+.table{
+  vertical-align: baseline;
+  text-align: center;
+  text-overflow:unset ;
+}
+
+.thead-light th{
+  cursor: pointer;
+}
+
+tbody{
+  overflow: auto;
+}
+
+.action{
+  display:inline-flex;
+}
+.action span{
+  cursor: pointer;
+}
+
+.plus .fas{
+  color: rgb(0, 204, 255);
+  background-color:white ;
+  border-radius: 50%;
+  font-size: 50px;
+  position: fixed;
+  bottom: 6rem;
+  right:8rem;
+  cursor: pointer;
+}
+
+.model-container {
+  /* display: none; */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
