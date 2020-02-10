@@ -1,0 +1,27 @@
+$stripe-color: #ddd;
+$bg-color: #282c33;
+$white: #fff;
+
+table {
+  width: 100%;
+  text-align: center;
+  th {
+    background-color: $bg-color;
+    color: $white;
+    height: 2.5em;
+    cursor: pointer;
+  }
+  th,
+  td {
+    border-bottom: 1px solid $stripe-color;
+  }
+  td {
+    cursor: default;
+  }
+  tr {
+    height: 3.5rem;
+  }
+}
+.complete {
+  text-decoration: line-through;
+}
