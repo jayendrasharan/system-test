@@ -1,28 +1,58 @@
 import React, {useState} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
-import RichTextEditor from 'react-rte';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import { connect } from 'react-redux';
+
+import { addTodo, updateTodo } from './../../store/actions/actions';
 
 import { priority } from './../../config';
 import "react-datepicker/dist/react-datepicker.css";
 import './CustomModal.css';
 
 const CustomModal = props => {
-  const { type, title, row } = props;
+  const { type, title, row, addNewRow, updateRow } = props;
+  
   const [modal, setModal] = useState(false);
   const [summary, setSummary] = useState((row && row.summary) || '');
-  const [desc, setDesc] = useState(RichTextEditor.createEmptyValue(row && row.description));
+  const [desc, setDesc] = useState(row && row.description || '');
   const [pri, setPri] = useState( (row && row.priority) || -1);
-  const [dueDate, setDueDate] = useState((row && new Date(row.dueDate)) ||new Date());
+  const [dueDate, setDueDate] = useState((row && new Date(row.dueDate)) || new Date());
   const toggle = () => setModal(!modal);
 
   const handleSummary = e =>{
-    console.log(e.target.value.length)
     if(e.target.value.length < 140){
       setSummary(e.target.value);
     }else{
       return false;
     }
+  };
+
+  const handleDesc = e =>{
+    if(e.target.value.length < 500){
+      setDesc(e.target.value)
+    }else{
+      return false;
+    }
+  };
+
+  const handleSave = () =>{
+    const rec = {
+      currentState: true,
+      summary: summary,
+      description: desc,
+      createdAt: moment(new Date()).format('L'),
+      dueDate: moment(new Date(dueDate)).format('L'),
+      priority: pri
+    }
+    if(type === "new"){
+      addNewRow(rec)
+    }else{
+      updateRow({...rec, id: row.id})
+    }
+      
+    setModal(false)
   };
 
   return (
@@ -77,11 +107,11 @@ const CustomModal = props => {
                 {type === "view" ? (
                   <p className="read-only-els">{row.description}</p>
                 ) : (
-                  <RichTextEditor
+                  <textarea
+                    rows="10"
+                    className='form-control w-100'
                     value={desc}
-                    onChange={val => {
-                      setDesc(val);
-                    }}
+                    onChange={handleDesc}
                   />
                 )}
               </div>
@@ -120,8 +150,8 @@ const CustomModal = props => {
                 <div className="col-sm-8">
                   {type === "view" ? (
                     <span className="read-only-els due-date">
-                      {row.dueDate}
-                    </span> //FIXME: why not dueDate?
+                      {moment(row.dueDate).format('LL')}
+                    </span>
                   ) : (
                     <DatePicker
                       selected={dueDate}
@@ -138,14 +168,19 @@ const CustomModal = props => {
             <Button color="secondary" onClick={toggle} className="btn-lg">
               Cancel
             </Button>
-            <Button color="primary" className="btn-lg">
-              Save
+            <Button color="primary" className="btn-lg" onClick={handleSave}>
+              {type === "edit" ? 'Update' : 'Save'}
             </Button>
           </ModalFooter>
         ):('')}
       </Modal>
     </>
   );
-}
+};
 
-export default CustomModal;
+const mapDispatchToProps = dispatch => ({
+  addNewRow : row => dispatch(addTodo(row)),
+  updateRow : row => dispatch(updateTodo(row))
+});
+
+export default connect(null, mapDispatchToProps)(CustomModal);

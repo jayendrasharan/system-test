@@ -6,3 +6,11 @@
   padding: 7px 15px;
   display: inline-block;
 }
+
+select{
+  text-transform: capitalize;
+}
+
+textarea{
+  resize: none;
+}

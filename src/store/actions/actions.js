@@ -10,7 +10,17 @@ export const updateActiveTab = payload => ({
   payload
 });
 
-export const deleteRow = payload => ({
-  type: 'DELETE_ROW',
+export const deleteTodo = payload => ({
+  type: 'DELETE_TODO',
+  payload
+});
+
+export const addTodo = payload => ({
+  type: 'ADD_TODO',
+  payload
+});
+
+export const updateTodo = payload => ({
+  type: 'UPDATE_TODO',
   payload
 });

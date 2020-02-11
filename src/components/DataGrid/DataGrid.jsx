@@ -3,18 +3,19 @@ import { connect } from 'react-redux';
 
 import DataTable from "react-data-table-component";
 
-import { deleteRow } from './../../store/actions/actions'
-import DataRow from './DataRow'
+import { deleteTodo, updateTodo } from './../../store/actions/actions'
 import CustomModal from './../CustomModal/CustomModal';
 
 import { 
-  PriorityFormatter
+  PriorityFormatter,
+  CreatedOnFormatter,
+  DuedateFormatter
 } from './ColumnFormatters';
 
 import './DataGrid.css';
 
 const DataGrid = props =>{
-  const { todoList, removeRow } = props;
+  const { todoList, removeRow, updateRow } = props;
 
   const columns = [
     {
@@ -32,17 +33,18 @@ const DataGrid = props =>{
       name: "Created On",
       selector: "createdAt",
       sortable: true,
+      cell: row => <CreatedOnFormatter row={row}/>
     },
     {
       name: "Due Date",
       selector: "dueDate",
       sortable: true,
+      cell: row => <DuedateFormatter row={row}/>
     },
     {
       name: "Actions",
       selector: "",
       cell : row => {
-        console.log(row);
         const { currentState } = row;
         return (
           <>
@@ -57,6 +59,7 @@ const DataGrid = props =>{
               type="button"
               className="btn btn-sm btn-link"
               value={currentState ? 'Done' : 'Re-Open'}
+              onClick={() => updateRow({...row, currentState: !currentState})}
             />
           </>
         );
@@ -92,7 +95,8 @@ const mapStateToProps = state =>({
 })
 
 const mapDispatchToProps = dispatch =>({
-  removeRow: row => dispatch(deleteRow(row))
+  removeRow: row => dispatch(deleteTodo(row)),
+  updateRow : row => dispatch(updateTodo(row))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
