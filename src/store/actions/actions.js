@@ -34,3 +34,8 @@ export const markPending = payload => ({
   type: 'BULK_PENDING',
   payload
 });
+
+export const globalSearch = payload => ({
+  type: 'GLOBAL_SEARCH',
+  payload
+})

@@ -37,7 +37,11 @@ const combReducer = (state = {todos: [], activeTab: 'all-tasks', alltodos:[]}, a
         todos: state.todos.map(x => {return ids.includes(x.id) ? {...x, currentState: true} : {...x}}),
         todos: state.alltodos.map(x => {return ids.includes(x.id) ? {...x, currentState: true} : {...x}}),
       }
-
+    case 'GLOBAL_SEARCH':
+      return {...state,
+        todos: state.todos.filter(x=> {return x.summary.toLowerCase().includes(action.payload.search) || x.description.toLowerCase().includes(action.payload.search)}),
+        todos: state.alltodos.filter(x=> {return x.summary.toLowerCase().includes(action.payload.search) || x.description.toLowerCase().includes(action.payload.search)})
+      }
     default:
       return state;
   }

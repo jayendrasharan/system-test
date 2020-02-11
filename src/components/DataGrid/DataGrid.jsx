@@ -80,16 +80,12 @@ const DataGrid = props =>{
 
   const handleRowSelected = rows =>{
     setSelectedRows(rows.selectedRows)
-    console.log(rows.selectedRows);
   }
 
   const contextActions = useMemo(() => {
     const handleDelete = () => {
       removeRow(selectedRows);
-      //if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.name)}?`)) {
-        //setToggleCleared(!toggleCleared);
-        //setData(differenceBy(data, selectedRows, 'name'));
-      //}
+      setSelection(true);
     };
     const handleDone = () => {
       tickDone(selectedRows);
