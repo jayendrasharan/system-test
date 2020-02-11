@@ -1,6 +1,7 @@
 
 
 const combReducer = (state = {todos: [], activeTab: 'all-tasks', alltodos:[]}, action) =>{
+  let ids;
   switch(action.type){
     case 'FETCH_TODOS':
       return {...state, todos: action.payload, alltodos: action.payload};
@@ -8,9 +9,10 @@ const combReducer = (state = {todos: [], activeTab: 'all-tasks', alltodos:[]}, a
       const todos = state.alltodos.filter(x=> (action.payload === 'completed' ? x.currentState === false : x.currentState === true ))
       return {...state, activeTab: action.payload, todos: action.payload === 'all-tasks' ? state.alltodos : todos}
     case 'DELETE_TODO':
+      ids = action.payload.map(x=>x.id)
       return {...state, 
-        todos: state.todos.filter(row => row.id !== action.payload.id), 
-        alltodos: state.alltodos.filter(row => row.id !== action.payload.id)
+        todos: state.todos.filter(row => !ids.includes(row.id)), 
+        alltodos: state.alltodos.filter(row => !ids.includes(row.id))
       }
     case 'ADD_TODO':
       const todo = {...action.payload, id: state.alltodos.length+1}
@@ -22,6 +24,18 @@ const combReducer = (state = {todos: [], activeTab: 'all-tasks', alltodos:[]}, a
       return {...state,
         todos: state.todos.reduce((a,c) => {return c.id === action.payload.id ? [...a, action.payload] : [...a, c]},[]),
         alltodos: state.alltodos.reduce((a,c) => {return c.id === action.payload.id ? [...a, action.payload] : [...a, c]},[])
+      }
+    case 'BULK_DONE':
+      ids = action.payload.map(x=>x.id);
+      return {...state,
+        todos: state.todos.map(x => {return ids.includes(x.id) ? {...x, currentState: false} : {...x}}),
+        todos: state.alltodos.map(x => {return ids.includes(x.id) ? {...x, currentState: false} : {...x}})
+      }
+    case 'BULK_PENDING':
+      ids = action.payload.map(x=>x.id);
+      return {...state,
+        todos: state.todos.map(x => {return ids.includes(x.id) ? {...x, currentState: true} : {...x}}),
+        todos: state.alltodos.map(x => {return ids.includes(x.id) ? {...x, currentState: true} : {...x}}),
       }
 
     default:

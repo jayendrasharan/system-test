@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import DataTable from "react-data-table-component";
 
-import { deleteTodo, updateTodo } from './../../store/actions/actions'
+import { deleteTodo, updateTodo, markDone, markPending } from './../../store/actions/actions'
 import CustomModal from './../CustomModal/CustomModal';
 
 import { 
@@ -15,7 +15,9 @@ import {
 import './DataGrid.css';
 
 const DataGrid = props =>{
-  const { todoList, removeRow, updateRow } = props;
+  const { todoList, removeRow, updateRow, tickDone, tickPending } = props;
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [selection, setSelection] = useState(false);
 
   const columns = [
     {
@@ -53,7 +55,7 @@ const DataGrid = props =>{
             <i
               className="fa mx-2 fa-trash"
               aria-hidden="true"
-              onClick={() => removeRow(row)}
+              onClick={() => removeRow([row])}
             ></i>
             <input
               type="button"
@@ -75,6 +77,38 @@ const DataGrid = props =>{
       },
     }
   ]
+
+  const handleRowSelected = rows =>{
+    setSelectedRows(rows.selectedRows)
+    console.log(rows.selectedRows);
+  }
+
+  const contextActions = useMemo(() => {
+    const handleDelete = () => {
+      removeRow(selectedRows);
+      //if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.name)}?`)) {
+        //setToggleCleared(!toggleCleared);
+        //setData(differenceBy(data, selectedRows, 'name'));
+      //}
+    };
+    const handleDone = () => {
+      tickDone(selectedRows);
+      setSelection(true);
+    };
+    const handlePending = () =>{
+      tickPending(selectedRows);
+      setSelection(true);
+    }
+
+    return (
+      <>
+        <input type='button' onClick={handleDelete} value='Delete' className='btn btn-sm btn-danger mx-2'/>
+        <input type='button' onClick={handleDone} value='Mark As Done' className='btn btn-sm btn-success mx-2'/>
+        <input type='button' onClick={handlePending} value='Mark As Pending' className='btn btn-sm btn-secondary mx-2'/>
+      </>
+    );
+  }, [todoList, selectedRows]);
+
   return (
     <DataTable
       title="TODo List"
@@ -86,6 +120,10 @@ const DataGrid = props =>{
       highlightOnHover
       className='todolist-component'
       conditionalRowStyles={conditionalRowStyles}
+      selectableRows
+      onSelectedRowsChange={handleRowSelected}
+      contextActions={contextActions}
+      clearSelectedRows = {selection}
     />
   );
 };
@@ -96,7 +134,9 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = dispatch =>({
   removeRow: row => dispatch(deleteTodo(row)),
-  updateRow : row => dispatch(updateTodo(row))
+  updateRow : row => dispatch(updateTodo(row)),
+  tickDone: rows => dispatch(markDone(rows)),
+  tickPending: rows => dispatch(markPending(rows))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

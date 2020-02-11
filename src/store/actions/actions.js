@@ -24,3 +24,13 @@ export const updateTodo = payload => ({
   type: 'UPDATE_TODO',
   payload
 });
+
+export const markDone = payload => ({
+  type: 'BULK_DONE',
+  payload
+});
+
+export const markPending = payload => ({
+  type: 'BULK_PENDING',
+  payload
+});
