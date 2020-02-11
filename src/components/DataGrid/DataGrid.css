@@ -3,6 +3,13 @@
 }
 
 .completed{
-  text-decoration: line-through;
   background-color: #defade;
+}
+
+.fa{
+  font-size: 18px;
+}
+
+div.rdt_TableBody{
+  overflow-y: auto;
 }
