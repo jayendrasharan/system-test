@@ -1,7 +1,7 @@
 export const Data = [
   {
     id: "1",
-    currentState: true,
+    currentState: true, //Open
     summary: "Lorem ipsum dolor sit amet",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a arcu rutrum, egestas odio id, rutrum nulla. Sed lectus risus, aliquet in massa vitae, luctus consequat risus. Quisque mattis rutrum sem in scelerisque. Curabitur lacinia malesuada interdum. Aenean suscipit, elit at congue molestie, justo turpis porttitor risus, in feugiat quam mauris non arcu. Nunc tincidunt orci et neque posuere egestas. Donec nec facilisis arcu, et aliquet leo.",
     createdAt: "2018-04-12",
@@ -37,7 +37,7 @@ export const Data = [
   },
   {
     id: "5",
-    currentState: false,
+    currentState: true,
     summary: "Nam sed justo id orci consequat viverra",
     description: "Nam sed justo id orci consequat viverra eu ut nunc. Maecenas quis felis quis neque tincidunt iaculis nec eu est. Suspendisse at lectus dapibus magna vulputate luctus vitae at sem. Quisque venenatis erat eu eros dictum mollis. Nullam dapibus ipsum quis ex imperdiet, ut ultricies nunc mattis. Fusce velit velit, consectetur consectetur arcu vel, facilisis molestie dolor. Aenean id leo laoreet, vehicula orci vel, vestibulum odio. Quisque a tortor efficitur, placerat lacus at, pretium nisl. Fusce vel orci ullamcorper, pharetra quam sit amet, finibus diam.",
     createdAt: "2018-09-12",
@@ -55,7 +55,7 @@ export const Data = [
   },
   {
     id: "7",
-    currentState: false,
+    currentState: true,
     summary: "Phasellus eu augue volutpat, varius risus ut, ornare nisl.",
     description: "Phasellus eu augue volutpat, varius risus ut, ornare nisl. In metus arcu, pellentesque ornare maximus vitae, scelerisque a augue. Praesent felis velit, commodo quis dictum non, sollicitudin et nibh. Integer imperdiet eget libero ac molestie. Nunc ac tristique risus. Pellentesque scelerisque nunc id ante commodo, molestie faucibus lorem posuere. Morbi convallis scelerisque rhoncus.",
     createdAt: "2018-09-12",
@@ -73,7 +73,7 @@ export const Data = [
   },
   {
     id: "9",
-    currentState: false,
+    currentState: true,
     summary: "Maecenas elementum lacinia quam, nec rhoncus dui fringilla vitae. ",
     description: "Maecenas elementum lacinia quam, nec rhoncus dui fringilla vitae. Aliquam erat volutpat. Praesent eget libero eros. In placerat bibendum augue, ut tristique urna accumsan id. Nulla id iaculis enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam semper vehicula mattis.",
     createdAt: "2018-09-12",

@@ -7,7 +7,7 @@ import { deleteRow } from './../../store/actions/actions'
 const DataRow = props =>{
   const { row, removeRow } = props;
   return (
-    <tr>
+    <tr className={row.currentState? '':'completed'}>
       <td>{row.summary}</td>
       <td className='priority'>{row.priority}</td>
       <td>{row.createdAt}</td>

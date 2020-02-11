@@ -27,7 +27,7 @@ const Tabs = props => {
 }
 
 const mapStateToPorps = state => ({
-  activeTab: state.tabs.activeTab
+  activeTab: state.combReducer.activeTab
 });
 
 const mapDispatchToProps = dispatch =>({

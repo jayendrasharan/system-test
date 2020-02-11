@@ -28,7 +28,7 @@ const DataGrid = props =>{
 };
 
 const mapStateToProps = state =>({
-  todoList: state.init.todos
+  todoList: state.combReducer.todos
 })
 
 export default connect(mapStateToProps, null)(DataGrid);

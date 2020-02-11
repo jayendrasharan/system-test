@@ -1,3 +1,7 @@
 .priority{
   text-transform: capitalize;
 }
+
+.completed{
+  text-decoration: line-through;
+}
