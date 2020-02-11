@@ -39,8 +39,7 @@ const combReducer = (state = {todos: [], activeTab: 'all-tasks', alltodos:[]}, a
       }
     case 'GLOBAL_SEARCH':
       return {...state,
-        todos: state.todos.filter(x=> {return x.summary.toLowerCase().includes(action.payload.search) || x.description.toLowerCase().includes(action.payload.search)}),
-        alltodos: state.alltodos.filter(x=> {return x.summary.toLowerCase().includes(action.payload.search) || x.description.toLowerCase().includes(action.payload.search)})
+        todos: state.alltodos.filter(x=> {return x.summary.toLowerCase().includes(action.payload.search) || x.description.toLowerCase().includes(action.payload.search)})
       }
     default:
       return state;
