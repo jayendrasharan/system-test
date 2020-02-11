@@ -1,3 +1,8 @@
 .DraftEditor-editorContainer{
   height: 200px;
 }
+
+.read-only-els{
+  padding: 7px 15px;
+  display: inline-block;
+}
