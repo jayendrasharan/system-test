@@ -17,6 +17,8 @@ export const OPEN_ADD_TASK_MODAL = 'OPEN_ADD_TASK_MODAL';
 export const CLOSE_TASK_MODAL = 'CLOSE_TASK_MODAL';
 export const OPEN_EDIT_TASK_MODAL = 'OPEN_EDIT_TASK_MODAL';
 
+export const SEARCH_TASKS = 'SEARCH_TASKS';
+
 export const SUBMIT_FORM = 'SUBMIT_FORM';
 
 export const RESET_STATE = 'RESET_STATE';
@@ -36,6 +38,11 @@ export const groupByOptions = config.reduce<optionType[]>((acc: optionType[], cu
 
 export const sortByOptions = config.reduce<string[]>((acc: string[], cur: ConfigType) => {
   if(cur.allowSortBy) return [...acc, cur.name]
+  return acc;
+}, [])
+
+export const searchOptions = config.reduce<string[]>((acc: string[], cur: ConfigType) => {
+  if(cur.allowSearch) return [...acc, cur.name]
   return acc;
 }, [])
 

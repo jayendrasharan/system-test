@@ -4,7 +4,7 @@ import {
   groupByOptions, CHANGE_GROUPBY, DELETE_TODO,
   CHANGE_TODO_STATUS, tabbarOptions, CHANGE_CURRENT_TAB,
   SORT_COLUMN, OPEN_ADD_TASK_MODAL, OPEN_EDIT_TASK_MODAL,
-  CLOSE_TASK_MODAL, SUBMIT_FORM
+  CLOSE_TASK_MODAL, SUBMIT_FORM, SEARCH_TASKS
 } from '../actions/todo';
 import todoReducer, { initialState } from '../reducers/todo';
 import { TableProvider } from '../contexts/TableContext';
@@ -30,6 +30,11 @@ const HomePage = () => {
     const { currentTarget: { dataset }} = event;
     const rowId = parseInt(dataset.rowId)
     dispatch({ type: DELETE_TODO, payload: { id: rowId }})
+  }
+
+  const onSearchInputChange = (event) => {
+    const { currentTarget: { value }} = event;
+    dispatch({ type: SEARCH_TASKS, payload: { value } })
   }
 
   const onRowStatusChange = (event) => {
@@ -75,11 +80,13 @@ const HomePage = () => {
         selected: state.selectedTab,
         onSelect: onTabChange
       }}
+      searchTerm={state.searchTerm}
       openModal={state.openModal}
       onClickAddTask={onClickAddTask}
       selectedTask={state.selectedTask}
       onCloseModal={onCloseModal}
       onFormSubmit={onFormSubmit}
+      onSearchInputChange={onSearchInputChange}
     />
     </TableProvider>
   )

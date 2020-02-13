@@ -3,11 +3,13 @@ import {
   CHANGE_GROUPBY, RESET_STATE, DELETE_TODO,
   CHANGE_TODO_STATUS, CHANGE_CURRENT_TAB,
   SORT_COLUMN, OPEN_ADD_TASK_MODAL, CLOSE_TASK_MODAL,
-  OPEN_EDIT_TASK_MODAL, SUBMIT_FORM
+  OPEN_EDIT_TASK_MODAL, SUBMIT_FORM, SEARCH_TASKS,
+  searchOptions
 } from '../actions/todo';
 
 export const initialState = {
   currentId: data.map(i => i.id).sort((a, b) => a-b).reverse()[0] || 1,
+  allTasks: data,
   tasks: data,
   groupBy: 'none',
   searchTerm: '',
@@ -29,9 +31,11 @@ export default (state, action) => {
         groupBy: payload.value
       }
     case DELETE_TODO: {
+      const updatedTask = state.tasks.filter(i => i.id !== payload.id)
       return {
         ...state,
-        tasks: state.tasks.filter(i => i.id !== payload.id)
+        tasks: updatedTask,
+        allTasks: updatedTask
       }
     }
     case CHANGE_TODO_STATUS: {
@@ -41,9 +45,11 @@ export default (state, action) => {
         }
         return {...i};
       }
+      const updateTasks = state.tasks.map(callback)
       return {
         ...state,
-        tasks: state.tasks.map(callback),
+        tasks: updateTasks,
+        allTasks: updateTasks
       }
     }
     case CHANGE_CURRENT_TAB: {
@@ -60,11 +66,13 @@ export default (state, action) => {
         else if(a[columnName] > b[columnName]) return sortOrder === 'ASC' ? 1 : -1;
         else return 0;
       }
+      const sortedTasks = state.tasks.sort(callback)
       return {
         ...state,
         sortOrder,
         sortBy: columnName,
-        tasks: state.tasks.sort(callback)
+        tasks: sortedTasks,
+        allTasks: sortedTasks
       }
     }
     case OPEN_ADD_TASK_MODAL: {
@@ -104,9 +112,18 @@ export default (state, action) => {
       return {
         ...state,
         tasks,
+        allTasks: tasks,
         openModal: false,
         selectedTask: {},
         currentId: state.currentId + 1
+      }
+    }
+    case SEARCH_TASKS: {
+      // NOTE :: Do not update allTasks column here.
+      return {
+        ...state,
+        searchTerm: payload.value,
+        tasks: state.allTasks.filter(task => searchOptions.some(option => task[option].toLowerCase().indexOf(payload.value.toLowerCase()) !== -1))
       }
     }
     case RESET_STATE:
