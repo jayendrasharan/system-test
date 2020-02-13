@@ -37,7 +37,7 @@ const Dropdown = ({
       <FlexContainer>
         {open ? <UnorderList flexDirection='column' backgroundColor='white'>
           {options.map(((option, i) => (
-            <ListElement key={i} onClick={onOptionClick} data-selection={option}>{option}</ListElement>)
+            <ListElement key={i} onClick={onOptionClick} data-selection={option.id}>{option.label}</ListElement>)
           ))}
         </UnorderList> : null}
       </FlexContainer>

@@ -23,7 +23,7 @@ const Tabbar = ({
   }
   return (
     <Flex maxHeight={8} alignItems='center'>
-      {options.map((option, i) => <TabItem py={4} px={5} bg='border' key={i} data-selected={option} onClick={onOptionSelect} selected={option === selected}>{option}</TabItem>)}
+      {options.map((option, i) => <TabItem py={4} px={5} bg='border' key={i} data-selection={option.id} onClick={onOptionSelect} selected={option.id === selected}>{option.label}</TabItem>)}
     </Flex>
   )
 }

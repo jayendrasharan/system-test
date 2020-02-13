@@ -52,9 +52,10 @@ export interface TaskType {
   priority: priorityTypes;
 }
 
+type optionType = {id: string | number; label: string;}
 export interface DropdownProps {
   selected: string;
-  options: string[];
+  options: optionType[];
   onSelect: (selection: string) => void;
 }
 

@@ -1,6 +1,9 @@
 import React, { useReducer } from 'react';
 import Home from '../components/templates/Home';
-import { groupByOptions, CHANGE_GROUPBY, DELETE_TODO, CHANGE_TODO_STATUS } from '../actions/todo';
+import {
+  groupByOptions, CHANGE_GROUPBY, DELETE_TODO,
+  CHANGE_TODO_STATUS, tabbarOptions, CHANGE_CURRENT_TAB
+} from '../actions/todo';
 import todoReducer, { initialState } from '../reducers/todo';
 import { TableProvider } from '../contexts/TableContext';
 import columns from '../config/tableColumns';
@@ -33,9 +36,13 @@ const HomePage = () => {
     dispatch({ type: CHANGE_TODO_STATUS, payload: { id: rowId }})
   }
 
+  const onTabChange = (value) => {
+    dispatch({ type: CHANGE_CURRENT_TAB, payload: { value }})
+  }
+
   return (
     <TableProvider value={{
-      columns, config, data: state.list,
+      columns, config, data: state.visibleTasks,
       onEdit: onRowEdit, onDelete: onRowDelete,
       onStatusChange: onRowStatusChange
     }}>
@@ -44,6 +51,11 @@ const HomePage = () => {
         options: groupByOptions,
         selected: state.groupBy,
         onSelect: onSelectOption
+      }}
+      tabbar={{
+        options: tabbarOptions,
+        selected: state.selectedTab,
+        onSelect: onTabChange
       }}
     />
     </TableProvider>

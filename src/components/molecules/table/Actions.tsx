@@ -11,7 +11,7 @@ const TableActions = ({
   onDelete, id, currentState
 }: TableActionsProps) => {
   return (
-    <Flex>
+    <Flex as='td'>
       <PointerImage px={3} data-row-id={id} src={edit} size={3} onClick={onEdit}/>
       <PointerImage px={3} data-row-id={id} src={trash} size={3} onClick={onDelete}/>
       <PointerText px={3} color='blue' data-row-id={id} onClick={onStatusChange}>{currentState === 'open' ? 'done' : 're-open'}</PointerText>

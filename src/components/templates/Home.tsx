@@ -5,33 +5,22 @@ import { Table } from '../organisms';
 import { DropdownProps, TaskType } from '../../react-app-env';
 
 interface HomeProps {
-  groupBy: DropdownProps,
+  groupBy: DropdownProps;
+  tabbar: DropdownProps;
   data: TaskType[];
 }
 
 const Home = ({
-  groupBy: {
-    options,
-    selected,
-    onSelect
-  },
-  data
+  groupBy,
+  tabbar
 }: HomeProps) => {
   return (
     <Flex flexDirection='column' width='100%'>
       <Flex justifyContent='space-between' alignItems='flex-end'>
-        <Tabbar 
-          selected={selected}
-          options={options}
-          onSelect={onSelect}
-        />
+        <Tabbar {...tabbar}/>
         <Flex flexDirection='column'>
           <Text mb={4}>Group By</Text>
-          <Dropdown 
-            selected={selected}
-            options={options}
-            onSelect={onSelect}
-          />
+          <Dropdown {...groupBy}/>
         </Flex>
       </Flex>
       <Flex>
