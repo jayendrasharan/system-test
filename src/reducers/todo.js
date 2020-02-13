@@ -26,9 +26,23 @@ export default (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case CHANGE_GROUPBY:
+      const { value } = payload;
+      const callback = (acc, cur) => {
+        if(!acc[cur[value]]) {
+          acc[cur[value]] = []
+        }
+        return {
+          ...acc,
+          [cur[value]]: [
+            ...acc[cur[value]],
+            cur
+          ] 
+        }
+      }
       return {
         ...state,
-        groupBy: payload.value
+        groupBy: payload.value,
+        tasks: state.allTasks.reduce(callback, {})
       }
     case DELETE_TODO: {
       const updatedTask = state.tasks.filter(i => i.id !== payload.id)

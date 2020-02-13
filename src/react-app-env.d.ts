@@ -110,7 +110,7 @@ export interface TaskEntryFormProps {
 export interface TableProps extends Omit<TableActionsProps, 'currentState'> {
   columns: string[];
   config: ConfigType[];
-  data: TaskType[];
+  data: TaskType[] | {[key: string]: TaskType[]};
 }
 
 export interface TabbarProps extends DropdownProps {}
