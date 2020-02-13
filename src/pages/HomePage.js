@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import Home from '../components/templates/Home';
-import { groupByOptions, CHANGE_GROUPBY } from '../actions/todo';
+import { groupByOptions, CHANGE_GROUPBY, DELETE_TODO } from '../actions/todo';
 import todoReducer, { initialState } from '../reducers/todo';
 import { TableProvider } from '../contexts/TableContext';
 import columns from '../config/tableColumns';
@@ -14,9 +14,28 @@ const HomePage = () => {
       value: selected }
     })
   }
+
+  const onRowEdit = (event) => {
+    const { currentTarget: { dataset }} = event;
+    const rowId = parseInt(dataset.rowId)
+
+  }
+
+  const onRowDelete = (event) => {
+    const { currentTarget: { dataset }} = event;
+    const rowId = parseInt(dataset.rowId)
+    dispatch({ type: DELETE_TODO, payload: { id: rowId }})
+  }
+
+  const onRowStatusChange = () => {
+
+  }
+
   return (
     <TableProvider value={{
-      columns, config, data: state.list
+      columns, config, data: state.list,
+      onEdit: onRowEdit, onDelete: onRowDelete,
+      onStatusChange: onRowStatusChange
     }}>
     <Home 
       groupBy={{

@@ -3,6 +3,8 @@ import { ConfigType } from '../react-app-env';
 
 export const ADD_TODO = 'ADD_TODO';
 export const CHANGE_INPUT = 'CHANGE_INPUT';
+export const DELETE_TODO = 'DELETE_TODO';
+export const CHANGE_TODO_STATUS = 'CHANGE_TODO_STATUS'
 
 export const CHANGE_SORT_FIELD = 'CHANGE_SORT_FIELD';
 export const CHANGE_SORT_ORDER = 'CHANGE_SORT_ORDER';
