@@ -10,7 +10,7 @@ const Layout = ({
   children
 }: LayoutProps) => {
   return (
-    <Flex flexDirection='column' width={['100%', '800px']} alignItems='center' mt={[0, 0, 12]} mx='auto'>
+    <Flex flexDirection='column' width={['100%', '800px']} alignItems='center' mx='auto'>
       {children}
     </Flex>
   )
