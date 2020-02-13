@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Flex, Image } from '../atoms';
-import { DropdownProps } from '../../react-app-env';
+import { DropdownProps, FlexProps } from '../../react-app-env';
 import { arrow } from '../../assets/icons';
+
+
+interface ListItemProps extends FlexProps {
+  selected: boolean;
+}
 
 const FlexContainer = styled(Flex)`
   position: relative;
@@ -14,8 +19,11 @@ const UnorderList = styled(Flex).attrs(() => ({ as: 'ul', alignItems: 'flex-star
   z-index: 1;
 `
 
-const ListElement = styled(Flex).attrs(() => ({ as: 'li', py: 4, px: 7 }))`
+const ListElement = styled(Flex).attrs(() => ({ as: 'li', py: 4, px: 7 }))<ListItemProps>`
   width: 100%;
+  ${({ selected }) => selected && css`
+    background-color: ${({ theme: { colors }}) => colors.border};
+  `}
   &:hover {
     background-color: ${({ theme: { colors }}) => colors.border};
   }
@@ -33,13 +41,14 @@ const Dropdown = ({
   const onClickToggle = () => {
     updateOpen(!open)
   }
+  const selectedToLabel = options.find(option => option.id === selected)
   return (
     <FlexContainer minWidth={10} flexDirection='column'>
-      <Flex bg='border' borderRadius={2} p={5} onClick={onClickToggle}>{selected} <Image ml={4} rotate={open ? 270 : 90} src={arrow} px={3} size={3}/></Flex>
+      <Flex bg='border' borderRadius={2} p={5} onClick={onClickToggle}>{selectedToLabel?.label} <Image ml={4} rotate={open ? 270 : 90} src={arrow} px={3} size={3}/></Flex>
       <FlexContainer>
         {open ? <UnorderList flexDirection='column' backgroundColor='white' px={0} m={0}>
           {options.map(((option, i) => (
-            <ListElement key={i} onClick={onOptionClick} data-selection={option.id}>{option.label}</ListElement>)
+            <ListElement key={i} onClick={onOptionClick} selected={option.id === selected} data-selection={option.id}>{option.label}</ListElement>)
           ))}
         </UnorderList> : null}
       </FlexContainer>

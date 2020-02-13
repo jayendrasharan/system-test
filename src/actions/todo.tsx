@@ -34,7 +34,7 @@ export const inputPrioritySelectionOptions = [{ id: 'none', label: 'None'}, { id
 export const groupByOptions = config.reduce<optionType[]>((acc: optionType[], cur: ConfigType) => {
   if(cur.allowGroupBy) return [...acc, {id: cur.id, label: cur.label}]
   return acc;
-}, [])
+}, [{id: 'none', label: 'None'}])
 
 export const sortByOptions = config.reduce<string[]>((acc: string[], cur: ConfigType) => {
   if(cur.allowSortBy) return [...acc, cur.name]

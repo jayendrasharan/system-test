@@ -42,7 +42,7 @@ export default (state, action) => {
       return {
         ...state,
         groupBy: payload.value,
-        tasks: state.allTasks.reduce(callback, {})
+        tasks: value === 'none' ? state.allTasks : state.allTasks.reduce(callback, {})
       }
     case DELETE_TODO: {
       const updatedTask = state.tasks.filter(i => i.id !== payload.id)
