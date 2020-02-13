@@ -4,8 +4,8 @@ import {
   PositionProps, SpaceProps, FlexboxProps, TextStyleProps,
   BackgroundImageProps, TypographyProps, FontStyleProps
 } from 'styled-system';
-import theme from './theme';
-import { CHANGE_GROUPBY, groupByOptions, sortByOptions, RESET_STATE } from './actions/todo';
+import themes from './themes/default';
+import { CHANGE_GROUPBY, groupByOptions, sortByOptions, RESET_STATE, allowedPriorities, allowedCurrentStates } from './actions/todo';
 import { initialState } from './reducers/todo';
 import { ReactNode } from 'react';
 
@@ -40,8 +40,8 @@ export interface InputProps extends FlexProps {
 }
 
 
-type priorityTypes = 'none' | 'low' |  'medium' | 'high';
-type currentStateTypes = 'open' | 'done';
+type priorityTypes = keyof allowedPriorities;
+type currentStateTypes = keyof allowedCurrentStates;
 
 export interface TaskType {
   id: number;
@@ -51,6 +51,22 @@ export interface TaskType {
   createdAt: string;
   dueDate: string;
   priority: priorityTypes;
+}
+
+export interface FormInputsHookOption {
+  [key: string]: {
+    minLength: number;
+    maxLength: number;
+  }
+}
+
+export interface FormInputsHookReturnType {
+  hasErrors: boolean;
+  errors: formErrorsType;
+  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  values: {
+      [key: string]: string;
+  }
 }
 
 export type optionType = {id: string | number; label: string;}
@@ -77,9 +93,14 @@ export interface ModalFormProps {
   onCloseModal: () => void;
 }
 
+
+export interface formErrorsType {
+  [key: string]: string[];
+}
 export interface TaskEntryFormProps {
   selectedTask: TaskType;
   onCloseModal: () => void;
+  onFormSubmit: () => void;
 }
 
 export interface TableProps extends Omit<TableActionsProps, 'currentState'> {

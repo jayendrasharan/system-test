@@ -19,7 +19,13 @@ export const OPEN_EDIT_TASK_MODAL = 'OPEN_EDIT_TASK_MODAL';
 
 export const RESET_STATE = 'RESET_STATE';
 
+export const allowedCurrentStates = ['open', 'done']
+
+export const allowedPriorities = ['none', 'low', 'medium', 'high']
+
 export const tabbarOptions = [{ id: 'all', label: 'All Tasks'}, { id: 'open', label: 'Pending Tasks' }, { id: 'done', label: 'Completed Tasks' }];
+
+export const inputPrioritySelectionOptions = [{ id: 'none', label: 'None'}, { id: 'low', label: 'Low'}, { id: 'medium', label: 'Medium'}, { id: 'high', label: 'High' }]
 
 export const groupByOptions = config.reduce<optionType[]>((acc: optionType[], cur: ConfigType) => {
   if(cur.allowGroupBy) return [...acc, {id: cur.id, label: cur.label}]

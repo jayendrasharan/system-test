@@ -11,10 +11,11 @@ interface HomeProps {
   selectedTask: TaskType;
   openModal: boolean;
   onCloseModal: () => void;
+  onFormSubmit: () => void;
 }
 
 const Home = ({
-  groupBy, tabbar,
+  groupBy, tabbar, onFormSubmit,
   onClickAddTask, onCloseModal,
   openModal, selectedTask
 }: HomeProps) => {
@@ -35,7 +36,7 @@ const Home = ({
         <Table />
       </Flex>
       <ModalForm open={openModal} onCloseModal={onCloseModal}>
-        <TaskEntryForm selectedTask={selectedTask} onCloseModal={onCloseModal}/>
+        <TaskEntryForm selectedTask={selectedTask} onCloseModal={onCloseModal} onFormSubmit={onFormSubmit}/>
       </ModalForm>
     </Flex>
   )

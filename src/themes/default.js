@@ -33,6 +33,20 @@ export default {
       color: colors.white,
       borderStyle: 'none',
       borderRadius: 3,
+      cursor: 'pointer',
+      borderWidth: '2px',
+      "&:disabled": {
+        backgroundColor: colors.options,
+        color: colors.black,
+        borderStyle: 'solid',
+      }
+    },
+    secondary: {
+      backgroundColor: colors.lightGrey,
+      color: colors.darkGrey,
+      borderStyle: 'none',
+      borderRadius: 3,
+      cursor: 'pointer',
       borderWidth: '2px',
       "&:disabled": {
         backgroundColor: colors.options,
