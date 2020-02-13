@@ -41,7 +41,8 @@ export interface InputProps extends FlexProps {
 
 type priorityTypes = 'none' | 'low' |  'medium' | 'high';
 
-export interface taskType {
+export interface TaskType {
+  id: number;
   currentState: boolean;
   title: string;
   description: string;
@@ -54,6 +55,19 @@ export interface DropdownProps {
   selected: string;
   options: string[];
   onSelect: (selection: string) => void;
+}
+
+export interface TableActionsProps {
+  id: number;
+  onEdit: () => void;
+  onDelete: () => void;
+  onStatusChange: () => void;
+}
+
+export interface TableProps extends TableActionsProps {
+  columns: string[];
+  config: ConfigType[];
+  data: TaskType[];
 }
 
 export interface TabbarProps extends DropdownProps {}
@@ -69,7 +83,7 @@ type PayloadType = {
   value: string;
 }
 export interface StateType {
-  list: taskType[];
+  list: TaskType[];
   groupBy: typeof groupByOptions;
   searchTerm: string;
   sortOrder: 'ASC' | 'DESC';

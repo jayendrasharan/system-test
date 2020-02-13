@@ -1,10 +1,12 @@
 import React from 'react';
 import { Flex, Text } from '../atoms';
 import { Dropdown, Tabbar } from '../molecules';
-import { DropdownProps } from '../../react-app-env';
+import { Table } from '../organisms';
+import { DropdownProps, TaskType } from '../../react-app-env';
 
 interface HomeProps {
-  groupBy: DropdownProps
+  groupBy: DropdownProps,
+  data: TaskType[];
 }
 
 const Home = ({
@@ -12,7 +14,8 @@ const Home = ({
     options,
     selected,
     onSelect
-  }
+  },
+  data
 }: HomeProps) => {
   return (
     <Flex flexDirection='column' width='100%'>
@@ -32,7 +35,7 @@ const Home = ({
         </Flex>
       </Flex>
       <Flex>
-        
+        <Table />
       </Flex>
     </Flex>
   )
