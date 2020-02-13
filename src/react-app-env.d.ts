@@ -75,6 +75,7 @@ export interface DropdownProps {
   selected: string;
   options: optionType[];
   onSelect: (selection: string) => void;
+  disabled?: boolean;
 }
 
 export interface TableActionsProps {

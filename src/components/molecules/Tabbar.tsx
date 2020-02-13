@@ -16,10 +16,12 @@ const TabItem = styled(Flex)<TabItemProps>`
 
 const Tabbar = ({
   selected, options,
-  onSelect
+  onSelect, disabled
 }: TabbarProps) => {
   const onOptionSelect = (event: React.MouseEvent<HTMLDivElement>): void => {
-    onSelect(event.currentTarget.dataset.selection!)
+    if(!disabled) {
+      onSelect(event.currentTarget.dataset.selection!)
+    }
   }
   return (
     <Flex maxHeight={8} alignItems='center'>

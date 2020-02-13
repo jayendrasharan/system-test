@@ -31,20 +31,22 @@ const ListElement = styled(Flex).attrs(() => ({ as: 'li', py: 4, px: 7 }))<ListI
 
 const Dropdown = ({
   selected, options,
-  onSelect
+  onSelect, disabled
 }: DropdownProps) => {
   const [open, updateOpen] = useState<boolean>(false);
   const onOptionClick = (event: React.MouseEvent<HTMLDivElement>): void => {
-    onSelect(event.currentTarget.dataset.selection!)
-    onClickToggle()
+    if(!disabled) {
+      onSelect(event.currentTarget.dataset.selection!)
+      onClickToggle()
+    }
   }
   const onClickToggle = () => {
     updateOpen(!open)
   }
   const selectedToLabel = options.find(option => option.id === selected)
   return (
-    <FlexContainer minWidth={10} flexDirection='column'>
-      <Flex bg='border' borderRadius={2} p={5} onClick={onClickToggle}>{selectedToLabel?.label} <Image ml={4} rotate={open ? 270 : 90} src={arrow} px={3} size={3}/></Flex>
+    <FlexContainer minWidth={10} maxWidth={11} flexDirection='column'>
+      <Flex bg='border' justifyContent='space-around' borderRadius={2} p={5} onClick={onClickToggle}>{selectedToLabel?.label} <Image ml={4} rotate={open ? 270 : 90} src={arrow} px={3} size={3}/></Flex>
       <FlexContainer>
         {open ? <UnorderList flexDirection='column' backgroundColor='white' px={0} m={0}>
           {options.map(((option, i) => (

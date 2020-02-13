@@ -66,10 +66,13 @@ const Home = ({
         <Text ml={6} fontSize={5} fontWeight='bolder'>+</Text>
       </Button>
       <Flex justifyContent='space-between' alignItems='flex-end'>
-        <Tabbar {...tabbar}/>
-        <Flex flexDirection='column'>
+        <Flex mb={6}>
+          <Tabbar {...tabbar}/>
+        </Flex>
+        <Flex flexDirection='column' alignItems='flex-end'>
           <Text mb={4}>Group By</Text>
           <Dropdown {...groupBy}/>
+          <Text color='orange' fontSize={0} mb={0}>When Group by selected delete, edit, add, search, tab switch are disabled. Tab defaults to all tasks.</Text>
         </Flex>
       </Flex>
       <Flex>
