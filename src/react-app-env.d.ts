@@ -52,7 +52,7 @@ export interface TaskType {
   priority: priorityTypes;
 }
 
-type optionType = {id: string | number; label: string;}
+export type optionType = {id: string | number; label: string;}
 export interface DropdownProps {
   selected: string;
   options: optionType[];
@@ -83,6 +83,8 @@ export type ConfigType = {
   allowGroupBy: boolean;
   allowSortBy: boolean;
   allowSearch: boolean;
+  id: string;
+  label: string;
 }
 
 type PayloadType = {

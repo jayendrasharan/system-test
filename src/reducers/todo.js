@@ -6,8 +6,7 @@ import {
 } from '../actions/todo';
 
 export const initialState = {
-  allTasks: data,
-  visibleTasks: data,
+  tasks: data,
   groupBy: 'none',
   searchTerm: '',
   sortBy: 'title',
@@ -28,8 +27,7 @@ export default (state, action) => {
     case DELETE_TODO: {
       return {
         ...state,
-        visibleTasks: state.visibleTasks.filter(i => i.id !== payload.id),
-        allTasks: state.allTasks.filter(i => i.id !== payload.id)
+        tasks: state.tasks.filter(i => i.id !== payload.id)
       }
     }
     case CHANGE_TODO_STATUS: {
@@ -41,15 +39,13 @@ export default (state, action) => {
       }
       return {
         ...state,
-        visibleTasks: state.visibleTasks.map(callback),
-        allTasks: state.allTasks.map(callback)
+        tasks: state.tasks.map(callback),
       }
     }
     case CHANGE_CURRENT_TAB: {
       return {
         ...state,
         selectedTab: payload.value,
-        visibleTasks: payload.value === 'all' ? state.allTasks : state.allTasks.filter(i => i.currentState === payload.value)
       }
     }
     case SORT_COLUMN: {
@@ -64,8 +60,7 @@ export default (state, action) => {
         ...state,
         sortOrder,
         sortBy: columnName,
-        allTasks: state.allTasks.sort(callback),
-        visibleTasks: state.visibleTasks.sort(callback)
+        tasks: state.tasks.sort(callback)
       }
     }
     case RESET_STATE:

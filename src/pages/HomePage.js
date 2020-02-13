@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import Home from '../components/templates/Home';
 import {
   groupByOptions, CHANGE_GROUPBY, DELETE_TODO,
@@ -46,9 +46,11 @@ const HomePage = () => {
     dispatch({ type: SORT_COLUMN, payload: { columnName }})
   }
 
+  const filteredTasks = useCallback(() => ['open', 'done'].indexOf(state.selectedTab) === -1 ? state.tasks : state.tasks.filter(task => task.currentState === state.selectedTab), [state.selectedTab, state.tasks])
+
   return (
     <TableProvider value={{
-      columns, config, data: state.visibleTasks,
+      columns, config, data: filteredTasks(),
       onEdit: onRowEdit, onDelete: onRowDelete,
       onStatusChange: onRowStatusChange,
       onClickSort, sortOrder: state.sortOrder, sortBy: state.sortBy

@@ -11,9 +11,18 @@ const TableData = styled(Text).attrs(() => ({ as: 'td', flexGrow: 1, justifyCont
 `
 
 const TableRowContainer = styled(Flex).attrs(() => ({ as: 'tr', flexGrow: 1, my: 5 }))`
+  position: relative;
   ${({ done }) => done && css`
     background-color: ${({ theme: { colors }}) => colors.green};
-    text-decoration: line-through;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 80%;
+      left: 0px;
+      height: 1px;
+      top: 50%;
+      background-color: ${({ theme: { colors }}) => colors.darkGrey};
+    }
   `}
 `
 
