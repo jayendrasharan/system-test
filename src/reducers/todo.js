@@ -1,6 +1,6 @@
 import data from '../.mock-data/todo-list.json';
 import {
-  CHANGE_GROUPBY, RESET_STATE, DELETE_TODO
+  CHANGE_GROUPBY, RESET_STATE, DELETE_TODO, CHANGE_TODO_STATUS
 } from '../actions/todo';
 
 export const initialState = {
@@ -25,6 +25,17 @@ export default (state, action) => {
       return {
         ...state,
         list: state.list.filter(i => i.id !== payload.id)
+      }
+    }
+    case CHANGE_TODO_STATUS: {
+      return {
+        ...state,
+        list: state.list.map(i => {
+          if(i.id === payload.id) {
+            i.currentState = i.currentState === 'open' ? 'done' : 'open';
+          }
+          return i;
+        })
       }
     }
     case RESET_STATE:

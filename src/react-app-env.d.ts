@@ -40,10 +40,11 @@ export interface InputProps extends FlexProps {
 
 
 type priorityTypes = 'none' | 'low' |  'medium' | 'high';
+type currentStateTypes = 'open' | 'done';
 
 export interface TaskType {
   id: number;
-  currentState: boolean;
+  currentState: currentStateTypes;
   title: string;
   description: string;
   createdAt: string;
@@ -62,9 +63,10 @@ export interface TableActionsProps {
   onEdit: () => void;
   onDelete: () => void;
   onStatusChange: () => void;
+  currentState: currentStateTypes;
 }
 
-export interface TableProps extends TableActionsProps {
+export interface TableProps extends Omit<TableActionsProps, 'currentState'> {
   columns: string[];
   config: ConfigType[];
   data: TaskType[];

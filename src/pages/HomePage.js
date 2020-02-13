@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import Home from '../components/templates/Home';
-import { groupByOptions, CHANGE_GROUPBY, DELETE_TODO } from '../actions/todo';
+import { groupByOptions, CHANGE_GROUPBY, DELETE_TODO, CHANGE_TODO_STATUS } from '../actions/todo';
 import todoReducer, { initialState } from '../reducers/todo';
 import { TableProvider } from '../contexts/TableContext';
 import columns from '../config/tableColumns';
@@ -27,8 +27,10 @@ const HomePage = () => {
     dispatch({ type: DELETE_TODO, payload: { id: rowId }})
   }
 
-  const onRowStatusChange = () => {
-
+  const onRowStatusChange = (event) => {
+    const { currentTarget: { dataset }} = event;
+    const rowId = parseInt(dataset.rowId)
+    dispatch({ type: CHANGE_TODO_STATUS, payload: { id: rowId }})
   }
 
   return (
