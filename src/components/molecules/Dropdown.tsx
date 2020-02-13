@@ -35,7 +35,7 @@ const Dropdown = ({
     <FlexContainer minWidth={10} flexDirection='column'>
       <Flex bg='border' borderRadius={2} p={5} onClick={onClickToggle}>{selected} <Image rotate='90' src={arrow} px={3} size={3}/></Flex>
       <FlexContainer>
-        {open ? <UnorderList flexDirection='column'>
+        {open ? <UnorderList flexDirection='column' backgroundColor='white'>
           {options.map(((option, i) => (
             <ListElement key={i} onClick={onOptionClick} data-selection={option}>{option}</ListElement>)
           ))}
