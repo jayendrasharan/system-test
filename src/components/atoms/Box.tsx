@@ -5,7 +5,7 @@
  */
 import styled, { css } from 'styled-components';
 import { 
-  background, color, border, layout, position, space, typography, fontSize, fontStyle,
+  background, color, border, layout, position, space, typography, fontStyle,
 } from 'styled-system';
 import { BoxProps } from '../../react-app-env';
 

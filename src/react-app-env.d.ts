@@ -26,7 +26,9 @@ export interface ButtonProps extends FlexProps {
   type?: string;
 }
 
-export interface ImageProps extends BackgroundImageProps, PositionProps, SpaceProps, BackgroundProps {}
+export interface ImageProps extends BackgroundImageProps, PositionProps, SpaceProps, BackgroundProps, LayoutProps {
+  rotate?: string;
+}
 
 export interface InputProps extends FlexProps {
   value: string;
@@ -53,6 +55,8 @@ export interface DropdownProps {
   options: string[];
   onSelect: (selection: string) => void;
 }
+
+export interface TabbarProps extends DropdownProps {}
 
 export type ConfigType = {
   name: string;

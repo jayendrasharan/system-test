@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Flex } from '../atoms';
+import { Flex, Image } from '../atoms';
 import { DropdownProps } from '../../react-app-env';
+import { arrow } from '../../assets/icons';
 
 const FlexContainer = styled(Flex)`
   position: relative;
@@ -12,7 +13,7 @@ const UnorderList = styled(Flex).attrs(() => ({ as: 'div' }))`
   position: absolute;
 `
 
-const ListElement = styled(Flex).attrs(() => ({ as: 'li', p: 2 }))`
+const ListElement = styled(Flex).attrs(() => ({ as: 'li', p: 4 }))`
   &:hover {
     background-color: ${({ theme: { colors }}) => colors.border};
   }
@@ -31,8 +32,8 @@ const Dropdown = ({
     updateOpen(!open)
   }
   return (
-    <FlexContainer flexDirection='column'>
-      <Flex bg='border' borderRadius={2} p={2} onClick={onClickToggle}>{selected}</Flex>
+    <FlexContainer minWidth={10} flexDirection='column'>
+      <Flex bg='border' borderRadius={2} p={5} onClick={onClickToggle}>{selected} <Image rotate='90' src={arrow} px={3} size={3}/></Flex>
       <FlexContainer>
         {open ? <UnorderList flexDirection='column'>
           {options.map(((option, i) => (

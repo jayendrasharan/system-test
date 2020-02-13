@@ -12,6 +12,8 @@ const colors = {
 
 export default {
   breakpoints: ['600px', '900px', '1200px', '1800px'],
+  space: [0, 1, 2, 4, 8, 12, 16, 20, 24, 32, 48, 64, 128],
+  sizes: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 128],
   fontSizes: [10, 12, 14, 16, 18, 24, 30, 36, 72],
   buttons: {
     primary: {

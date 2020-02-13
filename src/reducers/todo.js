@@ -2,7 +2,6 @@ import data from '../.mock-data/todo-list.json';
 import {
   CHANGE_GROUPBY, RESET_STATE
 } from '../actions/todo';
-import { StateType, ActionType } from '../react-app-env'
 
 export const initialState = {
   list: data,
@@ -12,9 +11,9 @@ export const initialState = {
   sortOrder: 'ASC'
 }
 
-export const initializeState = (state: StateType) => state;
+export const initializeState = (state) => state;
 
-export default (state: StateType, action: ActionType) => {
+export default (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case CHANGE_GROUPBY:

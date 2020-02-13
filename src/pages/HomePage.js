@@ -1,13 +1,12 @@
 import React, { useReducer } from 'react';
 import Home from '../components/templates/Home';
 import { groupByOptions, CHANGE_GROUPBY } from '../actions/todo';
-import todoReducer, { initialState, initializeState } from '../reducers/todo';
-import { StateType, ActionType } from '../react-app-env';
+import todoReducer, { initialState } from '../reducers/todo';
 
 const HomePage = () => {
-  const [state, dispatch] = useReducer<StateType, ActionType>(todoReducer, initialState, initializeState) // typescript expecting 3 arguments.
+  const [state, dispatch] = useReducer(todoReducer, initialState) // typescript expecting 3 arguments.
 
-  const onSelectOption = (selected: string) => {
+  const onSelectOption = (selected) => {
     dispatch({ type: CHANGE_GROUPBY, payload: {
       value: selected }
     })
