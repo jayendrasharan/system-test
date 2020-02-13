@@ -2,7 +2,8 @@ import React, { useReducer } from 'react';
 import Home from '../components/templates/Home';
 import {
   groupByOptions, CHANGE_GROUPBY, DELETE_TODO,
-  CHANGE_TODO_STATUS, tabbarOptions, CHANGE_CURRENT_TAB
+  CHANGE_TODO_STATUS, tabbarOptions, CHANGE_CURRENT_TAB,
+  SORT_COLUMN
 } from '../actions/todo';
 import todoReducer, { initialState } from '../reducers/todo';
 import { TableProvider } from '../contexts/TableContext';
@@ -40,11 +41,17 @@ const HomePage = () => {
     dispatch({ type: CHANGE_CURRENT_TAB, payload: { value }})
   }
 
+  const onClickSort = (event) => {
+    const { currentTarget: { dataset: { columnName } }} = event;
+    dispatch({ type: SORT_COLUMN, payload: { columnName }})
+  }
+
   return (
     <TableProvider value={{
       columns, config, data: state.visibleTasks,
       onEdit: onRowEdit, onDelete: onRowDelete,
-      onStatusChange: onRowStatusChange
+      onStatusChange: onRowStatusChange,
+      onClickSort, sortOrder: state.sortOrder, sortBy: state.sortBy
     }}>
     <Home 
       groupBy={{

@@ -27,7 +27,7 @@ export interface ButtonProps extends FlexProps {
 }
 
 export interface ImageProps extends BackgroundImageProps, PositionProps, SpaceProps, BackgroundProps, LayoutProps {
-  rotate?: string;
+  rotate?: string | number;
 }
 
 export interface InputProps extends FlexProps {
@@ -64,7 +64,10 @@ export interface TableActionsProps {
   onEdit: () => void;
   onDelete: () => void;
   onStatusChange: () => void;
+  onClickSort: () => void;
   currentState: currentStateTypes;
+  sortOrder?: 'ASC' | 'DESC';
+  sortBy?: sortByOptions;
 }
 
 export interface TableProps extends Omit<TableActionsProps, 'currentState'> {

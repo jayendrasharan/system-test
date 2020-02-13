@@ -10,7 +10,8 @@ const TableContext = createContext<TableProps>({
   id: 12,
   onEdit: () => {},
   onDelete: () => {},
-  onStatusChange: () => {}
+  onStatusChange: () => {},
+  onClickSort: () => {}
 })
 
 export const TableProvider = TableContext.Provider;
