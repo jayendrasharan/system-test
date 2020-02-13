@@ -12,11 +12,13 @@ const TaskEntryForm = ({
   const { values, onChange, errors, hasErrors } = useFormInputs(selectedTask, {
     title: {
       minLength: 10,
-      maxLength: 140
+      maxLength: 140,
+      value: selectedTask.title
     },
     description: {
       minLength: 10,
-      maxLength: 500 
+      maxLength: 500,
+      value: selectedTask.description
     }
   })
   const [selectedPriority, updatePriority] = useState<any>(selectedTask.priority)
@@ -32,7 +34,8 @@ const TaskEntryForm = ({
       description: values.description,
       title: values.title,
       dueDate,
-      priority: selectedPriority
+      priority: selectedPriority,
+      id: selectedTask.id
     })
   }
 

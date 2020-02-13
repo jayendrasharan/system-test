@@ -57,6 +57,7 @@ export interface FormInputsHookOption {
   [key: string]: {
     minLength: number;
     maxLength: number;
+    value: string;
   }
 }
 
@@ -102,7 +103,7 @@ export interface TaskEntryFormProps {
   onCloseModal: () => void;
   onFormSubmit: ({
     priority: priorityTypes, title: string,
-    description: string, dueDate: string
+    description: string, dueDate: string, id: number
   }) => void;
 }
 

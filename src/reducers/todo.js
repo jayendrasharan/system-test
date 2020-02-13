@@ -88,9 +88,22 @@ export default (state, action) => {
       }
     }
     case SUBMIT_FORM: {
+      let tasks = []
+      if(payload.id === -1) {
+        // For new elements which are not yet created this will be -1 and this need new states.
+        const newTask = {id: state.currentId + 1, currentState: 'open', createdAt: (new Date()).toLocaleDateString()}
+        tasks = [...state.tasks, {...payload, ...newTask}]
+      } else {
+        tasks = state.tasks.map((task) => {
+          if(task.id === payload.id) {
+            task = {...task, ...payload}
+          }
+          return task
+        })
+      }
       return {
         ...state,
-        tasks: [...state.tasks, {id: state.currentId + 1, currentState: 'open', ...payload, createdAt: (new Date()).toLocaleDateString()}],
+        tasks,
         openModal: false,
         selectedTask: {},
         currentId: state.currentId + 1
