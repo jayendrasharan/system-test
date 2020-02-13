@@ -3,6 +3,7 @@ import { Flex, Text, Button } from '../atoms';
 import { Dropdown, Tabbar } from '../molecules';
 import { Table, ModalForm, TaskEntryForm } from '../organisms';
 import { DropdownProps, TaskType } from '../../react-app-env';
+import { initialTaskObj } from '../../actions/todo'
 
 interface HomeProps {
   groupBy: DropdownProps;
@@ -36,7 +37,7 @@ const Home = ({
         <Table />
       </Flex>
       <ModalForm open={openModal} onCloseModal={onCloseModal}>
-        <TaskEntryForm selectedTask={selectedTask} onCloseModal={onCloseModal} onFormSubmit={onFormSubmit}/>
+        <TaskEntryForm selectedTask={{...initialTaskObj, ...selectedTask}} onCloseModal={onCloseModal} onFormSubmit={onFormSubmit}/>
       </ModalForm>
     </Flex>
   )

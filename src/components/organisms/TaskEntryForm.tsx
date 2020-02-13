@@ -3,7 +3,7 @@ import { Flex, Text, Input, Button } from '../atoms';
 import { InputWithText, Dropdown } from '../molecules'
 import { TaskEntryFormProps } from '../../react-app-env';
 import { useFormInputs } from '../../custom-hooks';
-import { allowedPriorities, inputPrioritySelectionOptions } from '../../actions/todo';
+import { inputPrioritySelectionOptions } from '../../actions/todo';
 
 const TaskEntryForm = ({
   selectedTask, onFormSubmit,
@@ -20,10 +20,20 @@ const TaskEntryForm = ({
     }
   })
   const [selectedPriority, updatePriority] = useState<any>(selectedTask.priority)
-  const editingTask = !!selectedTask.id
+  const [dueDate, updateDueDate] = useState(selectedTask.dueDate)
+  const editingTask = selectedTask.id !== -1
 
-  const onDateChange = () => {
+  const onDateChange = (event: React.FormEvent<HTMLInputElement>) => {
+    updateDueDate(event.currentTarget.value)
+  }
 
+  const onClickSubmit = () => {
+    onFormSubmit({
+      description: values.description,
+      title: values.title,
+      dueDate,
+      priority: selectedPriority
+    })
   }
 
   return (
@@ -59,7 +69,7 @@ const TaskEntryForm = ({
           </Flex>
         </Flex>
         <Flex my={4} width='100%' alignItems='center' justifyContent='flex-end'>
-          <Button  disabled={hasErrors} variant='primary' px={7} mr={4} height={6} onClick={onFormSubmit}>{editingTask ? 'Edit' : 'Save'}</Button>
+          <Button  disabled={hasErrors} variant='primary' px={7} mr={4} height={6} onClick={onClickSubmit}>{editingTask ? 'Edit' : 'Save'}</Button>
           <Button variant='secondary' px={7} ml={4} height={6} onClick={onCloseModal}>Cancel</Button>
         </Flex>
       </Flex>

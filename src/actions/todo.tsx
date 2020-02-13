@@ -17,6 +17,8 @@ export const OPEN_ADD_TASK_MODAL = 'OPEN_ADD_TASK_MODAL';
 export const CLOSE_TASK_MODAL = 'CLOSE_TASK_MODAL';
 export const OPEN_EDIT_TASK_MODAL = 'OPEN_EDIT_TASK_MODAL';
 
+export const SUBMIT_FORM = 'SUBMIT_FORM';
+
 export const RESET_STATE = 'RESET_STATE';
 
 export const allowedCurrentStates = ['open', 'done']
@@ -36,3 +38,13 @@ export const sortByOptions = config.reduce<string[]>((acc: string[], cur: Config
   if(cur.allowSortBy) return [...acc, cur.name]
   return acc;
 }, [])
+
+export const initialTaskObj = {
+  id: -1,
+  currentState: 'open',
+  title: '',
+  description: '',
+  createdAt: '',
+  dueDate: '',
+  priority: 'none'
+}

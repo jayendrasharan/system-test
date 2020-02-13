@@ -3,7 +3,8 @@ import Home from '../components/templates/Home';
 import {
   groupByOptions, CHANGE_GROUPBY, DELETE_TODO,
   CHANGE_TODO_STATUS, tabbarOptions, CHANGE_CURRENT_TAB,
-  SORT_COLUMN, OPEN_ADD_TASK_MODAL, OPEN_EDIT_TASK_MODAL, CLOSE_TASK_MODAL
+  SORT_COLUMN, OPEN_ADD_TASK_MODAL, OPEN_EDIT_TASK_MODAL,
+  CLOSE_TASK_MODAL, SUBMIT_FORM
 } from '../actions/todo';
 import todoReducer, { initialState } from '../reducers/todo';
 import { TableProvider } from '../contexts/TableContext';
@@ -46,6 +47,10 @@ const HomePage = () => {
     dispatch({ type: SORT_COLUMN, payload: { columnName }})
   }
 
+  const onFormSubmit = useCallback((obj) => {
+    dispatch({ type: SUBMIT_FORM, payload: obj })
+  }, [])
+
   const onClickAddTask = useCallback(() => dispatch({ type: OPEN_ADD_TASK_MODAL }), [])
 
   const onCloseModal = useCallback(() => dispatch({ type: CLOSE_TASK_MODAL }), [])
@@ -74,6 +79,7 @@ const HomePage = () => {
       onClickAddTask={onClickAddTask}
       selectedTask={state.selectedTask}
       onCloseModal={onCloseModal}
+      onFormSubmit={onFormSubmit}
     />
     </TableProvider>
   )

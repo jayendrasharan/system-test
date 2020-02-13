@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { TaskType, FormInputsHookOption, FormInputsHookReturnType } from '../react-app-env';
 
 const useFormInputs = (initialFormValue: TaskType, options: FormInputsHookOption): FormInputsHookReturnType => {
@@ -12,7 +12,7 @@ const useFormInputs = (initialFormValue: TaskType, options: FormInputsHookOption
     })
   }
 
-  const errors = Object.keys(options).reduce((acc, cur) => {
+  const errors: {[key: string]: string[]} = Object.keys(options).reduce((acc, cur) => {
     const option = options[cur];
     const error = []
     if(option.minLength && option.maxLength && (state[cur].length > option.maxLength || state[cur].length < option.minLength)) {
@@ -23,7 +23,7 @@ const useFormInputs = (initialFormValue: TaskType, options: FormInputsHookOption
       [cur]: error
     }
   }, {})
-  const hasErrors = !!Object.keys(errors).length
+  const hasErrors = Object.values(errors).some(i => i.length > 0)
   return { values: state, onChange, errors, hasErrors }
 }
 

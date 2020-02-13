@@ -3,10 +3,11 @@ import {
   CHANGE_GROUPBY, RESET_STATE, DELETE_TODO,
   CHANGE_TODO_STATUS, CHANGE_CURRENT_TAB,
   SORT_COLUMN, OPEN_ADD_TASK_MODAL, CLOSE_TASK_MODAL,
-  OPEN_EDIT_TASK_MODAL
+  OPEN_EDIT_TASK_MODAL, SUBMIT_FORM
 } from '../actions/todo';
 
 export const initialState = {
+  currentId: data.map(i => i.id).sort((a, b) => a-b).reverse()[0] || 1,
   tasks: data,
   groupBy: 'none',
   searchTerm: '',
@@ -84,6 +85,15 @@ export default (state, action) => {
         ...state,
         openModal: false,
         selectedTask: {}
+      }
+    }
+    case SUBMIT_FORM: {
+      return {
+        ...state,
+        tasks: [...state.tasks, {id: state.currentId + 1, currentState: 'open', ...payload, createdAt: (new Date()).toLocaleDateString()}],
+        openModal: false,
+        selectedTask: {},
+        currentId: state.currentId + 1
       }
     }
     case RESET_STATE:

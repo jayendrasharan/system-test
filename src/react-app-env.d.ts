@@ -100,7 +100,10 @@ export interface formErrorsType {
 export interface TaskEntryFormProps {
   selectedTask: TaskType;
   onCloseModal: () => void;
-  onFormSubmit: () => void;
+  onFormSubmit: ({
+    priority: priorityTypes, title: string,
+    description: string, dueDate: string
+  }) => void;
 }
 
 export interface TableProps extends Omit<TableActionsProps, 'currentState'> {
