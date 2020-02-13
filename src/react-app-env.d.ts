@@ -7,6 +7,7 @@ import {
 import theme from './theme';
 import { CHANGE_GROUPBY, groupByOptions, sortByOptions, RESET_STATE } from './actions/todo';
 import { initialState } from './reducers/todo';
+import { ReactNode } from 'react';
 
 type fontSizeType = keyof theme.fontSizes;
 type buttonVariantType = keyof typeof theme.buttons
@@ -68,6 +69,17 @@ export interface TableActionsProps {
   currentState: currentStateTypes;
   sortOrder?: 'ASC' | 'DESC';
   sortBy?: sortByOptions;
+}
+
+export interface ModalFormProps {
+  children: ReactNode;
+  open: boolean;
+  onCloseModal: () => void;
+}
+
+export interface TaskEntryFormProps {
+  selectedTask: TaskType;
+  onCloseModal: () => void;
 }
 
 export interface TableProps extends Omit<TableActionsProps, 'currentState'> {

@@ -13,6 +13,10 @@ export const SORT_COLUMN = 'SORT_COLUMN';
 
 export const CHANGE_GROUPBY = 'CHANGE_GROUPBY';
 
+export const OPEN_ADD_TASK_MODAL = 'OPEN_ADD_TASK_MODAL';
+export const CLOSE_TASK_MODAL = 'CLOSE_TASK_MODAL';
+export const OPEN_EDIT_TASK_MODAL = 'OPEN_EDIT_TASK_MODAL';
+
 export const RESET_STATE = 'RESET_STATE';
 
 export const tabbarOptions = [{ id: 'all', label: 'All Tasks'}, { id: 'open', label: 'Pending Tasks' }, { id: 'done', label: 'Completed Tasks' }];

@@ -2,7 +2,8 @@ import data from '../.mock-data/todo-list.json';
 import {
   CHANGE_GROUPBY, RESET_STATE, DELETE_TODO,
   CHANGE_TODO_STATUS, CHANGE_CURRENT_TAB,
-  SORT_COLUMN
+  SORT_COLUMN, OPEN_ADD_TASK_MODAL, CLOSE_TASK_MODAL,
+  OPEN_EDIT_TASK_MODAL
 } from '../actions/todo';
 
 export const initialState = {
@@ -11,7 +12,9 @@ export const initialState = {
   searchTerm: '',
   sortBy: 'title',
   sortOrder: 'ASC',
-  selectedTab: 'all'
+  selectedTab: 'all',
+  openModal: false,
+  selectedTask: {}
 }
 
 export const initializeState = (state) => state;
@@ -61,6 +64,26 @@ export default (state, action) => {
         sortOrder,
         sortBy: columnName,
         tasks: state.tasks.sort(callback)
+      }
+    }
+    case OPEN_ADD_TASK_MODAL: {
+      return {
+        ...state,
+        openModal: true
+      }
+    }
+    case OPEN_EDIT_TASK_MODAL: {
+      return {
+        ...state,
+        openModal: true,
+        selectedTask: state.tasks.filter(task => task.id === payload.id)[0] // not used find as less browser support.
+      }
+    }
+    case CLOSE_TASK_MODAL: {
+      return {
+        ...state,
+        openModal: false,
+        selectedTask: {}
       }
     }
     case RESET_STATE:
