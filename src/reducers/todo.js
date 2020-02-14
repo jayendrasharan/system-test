@@ -43,6 +43,7 @@ export default (state, action) => {
       return {
         ...state,
         groupBy: payload.value,
+        selectedTab: 'all',
         tasks: value === 'none' ? state.allTasks : state.allTasks.reduce(groupByCallback(value), {})
       }
     case DELETE_TODO: {
@@ -70,7 +71,7 @@ export default (state, action) => {
     case CHANGE_CURRENT_TAB: {
       return {
         ...state,
-        selectedTab: payload.value,
+        selectedTab: payload.value
       }
     }
     case SORT_COLUMN: {

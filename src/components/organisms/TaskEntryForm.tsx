@@ -9,7 +9,7 @@ const TaskEntryForm = ({
   selectedTask, onFormSubmit,
   onCloseModal
 }: TaskEntryFormProps) => {
-  const { values, onChange, errors, hasErrors } = useFormInputs(selectedTask, {
+  const { values, onChange, errors, hasErrors, inputTouched } = useFormInputs(selectedTask, {
     title: {
       minLength: 10,
       maxLength: 140,
@@ -45,7 +45,7 @@ const TaskEntryForm = ({
       <Flex as='form' px={6} width='100%' flexDirection='column' onSubmit={(e: React.FormEvent) => e.preventDefault()}>
         <InputWithText
           label='Summary'
-          errors={errors.title}
+          errors={inputTouched ? errors.title : []}
           input={{
             name: 'title',
             value: values.title,
@@ -55,11 +55,11 @@ const TaskEntryForm = ({
         <Flex flexDirection='column' my={4}>
           <Text mb={4} color='darkGrey'>Description</Text>
           <Input value={values.description} onChange={onChange} name='description' as='textarea'/>
-          {errors.description.length > 0 ? errors.description.map((d: string, index: number) => <Text color='red' fontSize={0} key={index}>{d}</Text>) : null}
+          <Flex style={{visibility: errors.description.length > 0 ? 'visible' : 'hidden'}} height={1}>{errors.description.length > 0 && inputTouched ? errors.description.map((d: string, index: number) => <Text color='red' fontSize={0} key={index}>{d}</Text>) : null}</Flex>
         </Flex>
         <Flex justifyContent='space-between' my={4} alignItems='center'>
-          <Flex>
-            <Text color='darkGrey'>Priority</Text>
+          <Flex alignItems='center'>
+            <Text color='darkGrey' mr={4}>Priority</Text>
             <Dropdown
               options={inputPrioritySelectionOptions}
               selected={selectedPriority}

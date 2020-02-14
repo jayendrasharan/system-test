@@ -31,10 +31,10 @@ const InputWithText = ({
         value={value}
         onChange={onChange}
       />
-      {
+      <Flex style={{visibility: errors.length > 0 ? 'visible' : 'hidden'}} height={1}>{
         errors.length > 0 ? 
         <Flex flexDirection='column'>{errors.map((error, i) => <Text color='red' fontSize={0} key={i}>{error}</Text>)}</Flex> : null
-      }
+      }</Flex>
     </Flex>
   )
 }

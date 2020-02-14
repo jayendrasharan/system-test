@@ -24,9 +24,10 @@ const Home = ({
 }: HomeProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    const requiredKeys: string[] = ['Meta', 'Shift', 'f']
+    const requiredKeys: string[] = ['Control', 'Shift', 'F']
     let focusedKeys: string[] = [];
     const focusKeydown = (event: KeyboardEvent) => {
+      console.log(event.key)
       if(requiredKeys.indexOf(event.key) !== -1) {
         focusedKeys.push(event.key)
         if(requiredKeys.every(key => focusedKeys.indexOf(key) !== -1) && inputRef.current) {

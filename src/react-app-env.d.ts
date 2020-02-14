@@ -68,6 +68,7 @@ export interface FormInputsHookReturnType {
   values: {
       [key: string]: string;
   }
+  inputTouched: boolean;
 }
 
 export type optionType = {id: string | number; label: string;}

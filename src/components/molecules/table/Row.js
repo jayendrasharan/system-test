@@ -10,7 +10,7 @@ const TableData = styled(Text).attrs(() => ({ as: 'td', flexGrow: 1, justifyCont
   width: 15%;
 `
 
-const TableRowContainer = styled(Flex).attrs(() => ({ as: 'tr', flexGrow: 1, my: 5 }))`
+const TableRowContainer = styled(Flex).attrs(() => ({ as: 'tr', flexGrow: 1, my: 1 }))`
   position: relative;
   ${({ done }) => done && css`
     background-color: ${({ theme: { colors }}) => colors.green};
