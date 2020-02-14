@@ -3,7 +3,8 @@ import { Flex, Text, Button, Input } from '../atoms';
 import { Dropdown, Tabbar } from '../molecules';
 import { Table, ModalForm, TaskEntryForm } from '../organisms';
 import { DropdownProps, TaskType } from '../../react-app-env';
-import { initialTaskObj } from '../../actions/todo'
+import { initialTaskObj } from '../../actions/todo';
+import SimpleLoader from '../../content-loaders/SimpleLoader';
 
 interface HomeProps {
   groupBy: DropdownProps;
@@ -15,10 +16,11 @@ interface HomeProps {
   onFormSubmit: () => void;
   onSearchInputChange: () => void;
   searchTerm: string;
+  isLoading: boolean;
 }
 
 const Home = ({
-  groupBy, tabbar, onFormSubmit,
+  groupBy, tabbar, onFormSubmit, isLoading,
   onClickAddTask, onCloseModal, searchTerm,
   openModal, selectedTask, onSearchInputChange
 }: HomeProps) => {
@@ -27,7 +29,6 @@ const Home = ({
     const requiredKeys: string[] = ['Control', 'Shift', 'F']
     let focusedKeys: string[] = [];
     const focusKeydown = (event: KeyboardEvent) => {
-      console.log(event.key)
       if(requiredKeys.indexOf(event.key) !== -1) {
         focusedKeys.push(event.key)
         if(requiredKeys.every(key => focusedKeys.indexOf(key) !== -1) && inputRef.current) {
@@ -46,10 +47,14 @@ const Home = ({
       window.addEventListener('keydown', focusKeydown)
       window.removeEventListener('keyup', focusKeyup)
     }
-  }, [inputRef])
+  }, [inputRef.current])
+
+  if(isLoading) {
+    return (<SimpleLoader mx='auto' mt='20%'/>)
+  }
   return (
     <Flex flexDirection='column' width='100%'>
-      <Flex mb={6} flexDirection='column'>
+      <Flex mb={6} flexDirection='column' width='300px'>
         <Flex justifyContent='space-between' alignItems='flex-end'>
           <Text fontWeight='bold' as='h6' mb={2} pb={0}>Search Here</Text>
           <Text fontSize={0} color='darkGrey' pb={0} as='p' mb={2}>or Click (CTRL + SHIFT + F)</Text>

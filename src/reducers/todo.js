@@ -8,6 +8,7 @@ import {
 } from '../actions/todo';
 
 export const initialState = {
+  isLoading: true,
   currentId: data.map(i => i.id).sort((a, b) => a-b).reverse()[0] || 1,
   allTasks: data,
   tasks: data,

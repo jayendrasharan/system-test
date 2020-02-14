@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useEffect } from 'react';
 import Home from '../components/templates/Home';
 import {
   groupByOptions, CHANGE_GROUPBY, DELETE_TODO,
@@ -15,6 +15,10 @@ const HomePage = () => {
   const [state, dispatch] = useReducer(todoReducer, initialState)
 
   const actionsDisabled = state.groupBy !== 'none'
+
+  useEffect(() => {
+    window.setTimeout(() => dispatch({ payload: { isLoading: false }}), 1000)
+  }, [])
 
   const onSelectOption = (selected) => {
     dispatch({ type: CHANGE_GROUPBY, payload: {
@@ -90,6 +94,7 @@ const HomePage = () => {
       onCloseModal={onCloseModal}
       onFormSubmit={onFormSubmit}
       onSearchInputChange={onSearchInputChange}
+      isLoading={state.isLoading}
     />
     </TableProvider>
   )
