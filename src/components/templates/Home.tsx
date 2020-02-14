@@ -4,7 +4,7 @@ import { Dropdown, Tabbar } from '../molecules';
 import { Table, ModalForm, TaskEntryForm } from '../organisms';
 import { DropdownProps, TaskType } from '../../react-app-env';
 import { initialTaskObj } from '../../actions/todo';
-import SimpleLoader from '../../content-loaders/SimpleLoader';
+import { SimpleLoader } from '../../content-loaders';
 
 interface HomeProps {
   groupBy: DropdownProps;
@@ -47,7 +47,7 @@ const Home = ({
       window.addEventListener('keydown', focusKeydown)
       window.removeEventListener('keyup', focusKeyup)
     }
-  }, [inputRef.current])
+  }, [inputRef])
 
   if(isLoading) {
     return (<SimpleLoader mx='auto' mt='20%'/>)

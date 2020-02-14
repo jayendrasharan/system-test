@@ -1,0 +1,1 @@
+export { default as SimpleLoader } from './SimpleLoader';
