@@ -5,7 +5,7 @@ import { Table, ModalForm, TaskEntryForm } from '../organisms';
 import { DropdownProps, TaskType } from '../../react-app-env';
 import { initialTaskObj } from '../../actions/todo';
 import { SimpleLoader } from '../../content-loaders';
-import { WithSuspenseLoader } from '../../helpers';
+import(/* webpackPreload: true */'../organisms/ModalForm')
 
 interface HomeProps {
   groupBy: DropdownProps;
@@ -51,7 +51,7 @@ const Home = ({
   }, [inputRef])
 
   if(isLoading) {
-    return (<SimpleLoader mx='auto' mt='20%'/>)
+    return (<SimpleLoader />)
   }
   return (
     <Flex flexDirection='column' width='100%'>
@@ -92,4 +92,4 @@ const Home = ({
   )
 }
 
-export default WithSuspenseLoader(Home);
+export default Home;

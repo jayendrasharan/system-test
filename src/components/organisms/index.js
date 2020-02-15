@@ -1,3 +1,7 @@
-export { default as Table } from './Table';
-export { default as ModalForm } from './ModalForm';
-export { default as TaskEntryForm } from './TaskEntryForm';
+import { lazy } from 'react';
+
+const Table = lazy(() => import('./Table'))
+const ModalForm = lazy(() => import('./ModalForm'))
+const TaskEntryForm = lazy(() => import('./TaskEntryForm'))
+
+export { Table, TaskEntryForm, ModalForm };

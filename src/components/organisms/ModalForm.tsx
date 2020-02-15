@@ -12,6 +12,7 @@ const ModalBackgroundOverlay = styled(Flex)`
   width: 100vw;
   height: 100vh;
   z-index: 10;
+  opacity: 0.5;
 `
 const ModalContainer = styled(Flex)`
   position: fixed;
