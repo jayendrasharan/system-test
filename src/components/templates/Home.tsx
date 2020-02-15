@@ -5,6 +5,7 @@ import { Table, ModalForm, TaskEntryForm } from '../organisms';
 import { DropdownProps, TaskType } from '../../react-app-env';
 import { initialTaskObj } from '../../actions/todo';
 import { SimpleLoader } from '../../content-loaders';
+import { WithSuspenseLoader } from '../../helpers';
 
 interface HomeProps {
   groupBy: DropdownProps;
@@ -91,4 +92,4 @@ const Home = ({
   )
 }
 
-export default Home;
+export default WithSuspenseLoader(Home);

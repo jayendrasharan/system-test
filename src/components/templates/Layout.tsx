@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Flex } from '../atoms'
-
+import { WithSuspenseLoader } from '../../helpers';
 
 interface LayoutProps {
   children: ReactNode
@@ -16,4 +16,4 @@ const Layout = ({
   )
 }
 
-export default Layout;
+export default WithSuspenseLoader(Layout);
