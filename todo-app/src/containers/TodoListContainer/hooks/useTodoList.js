@@ -29,7 +29,7 @@ export default function useTodoList(selectedTab) {
     dispatch({ type: 'editTask', payload: { task, selectedTab } });
   };
   const deleteTask = task => {
-    dispatch({ type: 'deleteTask', payload: { task, selectedTab } });
+    dispatch({ type: 'deleteTask', payload: { task } });
   };
   const changeTaskStatus = (task, status) => {
     dispatch({

@@ -15,6 +15,10 @@ const useStyles = makeStyles({
   column: {
     display: 'grid',
     gridTemplateColumns: 'auto 1fr'
+  },
+  sidePanel: {
+    height: '100vh',
+    backgroundColor: '#f5f5f5'
   }
 });
 
@@ -54,7 +58,7 @@ export default function Home(props) {
           searchText={searchText}
         />
         <div className={classes.column}>
-          <div style={{ height: '100vh', backgroundColor: '#f5f5f5' }}>
+          <div className={classes.sidePanel}>
             <TodoSidePanel setSelectedTab={props.setSelectedTab} />
           </div>
           <TodoList

@@ -1,6 +1,5 @@
 import React from 'react';
 import { TableBody } from '@material-ui/core';
-
 import TodoListEmpty from '../TodoListEmpty';
 import TodoListBodyRow from '../TodoListBodyRow';
 

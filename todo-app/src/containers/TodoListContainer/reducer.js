@@ -75,7 +75,7 @@ export default function(state, action) {
       return { ...state, allTasks, selectedTabTasks };
     }
     case 'deleteTask': {
-      const { task, selectedTab } = action.payload;
+      const { task } = action.payload;
       let allTasks = [...state.allTasks];
       let selectedTabTasks = [...state.selectedTabTasks];
       allTasks.forEach((data, index) => {

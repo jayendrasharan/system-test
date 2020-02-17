@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TableCell, TableRow, Checkbox, makeStyles } from '@material-ui/core';
+import { TableCell, TableRow, makeStyles } from '@material-ui/core';
 import ActionButtonGroup from '../ActionButtonGroup';
 
 const useStyles = makeStyles(props => ({
