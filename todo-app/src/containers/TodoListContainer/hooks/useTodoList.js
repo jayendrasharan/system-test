@@ -1,9 +1,10 @@
 import { useEffect, useReducer } from 'react';
 import reducer from '../reducer';
 import useDebouncedCallback from 'use-debounce/lib/useDebouncedCallback';
+import mockedData from '../mockedData';
 
 const intialState = {
-  allTasks: [],
+  allTasks: mockedData,
   selectedTabTasks: [],
   searchText: '',
   filteredData: [],
