@@ -1,0 +1,64 @@
+.Button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+
+.disabled{
+    background: #ccc;
+    color: #000000;
+}
+
+.success {
+    background: #5C9210;
+    border:1px solid #5C9210;
+}
+
+.success:hover{
+    background: #ffffff;
+    color: #5C9210
+}
+
+.danger {
+    background: #944317;
+    border:1px solid #944317;
+}
+
+.danger:hover{
+    background: #ffffff;
+    color: #944317
+}
+
+.general{
+    background: #2179d4d6;
+    border:1px solid #2179d4d6;
+}
+
+.general:hover{
+    background: #ffffff;
+    color: #2179d4d6
+}
+
+.RoundButton{
+    cursor: pointer;
+}
+
+.navTab{
+    display: inline-block;
+    width:120px;
+    padding:10px;
+    border:1px solid yellow;
+    margin-right:15px;
+}
+
+.active{
+    background-color: green;
+}

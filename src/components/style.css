@@ -1,0 +1,76 @@
+.main-content-container{
+width:70%;
+float: left;
+border: 1px solid red;
+padding: 10px;
+}
+
+.side-drawer-container{
+    width:25%;
+    float:right;
+    border: 1px solid red;
+    padding:10px;
+    position: relative;
+    min-height: 400px;
+    }
+
+    .form-group{
+        padding:10px;
+        display:block;
+        text-align: left;
+    }
+
+    .form-group label{
+        font-weight: bold;
+        min-width: 150px;
+        display: inline-block;
+    }
+
+    .form-group input, textarea{
+        padding:5px;
+        border-radius: 5px;
+        border:1px solid #ccc;
+        min-height:22px;
+        min-width: 250px;
+        margin-top: 20px;
+    }
+
+    textarea{
+        height: 60px;
+    }
+
+    .text-center{
+        text-align: center!important;
+    }
+
+    .form-group select{
+        padding:10px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+   .invalidInput{
+       border-color: red!important;
+   }
+
+   .error-msg{
+       display:block;
+       float:right;
+       color: red;
+       font-size: 12px;
+   }
+
+   .action-icon-holder{
+       display: flex;
+       justify-content: center;
+   }
+
+   .action-icon-holder svg{
+    cursor: pointer;
+    width:40px;
+   }
+
+   .comp-link{
+    cursor: pointer;
+       width:120px;
+   }
