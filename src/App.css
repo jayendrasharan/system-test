@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.hoverPointer :hover {
+  cursor: pointer;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  right:0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.dialog {
+  width: 150vw;
+  max-width: 30rem;
+  
+  padding: 1em;
+  
+  background: #fff;
+  color: #656e77;
+  box-shadow: 0 0 5px rgba(101, 110, 119, .2);
+  border: 0;
+  text-align: center;
+}
+
+.dialog[open] {
+  animation: .2s linear slidein;
+}
+
+.dialog::backdrop {
+  background: rgba(224, 228, 232, .9);
+  animation: .4s ease fade;
+}
+
+.dialog__title {
+  color: #50AAFF;
+}
+
+/* .dialog__txt {} */
+
+.dialog__btn {
+  display: block;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
