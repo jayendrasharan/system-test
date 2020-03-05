@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import uuid from 'uuid/v4';
 
-import Button from './components/Button';
 import Todos from './components/Todos';
 import Select from './components/Select';
 import Form from './components/Form';

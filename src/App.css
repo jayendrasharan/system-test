@@ -1,3 +1,7 @@
+.container {
+  margin-bottom: 20px;
+}
+
 .filters {
   display: flex;
 }
@@ -22,5 +26,6 @@ button[type='submit'] {
 }
 
 .list-group-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 0.5fr 0.5fr 0.5fr;
 }

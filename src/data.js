@@ -2,7 +2,7 @@ export const todosData = [
   {
     id: 1,
     checked: true,
-    title: '1',
+    title: 'title 1',
     description: '1',
     createdAt: new Date().toLocaleString(),
     dueDate: new Date().toLocaleDateString(),
