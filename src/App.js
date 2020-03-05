@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import uuid from 'uuid/v4';
 
+import Input from './components/Input';
 import Todos from './components/Todos';
 import Select from './components/Select';
 import Form from './components/Form';
@@ -22,9 +23,22 @@ function App() {
 
   const [sortBy, setSortBy] = useState('');
   const [searchBy, setSearchBy] = useState('');
+  const [search, setSearch] = useState('');
   const [groupBy, setGroupBy] = useState('');
 
   const [todos, setTodos] = useState(todosData);
+  const [showTodos, setShowTodos] = useState(todos);
+
+  useEffect(() => {
+    if (searchBy) {
+      const filteredTodos = todos.filter(todo =>
+        todo[searchBy].includes(search)
+      );
+      setShowTodos(filteredTodos);
+    }
+  }, [searchBy, search]);
+
+  useEffect(() => {}, [groupBy]);
 
   const submit = e => {
     e.preventDefault();
@@ -89,8 +103,19 @@ function App() {
           selectValue={setGroupBy}
         />
       </div>
+      {searchBy && (
+        <div style={{ margin: '10px 0' }}>
+          <Input
+            type="text"
+            label={`Search by ${searchBy}`}
+            value={search}
+            showLabel={false}
+            setText={setSearch}
+          />
+        </div>
+      )}
       <Form formData={formData} submit={submit} />
-      <Todos todos={todos}></Todos>
+      <Todos todos={showTodos}></Todos>
     </div>
   );
 }

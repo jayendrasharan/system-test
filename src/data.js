@@ -15,7 +15,7 @@ export const todosData = [
     description: '2',
     createdAt: new Date().toLocaleString(),
     dueDate: new Date().toLocaleDateString(),
-    priority: 'high'
+    priority: 'low'
   },
   {
     id: 3,

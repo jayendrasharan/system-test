@@ -1,11 +1,13 @@
 import React from 'react';
 
-const Input = ({ label, type, value, setText }) => {
+const Input = ({ label, type, value, setText, showLabel = true }) => {
   return (
     <div className="form-group">
-      <label htmlFor={label} style={{ textTransform: 'capitalize' }}>
-        {label}
-      </label>
+      {showLabel && (
+        <label htmlFor={label} style={{ textTransform: 'capitalize' }}>
+          {label}
+        </label>
+      )}
       <input
         className="form-control"
         type={type}
