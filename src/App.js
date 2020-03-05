@@ -38,7 +38,19 @@ function App() {
     }
   }, [searchBy, search]);
 
-  useEffect(() => {}, [groupBy]);
+  useEffect(() => {
+    if (groupBy) {
+      const groupedTodos = {};
+      let groupByValue;
+      todos.forEach(todo => {
+        groupByValue = todo[groupBy];
+        groupedTodos[groupByValue] = groupedTodos[groupByValue]
+          ? [...groupedTodos[groupByValue], todo]
+          : [todo];
+      });
+      setShowTodos(groupedTodos);
+    }
+  }, [groupBy]);
 
   const submit = e => {
     e.preventDefault();
