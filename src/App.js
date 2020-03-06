@@ -237,6 +237,14 @@ function App () {
     setEditTodo(!editTodo)
   }
 
+  const todosProps = {
+    todoCompletion: todoCompletionStatus,
+    remove: removeTodo,
+    edit,
+    search,
+    searchBy
+  }
+
   return (
     <div className="container">
       <h1>Todo App</h1>
@@ -287,24 +295,18 @@ function App () {
       </Modal>
       <Todos 
         todos={showTodos} 
-        todoCompletion={todoCompletionStatus} 
-        remove={removeTodo}
-        edit={edit}
+        {...todosProps}
       />
       </>}
       {tab === 'pending' 
       && <Todos 
           todos={todos.filter(todo => !todo.checked)}
-          todoCompletion={todoCompletionStatus}
-          remove={removeTodo}
-          edit={edit}
+          {...todosProps}
           />}
       {tab === 'completed' 
         && <Todos 
               todos={todos.filter(todo => todo.checked)}
-              todoCompletion={todoCompletionStatus}
-              remove={removeTodo}
-              edit={edit}
+              {...todosProps}
             />
       }
     </div>

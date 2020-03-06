@@ -3,7 +3,8 @@ import moment from "moment";
 
 import Button from "./Button";
 
-const Todos = ({ todos, todoCompletion, remove, edit }) => {
+const Todos = ({ todos, todoCompletion, remove, edit, search, searchBy }) => {
+  console.log("Todos -> search", search)
   if (!Array.isArray(todos)) {
     return (
       <>
@@ -77,9 +78,13 @@ const Todos = ({ todos, todoCompletion, remove, edit }) => {
                 checked={todo.checked}
                 onChange={(e) => todoCompletion(e, todo.id)}
               />
-              <label className="form-check-label">{todo.title}</label>
+              {searchBy === 'title' 
+              ? todo.title.split('').map(c => search.includes(c) ? <mark>{c}</mark> : <label>{c}</label>)
+              : <label className="form-check-label">{todo.title}</label>}
             </div>
-            <p>{todo.description}</p>
+            {searchBy === 'description' && search.length
+              ? <div style={{display: 'inline'}}>{todo.description.split('').map(c => search.includes(c) ? <mark>{c}</mark> : <label>{c}</label>)}</div>
+              : <p>{todo.description}</p>}
             <p>{moment(todo.createdAt).format("Do MMM Y, H:m")}</p>
             <p>{moment(todo.dueDate).format("Do MMM Y")}</p>
             <p>{todo.priority.value}</p>
