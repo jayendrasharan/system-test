@@ -37,7 +37,7 @@ function App(props) {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState(new Date().getDate());
+  const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState({ value: '', status: 0 });
 
   const [sortBy, setSortBy] = useState('');
@@ -59,7 +59,7 @@ function App(props) {
   });
 
   const focusSearch = window.addEventListener('keyup', e => {
-    if ((e.ctrlKey && e.shiftKey, e.keyCode === 70)) {
+    if (e.ctrlKey && e.shiftKey && e.keyCode === 70) {
       document.querySelector('#search').focus();
     }
   });
@@ -95,6 +95,15 @@ function App(props) {
         priority
       });
     } else {
+      if (
+        description.length < 10 ||
+        description.length > 500 ||
+        title.length < 10 ||
+        title.length > 150 ||
+        priority.value.length === 0
+      ) {
+        return;
+      }
       const data = {
         id: v4(),
         checked: false,

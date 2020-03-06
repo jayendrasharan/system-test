@@ -105,7 +105,11 @@ const Todos = ({
               <p>{todo.description}</p>
             )}
             <p>{moment(todo.createdAt).format('Do MMM Y, H:m')}</p>
-            <p>{moment(todo.dueDate).format('Do MMM Y')}</p>
+            <p>
+              {todo.dueDate.length
+                ? moment(todo.dueDate).format('Do MMM Y')
+                : ''}
+            </p>
             <p>{todo.priority.value}</p>
             <Button click={() => remove(todo.id)}>Remove</Button>
             <Button click={() => edit(todo.id)}>Edit</Button>
