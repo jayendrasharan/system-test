@@ -1,11 +1,9 @@
-import moment from "moment";
-
 export const todosData = [
   {
     id: 1,
     checked: false,
     title: "cat",
-    description: "1",
+    description: "this is first description",
     createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
     priority: { value: "high", status: 3 }
@@ -14,7 +12,7 @@ export const todosData = [
     id: 2,
     checked: true,
     title: "ele",
-    description: "2",
+    description: "this is second description 2",
     createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
     priority: { value: "low", status: 1 }
@@ -23,7 +21,7 @@ export const todosData = [
     id: 3,
     checked: false,
     title: "zeek",
-    description: "3",
+    description: "this is third description 3",
     createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
     priority: { value: "medium", status: 2 }

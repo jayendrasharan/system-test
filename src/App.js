@@ -1,182 +1,252 @@
-import React, { useState, useEffect } from "react";
-import { v4 } from "uuid";
+import React, {useState, useEffect} from 'react';
+import {v4} from 'uuid';
 
-import Input from "./components/Input";
-import Todos from "./components/Todos";
-import Select from "./components/Select";
-import Form from "./components/Form";
+import Input from './components/Input';
+import Todos from './components/Todos';
+import Button from './components/Button';
+import Select from './components/Select';
+import Form from './components/Form';
+import Modal from './components/Modal';
 import {
   todosData,
   sortValues,
   searchValues,
   groupValues,
-  priorityValues
-} from "./data";
+  priorityValues,
+} from './data';
 
-import "./App.css";
-import moment from "moment";
+import './App.css';
+import moment from 'moment';
 
-function App() {
-  const [title, setTitle] = useState("sdfdsf");
-  const [description, setDescription] = useState("sdfdsfsd");
+function App () {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState(new Date().getDate());
-  const [priority, setPriority] = useState({ value: "", status: 0 });
+  const [priority, setPriority] = useState({value: '', status: 0});
 
-  const [sortBy, setSortBy] = useState("");
-  const [searchBy, setSearchBy] = useState("");
-  const [search, setSearch] = useState("");
-  const [groupBy, setGroupBy] = useState("");
+  const [sortBy, setSortBy] = useState('');
+  const [searchBy, setSearchBy] = useState('');
+  const [search, setSearch] = useState('');
+  const [groupBy, setGroupBy] = useState('');
 
   const [todos, setTodos] = useState(todosData);
   const [showTodos, setShowTodos] = useState(todos);
 
-  useEffect(() => {
-    if (searchBy) {
-      const filteredTodos = todos.filter(todo =>
-        todo[searchBy].toLowerCase().includes(search.toLowerCase())
-      );
-      setShowTodos(filteredTodos);
-    }
-  }, [searchBy, search]);
+  const [showAddTodo, setShowAddTodo] = useState(false);
+  const [editTodo, setEditTodo] = useState(false);
+  const [editId, setEditId] = useState(null);
 
-  useEffect(() => {
-    if (groupBy) {
-      const groupedTodos = {};
-      let groupByValue;
-      todos.forEach(todo => {
-        groupByValue = todo[groupBy];
-        if (groupBy === "priority") {
-          groupedTodos[groupByValue.value] = groupedTodos[groupByValue.value]
-            ? [...groupedTodos[groupByValue.value], todo]
-            : [todo];
-        } else {
-          groupedTodos[groupByValue] = groupedTodos[groupByValue]
-            ? [...groupedTodos[groupByValue], todo]
-            : [todo];
-        }
-      });
-      setShowTodos(groupedTodos);
-    } else {
-      setShowTodos(todos);
-    }
-  }, [groupBy]);
+  const [tab, setTab] = useState('all');
 
-  useEffect(() => {
-    let sortedTodos = todos;
-    if (sortBy) {
-      switch (sortBy) {
-        case "completed":
-          sortedTodos = todos.sort((a, b) => {
-            if (a.checked) return -1;
-            if (b.checked) return 1;
-            return 0;
-          });
-          break;
-        case "title":
-          sortedTodos = todos.sort((a, b) => {
-            const titleA = a.title.toUpperCase();
-            const titleB = b.title.toUpperCase();
-            if (titleA > titleB) return 1;
-            if (titleA < titleB) return -1;
-            return 0;
-          });
-          break;
-        case "createdAt":
-          sortedTodos = todos.sort((a, b) => {
-            return b.createdAt - a.createdAt;
-          });
-          break;
-        case "dueDate":
-          sortedTodos = todos.sort((a, b) => {
-            return a.dueDate - b.dueDate;
-          });
-          break;
-        case "priority":
-          sortedTodos = todos.sort((a, b) => {
-            return b.priority.status - a.priority.status;
-          });
-          break;
+  useEffect (
+    () => {
+      if (searchBy) {
+        const filteredTodos = todos.filter (todo =>
+          todo[searchBy].toLowerCase ().includes (search.toLowerCase ())
+        );
+        setShowTodos (filteredTodos);
       }
+    },
+    [searchBy, search]
+  );
+
+  const escKey = window.addEventListener('keyup', (e) => {
+    if (e.keyCode === 27) {
+      setShowAddTodo(false)
+      setEditTodo(false)
     }
-    setShowTodos(sortedTodos);
-  }, [sortBy]);
+  })
 
   useEffect(() => {
-    setShowTodos(todos);
-  }, [todos]);
+    return () => window.removeEventListener(escKey);
+  }, [])
+
+  useEffect (
+    () => {
+      if (groupBy) {
+        const groupedTodos = {};
+        let groupByValue;
+        todos.forEach (todo => {
+          groupByValue = todo[groupBy];
+          if (groupBy === 'priority') {
+            groupedTodos[groupByValue.value] = groupedTodos[groupByValue.value]
+              ? [...groupedTodos[groupByValue.value], todo]
+              : [todo];
+          } else {
+            groupedTodos[groupByValue] = groupedTodos[groupByValue]
+              ? [...groupedTodos[groupByValue], todo]
+              : [todo];
+          }
+        });
+        setShowTodos(groupedTodos);
+      } else {
+        setShowTodos(todos);
+      }
+    },
+    [groupBy]
+  );
+
+  useEffect (
+    () => {
+      let sortedTodos = [...todos];
+      if (sortBy) {
+        switch (sortBy) {
+          case 'completed':
+            sortedTodos = sortedTodos.sort ((a, b) => {
+              if (a.checked) return -1;
+              if (b.checked) return 1;
+              return 0;
+            });
+            break;
+          case 'title':
+            sortedTodos = sortedTodos.sort((a, b) => {
+              const titleA = a.title.toUpperCase ();
+              const titleB = b.title.toUpperCase ();
+              if (titleA > titleB) return 1;
+              if (titleA < titleB) return -1;
+              return 0;
+            });
+            break;
+          case 'createdAt':
+            sortedTodos = sortedTodos.sort((a, b) => {
+              return b.createdAt - a.createdAt;
+            });
+            break;
+          case 'dueDate':
+            sortedTodos = sortedTodos.sort((a, b) => {
+              return a.dueDate - b.dueDate;
+            });
+            break;
+          case 'priority':
+            sortedTodos = sortedTodos.sort((a, b) => {
+              return b.priority.status - a.priority.status;
+            });
+            break;
+          default: setShowTodos(sortedTodos);
+        }
+      }
+      setShowTodos(sortedTodos);
+    },
+    [sortBy]
+  );
+
+  useEffect (
+    () => {
+      setShowTodos(todos);
+    },
+    [todos]
+  );
 
   const submit = e => {
     e.preventDefault();
-    const data = {
-      id: v4(),
-      checked: false,
-      title,
-      description,
-      createdAt: new Date().getTime(),
-      dueDate: new Date(dueDate).getTime(),
-      priority
-    };
-    setTodos([...todos, data]);
-    setTitle("");
-    setDescription("");
-    setPriority({ value: "", status: 0 });
+    if (editTodo) {
+      const allTodos = [...todos];
+      const editedTodo = allTodos.find(todo => todo.id === editId);
+      const editedTodoIndex = allTodos.findIndex(todo => todo.id === editId);
+      const updatedTodo = {
+        ...editedTodo,
+        title,
+        description,
+        dueDate,
+        priority
+      }
+      allTodos.splice(editedTodoIndex, 1, updatedTodo);
+      setTodos(allTodos);
+    } else {
+      const data = {
+        id: v4(),
+        checked: false,
+        title,
+        description,
+        createdAt: new Date().getTime(),
+        dueDate: new Date(dueDate).getTime(),
+        priority,
+      };
+      setTodos ([...todos, data]);
+    }
+    setTitle ('');
+    setDescription ('');
+    setPriority ({ value: '', status: 0 });
+    setShowAddTodo (false);
+    setEditTodo(false);
   };
 
   const setPriorityValue = e => {
     let status = 1;
-    if (e.target.value === "medium") status = 2;
-    else if (e.target.value === "high") status = 3;
-    setPriority({ value: e.target.value, status });
+    if (e.target.value === 'medium') status = 2;
+    else if (e.target.value === 'high') status = 3;
+    setPriority ({value: e.target.value, status});
   };
 
   const setGroupByValue = e => {
-    setSortBy("");
-    setSearchBy("");
+    setSortBy('');
+    setSearchBy('');
     setGroupBy(e.target.value);
   };
 
   const setSortByValue = e => {
-    setGroupBy("");
-    setSearchBy("");
+    setGroupBy('');
+    setSearchBy('');
     setSortBy(e.target.value);
   };
 
   const setSearchByValue = e => {
-    setGroupBy("");
-    setSortBy("");
+    setGroupBy('');
+    setSortBy('');
     setSearchBy(e.target.value);
   };
 
   const formData = {
     titleData: {
-      label: "title",
-      type: "text",
       value: title,
-      setText: setTitle
+      setText: setTitle,
     },
     descriptionData: {
-      label: "description",
       value: description,
-      setText: setDescription
+      setText: setDescription,
     },
     priorityData: {
-      label: "priority",
       values: priorityValues,
       value: priority.value,
-      selectValue: setPriorityValue
+      selectValue: setPriorityValue,
     },
     dueDateData: {
-      label: "due date",
-      type: "date",
       value: dueDate,
-      setText: setDueDate
+      setText: setDueDate,
     }
   };
+
+  const todoCompletionStatus = (e, id) => {
+    const allTodos = [...todos];
+    const todo = allTodos.find(todo => todo.id === id);
+    todo.checked = e.target.checked;
+    setTodos(allTodos);
+  }
+
+  const removeTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+
+  const edit = (id) => {
+    const todo = todos.find(todo => todo.id === id);
+    setTitle(todo.title);
+    setDescription(todo.description);
+    setPriorityValue({target: { value: todo.priority.value }});
+    setDueDate(todo.dueDate);
+    setEditId(id);
+    setEditTodo(!editTodo)
+  }
 
   return (
     <div className="container">
       <h1>Todo App</h1>
-      <div className="filters">
+      <div className="tabs">
+        <span onClick={() => setTab('all')}>All Todos</span>
+        <span onClick={() => setTab('pending')}>Pending Todos</span>
+        <span onClick={() => setTab('completed')}>Completed Todos</span>
+      </div>
+      {tab === 'all' && <>
+        <div className="filters">
         <Select
           values={sortValues}
           value={sortBy}
@@ -196,8 +266,8 @@ function App() {
           selectValue={setGroupByValue}
         />
       </div>
-      {searchBy && (
-        <div style={{ margin: "10px 0" }}>
+      {searchBy &&
+        <div style={{margin: '10px 0'}}>
           <Input
             type="text"
             label={`Search by ${searchBy}`}
@@ -205,10 +275,38 @@ function App() {
             showLabel={false}
             setText={setSearch}
           />
-        </div>
-      )}
-      <Form formData={formData} submit={submit} />
-      <Todos todos={showTodos}></Todos>
+        </div>}
+        <div style={{margin: '10px 0'}}>
+        <Button click={() => setShowAddTodo(!showAddTodo)}>Add Todo</Button>
+      </div>
+      <Modal show={showAddTodo}>
+        <Form formData={formData} submit={submit} close={() => setShowAddTodo(!showAddTodo)} />
+      </Modal>
+      <Modal show={editTodo}>
+        <Form formData={formData} submit={submit} close={() => setEditTodo(!editTodo)} />
+      </Modal>
+      <Todos 
+        todos={showTodos} 
+        todoCompletion={todoCompletionStatus} 
+        remove={removeTodo}
+        edit={edit}
+      />
+      </>}
+      {tab === 'pending' 
+      && <Todos 
+          todos={todos.filter(todo => !todo.checked)}
+          todoCompletion={todoCompletionStatus}
+          remove={removeTodo}
+          edit={edit}
+          />}
+      {tab === 'completed' 
+        && <Todos 
+              todos={todos.filter(todo => todo.checked)}
+              todoCompletion={todoCompletionStatus}
+              remove={removeTodo}
+              edit={edit}
+            />
+      }
     </div>
   );
 }

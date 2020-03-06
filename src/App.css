@@ -18,6 +18,7 @@ form {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  z-index: 10;
 }
 
 button[type='submit'] {
@@ -27,5 +28,25 @@ button[type='submit'] {
 
 .list-group-item {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 0.5fr 0.5fr 0.5fr;
+  grid-template-columns: 1fr 1.5fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr;
+  align-items: baseline;
+  grid-gap: 0.2em;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tabs span {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.tabs span:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
 }
