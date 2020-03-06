@@ -1,30 +1,46 @@
-import React from "react";
-import moment from "moment";
+import React from 'react';
+import moment from 'moment';
 
-import Button from "./Button";
+import Button from './Button';
 
-const Todos = ({ todos, todoCompletion, remove, edit, search, searchBy }) => {
-  console.log("Todos -> search", search)
+const Todos = ({
+  todos,
+  todoCompletion,
+  remove,
+  edit,
+  search,
+  searchBy,
+  groupBy
+}) => {
+  const tableHeadings = (
+    <li className="list-group-item">
+      <span style={{ display: 'inline' }}>
+        <span>Status</span>
+        <span> | </span>
+        <span>Title</span>
+      </span>
+      <p>Description</p>
+      <p>Created At</p>
+      <p>Due Date</p>
+      <p>Priority</p>
+      <p>Actions</p>
+    </li>
+  );
+
   if (!Array.isArray(todos)) {
     return (
       <>
         {Object.keys(todos).map(i => {
+          let heading = i;
+          if (groupBy === 'createdAt')
+            heading = moment(Number(i)).format('Do MMM Y, H:m');
+          else if (groupBy === 'dueDate')
+            heading = moment(Number(i)).format('Do MMM Y');
           return (
             <div key={i}>
-              <h5>{i}</h5>
+              <h5>{heading}</h5>
               <ul>
-              <li className="list-group-item">
-              <span style={{ display: 'inline' }}>
-                <span>Status</span>
-                <span> | </span>
-                <span>Title</span>
-              </span>
-              <p>Description</p>
-              <p>Created At</p>
-              <p>Due Date</p>
-              <p>Priority</p>
-              <p>Actions</p>
-          </li>
+                {tableHeadings}
                 {todos[i].map(todo => {
                   return (
                     <li key={todo.id} className="list-group-item">
@@ -33,13 +49,13 @@ const Todos = ({ todos, todoCompletion, remove, edit, search, searchBy }) => {
                           type="checkbox"
                           className="form-check-input"
                           checked={todo.checked}
-                          onChange={(e) => todoCompletion(e, todo.id)}
+                          onChange={e => todoCompletion(e, todo.id)}
                         />
                         <label className="form-check-label">{todo.title}</label>
                       </div>
                       <p>{todo.description}</p>
-                      <p>{moment(todo.createdAt).format("Do MMM Y, H:m")}</p>
-                      <p>{moment(todo.dueDate).format("Do MMM Y")}</p>
+                      <p>{moment(todo.createdAt).format('Do MMM Y, H:m')}</p>
+                      <p>{moment(todo.dueDate).format('Do MMM Y')}</p>
                       <p>{todo.priority.value}</p>
                       <Button click={() => remove(todo.id)}>Remove</Button>
                       <Button click={() => edit(todo.id)}>Edit</Button>
@@ -57,18 +73,7 @@ const Todos = ({ todos, todoCompletion, remove, edit, search, searchBy }) => {
     <>
       <h3>Todos</h3>
       <ul className="list-group">
-      <li className="list-group-item">
-      <span style={{ display: 'inline' }}>
-        <span>Status</span>
-        <span> | </span>
-        <span>Title</span>
-      </span>
-            <p>Description</p>
-            <p>Created At</p>
-            <p>Due Date</p>
-            <p>Priority</p>
-            <p>Actions</p>
-          </li>
+        {tableHeadings}
         {todos.map(todo => (
           <li key={todo.id} className="list-group-item">
             <div className="form-check">
@@ -76,17 +81,31 @@ const Todos = ({ todos, todoCompletion, remove, edit, search, searchBy }) => {
                 type="checkbox"
                 className="form-check-input"
                 checked={todo.checked}
-                onChange={(e) => todoCompletion(e, todo.id)}
+                onChange={e => todoCompletion(e, todo.id)}
               />
-              {searchBy === 'title' 
-              ? todo.title.split('').map(c => search.includes(c) ? <mark>{c}</mark> : <label>{c}</label>)
-              : <label className="form-check-label">{todo.title}</label>}
+              {searchBy === 'title' ? (
+                todo.title
+                  .split('')
+                  .map(c =>
+                    search.includes(c) ? <mark>{c}</mark> : <label>{c}</label>
+                  )
+              ) : (
+                <label className="form-check-label">{todo.title}</label>
+              )}
             </div>
-            {searchBy === 'description' && search.length
-              ? <div style={{display: 'inline'}}>{todo.description.split('').map(c => search.includes(c) ? <mark>{c}</mark> : <label>{c}</label>)}</div>
-              : <p>{todo.description}</p>}
-            <p>{moment(todo.createdAt).format("Do MMM Y, H:m")}</p>
-            <p>{moment(todo.dueDate).format("Do MMM Y")}</p>
+            {searchBy === 'description' && search.length ? (
+              <div style={{ display: 'inline' }}>
+                {todo.description
+                  .split('')
+                  .map(c =>
+                    search.includes(c) ? <mark>{c}</mark> : <label>{c}</label>
+                  )}
+              </div>
+            ) : (
+              <p>{todo.description}</p>
+            )}
+            <p>{moment(todo.createdAt).format('Do MMM Y, H:m')}</p>
+            <p>{moment(todo.dueDate).format('Do MMM Y')}</p>
             <p>{todo.priority.value}</p>
             <Button click={() => remove(todo.id)}>Remove</Button>
             <Button click={() => edit(todo.id)}>Edit</Button>

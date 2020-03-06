@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Input = ({ label, type, value, setText, showLabel = true }) => {
+const Input = props => {
+  const { label, type, value, setText, showLabel = true } = props;
   return (
     <div className="form-group">
       {showLabel && (
@@ -15,6 +16,7 @@ const Input = ({ label, type, value, setText, showLabel = true }) => {
         value={value}
         placeholder={label}
         onChange={e => setText(e.target.value)}
+        {...props}
       ></input>
     </div>
   );

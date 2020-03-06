@@ -1,15 +1,16 @@
 import React from 'react';
 import '../styles/modal.css';
 
-const Modal = ({children, show}) => {
+const Modal = ({ children, show, hideModal }) => {
   return (
     <>
-      {show &&
+      {show && (
         <>
           <div className="overflow">
-          <div className="form-modal">{children}</div>
+            <div className="form-modal">{children}</div>
           </div>
-        </>}
+        </>
+      )}
     </>
   );
 };

@@ -53,4 +53,6 @@ button[type='submit'] {
 
 mark {
   padding: 0;
+  background: blueviolet;
+  color: white;
 }
