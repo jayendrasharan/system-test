@@ -1,42 +1,42 @@
-import moment from 'moment';
+import moment from "moment";
 
 export const todosData = [
   {
     id: 1,
     checked: false,
-    title: 'title 1',
-    description: '1',
+    title: "cat",
+    description: "1",
     createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
-    priority: { value: 'high', status: 3 }
+    priority: { value: "high", status: 3 }
   },
   {
     id: 2,
     checked: true,
-    title: 'second',
-    description: '2',
+    title: "ele",
+    description: "2",
     createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
-    priority: { value: 'low', status: 1 }
+    priority: { value: "low", status: 1 }
   },
   {
     id: 3,
     checked: false,
-    title: 'last one',
-    description: '3',
+    title: "zeek",
+    description: "3",
     createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
-    priority: { value: 'medium', status: 2 }
+    priority: { value: "medium", status: 2 }
   }
 ];
 
 export const sortValues = [
-  'completed',
-  'title',
-  'createdAt',
-  'dueDate',
-  'priority'
+  "completed",
+  "title",
+  "createdAt",
+  "dueDate",
+  "priority"
 ];
-export const searchValues = ['title', 'description'];
-export const groupValues = ['createdAt', 'dueDate', 'priority'];
-export const priorityValues = ['high', 'medium', 'low'];
+export const searchValues = ["title", "description"];
+export const groupValues = ["createdAt", "dueDate", "priority"];
+export const priorityValues = ["high", "medium", "low"];

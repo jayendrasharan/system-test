@@ -1,7 +1,7 @@
-import React from 'react';
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
 
-import Button from './Button';
+import Button from "./Button";
 
 const Todos = ({ todos }) => {
   if (!Array.isArray(todos)) {
@@ -24,8 +24,8 @@ const Todos = ({ todos }) => {
                         <label className="form-check-label">{todo.title}</label>
                       </div>
                       <p>{todo.description}</p>
-                      <p>{moment(todo.createdAt).format('Do MMM Y, H:m')}</p>
-                      <p>{todo.dueDate}</p>
+                      <p>{moment(todo.createdAt).format("Do MMM Y, H:m")}</p>
+                      <p>{moment(todo.dueDate).format("Do MMM Y")}</p>
                       <p>{todo.priority.value}</p>
                       <Button>Remove</Button>
                     </li>
@@ -53,8 +53,8 @@ const Todos = ({ todos }) => {
               <label className="form-check-label">{todo.title}</label>
             </div>
             <p>{todo.description}</p>
-            <p>{moment(todo.createdAt).format('Do MMM Y, H:m')}</p>
-            <p>{todo.dueDate}</p>
+            <p>{moment(todo.createdAt).format("Do MMM Y, H:m")}</p>
+            <p>{moment(todo.dueDate).format("Do MMM Y")}</p>
             <p>{todo.priority.value}</p>
             <Button>Remove</Button>
           </li>
