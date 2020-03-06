@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import Button from './Button';
 
@@ -8,9 +9,9 @@ const Todos = ({ todos }) => {
       <>
         {Object.keys(todos).map(i => {
           return (
-            <div>
+            <div key={i}>
               <h5>{i}</h5>
-              <ul key={i}>
+              <ul>
                 {todos[i].map(todo => {
                   return (
                     <li key={todo.id} className="list-group-item">
@@ -23,9 +24,9 @@ const Todos = ({ todos }) => {
                         <label className="form-check-label">{todo.title}</label>
                       </div>
                       <p>{todo.description}</p>
-                      <p>{todo.createdAt}</p>
+                      <p>{moment(todo.createdAt).format('Do MMM Y, H:m')}</p>
                       <p>{todo.dueDate}</p>
-                      <p>{todo.priority}</p>
+                      <p>{todo.priority.value}</p>
                       <Button>Remove</Button>
                     </li>
                   );
@@ -52,9 +53,9 @@ const Todos = ({ todos }) => {
               <label className="form-check-label">{todo.title}</label>
             </div>
             <p>{todo.description}</p>
-            <p>{todo.createdAt}</p>
+            <p>{moment(todo.createdAt).format('Do MMM Y, H:m')}</p>
             <p>{todo.dueDate}</p>
-            <p>{todo.priority}</p>
+            <p>{todo.priority.value}</p>
             <Button>Remove</Button>
           </li>
         ))}

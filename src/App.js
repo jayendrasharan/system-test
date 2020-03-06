@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import uuid from 'uuid/v4';
+import { v4 } from 'uuid';
 
 import Input from './components/Input';
 import Todos from './components/Todos';
@@ -14,12 +14,13 @@ import {
 } from './data';
 
 import './App.css';
+import moment from 'moment';
 
 function App() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState(new Date().toLocaleDateString());
-  const [priority, setPriority] = useState('');
+  const [priority, setPriority] = useState({ value: '', status: 0 });
 
   const [sortBy, setSortBy] = useState('');
   const [searchBy, setSearchBy] = useState('');
@@ -32,7 +33,7 @@ function App() {
   useEffect(() => {
     if (searchBy) {
       const filteredTodos = todos.filter(todo =>
-        todo[searchBy].includes(search)
+        todo[searchBy].toLowerCase().includes(search.toLowerCase())
       );
       setShowTodos(filteredTodos);
     }
@@ -49,21 +50,74 @@ function App() {
           : [todo];
       });
       setShowTodos(groupedTodos);
+    } else {
+      setShowTodos(todos);
     }
   }, [groupBy]);
+
+  useEffect(() => {
+    if (sortBy) {
+      const sortedTodos = todos.sort((a, b) => {
+        switch (sortBy) {
+          case 'completed': {
+            if (a.checked) return -1;
+            if (b.checked) return 1;
+            return 0;
+          }
+          case 'title': {
+            return a.title.localeCompare(b);
+          }
+          case 'createdAt': {
+            return b.createdAt - a.createdAt;
+          }
+          case 'dueDate': {
+          }
+          case 'priority': {
+            return a.priority.status - b.priority.status;
+          }
+          default:
+            return 0;
+        }
+      });
+      console.log('App -> sortedTodos', sortedTodos);
+    }
+  }, [sortBy]);
+
+  useEffect(() => {
+    setShowTodos(todos);
+  }, [todos]);
 
   const submit = e => {
     e.preventDefault();
     const data = {
-      id: uuid(),
+      id: v4(),
       checked: false,
       title,
       description,
-      createdAt: new Date().toLocaleString(),
+      createdAt: new Date().getTime(),
       dueDate,
       priority
     };
     setTodos([...todos, data]);
+  };
+
+  const setPriorityValue = e => {
+    let status = 1;
+    if (e.target.value === 'medium') status = 2;
+    else if (e.target.value === 'high') status = 3;
+    setPriority({ value: e.target.value, status });
+  };
+
+  const setGroupByValue = e => {
+    setGroupBy(e.target.value);
+  };
+
+  const setSortByValue = e => {
+    setSortBy(e.target.value);
+  };
+
+  const setSearchByValue = e => {
+    setSearchBy(e.target.value);
   };
 
   const formData = {
@@ -81,8 +135,8 @@ function App() {
     priorityData: {
       label: 'priority',
       values: priorityValues,
-      value: priority,
-      selectValue: setPriority
+      value: priority.value,
+      selectValue: setPriorityValue
     },
     dueDateData: {
       label: 'due date',
@@ -100,19 +154,19 @@ function App() {
           values={sortValues}
           value={sortBy}
           label="Sort By"
-          selectValue={setSortBy}
+          selectValue={setSortByValue}
         />
         <Select
           values={searchValues}
           value={searchBy}
           label="Search By"
-          selectValue={setSearchBy}
+          selectValue={setSearchByValue}
         />
         <Select
           values={groupValues}
           value={groupBy}
           label="Group By"
-          selectValue={setGroupBy}
+          selectValue={setGroupByValue}
         />
       </div>
       {searchBy && (

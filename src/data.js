@@ -1,30 +1,32 @@
+import moment from 'moment';
+
 export const todosData = [
   {
     id: 1,
-    checked: true,
+    checked: false,
     title: 'title 1',
     description: '1',
-    createdAt: new Date().toLocaleString(),
+    createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
-    priority: 'low'
+    priority: { value: 'high', status: 3 }
   },
   {
     id: 2,
-    checked: false,
-    title: '2',
+    checked: true,
+    title: 'second',
     description: '2',
-    createdAt: new Date().toLocaleString(),
+    createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
-    priority: 'low'
+    priority: { value: 'low', status: 1 }
   },
   {
     id: 3,
     checked: false,
-    title: '3',
+    title: 'last one',
     description: '3',
-    createdAt: new Date().toLocaleString(),
+    createdAt: new Date().getTime(),
     dueDate: new Date().toLocaleDateString(),
-    priority: 'medium'
+    priority: { value: 'medium', status: 2 }
   }
 ];
 
