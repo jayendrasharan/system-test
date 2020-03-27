@@ -96,6 +96,7 @@ const AddTaskForm = props => {
                         style={{width: '212px'}}
                         label="Due Date"
                         value={dueDate}
+                        minDate={new Date()}
                         onChange={(value) => handleChange(value, input.key)}
                         animateYearScrolling
                         disabled={props.mode==="view"?true:false}
