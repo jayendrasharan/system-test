@@ -1,0 +1,11 @@
+#sticky {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+}
+
+.viewer {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
