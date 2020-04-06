@@ -1,4 +1,4 @@
-import { OPEN_TASK, EDIT_TASK, DELETE_TASK, CLOSE_TASK } from "./taskTypes.js";
+import { OPEN_TASK, EDIT_TASK, DELETE_TASK, CLOSE_TASK } from "./taskTypes";
 
 export const openTaskAction = taskid => ({
   type: OPEN_TASK,

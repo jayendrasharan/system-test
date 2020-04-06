@@ -1,18 +1,23 @@
-import { OPEN_TASK, EDIT_TASK, DELETE_TASK, CLOSE_TASK } from "./taskTypes.js";
+import {
+  ADD_TASK,
+  SHOW_ALLTASKS,
+  SHOW_COMPLETED,
+  SHOW_PENDING
+} from "./taskTypes";
 
-export const openTaskAction = taskid => ({
-  type: OPEN_TASK,
-  taskid
+export const addTaskAction = formfields => ({
+  type: ADD_TASK,
+  formfields
 });
-export const editTaskAction = taskid => ({
-  type: EDIT_TASK,
-  taskid
+export const ShowAllTasksAction = taskids => ({
+  type: SHOW_ALLTASKS,
+  taskids
 });
-export const deleteTasksAction = taskid => ({
-  type: DELETE_TASK,
-  taskid
+export const ShowCompletedTasksAction = taskids => ({
+  type: SHOW_COMPLETED,
+  taskids
 });
-export const closeTasksAction = taskid => ({
-  type: CLOSE_TASK,
-  taskid
+export const ShowPendingTasksAction = taskids => ({
+  type: SHOW_PENDING,
+  taskids
 });

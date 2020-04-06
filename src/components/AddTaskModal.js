@@ -114,7 +114,7 @@ TodoTask = reduxForm({
 
 })(TodoTask);
 
-export default class AddTaskModal extends React.Component {
+export default class AddtaskModal extends React.Component {
 
   handleSubmit = (task) => {
     console.log(task)

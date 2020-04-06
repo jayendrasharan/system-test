@@ -9,7 +9,7 @@ const Task = ({ taskid,task }) => (
     <td>{task.duDate}</td>
   </tr>
   :
-  <tr><td>Loading...</td></tr>
+  <tr id="0"><td>Loading...</td></tr>
 
 )
 
