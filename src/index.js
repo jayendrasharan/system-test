@@ -1,12 +1,14 @@
-import { render } from "react-dom";
-import provider from "./provider";
-import configureStore from './store';
-import createRoutes from './routes';
-import rootReducer from "./reducers";
-
-const initialState = {};
-const store = configureStore(initialState, rootReducer);
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './components/App'
+import { createStore } from 'redux'
+import rootReducer from './reducers'
+const store = createStore(rootReducer)
 
 render(
-  provider(store, createRoutes()), document.getElementById('root')
-);
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
