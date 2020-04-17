@@ -8,18 +8,26 @@ export const TaskModel = {
     currentState: {
         label: "Status",
         type: "boolean",
+        hidden: true,
         allowSort: true,
         allowSearch: false,
         allowGroupBy: false,
     },
     title: {
-        label: "Title",
+        label: "Summary",
         type: "string",
         allowSort: true,
         allowSearch: true,
         allowGroupBy: false,
         minLength: 10,
         maxLength: 140,
+    },
+    priority: {
+        label: "Priority",
+        type: "string",
+        allowSort: true,
+        allowSearch: false,
+        allowGroupBy: true,
     },
     description: {
         label: "Description",
@@ -45,11 +53,4 @@ export const TaskModel = {
         allowSearch: false,
         allowGroupBy: true,
     },
-    priority: {
-        label: "Priority",
-        type: "string",
-        allowSort: true,
-        allowSearch: false,
-        allowGroupBy: true,
-    }
 }

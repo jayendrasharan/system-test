@@ -9,24 +9,33 @@ import {Button, Table} from "react-bootstrap";
 import {FiCheckCircle, FiEdit, FiEye, FiTrash, FiXCircle} from 'react-icons/fi';
 import {connect} from "react-redux";
 import styled from 'styled-components';
+import {deleteTask, toggleTaskStatus} from '../../actions/tasksAction';
+import SortableTableCell from "../../components/SortableTableCell";
 
 import {TaskModel} from '../../models/task';
-import {toggleTaskStatus} from '../../actions/tasksAction';
-import {getTimeFromMillis} from "../../utils";
+import {getFormattedDate} from "../../utils";
+import SearchFormattedText from "./SearchFormattedText";
 
 const mapStateToProps = (state) => ({
-    tasksState: state.tasks,
+    tasksState: state.tasksState,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setTaskStatus: (taskIds) => dispatch(toggleTaskStatus(taskIds)),
+        deleteTask: (taskId) => dispatch(deleteTask(taskId)),
     }
 };
 
 const StyledTaskRow = styled.tr`
+    font-weight: ${props => props.bold ? "bold" : "inherit"};
     text-decoration: ${props => props.currentState ? "none" : "line-through"};
     /*background-color: ${props => props.currentState ? "inherit" : "maroon !important"};*/
+`
+
+const StyledTaskHeader = styled.tr`
+    font-weight: ${props => props.bold ? "bold" : "inherit"};
+    background-color: #25292d;
 `
 
 const StyledTaskCell = styled.td`
@@ -35,78 +44,113 @@ const StyledTaskCell = styled.td`
 
 class TasksListing extends React.Component {
     render() {
-        const {tasks, setTaskStatus} = this.props;
+        const {tasks, sortKey, sortOrder, handleSetSort, searchText} = this.props;
         return (
-            <Table striped bordered variant="dark" style={{marginTop: 12}}>
-                <thead>
-                <tr>
-                    {
-                        Object.keys(TaskModel).map((taskDataKey, index) => {
-                            if (TaskModel[taskDataKey].hidden) {
-                                return null;
-                            }
-                            let currentItem = TaskModel[taskDataKey];
-                            return <td key={"header-" + index}>
-                                {currentItem.label}
-                            </td>
-                        })
-                    }
-                    <td width={25}>Actions</td>
-                </tr>
-                </thead>
-                <tbody>
+            <>
                 {
-                    tasks.map(taskItem => {
-                        return <StyledTaskRow
-                            key={taskItem.id}
-                            currentState={taskItem.currentState}
-                        >
-                            <StyledTaskCell>
-                                {taskItem.currentState ? "Open" : "Completed"}
-                            </StyledTaskCell>
-                            <StyledTaskCell>
-                                {taskItem.title}
-                            </StyledTaskCell>
-                            <StyledTaskCell>
-                                {getTimeFromMillis(taskItem.createdOn)}
-                            </StyledTaskCell>
-                            <StyledTaskCell>
-                                {getTimeFromMillis(taskItem.dueDate)}
-                            </StyledTaskCell>
-                            <StyledTaskCell>
-                                {taskItem.priority}
-                            </StyledTaskCell>
-                            <StyledTaskCell style={{display: "flex", flexDirection: "row"}}>
-                                <Button
-                                    style={{marginRight: 6}} variant={"dark"}
-                                >
-                                    <FiEye/>
-                                </Button>
-                                <Button
-                                    style={{marginRight: 6, marginLeft: 6}} variant={"dark"}
-                                >
-                                    <FiEdit/>
-                                </Button>
-                                <Button
-                                    onClick={() => {
-                                        this.props.setTaskStatus([taskItem.id])
-                                    }}
-                                    style={{marginRight: 6, marginLeft: 6}}
-                                    variant={taskItem.currentState ? "success" : "info"}
-                                >
-                                    {taskItem.currentState ? <FiCheckCircle/> : <FiXCircle/>}
-                                </Button>
-                                <Button
-                                    style={{marginLeft: 6}} variant={"danger"}
-                                >
-                                    <FiTrash/>
-                                </Button>
-                            </StyledTaskCell>
-                        </StyledTaskRow>
-                    })
+                    tasks.length === 0
+                    && <div style={{margin: "auto", padding: 32}}>
+                        <h5>No Tasks here</h5>
+                    </div>
                 }
-                </tbody>
-            </Table>
+                {
+                    tasks.length > 0
+                    && <Table bordered variant="dark" style={{marginTop: 12}}>
+                        <thead>
+                        <StyledTaskHeader bold>
+                            {
+                                Object.keys(TaskModel).map((taskDataKey, index) => {
+                                    if (TaskModel[taskDataKey].hidden) {
+                                        return null;
+                                    }
+                                    let currentItem = TaskModel[taskDataKey];
+                                    return <SortableTableCell
+                                        handleSetSort={handleSetSort}
+                                        key={"header-" + index}
+                                        sortable={currentItem.allowSort}
+                                        dataKey={taskDataKey}
+                                        sortOrder={sortOrder}
+                                        sortKey={sortKey}
+                                    >
+                                        {currentItem.label}
+                                    </SortableTableCell>
+                                })
+                            }
+                            <td width={25}>Actions</td>
+                        </StyledTaskHeader>
+                        </thead>
+                        <tbody>
+                        {
+                            tasks.map(taskItem => {
+                                const {currentState, id, title, priority, createdOn, dueDate,} = taskItem;
+                                return <StyledTaskRow
+                                    key={id}
+                                    currentState={currentState}
+                                >
+                                    <StyledTaskCell>
+                                        <SearchFormattedText
+                                            value={title} searchText={searchText}
+                                            isSearchable={TaskModel.title.allowSearch}
+                                        />
+                                    </StyledTaskCell>
+                                    <StyledTaskCell>
+                                        <SearchFormattedText
+                                            value={priority} searchText={searchText}
+                                            isSearchable={TaskModel.priority.allowSearch}
+                                        />
+                                    </StyledTaskCell>
+                                    <StyledTaskCell>
+                                        <SearchFormattedText
+                                            value={getFormattedDate(createdOn)} searchText={searchText}
+                                            isSearchable={TaskModel.createdOn.allowSearch}
+                                        />
+                                    </StyledTaskCell>
+                                    <StyledTaskCell>
+                                        <SearchFormattedText
+                                            value={getFormattedDate(dueDate)} searchText={searchText}
+                                            isSearchable={TaskModel.dueDate.allowSearch}
+                                        />
+                                    </StyledTaskCell>
+                                    <StyledTaskCell style={{display: "flex", flexDirection: "row"}}>
+                                        <Button
+                                            title={"View Task"}
+                                            style={{marginRight: 6}} variant={"dark"}
+                                        >
+                                            <FiEye/>
+                                        </Button>
+                                        <Button
+                                            title={"Edit Task"}
+                                            style={{marginRight: 6, marginLeft: 6}} variant={"dark"}
+                                        >
+                                            <FiEdit/>
+                                        </Button>
+                                        <Button
+                                            title={`Mark as ${currentState ? "Completed" : "Pending"}`}
+                                            onClick={() => {
+                                                this.props.setTaskStatus([id])
+                                            }}
+                                            style={{marginRight: 6, marginLeft: 6}}
+                                            variant={currentState ? "success" : "info"}
+                                        >
+                                            {currentState ? <FiCheckCircle/> : <FiXCircle/>}
+                                        </Button>
+                                        <Button
+                                            title={"Delete Task"}
+                                            style={{marginLeft: 6}} variant={"danger"}
+                                            onClick={() => {
+                                                this.props.deleteTask(id)
+                                            }}
+                                        >
+                                            <FiTrash/>
+                                        </Button>
+                                    </StyledTaskCell>
+                                </StyledTaskRow>
+                            })
+                        }
+                        </tbody>
+                    </Table>
+                }
+            </>
         );
     }
 }

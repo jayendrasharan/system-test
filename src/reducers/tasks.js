@@ -3,50 +3,50 @@
  * Date: 16-Apr-2020
  * Time: 9:57 PM
  */
-import {TOGGLE_TASK_STATE} from "../actionTypes/tasks";
+import {DELETE_TASK, TOGGLE_TASK_STATE} from "../actionTypes/tasks";
 
 const INITIAL_STATE = {
     tasks: [
         {
             id: "cc10c8c7-86eb-405d-8ac2-9708fa87464b",
-            title: "Task 1",
+            title: "Lorem Ipsum task",
             description: "Nulla eu libero vulputate, condimentum leo nec, eleifend nisl.",
             currentState: true,
             createdOn: "12-04-2020",
             dueDate: "21-04-2020",
-            priority: "low"
+            priority: "none"
         },
         {
             id: "cc10c8c7-86eb-405d-8ac2-9708fa87464c",
-            title: "Task 2",
+            title: "Bla Bla Task",
             description: "Praesent efficitur magna in nunc dictum, vel rutrum sapien tincidunt.",
             currentState: false,
             createdOn: "13-04-2020",
-            dueDate: "21-04-2020",
+            dueDate: "17-04-2020",
             priority: "medium"
         },
         {
             id: "cc10c8c7-86eb-405d-8ac2-9708fa87464d",
-            title: "Task 3",
+            title: "Zen task",
             description: "Sed et ipsum in ante consequat maximus.",
             currentState: true,
             createdOn: "14-04-2020",
-            dueDate: "21-04-2020",
+            dueDate: "18-04-2020",
             priority: "high"
         },
         {
             id: "cc10c8c7-86eb-405d-8ac2-9708fa87464e",
-            title: "Task 4",
+            title: "Some other task",
             description: "Integer eget lacus ut sem pellentesque dapibus a non nisi.",
             currentState: true,
             createdOn: "15-04-2020",
-            dueDate: "21-04-2020",
+            dueDate: "16-04-2020",
             priority: "low"
         },
     ]
 }
 
-const tasksReducer = (state = [], action) => {
+const tasksReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case TOGGLE_TASK_STATE:
             return {
@@ -55,9 +55,16 @@ const tasksReducer = (state = [], action) => {
                     ...action.payload,
                 ]
             }
+        case DELETE_TASK:
+            return {
+                ...state,
+                tasks: [
+                    ...action.payload,
+                ]
+            }
         default:
             return {
-                ...INITIAL_STATE,
+                ...state,
             };
     }
 }

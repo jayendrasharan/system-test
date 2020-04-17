@@ -4,8 +4,6 @@
  * Time: 2:51 AM
  */
 
-const TOGGLE_TASK_STATE = "TOGGLE_TASK_STATE";
-
-export {
-    TOGGLE_TASK_STATE
-};
+export const TOGGLE_TASK_STATE = "TOGGLE_TASK_STATE";
+export const DELETE_TASK = "DELETE_TASK";
+export const UPDATE_TASK_STATE = "UPDATE_TASK";

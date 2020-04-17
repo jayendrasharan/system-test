@@ -5,7 +5,7 @@
  */
 import moment from "moment";
 
-export const getTimeFromMillis = (time) => {
+export const getFormattedDate = (time) => {
     let date = moment(time, "DD-MM-YYYY");
     return date.format("LL")
 }

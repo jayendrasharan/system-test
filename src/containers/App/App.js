@@ -1,25 +1,51 @@
 import React from 'react';
 
-import {Button, Col, Container, Form, Modal, Row, Tab, Tabs} from 'react-bootstrap';
+import {Button, Col, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import {FiPlus} from 'react-icons/fi';
 import {connect} from "react-redux";
-import {hideModal, showModal} from "../../actions/appAction";
+import {hideModal, setSort, showModal} from "../../actions/appAction";
+import {MODAL_TYPES} from "../../actionTypes/app";
+import AppModal from "../../components/Modal/AppModal";
+import {getCompletedTasks, getPendingTasks, getTasksByGroup, makeAllTasks} from "../../selectors/tasks";
 import TasksListing from "../TasksListing";
 import './App.css';
 
-const mapStateToProps = (state) => ({
-    appState: state.appState,
-    tasksState: state.tasksState,
-});
+const makeMapStateToProps = () => {
+    const allTasks = makeAllTasks();
+    const mapStateToProps = (state) => ({
+        appState: state.appState,
+        tasks: {
+            all: allTasks(state),
+            pending: getPendingTasks(allTasks(state)),
+            completed: getCompletedTasks(allTasks(state)),
+            tasksByGroup: getTasksByGroup(allTasks(state)),
+        }
+    })
+
+    return mapStateToProps;
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         showModal: (payload) => dispatch(showModal(payload)),
         hideModal: () => dispatch(hideModal()),
+        setSort: (payload) => dispatch(setSort(payload)),
     }
 };
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchText: ""
+        }
+    }
+
+    handleSearch = (searchText) => {
+        this.setState({
+            searchText,
+        })
+    }
 
     handleShowModal = () => {
 
@@ -30,60 +56,74 @@ class App extends React.Component {
     }
 
     render() {
-        const {appState: {showDialog}} = this.props;
-        const {tasksState: {tasks}} = this.props;
+        const {appState: {showDialog, modalType, sortOrder, sortKey}, tasks, setSort} = this.props;
+        const {searchText} = this.state;
         return (
             <div className="App">
                 <div className="container">
-                    <Container>
-                        <Row style={{justifyContent: "space-between", textAlign: 'center'}}>
-                            <Col xs={8}>
-                                <Form.Group controlId="formBasicEmail">
-                                    <Form.Control type="text" placeholder="Search Tasks"/>
-                                </Form.Group>
-                            </Col>
-                            <Col xs={2}>
-                                <Button variant={"primary"} onClick={() => {
-                                    this.props.showModal({});
-                                }}> <FiPlus/> Add Task</Button>
-                            </Col>
-                        </Row>
-                    </Container>
+                    <h1>Not So Boring ToDo App</h1>
+                    <Row style={{justifyContent: "space-between", textAlign: 'center', marginTop: 36}}>
+                        <Col xs={8}>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search Tasks"
+                                    onChange={(e) => {
+                                        this.handleSearch(e.target.value);
+                                    }}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col xs={2}>
+                            <Button variant={"primary"} onClick={() => {
+                                this.props.showModal({
+                                    type: MODAL_TYPES.ADD_TASK_MODAL,
+                                });
+                            }}> <FiPlus/> Add Task</Button>
+                        </Col>
+                    </Row>
                     <Tabs defaultActiveKey="all" id="uncontrolled-tab-example">
                         <Tab eventKey="all" title="All">
-                            <TasksListing tasks={tasks}/>
+                            <TasksListing
+                                handleSetSort={setSort}
+                                sortOrder={sortOrder}
+                                sortKey={sortKey}
+                                searchText={searchText}
+                                tasks={tasks.all}
+                            />
                         </Tab>
                         <Tab eventKey="pending" title="Pending">
-                            Pending
+                            <TasksListing
+                                handleSetSort={setSort}
+                                sortOrder={sortOrder}
+                                sortKey={sortKey}
+                                searchText={searchText}
+                                tasks={tasks.pending}
+                            />
                         </Tab>
                         <Tab eventKey="completed" title="Completed">
-                            Completed
+                            <TasksListing
+                                handleSetSort={setSort}
+                                sortOrder={sortOrder}
+                                sortKey={sortKey}
+                                searchText={searchText}
+                                tasks={tasks.completed}
+                            />
                         </Tab>
                     </Tabs>
                 </div>
 
-                <Modal
-                    show={showDialog}
-                    size={"lg"}
-                    onHide={this.handleClose}
-                    centered
-                >
-                    <Modal.Header>
-                        <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
-                            Save Changes
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                {
+                    showDialog
+                    && <AppModal
+                        show={showDialog}
+                        modalType={modalType}
+                        onHide={this.handleClose}
+                    />
+                }
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(makeMapStateToProps, mapDispatchToProps)(App);

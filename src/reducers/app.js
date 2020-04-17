@@ -7,6 +7,9 @@ import * as AppActionTypes from "../actionTypes/app";
 
 const INITIAL_STATE = {
     showDialog: false,
+    sortKey: null,
+    sortOrder: 0,
+    groupByKey: null
 }
 
 const appReducer = (state = INITIAL_STATE, action) => {
@@ -21,8 +24,14 @@ const appReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 showDialog: false,
             }
+        case AppActionTypes.SET_SORT_ORDER:
+            return {
+                ...state,
+                sortOrder: action.payload.sortOrder,
+                sortKey: action.payload.sortKey,
+            }
         default:
-            return state
+            return {...state};
     }
 }
 

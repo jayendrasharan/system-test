@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
 import React from 'react';
-import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {applyMiddleware, compose, createStore} from "redux";
+import thunk from 'redux-thunk';
 import App from './containers/App/App';
+import './index.css';
 import reducers from './reducers';
 import * as serviceWorker from './serviceWorker';
 
