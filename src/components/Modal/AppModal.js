@@ -6,17 +6,59 @@
 
 import React from 'react';
 import {Modal} from "react-bootstrap";
+import {connect} from "react-redux";
+import {addTask, deleteTask, editTask} from "../../actions/tasksAction";
+import {MODAL_TYPES} from "../../actionTypes/app";
 import DeleteAlertModal from "./DeleteAlertModal";
+import AddTodoModal from "./AddTodoModal";
+
+const mapStateToProps = (state) => ({
+    app: state.appState,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    handleDelete: (taskId) => dispatch(deleteTask(taskId)),
+    handleEditTask: (taskId, task) => dispatch(editTask(taskId, task)),
+    handleAddTask: (task) => dispatch(addTask(task)),
+})
 
 class AppModal extends React.Component {
     render() {
-        const {title, body, actions, handleClose, showDialog, modalType} = this.props;
+        const {onHide, showDialog, modalType, handleDelete, handleEditTask, handleAddTask} = this.props;
+        const {app: {modalProps, progressState}} = this.props;
+        const commonProps = {
+            modalProps,
+            handleClose: onHide,
+            apiState: progressState,
+        }
         let size = "lg"
         let component = null;
         switch (modalType) {
-            case "delete_alert_modal":
+            case MODAL_TYPES.DELETE_TASK_MODAL:
                 size = "md";
-                component = <DeleteAlertModal title={title} body={body} actions={actions}/>;
+                component = <DeleteAlertModal
+                    handleDelete={handleDelete}
+                    {...commonProps}
+                />;
+                break;
+            case MODAL_TYPES.ADD_TASK_MODAL:
+                component = <AddTodoModal
+                    handleAddTask={handleAddTask}
+                    {...commonProps}
+                />;
+                break;
+            case MODAL_TYPES.EDIT_TASK_MODAL:
+                component = <AddTodoModal
+                    handleEditTask={handleEditTask}
+                    {...commonProps}
+                    editMode
+                />;
+                break;
+            case MODAL_TYPES.VIEW_TASK_MODAL:
+                component = <AddTodoModal
+                    {...commonProps}
+                    viewOnly
+                />;
                 break;
             default:
                 console.log("No Relevant Modal Type Found");
@@ -25,7 +67,7 @@ class AppModal extends React.Component {
             <Modal
                 show={showDialog}
                 size={size}
-                onHide={handleClose}
+                onHide={onHide}
                 centered
             >
                 {component}
@@ -35,4 +77,4 @@ class AppModal extends React.Component {
 
 }
 
-export default AppModal;
+export default connect(mapStateToProps, mapDispatchToProps)(AppModal);

@@ -7,7 +7,7 @@ import {hideModal, setSort, showModal} from "../../actions/appAction";
 import {MODAL_TYPES} from "../../actionTypes/app";
 import AppModal from "../../components/Modal/AppModal";
 import {getCompletedTasks, getPendingTasks, getTasksByGroup, makeAllTasks} from "../../selectors/tasks";
-import TasksListing from "../TasksListing";
+import TasksListing from "../TasksListing/TasksListing";
 import './App.css';
 
 const makeMapStateToProps = () => {
@@ -47,10 +47,6 @@ class App extends React.Component {
         })
     }
 
-    handleShowModal = () => {
-
-    }
-
     handleClose = () => {
         this.props.hideModal()
     }
@@ -77,7 +73,8 @@ class App extends React.Component {
                         <Col xs={2}>
                             <Button variant={"primary"} onClick={() => {
                                 this.props.showModal({
-                                    type: MODAL_TYPES.ADD_TASK_MODAL,
+                                    modalType: MODAL_TYPES.ADD_TASK_MODAL,
+                                    modalProps: {},
                                 });
                             }}> <FiPlus/> Add Task</Button>
                         </Col>
@@ -85,6 +82,7 @@ class App extends React.Component {
                     <Tabs defaultActiveKey="all" id="uncontrolled-tab-example">
                         <Tab eventKey="all" title="All">
                             <TasksListing
+                                showModal={this.props.showModal}
                                 handleSetSort={setSort}
                                 sortOrder={sortOrder}
                                 sortKey={sortKey}
@@ -116,7 +114,7 @@ class App extends React.Component {
                 {
                     showDialog
                     && <AppModal
-                        show={showDialog}
+                        showDialog={showDialog}
                         modalType={modalType}
                         onHide={this.handleClose}
                     />

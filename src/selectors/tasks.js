@@ -23,7 +23,7 @@ const makeAllTasks = () => {
                         return tasks.sort((a, b) => b[sortKey].localeCompare(a[sortKey]));
                     // Default Sort
                     default:
-                        return tasks
+                        return tasks.sort((a, b) => a["createdOn"].localeCompare(b["createdOn"]));
                 }
             }
             return tasks || [];
@@ -45,4 +45,5 @@ export {
     getPendingTasks,
     getCompletedTasks,
     getTasksByGroup,
+    getTodos,
 }

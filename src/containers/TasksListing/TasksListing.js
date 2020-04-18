@@ -10,6 +10,7 @@ import {FiCheckCircle, FiEdit, FiEye, FiTrash, FiXCircle} from 'react-icons/fi';
 import {connect} from "react-redux";
 import styled from 'styled-components';
 import {deleteTask, toggleTaskStatus} from '../../actions/tasksAction';
+import {MODAL_TYPES} from "../../actionTypes/app";
 import SortableTableCell from "../../components/SortableTableCell";
 
 import {TaskModel} from '../../models/task';
@@ -113,12 +114,28 @@ class TasksListing extends React.Component {
                                     </StyledTaskCell>
                                     <StyledTaskCell style={{display: "flex", flexDirection: "row"}}>
                                         <Button
+                                            onClick={() => {
+                                                this.props.showModal({
+                                                    modalType: MODAL_TYPES.VIEW_TASK_MODAL,
+                                                    modalProps: {
+                                                        task: taskItem
+                                                    }
+                                                })
+                                            }}
                                             title={"View Task"}
                                             style={{marginRight: 6}} variant={"dark"}
                                         >
                                             <FiEye/>
                                         </Button>
                                         <Button
+                                            onClick={() => {
+                                                this.props.showModal({
+                                                    modalType: MODAL_TYPES.EDIT_TASK_MODAL,
+                                                    modalProps: {
+                                                        task: taskItem
+                                                    }
+                                                })
+                                            }}
                                             title={"Edit Task"}
                                             style={{marginRight: 6, marginLeft: 6}} variant={"dark"}
                                         >
@@ -138,7 +155,13 @@ class TasksListing extends React.Component {
                                             title={"Delete Task"}
                                             style={{marginLeft: 6}} variant={"danger"}
                                             onClick={() => {
-                                                this.props.deleteTask(id)
+                                                this.props.showModal({
+                                                    modalType: MODAL_TYPES.DELETE_TASK_MODAL,
+                                                    modalProps: {
+                                                        taskId: taskItem.id,
+                                                        taskTitle: taskItem.title,
+                                                    }
+                                                })
                                             }}
                                         >
                                             <FiTrash/>

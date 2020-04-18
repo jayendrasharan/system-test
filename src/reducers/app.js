@@ -9,7 +9,10 @@ const INITIAL_STATE = {
     showDialog: false,
     sortKey: null,
     sortOrder: 0,
-    groupByKey: null
+    groupByKey: null,
+    progressState: {
+        api_pending: false,
+    }
 }
 
 const appReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +21,7 @@ const appReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 showDialog: true,
+                ...action.payload
             }
         case AppActionTypes.APP_HIDE_MODAL:
             return {
@@ -29,6 +33,22 @@ const appReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 sortOrder: action.payload.sortOrder,
                 sortKey: action.payload.sortKey,
+            }
+        case AppActionTypes.API_STARTED:
+            return {
+                ...state,
+                progressState: {
+                    ...state.progressState,
+                    api_pending: true,
+                }
+            }
+        case AppActionTypes.API_COMPLETED:
+            return {
+                ...state,
+                progressState: {
+                    ...state.progressState,
+                    api_pending: false,
+                }
             }
         default:
             return {...state};
