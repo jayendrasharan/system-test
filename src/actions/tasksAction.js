@@ -17,8 +17,8 @@ const buildTaskItem = (body) => {
         currentState: true,
         title,
         description,
-        createdOn: moment().format("DD-MM-YYYY"),
-        dueDate: dueDate,
+        createdOn: moment().toDate().toISOString().slice(0, 10),
+        dueDate: moment(dueDate).toDate().toISOString().slice(0, 10),
         priority,
     }
 }
@@ -49,7 +49,8 @@ const editTask = (taskId, payload) => {
         let updatedTasksList = allTasks.map(task => {
             if (task.id === taskId) {
                 return {
-                    ...payload
+                    ...payload,
+                    dueDate: moment(payload.dueDate).toDate().toISOString().slice(0, 10),
                 }
             }
             return task;

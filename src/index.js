@@ -9,17 +9,12 @@ import './index.css';
 import reducers from './reducers';
 import * as serviceWorker from './serviceWorker';
 
+const composeSetup = process.env.NODE_ENV !== 'production' && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
+
 const store = createStore(
     reducers,
-    compose(
-        applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    )
+    composeSetup(applyMiddleware(thunk))
 )
-
-// if (process.env.NODE_ENV !== 'production' && module.hot) {
-//     module.hot.accept('./reducers', () => store.replaceReducer(reducers))
-// }
 
 const rootEl = document.getElementById("root");
 ReactDOM.render(
@@ -29,7 +24,4 @@ ReactDOM.render(
     rootEl
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

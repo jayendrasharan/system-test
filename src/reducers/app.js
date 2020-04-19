@@ -9,7 +9,7 @@ const INITIAL_STATE = {
     showDialog: false,
     sortKey: null,
     sortOrder: 0,
-    groupByKey: null,
+    groupByKey: "",
     progressState: {
         api_pending: false,
     }
@@ -33,6 +33,11 @@ const appReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 sortOrder: action.payload.sortOrder,
                 sortKey: action.payload.sortKey,
+            }
+        case AppActionTypes.SET_GROUPBY_KEY:
+            return {
+                ...state,
+                groupByKey: action.payload,
             }
         case AppActionTypes.API_STARTED:
             return {

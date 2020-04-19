@@ -4,24 +4,28 @@ import {Button, Col, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import {FiPlus} from 'react-icons/fi';
 import {connect} from "react-redux";
 import styled from 'styled-components';
-import {hideModal, setSort, showModal} from "../../actions/appAction";
+import {hideModal, setGroupBy, setSort, showModal} from "../../actions/appAction";
 import {MODAL_TYPES} from "../../actionTypes/app";
 import AppModal from "../../components/Modal/AppModal";
+import {TaskModel} from "../../models/task";
 import {getCompletedTasks, getPendingTasks, getTasksByGroup, makeAllTasks} from "../../selectors/tasks";
 import TasksListing from "../TasksListing/TasksListing";
 import './App.css';
 
 const makeMapStateToProps = () => {
     const allTasks = makeAllTasks();
-    const mapStateToProps = (state) => ({
-        appState: state.appState,
-        tasks: {
-            all: allTasks(state),
-            pending: getPendingTasks(allTasks(state)),
-            completed: getCompletedTasks(allTasks(state)),
-            tasksByGroup: getTasksByGroup(allTasks(state)),
+    const mapStateToProps = (state) => {
+        const {appState: {groupByKey}} = state;
+        return {
+            appState: state.appState,
+            tasks: {
+                all: allTasks(state),
+                pending: getPendingTasks(allTasks(state)),
+                completed: getCompletedTasks(allTasks(state)),
+                tasksByGroup: getTasksByGroup(allTasks(state), groupByKey),
+            }
         }
-    })
+    }
 
     return mapStateToProps;
 }
@@ -31,6 +35,7 @@ const mapDispatchToProps = (dispatch) => {
         showModal: (payload) => dispatch(showModal(payload)),
         hideModal: () => dispatch(hideModal()),
         setSort: (payload) => dispatch(setSort(payload)),
+        setGroupBy: (groupByKey) => dispatch(setGroupBy(groupByKey)),
     }
 };
 
@@ -77,67 +82,91 @@ class App extends React.Component {
         this.props.hideModal()
     }
 
+    getGroupOptions = () => {
+        return Object.keys(TaskModel).filter(taskKey => {
+            return TaskModel[taskKey].allowGroupBy;
+        }).map((key, index) => <option value={key} key={key + "-" + index}>{TaskModel[key].label}</option>)
+    }
+
     render() {
-        const {appState: {showDialog, modalType, sortOrder, sortKey}, tasks, setSort} = this.props;
+        const {appState: {showDialog, modalType, sortOrder, sortKey, groupByKey = ""}, showModal, setGroupBy, tasks, setSort} = this.props;
         const {searchText} = this.state;
+        const tasksListingProps = {
+            handleSetSort: setSort,
+            sortOrder: sortOrder,
+            sortKey: sortKey,
+            groupByKey: groupByKey,
+            searchText: searchText,
+            showModal: showModal,
+        }
         return (
             <div className="App">
                 <div className="container">
                     <h1>Not So Boring ToDo App</h1>
                     <Row style={{justifyContent: "space-between", marginTop: 36}}>
-                        <Col xs={8}>
-                            <Form.Group controlId="formBasicEmail">
-                                <SearchField
-                                    type="text"
-                                    ref={(input) => {
-                                        this.searchInput = input;
-                                    }}
-                                    placeholder="Search Tasks"
+                        <Col xs={3}>
+                            <Form.Label column>
+                                Group By
+                            </Form.Label>
+                            <Col>
+                                <Form.Control
+                                    as="select" value={groupByKey}
                                     onChange={(e) => {
-                                        this.handleSearch(e.target.value);
+                                        setGroupBy(e.target.value);
                                     }}
-                                />
-                            </Form.Group>
-                            <span>Hit <kbd>Ctrl + Shift + F</kbd> to search</span>
+                                >
+                                    <option>none</option>
+                                    {this.getGroupOptions()}
+                                </Form.Control>
+                            </Col>
                         </Col>
-                        <Col xs={2}>
-                            <Button variant={"primary"} onClick={() => {
-                                this.props.showModal({
-                                    modalType: MODAL_TYPES.ADD_TASK_MODAL,
-                                    modalProps: {},
-                                });
-                            }}> <FiPlus/> Add Task</Button>
+                        <Col xs={9} style={{display: "flex", flexDirection: "column"}}>
+                            <span style={{padding: "7px 15px"}}>Hit <kbd>Ctrl + Shift + F</kbd> to search</span>
+                            <SearchField
+                                type="text"
+                                ref={(input) => {
+                                    this.searchInput = input;
+                                }}
+                                placeholder="Search Tasks"
+                                onChange={(e) => {
+                                    this.handleSearch(e.target.value);
+                                }}
+                            />
                         </Col>
                     </Row>
                 </div>
+                <Row className="container justify-content-md-center">
+                    <Button
+                        variant={"primary"}
+                        style={{margin: 'auto'}}
+                        onClick={() => {
+                            this.props.showModal({
+                                modalType: MODAL_TYPES.ADD_TASK_MODAL,
+                                modalProps: {},
+                            });
+                        }}
+                    >
+                        <FiPlus/> Add Task
+                    </Button>
+                </Row>
                 <div className="container">
                     <Tabs defaultActiveKey="all" id="uncontrolled-tab-example">
                         <Tab eventKey="all" title="All">
                             <TasksListing
-                                showModal={this.props.showModal}
-                                handleSetSort={setSort}
-                                sortOrder={sortOrder}
-                                sortKey={sortKey}
-                                searchText={searchText}
                                 tasks={tasks.all}
+                                {...tasksListingProps}
                             />
                         </Tab>
                         <Tab eventKey="pending" title="Pending">
                             <TasksListing
-                                handleSetSort={setSort}
-                                sortOrder={sortOrder}
-                                sortKey={sortKey}
-                                searchText={searchText}
                                 tasks={tasks.pending}
+                                {...tasksListingProps}
                             />
                         </Tab>
                         <Tab eventKey="completed" title="Completed">
                             <TasksListing
-                                handleSetSort={setSort}
-                                sortOrder={sortOrder}
-                                sortKey={sortKey}
-                                searchText={searchText}
                                 tasks={tasks.completed}
+                                {...tasksListingProps}
                             />
                         </Tab>
                     </Tabs>

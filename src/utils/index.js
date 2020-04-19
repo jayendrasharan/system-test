@@ -6,10 +6,6 @@
 import moment from "moment";
 
 export const getFormattedDate = (time) => {
-    let date = moment(time, "DD-MM-YYYY");
+    let date = moment(time, );
     return date.format("LL")
-}
-
-export const formatDateToTaskDate = (date) => {
-    return moment(date).format("DD-MM-YYYY");
 }

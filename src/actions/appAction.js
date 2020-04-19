@@ -3,7 +3,7 @@
  * Date: 16-Apr-2020
  * Time: 10:40 PM
  */
-import {APP_HIDE_MODAL, APP_SHOW_MODAL, SET_SORT_ORDER} from "../actionTypes/app";
+import {APP_HIDE_MODAL, APP_SHOW_MODAL, SET_GROUPBY_KEY, SET_SORT_ORDER} from "../actionTypes/app";
 
 const showModal = (payload) => {
     return ({
@@ -21,8 +21,14 @@ const setSort = (payload) => ({
     payload
 })
 
+const setGroupBy = (payload) => ({
+    type: SET_GROUPBY_KEY,
+    payload: payload !== "none" ? payload : ""
+})
+
 export {
     showModal,
     hideModal,
     setSort,
+    setGroupBy,
 }

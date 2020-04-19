@@ -40,7 +40,7 @@ class AddTodoModal extends React.Component {
                 description: "",
                 currentState: false,
                 priority: "none",
-                dueDate: moment().format("DD-MM-YYYY"),
+                dueDate: moment().toDate(),
                 ...task,
             }
         }
@@ -91,13 +91,13 @@ class AddTodoModal extends React.Component {
                                 <Form.Label>Due Date</Form.Label>
                                 <DatePicker
                                     disabled={viewOnly}
-                                    selected={moment(dueDate, "DD-MM-YYYY").startOf('day').toDate()}
+                                    selected={moment(dueDate).toDate()}
                                     onChange={date => {
-                                        this.handleValueChange("dueDate", moment(date, "DD-MM-YYYY"))
+                                        this.handleValueChange("dueDate", moment(date))
                                     }}
                                     minDate={Date.now()}
-                                    dateFormat={"dd-MM-yyyy"}
                                     placeholderText="Pick A Due Date"
+                                    dateFormat={"dd-MM-yyyy"}
                                     customInput={<CustomDateButton/>}
                                 />
                             </div>

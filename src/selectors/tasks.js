@@ -6,8 +6,8 @@
 import {createSelector} from "reselect";
 
 const getTodos = (state) => state.tasksState.tasks;
-const getSortOrder = (state) => state.appState.sortOrder
-const getSortKey = (state) => state.appState.sortKey
+const getSortOrder = (state) => state.appState.sortOrder;
+const getSortKey = (state) => state.appState.sortKey;
 
 const makeAllTasks = () => {
     return createSelector(
@@ -35,9 +35,12 @@ const getPendingTasks = (tasks) => tasks.filter(task => task && task.currentStat
 
 const getCompletedTasks = (tasks) => tasks.filter(task => task && !task.currentState);
 
-const getTasksByGroup = (tasks) => {
-    // const allTasks = state.tasksState.tasks;
-    return tasks;
+const getTasksByGroup = (tasks, groupByKey) => {
+    const groupedTasks = tasks.reduce((result, item) => {
+        (result[item[groupByKey]] = result[item[groupByKey]] || []).push(item)
+        return result
+    }, {})
+    return groupedTasks;
 }
 
 export {

@@ -68,6 +68,7 @@ class AppModal extends React.Component {
                 show={showDialog}
                 size={size}
                 onHide={onHide}
+                backdrop={"static"}
                 centered
             >
                 {component}
