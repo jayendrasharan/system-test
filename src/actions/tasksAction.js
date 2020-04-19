@@ -4,11 +4,11 @@
  * Time: 10:56 PM
  */
 import moment from "moment";
+import {v4 as uuidv4} from 'uuid';
 import {API_COMPLETED, API_STARTED, MODAL_TYPES} from "../actionTypes/app";
 import {ADD_TASK, DELETE_TASK, EDIT_TASK, TOGGLE_TASK_STATE} from "../actionTypes/tasks";
 import {getTodos} from "../selectors/tasks";
 import {hideModal} from "./appAction";
-import {v4 as uuidv4} from 'uuid';
 
 const buildTaskItem = (body) => {
     const {title, description, dueDate, priority} = body;
@@ -18,7 +18,7 @@ const buildTaskItem = (body) => {
         title,
         description,
         createdOn: moment().format("DD-MM-YYYY"),
-        dueDate: moment(dueDate).format("DD-MM-YYYY"),
+        dueDate: dueDate,
         priority,
     }
 }
@@ -55,10 +55,19 @@ const editTask = (taskId, payload) => {
             return task;
         })
 
-        return dispatch({
-            type: EDIT_TASK,
-            payload: updatedTasksList,
+        dispatch({
+            type: API_STARTED
         })
+        return setTimeout(() => {
+            dispatch({
+                type: EDIT_TASK,
+                payload: updatedTasksList
+            });
+            dispatch(hideModal(MODAL_TYPES.DELETE_TASK_MODAL));
+            dispatch({
+                type: API_COMPLETED
+            });
+        }, 500)
     }
 }
 

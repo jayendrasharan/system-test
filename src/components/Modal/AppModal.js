@@ -9,8 +9,8 @@ import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
 import {addTask, deleteTask, editTask} from "../../actions/tasksAction";
 import {MODAL_TYPES} from "../../actionTypes/app";
-import DeleteAlertModal from "./DeleteAlertModal";
 import AddTodoModal from "./AddTodoModal";
+import DeleteAlertModal from "./DeleteAlertModal";
 
 const mapStateToProps = (state) => ({
     app: state.appState,

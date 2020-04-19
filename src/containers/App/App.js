@@ -3,6 +3,7 @@ import React from 'react';
 import {Button, Col, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import {FiPlus} from 'react-icons/fi';
 import {connect} from "react-redux";
+import styled from 'styled-components';
 import {hideModal, setSort, showModal} from "../../actions/appAction";
 import {MODAL_TYPES} from "../../actionTypes/app";
 import AppModal from "../../components/Modal/AppModal";
@@ -33,12 +34,37 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
+const SearchField = styled(Form.Control)`
+    color: white;
+    background-color: #495057;
+    border: none;
+    transition: all 0.1s ease;
+`
+
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             searchText: ""
         }
+        this.searchInput = React.createRef();
+        this.focusSearchHandler = this.focusSearchHandler.bind(this);
+    }
+
+    focusSearchHandler = (e) => {
+        if (e.ctrlKey && e.shiftKey && e.which === 70) {
+            this.searchInput.focus();
+        } else if (e.keyCode === 27) {
+            this.searchInput.blur();
+        }
+    }
+
+    componentDidMount() {
+        document.addEventListener('keyup', this.focusSearchHandler, false)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keyup', this.focusSearchHandler, false);
     }
 
     handleSearch = (searchText) => {
@@ -58,17 +84,21 @@ class App extends React.Component {
             <div className="App">
                 <div className="container">
                     <h1>Not So Boring ToDo App</h1>
-                    <Row style={{justifyContent: "space-between", textAlign: 'center', marginTop: 36}}>
+                    <Row style={{justifyContent: "space-between", marginTop: 36}}>
                         <Col xs={8}>
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Control
+                                <SearchField
                                     type="text"
+                                    ref={(input) => {
+                                        this.searchInput = input;
+                                    }}
                                     placeholder="Search Tasks"
                                     onChange={(e) => {
                                         this.handleSearch(e.target.value);
                                     }}
                                 />
                             </Form.Group>
+                            <span>Hit <kbd>Ctrl + Shift + F</kbd> to search</span>
                         </Col>
                         <Col xs={2}>
                             <Button variant={"primary"} onClick={() => {
@@ -79,6 +109,8 @@ class App extends React.Component {
                             }}> <FiPlus/> Add Task</Button>
                         </Col>
                     </Row>
+                </div>
+                <div className="container">
                     <Tabs defaultActiveKey="all" id="uncontrolled-tab-example">
                         <Tab eventKey="all" title="All">
                             <TasksListing

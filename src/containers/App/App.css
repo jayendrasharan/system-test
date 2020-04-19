@@ -9,3 +9,11 @@ mark {
     border-radius: 2px;
     background-color: yellow;
 }
+
+kbd {
+    background-color: #495057;
+}
+
+.modal-header {
+    align-items: center;
+}

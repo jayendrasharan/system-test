@@ -6,12 +6,10 @@
 
 import moment from "moment";
 import React from 'react';
-import {Button, Col, Container, Form, Modal, Row, Spinner} from "react-bootstrap";
+import {Button, Col, Form, Modal, Row, Spinner} from "react-bootstrap";
 import DatePicker from "react-datepicker";
-import {TaskModel} from "../../models/task";
-import {getFormattedDate} from "../../utils";
-import styled from 'styled-components';
 import "react-datepicker/dist/react-datepicker.css";
+import styled from 'styled-components';
 
 const StyledRow = styled(Row)`
     margin: 0px 0px 12px;
@@ -21,11 +19,16 @@ const StyledModalBody = styled(Modal.Body)`
     padding: 24px;
 `;
 
-const CustomDateButton = ({value, onClick}) => (
-    <Button className="example-custom-input" onClick={onClick} variant={"light"}>
-        {value}
-    </Button>
-);
+class CustomDateButton extends React.Component {
+    render() {
+        const {value, onClick} = this.props
+        return (
+            <Button className="example-custom-input" onClick={onClick} variant={"light"}>
+                {value}
+            </Button>
+        );
+    }
+}
 
 class AddTodoModal extends React.Component {
     constructor(props) {
@@ -33,31 +36,14 @@ class AddTodoModal extends React.Component {
         const {modalProps: {task}} = this.props;
         this.state = {
             task: {
-                createdOn: "",
                 title: "",
                 description: "",
                 currentState: false,
                 priority: "none",
-                dueDate: Date.now()
+                dueDate: moment().format("DD-MM-YYYY"),
+                ...task,
             }
         }
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        const {modalProps: {task}} = this.props;
-        const requiredKeys = Object.keys(TaskModel);
-        if (task && requiredKeys.every(key => Object.keys(task).includes(key)))
-            this.setState({
-                task: {
-                    id: task.id || null,
-                    createdOn: task.createdOn || "",
-                    title: task.title || "",
-                    description: task.description || "",
-                    currentState: task.currentState || false,
-                    priority: task.priority || "none",
-                    dueDate: task.dueDate || getFormattedDate(Date.now())
-                }
-            })
     }
 
     handleValueChange = (key, value) => {
@@ -71,10 +57,10 @@ class AddTodoModal extends React.Component {
 
     render() {
         const {editMode, handleAddTask, handleEditTask, handleClose, viewOnly, apiState: {api_pending}} = this.props;
-        const {task: {title, priority, description, createdOn, dueDate}, task} = this.state;
+        const {task: {title, priority, description, dueDate}, task} = this.state;
         return (
             <>
-                <Modal.Header closeButton={viewOnly} backdrop={!viewOnly && 'static'}>
+                <Modal.Header closeButton={viewOnly}>
                     <Modal.Title>{!viewOnly && !editMode ? "New Task" : (!editMode ? "View Task" : "Edit Task")}</Modal.Title>
                 </Modal.Header>
                 <StyledModalBody disabled={viewOnly}>
@@ -82,9 +68,12 @@ class AddTodoModal extends React.Component {
                         <Form.Label>Summary</Form.Label>
                         <Form.Control
                             disabled={viewOnly}
-                            placeholder="Summary" value={title} onChange={(e) => {
-                            this.handleValueChange("title", e.target.value)
-                        }}/>
+                            placeholder="Summary"
+                            value={title}
+                            onChange={(e) => {
+                                this.handleValueChange("title", e.target.value)
+                            }}
+                        />
                     </StyledRow>
                     <StyledRow>
                         <Form.Label>Description</Form.Label>
@@ -98,18 +87,20 @@ class AddTodoModal extends React.Component {
                     </StyledRow>
                     <StyledRow>
                         <Col>
-                            <Form.Label>Due Date</Form.Label>
-                            <DatePicker
-                                disabled={viewOnly}
-                                selected={moment(dueDate).toDate()}
-                                onChange={date => {
-                                    this.handleValueChange("dueDate", moment(date, "DD-MM-YYYY"))
-                                }}
-                                minDate={Date.now()}
-                                dateFormat={"dd-MM-yyyy"}
-                                placeholderText="Pick A Due Date"
-                                customInput={<CustomDateButton/>}
-                            />
+                            <div style={{display: "flex", flexDirection: "column"}}>
+                                <Form.Label>Due Date</Form.Label>
+                                <DatePicker
+                                    disabled={viewOnly}
+                                    selected={moment(dueDate, "DD-MM-YYYY").startOf('day').toDate()}
+                                    onChange={date => {
+                                        this.handleValueChange("dueDate", moment(date, "DD-MM-YYYY"))
+                                    }}
+                                    minDate={Date.now()}
+                                    dateFormat={"dd-MM-yyyy"}
+                                    placeholderText="Pick A Due Date"
+                                    customInput={<CustomDateButton/>}
+                                />
+                            </div>
                         </Col>
                         <Col>
                             <Form.Label>Priority</Form.Label>
@@ -152,7 +143,7 @@ class AddTodoModal extends React.Component {
                                     style={{marginRight: 6}}
                                 />
                             }
-                            Save
+                            {editMode ? "Update" : "Save"}
                         </Button>
                     </Modal.Footer>
                 }
