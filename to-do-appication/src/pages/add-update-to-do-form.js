@@ -10,7 +10,7 @@ class AddUpdateToDoForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            addUpdateToDoForm: ToDoFormModal,
+            addUpdateToDoForm: JSON.parse(JSON.stringify(ToDoFormModal)),
             isChangedDate: false,
             selectedDate: new Date(),
             redirectPage: false
@@ -20,8 +20,10 @@ class AddUpdateToDoForm extends React.Component {
     }
 
     componentDidMount() {
-        if (!!this.props.editForm) {
-            this.mapDataToForm(this.props.editForm);
+        let paramReceived = '';
+        if ((!!this.props.match.params) && (!!this.props.match.params.id) && (paramReceived = this.props.match.params.id)) {
+            let toDoList = this.localStorageService.retrieveDataItem('toDoList');
+            this.mapDataToForm(toDoList[this.props.match.params.id - 1]);
         }
     }
 
@@ -32,7 +34,18 @@ class AddUpdateToDoForm extends React.Component {
         localForm.title.value = dataObj.title;
         localForm.description.value = dataObj.description;
         localForm.createdAt.value = dataObj.createdAt;
-        localForm.dueDate.value = dataObj.dueDate;
+        if (dataObj.dueDate !== '') {
+            let d = dataObj.dueDate.split('-');
+            let date = new Date();
+            date.setDate(d[0]);
+            date.setMonth(d[1] - 1);
+            date.setFullYear(d[2]);
+            localForm.dueDate.value = date;
+            this.setState(() => ({ selectedDate: date, isChangedDate: true }));
+        }
+        else {
+            localForm.dueDate.value = new Date();
+        }
         localForm.priority.value = dataObj.priority;
         this.setState({ addUpdateToDoForm: localForm });
     }
@@ -43,8 +56,13 @@ class AddUpdateToDoForm extends React.Component {
         dataObj.currentState = localForm.currentState.value;
         dataObj.title = localForm.title.value;
         dataObj.description = localForm.description.value;
-        let date = localForm.createdAt.value
-        dataObj.createdAt = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+        let date = new Date();
+        if (dataObj.id === -1) {
+            dataObj.createdAt = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+        }
+        else {
+            dataObj.createdAt = localForm.createdAt.value;
+        }
         if (this.state.isChangedDate) {
             date = this.state.selectedDate;
             dataObj.dueDate = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
@@ -92,22 +110,31 @@ class AddUpdateToDoForm extends React.Component {
 
     handleSave = () => {
         if (this.handleValidation()) {
-            let dataObj = this.mapFormToData(this.state.addUpdateToDoForm);
-            let toDoList = JSON.parse(JSON.stringify(this.localStorageService.retrieveDataItem('toDoList')));
-            if (toDoList === null) {
-                toDoList = [];
+            let bool = window.confirm('Are You sure want to save changes?');
+            if (bool) {
+                let dataObj = this.mapFormToData(this.state.addUpdateToDoForm);
+                let toDoList = JSON.parse(JSON.stringify(this.localStorageService.retrieveDataItem('toDoList')));
+                if (toDoList === null) {
+                    toDoList = [];
+                }
+                if (dataObj.id === -1 || toDoList === null || toDoList.length === 0) {
+                    dataObj.id = toDoList.length + 1;
+                    toDoList.push(dataObj);
+                }
+                else {
+                    toDoList[dataObj.id - 1] = dataObj;
+                }
+                this.localStorageService.storeDataItem('toDoList', toDoList);
+                this.setState({ redirectPage: true });
             }
-            if (dataObj.id === -1 || toDoList === null || toDoList.length === 0) {
-                dataObj.id = toDoList.length + 1;
-                toDoList.push(dataObj);
-            }
-            else {
-                toDoList[dataObj.id + 1] = dataObj;
-            }
-            this.localStorageService.storeDataItem('toDoList', toDoList);
-            this.setState({redirectPage: true});
-            //redirection
         }
+        else {
+
+        }
+    }
+
+    setRedirection = () => {
+        this.setState({ redirectPage: true });
     }
 
     render() {
@@ -127,33 +154,20 @@ class AddUpdateToDoForm extends React.Component {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='form-row' style={{ padding: '1%' }} >
                 <div className={'form-group' + ' ' + 'col-sm-6'}>
                     <div class='row'>
                         <div class='col-sm-3'>
                             <label>Description:</label>
                         </div>
                         <div class='col-sm-9'>
-                            <textarea required className="form-control" placeholder="Enter Description" name="description" value={this.state.addUpdateToDoForm.description.value} onChange={this.handleChange.bind(this, 'description')} />
+                            <textarea required style={{ width: "500px" }} className="form-control" placeholder="Enter Description" name="description" value={this.state.addUpdateToDoForm.description.value} onChange={this.handleChange.bind(this, 'description')} />
                         </div>
                     </div>
                 </div>
             </div>
-
             <div className='form-row' style={{ padding: '1%' }}>
-                <div className={'form-group' + ' ' + 'col-sm-6'}>
-                    <div class='row'>
-                        <div class='col-sm-3'>
-                            <label>Due Date:</label>
-                        </div>
-                        <div class='col-sm-9'>
-                            <DatePicker
-                                name='dueDate'
-                                selected={this.state.selectedDate}
-                                onChange={this.handleChangeDate}
-                            />
-                        </div>
-                    </div>
-                </div>
                 <div className={'form-group' + ' ' + 'col-sm-6'}>
                     <div class='row'>
                         <div class='col-sm-3'>
@@ -169,23 +183,37 @@ class AddUpdateToDoForm extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className={'form-group' + ' ' + 'col-sm-6'}>
+                    <div class='row'>
+                        <div class='col-sm-3'>
+                            <label>Due Date:</label>
+                        </div>
+                        <div class='col-sm-9'>
+                            <DatePicker
+                                name='dueDate'
+                                selected={this.state.selectedDate}
+                                onChange={this.handleChangeDate}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className='form-row' style={{ padding: '1%' }}>
 
                 <div className={'form-group' + ' ' + 'col-sm-4'}>
                     <div class='row'>
                         <div class='col-sm-3'>
-                            <button>Cancel</button>
+                            <button onClick={this.setRedirection}>Cancel</button>
                         </div>
                         <div class='col-sm-3'>
-                            <button onClick={this.handleSave}>
+                            <button onClick={this.handleSave} style={{ backgroundColor: '#008CBA' }}>
                                 Save
                                 </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     }
 
 }

@@ -27,6 +27,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={ToDoList} />
           <Route exact path='/insert' component={AddUpdateToDoForm} />
+          <Route exact path='/edit/:id' component={AddUpdateToDoForm} />
         </Switch>
       </Router>
     </div>

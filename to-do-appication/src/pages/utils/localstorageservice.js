@@ -1,6 +1,5 @@
 class LocalStorageService {
     storeDataItem(key, value) {
-        console.log(value);
         try {
             window.localStorage.setItem(key, JSON.stringify(value));
         }

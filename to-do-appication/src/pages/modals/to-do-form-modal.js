@@ -1,4 +1,5 @@
-const ToDoFormModal = {
+ const ToDoFormModal = 
+ {
     id: {
         label: 'ID',
         value: -1,
@@ -46,7 +47,7 @@ const ToDoFormModal = {
 
     dueDate: {
         label: 'Due Date',
-        value: '',
+        value:  new Date(),
         isRequired: false,
         errorMessage: '',
         helperText: '',
