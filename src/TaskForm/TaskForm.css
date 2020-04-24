@@ -1,0 +1,27 @@
+.taskFormContent {
+  padding: 2% 2%;
+  text-align: left;
+}
+
+.buttonContainer {
+  margin-top: 5%;
+  /* float: right; */
+}
+
+.line {
+  margin-top: 1%;
+}
+
+.formButton {
+  border: none;
+  padding: 0.5% 1%;
+  font-size: 20px;
+  background-color: #495159;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  background-color: gray;
+}
