@@ -1,0 +1,10 @@
+.myGrpBtn{
+    color:black;
+}
+.myGrpBtn:hover{
+    color:blueviolet;
+    cursor: pointer;
+}
+.myGrpBtn:active{
+    color:brown;
+}
