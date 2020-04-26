@@ -1,0 +1,136 @@
+.mycreatedAt,.myAction,.myDescription {cursor: not-allowed !important}
+.mycreatedAt:hover,.myAction:active{
+color: none;
+}
+
+
+.myPlusbutton {
+    background-color: darkcyan;
+    padding: 1em 2em;
+    color: antiquewhite;
+    border:0;
+    position: fixed;
+    bottom: 5%;
+    right: 25%;
+    border-radius: 100%;
+    border: 2px solid salmon;
+}
+.myPlusbutton:hover{
+  cursor: pointer;
+  background-color: #009879;
+}
+.myPlusbutton::after{
+  content: ' \002B';
+  font-weight: bold;
+  font-size: xx-large;
+}
+.myButtonsContainer{
+  display: flex;
+}
+.myDelete{
+  background-color: white;
+}
+
+.myDelete:after {
+  content: ' \2716';
+}
+.myEdit:after {
+  content: '\1F58B';
+}
+.myDone:after{
+  content: '\2714';
+}
+.noModalDisplay{
+  display: none;
+ }
+
+ .modal{
+  position:fixed;
+  z-index: 1;
+  left:0;
+  top:0;
+  height: 100%;
+  width:100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.myContent{
+  background-color:aliceblue;
+  min-height: 600px;
+  padding:5%;
+}
+
+* {
+  font-family: sans-serif; /* Change your font family */
+}
+
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.content-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+h1{
+  font-style: italic;
+  font-weight: 600;
+  text-decoration: underline;
+  text-align: justify;
+  color: indigo;
+}
+th:hover{
+  cursor: pointer;
+}
+.myid:active,.myTitle:active,.mypriority:active,.mydueDate:active {
+  color:purple;
+}
+a:visited {
+  color:cyan;
+}
+
+/* .mycreatedAt:active,.myAction:active{
+  color: none !important;
+  }
+   */
+
+   .hideAll {
+    pointer-events:none;
+   }
+
+   .myToDoApp:hover{
+     color:darkcyan;
+    cursor: pointer;
+   }

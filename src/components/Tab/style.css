@@ -1,0 +1,50 @@
+.myTab{
+    display:flex;
+    flex-direction: row;
+    list-style: none;
+    border-bottom: 1px solid blue;
+    background-color:darkcyan;
+    color:antiquewhite;
+    margin:0px;
+    padding:0px;
+    text-align: center;
+    height: auto;
+}
+
+/* .myTab.active{
+
+} */
+
+.tab:hover{
+    background-color: dimgrey;
+    color: lightblue;
+    outline: thin solid orange;
+    cursor: pointer;
+}
+.tab:active,.tab:focus{
+    background-color: dimgrey;
+    color: lightblue;
+}
+.tab {
+    cursor: pointer;
+    border-right: 2px solid salmon;
+    border-left: 2px solid salmon;
+    width:33%;    
+    height:50px;
+    margin:0px;
+    padding:0px;
+    font-size: x-large
+    
+    /* margin-top:10px; */
+}
+
+.tabSelect {
+
+    background-color:#009879;
+
+   
+}
+.tabunSelect {
+ 
+    background-color:darkcyan;
+}
