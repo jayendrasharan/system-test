@@ -1,0 +1,23 @@
+.table-header {
+  font-weight: "bold";
+}
+
+.cell {
+  padding: 4px;
+  vertical-align: middle;
+}
+
+.priority-row {
+  text-align: center;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.pending {
+  text-decoration: line-through;
+}
+
+.done-button {
+  text-decoration: none;
+}
