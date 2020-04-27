@@ -24,6 +24,9 @@ export class AllTasks extends Component {
               createdAt={taskData.createdAt}
               dueDate={taskData.dueDate}
               priority={taskData.priority}
+              closeOpenClicked={this.props.closeOpenClicked}
+              removeTaskClicked={this.props.removeTaskClicked}
+              editTaskClicked={this.props.editTaskClicked}
             />
           ))}
         </div>
