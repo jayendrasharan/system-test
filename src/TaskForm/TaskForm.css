@@ -1,0 +1,49 @@
+.taskFormContent {
+  padding: 1% 1%;
+  text-align: left;
+  border-radius: 15px;
+}
+
+.formTitle {
+  font-family: "Righteous", cursive;
+  font-size: 20px;
+  border-bottom: 3px solid rgb(207, 203, 203);
+}
+
+.errorMessage {
+  font-size: 15px;
+  color: red;
+}
+
+.buttonContainer {
+  margin-top: 5%;
+  /* float: right; */
+}
+
+.line {
+  margin-top: 1%;
+}
+
+.formButton {
+  border: none;
+  padding: 0.5% 1%;
+  font-size: 20px;
+  background-color: #495159;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  background-color: gray;
+}
+
+@media screen and (max-width: 600px) {
+  .taskFormContent {
+    padding: 3% 1%;
+  }
+
+  .line {
+    margin-top: 4%;
+  }
+}

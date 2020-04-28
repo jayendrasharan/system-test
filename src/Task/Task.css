@@ -1,0 +1,58 @@
+.taskContainer {
+  width: 100%;
+  padding: 2% 2%;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #495159;
+  font-family: "Ubuntu", sans-serif;
+  cursor: pointer;
+  margin-top: 1%;
+}
+
+.openTaskBackgroundColor {
+  background-color: white;
+}
+
+.closeTaskBackgroundColor {
+  background-color: #3bfeb8;
+}
+
+.strikeThroughText {
+  text-decoration: line-through;
+}
+
+.taskContainer:hover {
+  background-color: rgb(245, 241, 241);
+  transition: all 0.3s;
+}
+
+.taskSummary {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.actionButton {
+  margin-left: 6%;
+}
+
+.startDate {
+  background-color: #1bbc9b;
+  border-radius: 5px;
+  color: white;
+}
+
+.endDate {
+  background-color: #e2695c;
+  border-radius: 5px;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .taskContainer {
+    font-size: 10px;
+  }
+}
