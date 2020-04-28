@@ -10,61 +10,53 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      data: [
-        {
-          id: 1,
-          currentState: true,
-          title: "Do the dishes",
-          description: "I need to do the dishes and what not",
-          createdAt: "02/05/2020",
-          dueDate: "02/06/2020",
-          priority: "High",
-        },
-        {
-          id: 2,
-          currentState: true,
-          title: "Code hackathon",
-          description: "I need to do the hackathon",
-          createdAt: "04/23/2020",
-          dueDate: "05/07/2020",
-          priority: "Medium",
-        },
-        {
-          id: 3,
-          currentState: false,
-          title: "Read Paper",
-          description: "I need to do the hackathon",
-          createdAt: "04/23/2020",
-          dueDate: "05/07/2020",
-          priority: "Low",
-        },
-      ],
+      data: [],
       taskFormDisplay: false,
       summary: "",
       description: "",
       priority: "",
       dueDate: "",
+      taskCreationDate: "",
       purpose: "AddTask",
       id: "",
     };
   }
 
-  handleAddTask = (summary, description, priority, dueDate) => {
+  handleAddTask = (summary, description, priority, dueDate, creationDate) => {
     let newTask = {
       id: ++window.id,
       currentState: true,
       title: summary,
       description: description,
-      createdAt: "04/23/2020",
+      createdAt: creationDate,
       dueDate: dueDate,
       priority: priority,
     };
     let tempData = this.state.data;
     tempData.push(newTask);
+    tempData.sort(this.sortByPropertyDescOrder("id"));
     this.setState({ data: tempData }, () => {
       console.log(this.state.data);
     });
     this.setState({ taskFormDisplay: false });
+  };
+
+  handleTaskCardClick = (id) => {
+    let dataToBeShown = this.state.data.filter((element) => element.id === id);
+    this.setState({
+      taskFormDisplay: true,
+      summary: dataToBeShown[0].title,
+      description: dataToBeShown[0].description,
+      priority: dataToBeShown[0].priority,
+      dueDate: dataToBeShown[0].dueDate,
+      taskCreationDate: dataToBeShown[0].createdAt,
+      id: id,
+      purpose: "TaskShow",
+    });
+    console.log(
+      "task creation data from task card click",
+      dataToBeShown[0].createdAt
+    );
   };
 
   handleEditTaskClick = (id) => {
@@ -75,6 +67,7 @@ export class App extends Component {
       description: dataToBeEdited[0].description,
       priority: dataToBeEdited[0].priority,
       dueDate: dataToBeEdited[0].dueDate,
+      taskCreationDate: dataToBeEdited[0].createdAt,
       id: id,
       purpose: "EditTask",
     });
@@ -90,6 +83,7 @@ export class App extends Component {
       description: dataToBeDeleted[0].description,
       priority: dataToBeDeleted[0].priority,
       dueDate: dataToBeDeleted[0].dueDate,
+      taskCreationDate: dataToBeDeleted[0].createdAt,
       id: id,
       purpose: "DeleteConfirm",
     });
@@ -147,7 +141,18 @@ export class App extends Component {
           element.dueDate = dueDate;
         }
       });
+      this.setState({
+        taskFormDisplay: false,
+      });
     }
+  };
+
+  sortByPropertyDescOrder = (property) => {
+    return function (a, b) {
+      if (a[property] < b[property]) return 1;
+      else if (a[property] > b[property]) return -1;
+      return 0;
+    };
   };
 
   render() {
@@ -161,6 +166,7 @@ export class App extends Component {
             description={this.state.description}
             priority={this.state.priority}
             dueDate={this.state.dueDate}
+            taskCreationDate={this.state.taskCreationDate}
             cancelClicked={this.handleTaskFormCancelClick}
             addTask={this.handleAddTask}
             EditTask={this.handleEditTask}
@@ -174,6 +180,7 @@ export class App extends Component {
             <AllTasks
               data={data}
               addButtonClicked={this.handleAddButtonClick}
+              taskcardClicked={this.handleTaskCardClick}
               editTaskClicked={this.handleEditTaskClick}
               removeTaskClicked={this.handleRemoveTaskClick}
               closeOpenClicked={this.handleTaskCloseOpenClick}

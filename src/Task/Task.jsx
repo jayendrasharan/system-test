@@ -18,39 +18,41 @@ export class Task extends Component {
           currentState ? "openTaskBackgroundColor" : "closeTaskBackgroundColor"
         }`}
       >
-        <div
-          className={`w3-col m4 l4 s4 taskSummary ${
-            currentState ? "" : "strikeThroughText"
-          }`}
-          style={{ textAlign: "left" }}
-        >
-          {title}
-        </div>
-        <div
-          className={`w3-col m2 l2 s2 ${
-            priority === "High"
-              ? "w3-text-red"
-              : priority === "Medium"
-              ? "w3-text-yellow"
-              : "w3-text-green"
-          } ${currentState ? "" : "strikeThroughText"}`}
-          style={{ textAlign: "left" }}
-        >
-          {priority}
-        </div>
-        <div className="w3-col m2 l2 s2" style={{ paddingRight: 2 }}>
+        <div onClick={() => this.props.taskcardClicked(id)}>
           <div
-            className={`startDate ${currentState ? "" : "strikeThroughText"}`}
+            className={`w3-col m4 l4 s4 taskSummary ${
+              currentState ? "" : "strikeThroughText"
+            }`}
+            style={{ textAlign: "left" }}
           >
-            {createdAt}
+            {title}
           </div>
-        </div>
-        <div
-          className={`w3-col m2 l2 s2 endDate ${
-            currentState ? "" : "strikeThroughText"
-          }`}
-        >
-          {dueDate}
+          <div
+            className={`w3-col m2 l2 s2 ${
+              priority === "High"
+                ? "w3-text-red"
+                : priority === "Medium"
+                ? "w3-text-yellow"
+                : "w3-text-green"
+            } ${currentState ? "" : "strikeThroughText"}`}
+            style={{ textAlign: "left" }}
+          >
+            {priority}
+          </div>
+          <div className="w3-col m2 l2 s2" style={{ paddingRight: 2 }}>
+            <div
+              className={`startDate ${currentState ? "" : "strikeThroughText"}`}
+            >
+              {createdAt}
+            </div>
+          </div>
+          <div
+            className={`w3-col m2 l2 s2 endDate ${
+              currentState ? "" : "strikeThroughText"
+            }`}
+          >
+            {dueDate}
+          </div>
         </div>
         <div className="w3-col m2 l2 s2" style={{ textAlign: "right" }}>
           <span
