@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -7,7 +7,6 @@ import TableRow from "@material-ui/core/TableRow";
 import View from "./View";
 
 function AllTask(props) {
-  //const [val, setVal] = useState(props.list);
   const [value, setValue] = useState({ isActive: false });
   var temp = {};
   function click(pos) {
@@ -20,6 +19,7 @@ function AllTask(props) {
   function onCancelFun() {
     setValue({ isActive: false });
   }
+  function edit(event, pos) {}
   var items = props.list.map((m, i) => {
     return (
       <>
@@ -64,6 +64,14 @@ function AllTask(props) {
           >
             {m.action}
           </TableCell>
+          <TableCell>
+            <i
+              class="fa fa-edit"
+              onClick={() => {
+                edit(m);
+              }}
+            ></i>
+          </TableCell>
         </TableRow>
       </>
     );
@@ -89,6 +97,7 @@ function AllTask(props) {
             <TableCell>
               <a>Actions</a>
             </TableCell>
+            <TableCell> </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{/**Other Rowss */ items}</TableBody>
