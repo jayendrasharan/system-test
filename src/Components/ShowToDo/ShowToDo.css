@@ -1,0 +1,14 @@
+.highlightSearch {
+    background-color: yellow;
+}
+
+.hiddenElement {
+    font-size: 0;
+}
+.handleOverflow{
+    overflow-x: auto;
+}
+
+.buttonGroup {
+    border: 0 !important;
+}

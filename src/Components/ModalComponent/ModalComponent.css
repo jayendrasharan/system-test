@@ -1,0 +1,8 @@
+.textHead {
+    float: left;
+}
+
+.fixHeight {
+    overflow-y: scroll;
+    height: 90vh;
+}
