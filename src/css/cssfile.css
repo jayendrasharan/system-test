@@ -25,7 +25,7 @@
 .dialog {
   position: fixed;
   z-index: 2147483648;
-  background-color: #fff;
+  background-color: #eee;
   width: 90%;
   border-radius: 15px 15px;
   border: 1px solid black;
@@ -38,8 +38,7 @@
 .btn {
   display: inline-block;
   width: 75px;
-  height: 25px;
-  background: #fedbd0;
+  background-color: #fff !important;
   padding: 10px;
   margin-left: 10px;
   text-align: center;

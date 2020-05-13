@@ -1,10 +1,5 @@
 import React from "react";
 import "../css/cssfile.css";
-import Title from "./Title";
-import Description from "./Description";
-import Priority from "./Priority";
-import Date from "./Date";
-import CurrentTime from "./CurrentTime";
 function View(props) {
   // var temp = {
   //   isCompleted: false,
@@ -15,32 +10,36 @@ function View(props) {
   //   createdOn: <CurrentTime />,
   //   action: "Pending",
   // };
-  var tmp = props;
+  var tmp = props.send;
+  console.log(tmp);
   return (
     <div className="dialog">
-      <form>
-        Title: {props.title}
-        <br />
-        <br />
-        Description: {props.description}
-        <br />
-        <br />
-        Priority: {props.priority}
-        <br />
-        <br />
-        CreatedOn: {props.createdOn}
-        <br />
-        <br />
-        DueDate: {props.date}
-        <br></br>
-        Action: {props.action}
-        <br></br>
-        <div class="buttons" style={{ float: "right", paddingRight: "200px" }}>
-          <a class="btn cancelBtn" onClick={props.cancel}>
-            cancel
-          </a>
-        </div>
-      </form>
+      <b>Title: </b>
+      {tmp.title}
+      <br />
+      <br />
+      <b>Description: </b>
+      {tmp.description}
+      <br />
+      <br />
+      <b>Priority: </b> {tmp.priority}
+      <br />
+      <br />
+      <b>CreatedOn: </b>
+      {tmp.createdOn}
+      <br />
+      <br />
+      <b> DueDate:</b> {tmp.date}
+      <br />
+      <br />
+      <b>Action: </b>
+      {tmp.action}
+      <br></br>
+      <div class="buttons" style={{ float: "right", paddingRight: "200px" }}>
+        <a class="btn cancelBtn" onClick={props.cancel}>
+          <b>cancel</b>
+        </a>
+      </div>
     </div>
   );
 }

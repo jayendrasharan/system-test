@@ -47,10 +47,10 @@ function Submit(props) {
         <br />
         <div class="buttons" style={{ float: "right", paddingRight: "200px" }}>
           <a class="btn cancelBtn" onClick={props.cancel}>
-            cancel
+            <b>cancel</b>
           </a>
           <a class="btn saveBtn" onClick={sendData}>
-            Save
+            <b> Save</b>
           </a>
         </div>
       </form>

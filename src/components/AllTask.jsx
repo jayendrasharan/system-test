@@ -9,22 +9,13 @@ import View from "./View";
 function AllTask(props) {
   //const [val, setVal] = useState(props.list);
   const [value, setValue] = useState({ isActive: false });
+  var temp = {};
   function click(pos) {
     // console.log(props.list[pos].title);
-    //   temp = props.list[pos];
-    //   setValue({ isActive: true });
+    temp = props.list[pos];
+    setValue({ isActive: true });
+    console.log(temp);
   }
-  var temp;
-  //   function onCancelFun() {
-  //     setValue({ isActive: false });
-  //   }
-
-  //   function click(pos) {
-  //     console.log(props.list[pos].title);
-
-  //     temp = props.list[pos];
-  //     setValue({ isActive: true });
-  //   }
 
   function onCancelFun() {
     setValue({ isActive: false });
@@ -32,9 +23,9 @@ function AllTask(props) {
   var items = props.list.map((m, i) => {
     return (
       <>
-        {value.isActive ? <View cancel={onCancelFun} /> : null}
+        {value.isActive ? <View cancel={onCancelFun} send={m} /> : null}
         <TableRow>
-          <TableCell onClick={click(i)}>
+          <TableCell>
             <input type="checkbox" name="name1" />
           </TableCell>
 
