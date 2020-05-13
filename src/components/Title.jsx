@@ -11,6 +11,8 @@ function Title(props) {
         name="title"
         onChange={changes}
         placeholder="Enter Title"
+        maxLength="140"
+        minLength="10"
       ></input>
     </>
   );

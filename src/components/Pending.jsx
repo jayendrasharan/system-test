@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { AppContext } from "./App";
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -22,30 +22,53 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
-function Pending() {
-  var sample = {
-    Summary: "ABC",
-    Priority: "High",
-    CreatedOn: "12PM",
-    DueDate: "tomorrow",
-    Actions: "Important",
-  };
-  var list = [sample, sample, sample, sample, sample];
-
-  function click() {}
-
-  var items = list.map((m) => {
+function Pending(props) {
+  const [val, setVal] = useState(props.list);
+  function click(pos) {
+    // console.log(props.list[pos].title);
+  }
+  var items = props.list.map((m, i) => {
     return (
       <TableRow>
-        <TableCell>
+        <TableCell onClick={click(i)}>
           <input type="checkbox" name="name1" />
         </TableCell>
 
-        <TableCell>{m.Summary}</TableCell>
-        <TableCell>{m.Priority}</TableCell>
-        <TableCell>{m.CreatedOn}</TableCell>
-        <TableCell>{m.DueDate}</TableCell>
-        <TableCell>{m.Actions}</TableCell>
+        <TableCell
+          onClick={() => {
+            click(i);
+          }}
+        >
+          {m.title}
+        </TableCell>
+        <TableCell
+          onClick={() => {
+            click(i);
+          }}
+        >
+          {m.priority}
+        </TableCell>
+        <TableCell
+          onClick={() => {
+            click(i);
+          }}
+        >
+          {m.createdOn}
+        </TableCell>
+        <TableCell
+          onClick={() => {
+            click(i);
+          }}
+        >
+          {m.date}
+        </TableCell>
+        <TableCell
+          onClick={() => {
+            click(i);
+          }}
+        >
+          {m.action}
+        </TableCell>
       </TableRow>
     );
   });

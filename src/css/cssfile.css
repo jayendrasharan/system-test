@@ -80,3 +80,8 @@
 .tab button.active {
   background-color: #ccc;
 }
+
+.MuiTableCell-root {
+  display: block;
+  cursor: pointer;
+}

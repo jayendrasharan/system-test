@@ -13,6 +13,8 @@ function Description(props) {
         cols="50"
         onChange={changes}
         placeholder="Enter Description"
+        maxLength="500"
+        minLength="10"
       ></textarea>
     </div>
   );

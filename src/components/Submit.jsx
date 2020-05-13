@@ -4,8 +4,17 @@ import Title from "./Title";
 import Description from "./Description";
 import Priority from "./Priority";
 import Date from "./Date";
+import CurrentTime from "./CurrentTime";
 function Submit(props) {
-  var temp = { isCompleted: false };
+  var temp = {
+    isCompleted: false,
+    title: "",
+    description: "",
+    priority: "",
+    date: "",
+    createdOn: <CurrentTime />,
+    action: "Pending",
+  };
   function getTitle(event) {
     temp = { ...temp, title: event };
   }

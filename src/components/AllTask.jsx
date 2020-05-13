@@ -1,41 +1,80 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
+import View from "./View";
 
 function AllTask(props) {
-  function click() {}
-  var items = props.list.map((m) => {
-    return (
-      <TableRow>
-        <TableCell>
-          <input type="checkbox" name="name1" />
-        </TableCell>
+  //const [val, setVal] = useState(props.list);
+  const [value, setValue] = useState({ isActive: false });
+  function click(pos) {
+    // console.log(props.list[pos].title);
+    //   temp = props.list[pos];
+    //   setValue({ isActive: true });
+  }
+  var temp;
+  //   function onCancelFun() {
+  //     setValue({ isActive: false });
+  //   }
 
-        <TableCell>{m.title}</TableCell>
-        <TableCell>{m.priority}</TableCell>
-        <TableCell>{m.date}</TableCell>
-        <TableCell>{m.DueDate}</TableCell>
-        <TableCell>{m.Actions}</TableCell>
-      </TableRow>
+  //   function click(pos) {
+  //     console.log(props.list[pos].title);
+
+  //     temp = props.list[pos];
+  //     setValue({ isActive: true });
+  //   }
+
+  function onCancelFun() {
+    setValue({ isActive: false });
+  }
+  var items = props.list.map((m, i) => {
+    return (
+      <>
+        {value.isActive ? <View cancel={onCancelFun} /> : null}
+        <TableRow>
+          <TableCell onClick={click(i)}>
+            <input type="checkbox" name="name1" />
+          </TableCell>
+
+          <TableCell
+            onClick={() => {
+              click(i);
+            }}
+          >
+            {m.title}
+          </TableCell>
+          <TableCell
+            onClick={() => {
+              click(i);
+            }}
+          >
+            {m.priority}
+          </TableCell>
+          <TableCell
+            onClick={() => {
+              click(i);
+            }}
+          >
+            {m.createdOn}
+          </TableCell>
+          <TableCell
+            onClick={() => {
+              click(i);
+            }}
+          >
+            {m.date}
+          </TableCell>
+          <TableCell
+            onClick={() => {
+              click(i);
+            }}
+          >
+            {m.action}
+          </TableCell>
+        </TableRow>
+      </>
     );
   });
   return (

@@ -22,7 +22,7 @@ function App() {
         <Completed></Completed>
       </Tab>
       <Tab eventKey="pending" title="Pending">
-        <Pending></Pending>
+        <Pending list={value}></Pending>
       </Tab>
     </Tabs>
   );

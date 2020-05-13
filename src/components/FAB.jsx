@@ -16,17 +16,15 @@ function FAB(props) {
   });
 
   function onSaveFun(event) {
-    setValue({ isActive: false });
+    // console.log(event.title.length);
+    if (event.title.length > 10 && event.description.length > 10) {
+      setValue({ isActive: false });
 
-    // var temp = {
-    //   isCompleted: event[0].isCompleted,
-    //   title: event[0].title,
-    //   description: event[0].description,
-    //   priority: event[0].priority,
-    //   date: event[0].date,
-    // };
-    console.log("set: " + JSON.parse(JSON.stringify(event)));
-    props.submit(event);
+      props.submit(event);
+    } else {
+      alert("Title and Description should be minimum of 10 characters");
+    }
+    //console.log("set: " + JSON.parse(JSON.stringify(event)));
   }
   return (
     <>
