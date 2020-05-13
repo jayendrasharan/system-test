@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -21,35 +21,18 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
-function TitemCopy() {
-  var sample = {
-    Summary: "ABC",
-    Priority: "High",
-    CreatedOn: "12PM",
-    DueDate: "tomorrow",
-    Actions: "Important",
-  };
-  var list = [
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-    sample,
-  ];
-
-  var items = list.map((m) => {
+function AllTask(props) {
+  function click() {}
+  var items = props.list.map((m) => {
     return (
-      <TableRow className="header">
-        <TableCell>{m.Summary}</TableCell>
-        <TableCell>{m.Priority}</TableCell>
-        <TableCell>{m.CreatedOn}</TableCell>
+      <TableRow>
+        <TableCell>
+          <input type="checkbox" name="name1" />
+        </TableCell>
+
+        <TableCell>{m.title}</TableCell>
+        <TableCell>{m.priority}</TableCell>
+        <TableCell>{m.date}</TableCell>
         <TableCell>{m.DueDate}</TableCell>
         <TableCell>{m.Actions}</TableCell>
       </TableRow>
@@ -59,12 +42,23 @@ function TitemCopy() {
     <>
       <Table>
         <TableHead>
-          <TableRow>
-            <TableCell>Summary</TableCell>
-            <TableCell>Priority</TableCell>
-            <TableCell>Created On</TableCell>
-            <TableCell>Due Date</TableCell>
-            <TableCell>Actions</TableCell>
+          <TableRow style={{ backgroundColor: "#fef" }}>
+            <TableCell> </TableCell>
+            <TableCell>
+              <a>Summary</a>
+            </TableCell>
+            <TableCell>
+              <a>Priority</a>
+            </TableCell>
+            <TableCell>
+              <a>Created On</a>
+            </TableCell>
+            <TableCell>
+              <a>Due Date</a>
+            </TableCell>
+            <TableCell>
+              <a>Actions</a>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{/**Other Rowss */ items}</TableBody>
@@ -72,4 +66,4 @@ function TitemCopy() {
     </>
   );
 }
-export default TitemCopy;
+export default AllTask;

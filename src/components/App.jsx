@@ -1,13 +1,30 @@
-import React from "react";
-import TitemsCopy from "./TitemsCopy";
+import React, { useState } from "react";
+import Pending from "./Pending";
+import Completed from "./Completed";
+import AllTask from "./AllTask";
 import FAB from "./FAB";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  const [value, setValue] = useState([]);
+  function onSubmit(event) {
+    setValue([...value, event]);
+  }
   return (
-    <div className="App">
-      <TitemsCopy></TitemsCopy>
-      <FAB></FAB>
-    </div>
+    <Tabs defaultActiveKey="AllTask" id="uncontrolled-tab-example">
+      <Tab eventKey="AllTask" title="All Task">
+        <AllTask list={value}></AllTask>
+        <FAB submit={onSubmit}></FAB>
+      </Tab>
+      <Tab eventKey="completed" title="Completed">
+        <Completed></Completed>
+      </Tab>
+      <Tab eventKey="pending" title="Pending">
+        <Pending></Pending>
+      </Tab>
+    </Tabs>
   );
 }
 

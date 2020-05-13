@@ -1,10 +1,13 @@
 import React from "react";
-function Priority() {
+function Priority(props) {
+  function changes(event) {
+    props.priority(event.target.value);
+  }
   return (
     <div>
       <label for="Priority">Priority: </label>
 
-      <select id="Priority">
+      <select id="Priority" onChange={changes}>
         <option value="None">None</option>
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
