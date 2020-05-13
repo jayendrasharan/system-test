@@ -103,7 +103,7 @@ class ShowToDo extends Component {
                 }
                 return null;
             });
-            if (!(eventCaptured.name.includes('delete') || eventCaptured.name.includes('reopen'))) {
+            if (eventCaptured.name === 'view' || eventCaptured.name === 'edit') {
                 this.toggleModal();
             } else if (eventCaptured.name.includes('delete')) {
                 let confirmDelete = window.confirm(`Do you want to delete ${(eventCaptured.name === 'deleteSelected') ?
@@ -176,7 +176,7 @@ class ShowToDo extends Component {
                                                         <td dangerouslySetInnerHTML={{ __html: (this.props.searchKeyword) ? val.visibleDescription : val.description }} />
                                                         <td>{val.createdDate}</td>
                                                         <td>{val.dueDate}</td>
-                                                        <td className="btn-group" role="group">
+                                                        <td className="btn-group buttonGroup" role="group">
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-sm btn-success"

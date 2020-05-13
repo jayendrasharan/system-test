@@ -69,7 +69,14 @@ class ModalComponent extends Component {
                 <div className="modal-dialog">
                     <div className="modal-content fixHeight">
                         <div className="modal-header">
-                            <h4 className="modal-title">Add new task to do</h4>
+                            <h4 className="modal-title">{
+                                this.props.buttonClicked === 'add' ?
+                                 'Add new task to do' : 
+                                 this.props.buttonClicked === 'edit' ?
+                                 'Edit task' :
+                                 'View task'
+                                }
+                            </h4>
                             <button type="button" className="close" data-dismiss="modal" onClick={this.props.toggleModal}>&times;</button>
                         </div>
 
@@ -85,6 +92,7 @@ class ModalComponent extends Component {
                                         placeholder="Enter title of your new task"
                                         onChange={this.handleChange}
                                         value={this.state.title}
+                                        disabled={this.props.buttonClicked==='view'}
                                         ref = {title => this.titleRef = title}
                                     />
                                     {this.state.errorTitle ? this.returnError("title"):null}
@@ -98,6 +106,7 @@ class ModalComponent extends Component {
                                         placeholder="Enter description of your new task"
                                         onChange={this.handleChange}
                                         value={this.state.description}
+                                        disabled={this.props.buttonClicked==='view'}
                                         ref = {description => this.descriptionRef = description}
                                     />
                                     {this.state.errorDescription ? this.returnError("description"):null}
@@ -127,6 +136,7 @@ class ModalComponent extends Component {
                                         className="form-control"
                                         onChange={this.handleChange}
                                         value={this.state.dueDate}
+                                        disabled={this.props.buttonClicked==='view'}
                                         ref = {date => this.dueDateRef = date}
                                     />
                                     {this.state.errordueDate ? this.returnError("due date"):null}
@@ -139,6 +149,7 @@ class ModalComponent extends Component {
                                         name="taskPriority"
                                         onChange={this.handleChange}
                                         value={this.state.taskPriority}
+                                        disabled={this.props.buttonClicked==='view'}
                                         ref = {priorityType => this.taskPriority = priorityType}
                                     >
                                         <option>High</option>
@@ -160,7 +171,7 @@ class ModalComponent extends Component {
                                         data-dismiss="modal"
                                         onClick={this.handleSubmit}
                                     >
-                                        Add
+                                        {this.props.buttonClicked}
                                     </button> :
                                     ''
                             }
@@ -170,7 +181,7 @@ class ModalComponent extends Component {
                                 data-dismiss="modal"
                                 onClick={this.props.toggleModal}
                             >
-                                Close
+                                close
                             </button>
                         </div>
                     </div>
