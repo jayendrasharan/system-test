@@ -1,0 +1,239 @@
+@import '@hal/shared-base-styles/src/index.scss';
+
+a.cta {
+  text-decoration: none;
+}
+
+.cta {
+  border: solid 1px;
+  border-radius: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: $frutiger-medium-font-family;
+  min-width: $button-min-width;
+  overflow: hidden;
+  padding: 16px 16px 16px 24px;
+  position: relative;
+  user-select: none;
+  word-break: break-word;
+
+  .button-label {
+    @include font-paragraph-medium(inherit);
+  }
+
+  .button-active-label {
+    @include font-paragraph-regular($mid-grey);
+  }
+
+  .icon-left {
+    margin-left: 1.5rem;
+  }
+
+  .icon-right {
+    margin-right: 2.5rem;
+  }
+
+  .icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &.show-secondary-icon {
+    .icon:first-child {
+      display: none;
+    }
+
+    .secondary-icon {
+      display: inline;
+    }
+  }
+
+  .secondary-icon {
+    display: none;
+  }
+
+  &.primary {
+    background: linear-gradient(to left,
+    $heathrow-purple 50%,
+    $deep-purple 50%);
+    background-color: $heathrow-purple;
+    background-position: right bottom;
+    background-size: 200% 100%;
+    border-color: $heathrow-purple;
+    color: $white;
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+      background-position: left bottom;
+      border-color: $deep-purple;
+      color: $white;
+
+      .icon {
+        fill: $white;
+        padding-left: 8px;
+      }
+    }
+
+    &:disabled {
+      background-color: $heathrow-purple;
+      border-color: $light-grey;
+      color: $white;
+    }
+
+    .icon {
+      fill: $white;
+      transition: all 0.3s ease-out;
+    }
+  }
+
+  &.secondary {
+    background: linear-gradient(to left, $white 50%, $deep-purple 50%);
+    background-position: right bottom;
+    background-size: 200% 100%;
+    border-color: $heathrow-purple;
+    color: $heathrow-purple;
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+      background-position: left bottom;
+      border-color: $heathrow-purple;
+      color: $white;
+
+      .icon {
+        fill: $white;
+        padding-left: 8px;
+      }
+    }
+
+    &:disabled {
+      background-color: $white;
+      border-color: $light-grey;
+      color: $mid-grey;
+    }
+
+    .icon {
+      fill: $heathrow-purple;
+      transition: all 0.3s ease-out;
+    }
+  }
+
+  &.tertiary {
+    @include font-paragraph-medium($heathrow-purple);
+    background-color: transparent;
+    border: 0;
+    color: $heathrow-purple;
+    padding: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      color: $heathrow-purple;
+
+      .icon {
+        padding-left: 8px;
+      }
+    }
+
+    &:disabled {
+      color: $mid-grey;
+    }
+
+    .icon {
+      fill: $heathrow-purple;
+      transition: all 0.3s ease-out;
+    }
+
+    .icon-right {
+      margin-right: 1rem;
+    }
+  }
+
+  &.download {
+    background-color: $white;
+    border-color: $heathrow-purple;
+    color: $heathrow-purple;
+  }
+
+  &.secondary-light {
+    background: linear-gradient(to left, transparent 50%, $heathrow-purple 50%);
+    background-position: right bottom;
+    background-size: 200% 100%;
+    border-color: $white;
+    color: $white;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-position: left bottom;
+      border-color: $white;
+      color: $white;
+
+      .icon {
+        fill: $white;
+        padding-left: 8px;
+      }
+    }
+
+    .icon {
+      fill: $white;
+      transition: all 0.3s ease-out;
+    }
+
+    &:disabled {
+      background-color: $white;
+      border-color: $light-grey;
+      color: $mid-grey;
+    }
+  }
+
+  &.icon-only {
+    background: none;
+    border: 0;
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    min-height: auto;
+    min-width: auto;
+    padding: 0;
+
+    .icon {
+      fill: $heathrow-purple;
+    }
+  }
+
+  &.underline {
+    @include font-paragraph-regular($heathrow-purple);
+    text-decoration: underline;
+  }
+
+  &.full-width {
+    display: flex;
+    width: 100%;
+  }
+
+  &.full-width-icon {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-absolute {
+    position: absolute;
+  }
+}
+
+button {
+  &.disabled,
+  &:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  // Remove 3D press effect of button in IE
+  &:focus {
+    span {
+      position: relative;
+    }
+  }
+}

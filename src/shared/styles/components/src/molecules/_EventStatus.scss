@@ -1,0 +1,46 @@
+.status-text {
+  @include font-paragraph-regular($black);
+}
+
+.status-circle {
+  border-radius: 50%;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.past,
+.cancelled {
+  background: $dark-red;
+}
+
+.upcoming,
+.happening {
+  background: $dark-green;
+}
+
+.happening-wrapper {
+  border: 1px solid $dark-green;
+  height: 1.25rem;
+  width: 1.25rem;
+
+  .happening {
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-duration: 0.75s;
+    animation-iteration-count: infinite;
+    animation-name: stretch;
+    animation-timing-function: ease-out;
+    right: 6px;
+    top: 6px;
+  }
+}
+
+@keyframes stretch {
+  0% {
+    background-color: $dark-green;
+  }
+
+  100% {
+    transform: scale(1.5);
+  }
+}

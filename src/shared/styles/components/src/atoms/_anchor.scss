@@ -1,0 +1,13 @@
+@import '@hal/shared-base-styles/src/index.scss';
+
+a {
+  text-decoration: none;
+
+  &.tertiary {
+    color: $heathrow-purple;
+
+    .icon {
+      fill: $heathrow-purple;
+    }
+  }
+}

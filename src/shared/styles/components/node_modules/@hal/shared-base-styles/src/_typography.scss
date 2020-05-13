@@ -1,0 +1,364 @@
+/**
+ * Basic typography style for copy text
+ */
+@import './fonts';
+
+body {
+  color: $text-color;
+}
+
+@mixin font-h1-desktop($text-color) {
+  @include font-style(
+    4rem/1.13 $frutiger-regular-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h1-desktop-light($text-color) {
+  @include font-style(
+    4rem/1.13 $frutiger-light-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h2-desktop($text-color) {
+  @include font-style(
+    3.5rem/1.18 $frutiger-light-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h2-desktop-regular($text-color) {
+  @include font-style(
+    3.5rem/1.18 $frutiger-regular-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h1-tablet($text-color) {
+  @include font-style(
+    3rem/1.17 $frutiger-regular-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h1-tablet-light($text-color) {
+  @include font-style(
+    3rem/1.17 $frutiger-light-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h3-desktop($text-color) {
+  @include font-style(
+    2.625rem/1.24 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+
+@mixin font-h3-desktop-light($text-color) {
+  @include font-style(
+    2.625rem/1.24 $frutiger-light-font-family,
+    0,
+    $text-color
+  );
+}
+
+@mixin font-h2-tablet($text-color) {
+  @include font-style(
+    2.5rem/1.3 $frutiger-regular-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h2-tablet-light($text-color) {
+  @include font-style(
+    2.5rem/1.3 $frutiger-light-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h2-tablet-medium($text-color) {
+  @include font-style(
+    2.5rem/1.3 $frutiger-medium-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h1-mobile($text-color) {
+  @include font-style(
+    2.25rem/1.22 $frutiger-regular-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h1-mobile-light($text-color) {
+  @include font-style(
+    2.5rem/1.1 $frutiger-light-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h3-tablet($text-color) {
+  @include font-style(
+    2.25rem/1.28 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+
+@mixin font-h3-tablet-light($text-color) {
+  @include font-style(2.25rem/1.28 $frutiger-light-font-family, 0, $text-color);
+}
+
+@mixin font-h4-desktop-regular($text-color) {
+  @include font-style(2rem/1.25 $frutiger-regular-font-family, 0, $text-color);
+}
+
+@mixin font-h4-desktop-light($text-color) {
+  @include font-style(2rem/1.25 $frutiger-light-font-family, 0, $text-color);
+}
+
+@mixin font-h2-mobile($text-color) {
+  @include font-style(
+    2rem/1.25 $frutiger-light-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h2-mobile-regular($text-color) {
+  @include font-style(
+    2rem/1.25 $frutiger-regular-font-family,
+    -0.5px,
+    $text-color
+  );
+}
+
+@mixin font-h3-mobile($text-color) {
+  @include font-style(
+    1.75rem/1.29 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h4-tablet-regular($text-color) {
+  @include font-style(
+    1.75rem/1.29 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h4-tablet-light($text-color) {
+  @include font-style(1.75rem/1.29 $frutiger-light-font-family, 0, $text-color);
+}
+@mixin font-h4-tablet-medium($text-color) {
+  @include font-style(
+    1.75rem/1.29 $frutiger-medium-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h4-mobile-regular($text-color) {
+  @include font-style(
+    1.5rem/1.33 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h4-mobile-light($text-color) {
+  @include font-style(1.5rem/1.33 $frutiger-light-font-family, 0, $text-color);
+}
+@mixin font-h4-mobile-medium($text-color) {
+  @include font-style(1.5rem/1.33 $frutiger-medium-font-family, 0, $text-color);
+}
+@mixin font-h5-desktop($text-color) {
+  @include font-style(
+    1.5rem/1.33 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h5-tablet($text-color) {
+  @include font-style(
+    1.375rem/1.455 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h5-tablet-light($text-color) {
+  @include font-style(
+    1.375rem/1.455 $frutiger-light-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h6-desktop($text-color) {
+  @include font-style(
+    1.25rem/1.4 $frutiger-regular-font-family,
+    0.2px,
+    $text-color
+  );
+}
+@mixin font-h6-desktop-medium($text-color) {
+  @include font-style(
+    1.25rem/1.4 $frutiger-medium-font-family,
+    0.2px,
+    $text-color
+  );
+}
+@mixin font-h5-mobile($text-color) {
+  @include font-style(
+    1.25rem/1.4 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-h5-mobile-medium($text-color) {
+  @include font-style(1.25rem/1.4 $frutiger-medium-font-family, 0, $text-color);
+}
+@mixin font-h5-mobile-light($text-color) {
+  @include font-style(1.25rem/1.4 $frutiger-light-font-family, 0, $text-color);
+}
+@mixin font-h6-tablet($text-color) {
+  @include font-style(
+    1.125rem/1.56 $frutiger-medium-font-family,
+    0,
+    $text-color
+  );
+}
+
+@mixin font-super-para-medium($text-color) {
+  @include font-style(
+    1.125rem/1.56 $frutiger-medium-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-super-para-italic($text-color) {
+  @include font-style(
+    1.125rem/1.56 $frutiger-light-font-family,
+    0,
+    $text-color
+  );
+  font-style: italic;
+}
+@mixin font-super-para-regular($text-color) {
+  @include font-style(
+    1.125rem/1.56 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+
+@mixin font-h6-mobile($text-color) {
+  @include font-style(
+    1rem/1.5 $frutiger-regular-font-family,
+    0.2px,
+    $text-color
+  );
+}
+@mixin font-h6-mobile-medium($text-color) {
+  @include font-style(
+    1rem/1.5 $frutiger-medium-font-family,
+    0.2px,
+    $text-color
+  );
+}
+@mixin font-para-italic($text-color) {
+  @include font-style(1rem/1.63 $frutiger-regular-font-family, 0, $text-color);
+  font-style: italic;
+}
+@mixin font-hyperlink($text-color) {
+  @include font-style(1rem/1.25 $frutiger-regular-font-family, 0, $text-color);
+}
+@mixin font-paragraph-regular($text-color) {
+  @include font-style(1rem/1.5 $frutiger-regular-font-family, 0, $text-color);
+}
+@mixin font-paragraph-regular-italic($text-color) {
+  @include font-style(1rem/1.5 $frutiger-regular-font-family, 0, $text-color);
+}
+@mixin font-paragraph-medium($text-color) {
+  @include font-style(1rem/1.5 $frutiger-medium-font-family, 0, $text-color);
+}
+@mixin font-label-medium($text-color) {
+  @include font-style(
+    0.875rem/1.5 $frutiger-medium-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-label-italic($text-color) {
+  @include font-style(
+    0.875rem/1.5 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+  font-style: italic;
+}
+@mixin font-label-regular($text-color) {
+  @include font-style(
+    0.875rem/1.5 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+@mixin font-tag($text-color) {
+  @include font-style(
+    0.6875rem/1.45 $frutiger-medium-font-family,
+    2px,
+    $text-color
+  );
+}
+
+@mixin font-floating-label($text-color) {
+  @include font-style(
+    0.6875rem/1.45 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}
+
+@mixin font-tag-regular($text-color) {
+  @include font-style(
+    0.6875rem/1.45 $frutiger-regular-font-family,
+    2px,
+    $text-color
+  );
+}
+
+@mixin font-terminal($text-color) {
+  @include font-style(0.875rem/1 $frutiger-regular-font-family, 0, $text-color);
+}
+
+@mixin font-para-gate-sublevel-text($text-color) {
+  @include font-style(
+    1rem/1.5 $frutiger-regular-font-family,
+    -0.25px,
+    $text-color
+  );
+}
+
+@mixin font-paragraph-medium-text($text-color) {
+  @include font-style(1rem/1.25 $frutiger-medium-font-family, 0, $text-color);
+}
+
+@mixin font-regular($text-color) {
+  @include font-style(
+    0.75rem/1.5 $frutiger-regular-font-family,
+    0,
+    $text-color
+  );
+}

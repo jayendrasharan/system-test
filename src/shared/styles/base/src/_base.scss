@@ -1,0 +1,202 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+body {
+  @include font-label-regular($mid-grey);
+  background-color: $light-grey;
+  direction: ltr;
+  overflow-x: hidden;
+}
+
+h1 {
+  @include font-h1-mobile($black);
+
+  @include tablet {
+    @include font-h1-tablet($black);
+  }
+
+  @include desktop {
+    @include font-h1-desktop($black);
+  }
+}
+
+h2 {
+  @include font-h2-mobile($black);
+
+  @include tablet {
+    @include font-h2-tablet($black);
+  }
+
+  @include desktop {
+    @include font-h2-desktop($black);
+  }
+}
+
+h3 {
+  @include font-h3-mobile($black);
+
+  @include tablet {
+    @include font-h3-tablet($black);
+  }
+
+  @include desktop {
+    @include font-h3-desktop($black);
+  }
+}
+
+h4 {
+  @include font-h4-mobile-regular($black);
+
+  @include tablet {
+    @include font-h4-tablet-regular($black);
+  }
+
+  @include desktop {
+    @include font-h4-desktop-regular($black);
+  }
+}
+
+h5 {
+  @include font-h5-mobile($mid-grey);
+
+  @include tablet {
+    @include font-h5-tablet($mid-grey);
+  }
+
+  @include desktop {
+    @include font-h5-desktop($mid-grey);
+  }
+}
+
+h6 {
+  @include font-h6-mobile($mid-grey);
+
+  @include tablet {
+    @include font-h6-tablet($mid-grey);
+  }
+
+  @include desktop {
+    @include font-h6-desktop($mid-grey);
+  }
+}
+
+.tag {
+  @include font-tag($deep-purple);
+}
+
+.small-text {
+  @include font-label-regular($mid-grey);
+}
+
+.rte {
+  li {
+    @include font-style(1rem/1.63 $frutiger-regular-font-family, 0, $mid-grey);
+  }
+
+  .super-font-paragraph-regular {
+    @include font-super-para-regular($text-color);
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+
+    @include tablet {
+      margin-bottom: 2rem;
+    }
+  }
+
+  a {
+    color: $heathrow-purple;
+    text-decoration: underline;
+  }
+}
+
+.rte-dark {
+  background-color: $deep-purple;
+  color: $white;
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  li,
+  p,
+  a {
+    color: $white;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+
+    @include tablet {
+      margin-bottom: 2rem;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .super-font-paragraph-regular {
+    @include font-super-para-regular($white);
+  }
+}
+
+cite {
+  font-style: normal;
+}
+
+#hal-sprite {
+  display: none;
+}
+
+.rewards-page:empty {
+  animation: 500ms showLoader forwards;
+  background-color: hsla(0, 0%, 100%, 0.6);
+  background-image: url('/etc.clientlibs/heathrow/clientlibs/vanilla-components/base/resources/Heathrow-Loader-Purple.gif');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 3rem;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  @include tablet {
+    background-size: 5rem;
+  }
+  @include desktop {
+    background-size: 7.5rem;
+  }
+}
+
+@keyframes showLoader {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.rewards-wrapper {
+  min-height: 400px;
+}

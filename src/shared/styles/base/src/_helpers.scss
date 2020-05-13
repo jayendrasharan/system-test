@@ -1,0 +1,827 @@
+// -----------------------------------------------------------------------------
+// This file contains CSS helper classes.
+// -----------------------------------------------------------------------------
+
+.left {
+  float: #{$left};
+}
+
+.right {
+  float: #{$right};
+}
+
+.text-left {
+  text-align: #{$left};
+}
+
+.text-right {
+  text-align: #{$right};
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-just {
+  text-align: justify;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.align-bottom {
+  vertical-align: bottom;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-sub {
+  vertical-align: sub;
+}
+
+.dark {
+  color: $black;
+}
+
+.light {
+  color: $white;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.width-25 {
+  width: 25%;
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.box-shadow-none {
+  box-shadow: none;
+}
+
+.list-style-none {
+  list-style-type: none;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.hover-underline {
+  &:hover {
+    border-bottom: 1px solid $white;
+  }
+}
+
+.hover-dark-underline {
+  &:hover {
+    border-bottom: 1px solid $heathrow-purple;
+  }
+}
+
+.input-grey-border {
+  border: 1px solid $border-color;
+}
+
+.word-break {
+  hyphens: auto;
+  word-break: break-word;
+}
+/* stylelint-disable property-no-vendor-prefix */
+input {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  overflow: hidden;
+
+  &:focus {
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+select {
+  overflow: hidden;
+}
+
+@include mobile {
+  .sm-width-50 {
+    width: 50%;
+  }
+
+  .sm-width-100 {
+    width: 100%;
+  }
+
+  .sm-width-auto {
+    width: auto;
+  }
+}
+
+@include tablet {
+  .md-width-50 {
+    width: 50%;
+  }
+
+  .md-width-100 {
+    width: 100%;
+  }
+}
+
+@include desktop {
+  .lg-width-50 {
+    width: 50%;
+  }
+
+  .lg-width-full {
+    width: 100%;
+  }
+
+  .lg-width-auto {
+    width: auto;
+  }
+}
+
+.block {
+  display: block;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-inline {
+  display: inline-flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-start {
+  align-items: start;
+}
+
+.flex-center {
+  align-items: center;
+}
+
+.flex-baseline {
+  align-items: baseline;
+}
+
+.flex-stretch {
+  align-items: stretch;
+}
+
+.flex-start {
+  align-items: flex-start;
+}
+
+.flex-end {
+  align-items: flex-end;
+}
+
+.flex-justify {
+  justify-content: space-between;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.flex-justify-start {
+  justify-content: flex-start;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+.flex-grow {
+  flex: 1 0 auto;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.flex-first {
+  order: -1;
+}
+
+.flex-last {
+  order: 99999;
+}
+
+.lg-flex-start {
+  align-items: flex-start;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.object-fit-cover {
+  @include object-fit-cover;
+}
+
+.full-bleed {
+  @include full-bleed-container;
+}
+
+@include mobile {
+  .sm-full-bleed {
+    @include full-bleed-container;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .md-full-bleed {
+    @include full-bleed-container;
+  }
+}
+
+@media (min-width: 1280px) {
+  .lg-full-bleed {
+    @include full-bleed-container;
+  }
+
+  .lg-flex-center {
+    align-items: center;
+  }
+
+  .lg-flex-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  .lg-text-left {
+    text-align: left;
+  }
+}
+
+/* TODO: mediawall added for the lifefyre as it not allow to add custom class */
+
+.mediawall {
+  margin-bottom: $space-4;
+  @include tablet {
+    margin-bottom: $space-7;
+  }
+  @include desktop {
+    margin-bottom: 7rem;
+  }
+}
+
+.comp-mb {
+  margin-bottom: $space-4;
+  @include tablet {
+    margin-bottom: $space-7;
+  }
+  @include desktop {
+    margin-bottom: 7rem;
+  }
+  @include sm-desktop {
+    margin-bottom: 5rem;
+  }
+}
+
+.comp-mb-rewards {
+  margin-bottom: $space-4;
+  @include tablet {
+    margin-bottom: $space-7;
+  }
+  @include desktop {
+    margin-bottom: 5.5rem;
+  }
+  @include sm-desktop {
+    margin-bottom: 5rem;
+  }
+}
+
+.comp-transform {
+  @include tablet {
+    margin-bottom: -5rem;
+    transform: translateY(-5rem);
+  }
+  @include desktop {
+    margin-bottom: -6.5rem;
+    transform: translateY(-6.5rem);
+  }
+}
+
+.comp-hero-container {
+  z-index: 111;
+}
+
+@include mobile {
+  .sm-flex {
+    display: flex;
+  }
+
+  .sm-flex-justify-end {
+    justify-content: flex-end;
+  }
+
+  .sm-flex-grow {
+    flex: 1 0 auto;
+  }
+
+  .sm-flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .sm-hide {
+    display: none;
+  }
+
+  .sm-inline {
+    display: inline;
+  }
+
+  .sm-block {
+    display: block;
+  }
+
+  .sm-inline-block {
+    display: inline-block;
+  }
+
+  .sm-comp-mb {
+    margin-bottom: $space-4;
+  }
+
+  .sm-comp-transform {
+    margin-bottom: -1.5rem;
+    transform: translateY(-1.5rem);
+  }
+
+  .sm-absolute {
+    position: absolute;
+  }
+
+  .sm-relative {
+    position: relative;
+  }
+
+  .sm-text-center {
+    text-align: center;
+  }
+
+  .sm-flex-justify {
+    justify-content: space-between;
+  }
+
+  .sm-flex-column {
+    flex-direction: column;
+  }
+
+  .sm-scroll-overflow {
+    overflow: scroll;
+  }
+
+  .sm-text-right {
+    text-align: right;
+  }
+}
+
+@include tablet {
+  .md-text-center {
+    text-align: center;
+  }
+
+  .md-text-right {
+    text-align: right;
+  }
+
+  .md-flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .md-flex {
+    display: flex;
+  }
+
+  .md-flex-justify-center {
+    justify-content: center;
+  }
+
+  .md-flex-justify-end {
+    justify-content: flex-end;
+  }
+
+  .md-flex-grow {
+    flex: 1 0 auto;
+  }
+
+  .md-hide {
+    display: none;
+  }
+
+  .md-inline {
+    display: inline;
+  }
+
+  .md-block {
+    display: block;
+  }
+
+  .md-inline-block {
+    display: inline-block;
+  }
+
+  .md-inline-flex {
+    display: inline-flex;
+  }
+
+  .md-comp-mb {
+    margin-bottom: $space-7;
+  }
+
+  .md-comp-transform {
+    margin-bottom: -5rem;
+    transform: translateY(-5rem);
+  }
+
+  .md-absolute {
+    position: absolute;
+  }
+
+  .md-relative {
+    position: relative;
+  }
+
+  .md-initial {
+    display: initial;
+  }
+
+  .md-flex-center {
+    align-items: center;
+  }
+
+  .md-hide-overflow {
+    overflow: hidden;
+  }
+
+  .md-flex-column {
+    flex-direction: column;
+  }
+}
+
+@include desktop {
+  .lg-text-center {
+    text-align: center;
+  }
+
+  .lg-text-left {
+    text-align: left;
+  }
+
+  .lg-flex {
+    display: flex;
+  }
+
+  .lg-flex-grow {
+    flex: 1 0 auto;
+  }
+
+  .lg-hide {
+    display: none;
+  }
+
+  .lg-inline {
+    display: inline;
+  }
+
+  .lg-initial {
+    display: initial;
+  }
+
+  .lg-block {
+    display: block;
+  }
+
+  .lg-inline-block {
+    display: inline-block;
+  }
+
+  .lg-table-cell {
+    display: table-cell;
+  }
+
+  .lg-inline-flex {
+    display: inline-flex;
+  }
+
+  .lg-flex-justify-center {
+    justify-content: center;
+  }
+
+  .lg-comp-mb {
+    margin-bottom: 7rem;
+  }
+
+  .lg-comp-mb-rewards {
+    margin-bottom: 5.5rem;
+  }
+
+  .lg-comp-transform {
+    margin-bottom: -6.5rem;
+    transform: translateY(-6.5rem);
+  }
+
+  .lg-absolute {
+    position: absolute;
+  }
+
+  .lg-relative {
+    position: relative;
+  }
+
+  .lg-flex-row {
+    flex-direction: row;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.no-border {
+  border: 0;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.green {
+  color: $green;
+}
+
+.yellow {
+  color: $yellow;
+}
+
+.red {
+  color: $red;
+}
+
+.dark-red {
+  color: $dark-red;
+}
+
+.dark-green {
+  color: $dark-green;
+}
+
+.light-grey {
+  color: $light-grey;
+}
+
+.mid-grey {
+  color: $mid-grey;
+}
+
+.white-fill {
+  fill: $white;
+}
+
+.purple-fill {
+  fill: $heathrow-purple;
+}
+
+.heathrow-purple-background {
+  background-color: $heathrow-purple;
+}
+
+.deep-purple-background {
+  background-color: $deep-purple;
+}
+
+.rewards-premium-background {
+  background-image: linear-gradient(to bottom, #1d0439 28%, #120422 108%);
+}
+
+.light-purple-background {
+  background-color: $light-purple;
+}
+
+.white-background {
+  background-color: $white;
+}
+
+.yellow-background {
+  background-color: $yellow;
+}
+
+.green-background {
+  background-color: $green;
+}
+
+.red-background {
+  background-color: $red;
+}
+
+.grey-background {
+  background-color: $grey;
+}
+
+.full-overlay {
+  background: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+}
+
+.of-cover {
+  font-family: 'object-fit: cover;';
+}
+
+.image-overlay {
+  background-color: $black;
+  height: 100%;
+  left: 0;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.hero-image {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.image-background {
+  background: linear-gradient(to right bottom,
+  $heathrow-purple 50%,
+  $deep-purple 50%);
+}
+
+.width-33 {
+  width: 33.33%;
+}
+
+.no-list-style {
+  list-style: none;
+}
+
+.hide-overflow {
+  overflow: hidden;
+}
+
+.show {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.25;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@include mobile {
+  .lg-show {
+    display: none;
+  }
+}
+@include tablet {
+  .lg-show {
+    display: none;
+  }
+}
+@include desktop {
+  .lg-show {
+    display: inherit;
+  }
+}
+@include sm-desktop {
+  .grid-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* Styling for terminal filtering button */
+
+.terminal-filter-btn {
+  @include font-super-para-regular($light-purple);
+  background-color: $white;
+  border-color: $light-purple;
+  color: $light-purple;
+
+  &:hover,
+  &:focus {
+    background-color: $light-purple;
+    border-color: $light-purple;
+    color: $white;
+
+    .icon {
+      fill: $white;
+    }
+  }
+
+  &.selected {
+    @include font-super-para-regular($white);
+    background-color: $light-purple;
+    border-color: $light-purple;
+  }
+}
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

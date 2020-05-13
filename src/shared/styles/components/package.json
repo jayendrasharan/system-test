@@ -1,0 +1,14 @@
+{
+  "name": "@hal/shared-component-styles",
+  "version": "1.0.0",
+  "description": "Shared component styles",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006"
+  },
+  "dependencies": {
+    "@hal/shared-base-styles": "^1.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

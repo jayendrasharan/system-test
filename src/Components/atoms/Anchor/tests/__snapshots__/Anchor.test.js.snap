@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Anchor Component should render correctly and match snapshot 1`] = `
+<a
+  className="cta primary"
+  data-hal-action-name="text: Sample"
+  href="/"
+  onClick={[Function]}
+  role="link"
+>
+  Sample
+</a>
+`;
+
+exports[`Anchor Component should render correctly and match snapshot with icons after false 1`] = `
+<a
+  className="cta primary"
+  data-hal-action-name="text: Sample"
+  href="/"
+  onClick={null}
+  role="link"
+>
+  <Icon
+    className="icon mr1 align-middle arrow-right"
+    focusable="false"
+    height="18px"
+    key="arrow-right"
+    type="arrow-right"
+    width="18px"
+  />
+  Sample
+</a>
+`;
+
+exports[`Anchor Component should render correctly and match snapshot with icons after true 1`] = `
+<a
+  className="cta primary"
+  data-hal-action-name="text: Sample"
+  href="/"
+  onClick={null}
+  role="link"
+>
+  Sample
+  <Icon
+    className="icon ml1 align-middle arrow-right"
+    focusable="false"
+    height="18px"
+    key="arrow-right"
+    type="arrow-right"
+    width="18px"
+  />
+</a>
+`;
+
+exports[`Anchor Component should render correctly and match snapshot with icons after true 2`] = `
+<a
+  className="cta primary"
+  data-hal-action-name="text: Sample"
+  href="/"
+  onClick={null}
+  role="link"
+>
+  Sample
+  <Icon
+    className="icon  align-middle arrow-right"
+    focusable="false"
+    height="18px"
+    key="arrow-right"
+    type="arrow-right"
+    width="18px"
+  />
+</a>
+`;
+
+exports[`Anchor Component should render correctly and match snapshot with icons after true 3`] = `
+<a
+  className="cta primary"
+  data-hal-action-name="text: Sample"
+  href="/"
+  onClick={null}
+  role="link"
+>
+  <Icon
+    className="icon  align-middle arrow-right"
+    focusable="false"
+    height="18px"
+    key="arrow-right"
+    type="arrow-right"
+    width="18px"
+  />
+  Sample
+</a>
+`;
+
+exports[`Anchor Component should render correctly and match snapshot with object destination 1`] = `
+<a
+  className="cta primary"
+  data-hal-action-name="text: Sample"
+  href="http://abc.com?a=1&b=2"
+  onClick={null}
+  role="link"
+>
+  Sample
+</a>
+`;
+
+exports[`Anchor Component should render correctly and match snapshot with object destination and no query param 1`] = `
+<a
+  className="cta primary"
+  data-hal-action-name="text: Sample"
+  href="http://abc.com?"
+  onClick={null}
+  role="link"
+>
+  Sample
+</a>
+`;

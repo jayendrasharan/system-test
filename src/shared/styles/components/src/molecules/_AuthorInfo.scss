@@ -1,0 +1,39 @@
+.author-info {
+  background-color: $white;
+
+  .tags-info {
+    .author-tag {
+      @include font-label-regular($heathrow-purple);
+      border-bottom: 1px solid $heathrow-purple;
+      margin-left: 0.1rem;
+      padding-bottom: 1px;
+    }
+  }
+
+  .author-tag-comma {
+    color: $heathrow-purple;
+
+    &:last-child {
+      display: none;
+    }
+  }
+
+  .fallback-img {
+    background-color: $author-img-bg-color;
+  }
+
+  .fallback-img,
+  img {
+    border-radius: 50%;
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+
+  cite {
+    @include font-paragraph-medium($black);
+  }
+
+  time {
+    @include font-label-regular($mid-grey);
+  }
+}

@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// This file contains all Design Elements used.
+// -----------------------------------------------------------------------------
+
+@mixin tick-mark {
+  &::before {
+    border: solid 12px $light-purple;
+    border-radius: 2px;
+    content: ' ';
+    display: block;
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 0;
+  }
+
+  &::after {
+    // @include transform(rotate(45deg));
+    border: solid $white;
+    border-width: 0 2px 2px 0;
+    content: ' ';
+    display: block;
+    height: 13px;
+    left: 9px;
+    position: absolute;
+    top: 4px;
+    width: 7px;
+  }
+}
