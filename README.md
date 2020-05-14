@@ -1,5 +1,7 @@
 # Things That i have implemented in this project!
 
+This has been made only by React Hooks.
+
 1. Three Tabs AllTask -> Completed -> Pending.
 
 2. The listView with all details of date of createdon, duedate ,title etc.
