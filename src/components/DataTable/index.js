@@ -21,8 +21,8 @@ const DataGrid = props =>{
 
   const columns = [
     {
-      name: "Title",
-      selector: "title",
+      name: "Description",
+      selector: "description",
       sortable: true,
     },
     {
@@ -108,7 +108,7 @@ const DataGrid = props =>{
 
   return (
     <DataTable
-      title="TODo List"
+      title="TODO List"
       columns={columns}
       data={todoList}
       fixedHeader

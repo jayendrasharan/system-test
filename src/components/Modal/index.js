@@ -56,7 +56,7 @@ const ModalPopup = props => {
       {type === "new" ? (
         <div className="justify-content-end row">
           <button className="btn" onClick={toggle}>
-            <i className="fa fa-plus-circle fa-2x" style={{color:"red"}} aria-hidden="true"></i>
+            <i className="fa fa-plus-circle fa-2x" style={{color:"blue"}} aria-hidden="true"></i>
           </button>
         </div>
       ) : (

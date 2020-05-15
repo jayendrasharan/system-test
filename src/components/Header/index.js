@@ -27,7 +27,7 @@ const Header = props =>{
   return (
     <div className='row mx-0 header'>
       <h2 className='col-sm-8 text-left'>Todo  Application</h2>
-      <div className='col-sm-4'>
+      <div className='col-sm-4 searchText'>
         <input ref={inputEl} type='text' className='p-1 w-75' placeholder='Enter text to search' onChange={(e) => handleChange(e)}/><br/>
         
       </div>

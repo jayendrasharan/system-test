@@ -1,1 +1,1 @@
-export const defaultColor = "rgba(0, 123, 255, 0.25)";
+export const defaultColor = "rgb(49, 218, 232)";

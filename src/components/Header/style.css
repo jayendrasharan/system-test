@@ -32,3 +32,10 @@
   .App-link {
     color: #61dafb;
   }
+
+  .searchText{
+    position: relative;
+    left: 83px;
+    top: 53px;
+
+  }
