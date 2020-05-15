@@ -1,14 +1,13 @@
 import React from 'react';
 import { GlobalStyle } from './styled/GlobalStyle';
+import Todo from './components/Todo/index';
 
 
 function App() {
   return (
     <>
      <GlobalStyle/>
-    <div>
-        Start Surify Assignment...
-    </div>
+      <Todo/>
     </>
   );
 }

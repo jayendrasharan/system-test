@@ -1,1 +1,1 @@
-export const defaultColor = "rgb(0, 119, 223)";
+export const defaultColor = "silver";
