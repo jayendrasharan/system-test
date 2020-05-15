@@ -7,13 +7,14 @@ import React, { useState } from 'react';
 
 import { TodoWrapper } from './Wrapper';
 import Tabs from '../Tabs';
+import Header from '../Header';
 
 const Todo = () =>{
   const [open, setOpen] = useState(false);
   return (
     <TodoWrapper className='container my-5 pt-2'>
-      <Tabs/>      
-     
+      <Header/>
+      <Tabs/>   
     </TodoWrapper>
   );
 }

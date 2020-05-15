@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => (props.whiteColor ? 'white' : 'black')};
     background-color: #fff;
     font-family : 'Open Sans', sans-sarif;
+    margin : 0;
   }
 
   h1,h2,h3,h4 {
