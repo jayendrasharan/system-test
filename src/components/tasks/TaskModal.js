@@ -39,6 +39,10 @@ const TaskModal = ({
             alert('Description should not be empty or less than 10 characters');
             return;
         }
+        var response = window.confirm('Please confirm before saving the record');
+        if (!response) {
+            return;
+        }
         const taskObj = {
             id: row && row.id ? row.id : v4(),
             summary,
@@ -143,7 +147,7 @@ const TaskModal = ({
                 <Button variant="secondary" onClick={handleClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={saveTask}>
+                <Button variant="primary" type='submit' onClick={saveTask}>
                     Save Task
                 </Button>
             </Modal.Footer> : ''}
