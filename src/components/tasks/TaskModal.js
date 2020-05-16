@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { v4 } from 'uuid';
+import { isEqual, cloneDeep } from "lodash";
 
 const initialState = {
     summary: "",
@@ -39,18 +40,26 @@ const TaskModal = ({
             alert('Description should not be empty or less than 10 characters');
             return;
         }
-        var response = window.confirm('Please confirm before saving the record');
-        if (!response) {
-            return;
-        }
         const taskObj = {
             id: row && row.id ? row.id : v4(),
             summary,
             description,
             priority,
             dueDate,
-            currentState: row && row.currentState ? row.currentState : 'open',
-            createdOn: new Date()
+            currentState: row && row.currentState ? row.currentState : 'open'
+        };
+        if (row && row.id) {
+            let previousData = cloneDeep(row);
+            delete previousData.createdOn;
+            if (isEqual(previousData, taskObj)) {
+                alert('Nothing to update!');
+                return;
+            }
+        }
+        taskObj.createdOn = new Date();
+        var response = window.confirm('Please confirm before saving the record');
+        if (!response) {
+            return;
         }
         if (isEdit) {
             updateTask(taskObj);
