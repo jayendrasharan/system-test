@@ -15,12 +15,19 @@ const TaskGrid = ({
     deleteTask,
     sortEle,
     setSortEle,
-    setTasks
+    setTasks,
+    groupBy
 }) => {
     const [showDetails, setShowDetails] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const [row, setRow] = useState();
     const [actionType, setActionType] = useState();
+
+    let groupByValues = [];
+
+    if (groupBy) {
+        groupByValues = [...new Set(tasksList.map(t => t[groupBy]))];
+    }
 
     const handleRowSelection = (row) => {
         setRow(row);
@@ -72,12 +79,33 @@ const TaskGrid = ({
         } else return row[key];
     }
 
+    const getRowData = (tasks) => {
+        return tasks.map(t => {
+            return <div
+                key={`row-${t.id}`}
+                className="task-grid-data-row"
+                onClick={() => handleRowSelection(t)}
+            >
+                {cols.map(col => {
+                    return <div
+                        key={`row-col-${col.key}-${t.id}`}
+                        className={`task-grid-col ${col.key} task-grid-data-col ` +
+                            `${t.currentState === 'open' ? '' : `task-grid-data-row-${type}`}`}
+                        style={{ maxWidth: col.width || '200px' }}
+                    >
+                        {getColumnContent(t, col.key)}
+                    </div>
+                })}
+            </div>
+        })
+    }
+
     const handleSort = col => {
         let taskList = [];
         const order = sortEle[col.key]
             ? sortEle[col.key] === 'asc' ? 'desc' : 'asc'
             : 'asc'
-        switch(col.key) {
+        switch (col.key) {
             case 'summary':
                 taskList = orderBy(
                     tasksList,
@@ -138,24 +166,20 @@ const TaskGrid = ({
                         })}
                     </div>
                     <div className='task-grid-data-wrapper'>
-                        {tasksList.map(t => {
-                            return <div
-                                key={`row-${t.id}`}
-                                className="task-grid-data-row"
-                                onClick={() => handleRowSelection(t)}
-                            >
-                                {cols.map(col => {
-                                    return <div
-                                        key={`row-col-${col.key}-${t.id}`}
-                                        className={`task-grid-col ${col.key} task-grid-data-col ` +
-                                            `${t.currentState === 'open' ? '' : `task-grid-data-row-${type}`}`}
-                                        style={{ maxWidth: col.width || '200px' }}
-                                    >
-                                        {getColumnContent(t, col.key)}
-                                    </div>
+                        {groupBy
+                            ? <div>
+                                {groupByValues.map(g => {
+                                    return <>
+                                        <div
+                                            key={`group-value-${g}`}
+                                            className="task-grid-groupby-row"
+                                        >{typeof g === 'object' ? g.toISOString() : g}</div>
+                                        {getRowData(tasksList.filter(t => t[groupBy] === g))}
+                                    </>
                                 })}
                             </div>
-                        })}
+                            : getRowData(tasksList)
+                        }
                     </div>
                 </div>
                 : <div className='task-grid-no-tasks'>

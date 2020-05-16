@@ -15,7 +15,7 @@ const TaskView = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [sortEle, setSortEle] = useState({ summary: 'asc' });
     const [tasksList, setTasks] = useState(getOrderedTasks(tasks, sortEle));
-    const [groupBy, setGroupBy] = useState();
+    const [groupBy, setGroupBy] = useState('');
     const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
@@ -24,13 +24,18 @@ const TaskView = (props) => {
 
     const handleClose = () => setShowModal(false);
 
-    const handleSearch = ({ target: { value } }) => {
-        setSearchText(value);
+    const removeHighlighting = () => {
         // delete all nodes with highlight class.
         document.querySelectorAll('.highlight').forEach(a => {
             // dirty work around to remove highlighted span
+            // eslint-disable-next-line
             a.parentElement.innerText = a.parentElement.innerText;
         });
+    }
+
+    const handleSearch = ({ target: { value } }) => {
+        setSearchText(value);
+        removeHighlighting();
         if (value) {
             const elementsToHighlight = [
                 ...document.getElementsByClassName('summary'),
@@ -48,10 +53,12 @@ const TaskView = (props) => {
         }
     };
 
-    const handleGroupBy = ({ target: { value } }) => { };
+    const handleGroupBy = ({ target: { value } }) => setGroupBy(value);
 
     const handleClearFilters = () => {
         setSearchText('');
+        setGroupBy('');
+        removeHighlighting();
     };
 
     const getTasks = tasks => {
@@ -95,7 +102,7 @@ const TaskView = (props) => {
                     >
                         <option>Group by</option>
                         {Coldefs.filter(col => col.allowGroup && !col.hidden)
-                            .map(c => <option>{c.header}</option>)}
+                            .map(c => <option key={`option-${c.key}`} value={c.key}>{c.header}</option>)}
                     </select>
                 </div>
             </div>
@@ -108,6 +115,7 @@ const TaskView = (props) => {
                         sortEle={sortEle}
                         setSortEle={setSortEle}
                         setTasks={setTasks}
+                        groupBy={groupBy}
                     />
                 </Tab>
                 <Tab eventKey="completed" title="Completed">
@@ -118,6 +126,7 @@ const TaskView = (props) => {
                         sortEle={sortEle}
                         setSortEle={setSortEle}
                         setTasks={setTasks}
+                        groupBy={groupBy}
                     />
                 </Tab>
                 <Tab eventKey="pending" title="Pending">
@@ -128,6 +137,7 @@ const TaskView = (props) => {
                         sortEle={sortEle}
                         setSortEle={setSortEle}
                         setTasks={setTasks}
+                        groupBy={groupBy}
                     />
                 </Tab>
             </Tabs>

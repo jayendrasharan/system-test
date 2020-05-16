@@ -26,7 +26,7 @@
 .task-grid-no-tasks {
     text-align: center;
     width: 100%;
-    line-height: 90vh;
+    line-height: 80vh;
     font-size: 1.5em;
     color: #8a8a8a;
 }
@@ -100,4 +100,12 @@
 
 .highlight {
     background-color: yellow;
+}
+
+.task-grid-groupby-row {
+    width: 1000px;
+    padding: 5px;
+    border: 1px solid #000;
+    border-top: none;
+    background: #CCC;
 }
