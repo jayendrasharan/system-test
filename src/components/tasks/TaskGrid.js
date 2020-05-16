@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button } from 'react-bootstrap';
-import { get } from 'lodash';
+import { get, orderBy } from 'lodash';
 import { Coldefs } from './coldefs';
 import TaskModal from './TaskModal';
+import { getOrderedTasks } from '../../utils/taskHelper';
 
 const TaskGrid = ({
-    tasks,
+    tasksList,
     updateTask,
-    deleteTask
+    deleteTask,
+    sortEle,
+    setSortEle,
+    setTasks
 }) => {
     const [showDetails, setShowDetails] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
@@ -66,17 +70,73 @@ const TaskGrid = ({
         } else return row[key];
     }
 
+    const handleSort = col => {
+        let taskList = [];
+        const order = sortEle[col.key]
+            ? sortEle[col.key] === 'asc' ? 'desc' : 'asc'
+            : 'asc'
+        switch(col.key) {
+            case 'summary':
+                taskList = orderBy(
+                    tasksList,
+                    'summary',
+                    order
+                );
+                setTasks(taskList);
+                break;
+            case 'priority':
+                if (order === 'asc') {
+                    taskList = [
+                        ...tasksList.filter(t => t.priority === 'None'),
+                        ...tasksList.filter(t => t.priority === 'Low'),
+                        ...tasksList.filter(t => t.priority === 'Medium'),
+                        ...tasksList.filter(t => t.priority === 'High'),
+                    ]
+                } else {
+                    taskList = [
+                        ...tasksList.filter(t => t.priority === 'High'),
+                        ...tasksList.filter(t => t.priority === 'Medium'),
+                        ...tasksList.filter(t => t.priority === 'Low'),
+                        ...tasksList.filter(t => t.priority === 'None'),
+                    ]
+                }
+                setTasks(taskList);
+                break;
+            case 'createdOn':
+                taskList = orderBy(tasksList, 'createdOn', order);
+                setTasks(taskList);
+                break;
+            case 'dueDate':
+                taskList = order === 'asc'
+                    ? tasksList.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate))
+                    : tasksList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+                setTasks(taskList);
+                break;
+            default:
+                taskList = orderBy(tasksList, 'summary', order);
+                setTasks(taskList);
+                break;
+        }
+        setSortEle({ [col.key]: order });
+    }
+
     return (
         <>
-            {tasks.length
+            {tasksList.length
                 ? <div className='task-grid'>
                     <div className='task-grid-col-wrapper'>
                         {Coldefs.map(col => {
-                            return <div key={`col-${col.key}`} className='task-grid-col'>{col.header}</div>
+                            return <div
+                                key={`col-${col.key}`}
+                                className='task-grid-col'
+                                onClick={() => handleSort(col)}
+                            >
+                                {col.header}
+                            </div>
                         })}
                     </div>
                     <div className='task-grid-data-wrapper'>
-                        {tasks.map(t => {
+                        {tasksList.map(t => {
                             return <div
                                 key={`row-${t.id}`}
                                 className='task-grid-data-row'
@@ -127,10 +187,10 @@ const TaskGrid = ({
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         No
-                        </Button>
+                    </Button>
                     <Button variant="primary" onClick={handleDeleteConfirmation}>
                         Yes
-                        </Button>
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>

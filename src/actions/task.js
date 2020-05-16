@@ -5,7 +5,7 @@ export function addTask(task) {
                 type: 'ADD_TASK_SUCCESS',
                 payload: task
             });
-        }, 2000);
+        }, 1000);
     }
 }
 
@@ -16,7 +16,7 @@ export function updateTask(task) {
                 type: 'UPDATE_TASK_SUCCESS',
                 payload: task
             });
-        }, 2000);
+        }, 1000);
     }
 }
 
@@ -27,6 +27,6 @@ export function deleteTask(id) {
                 type: 'DELETE_TASK_SUCCESS',
                 id
             });
-        }, 2000);
+        }, 1000);
     }
 }

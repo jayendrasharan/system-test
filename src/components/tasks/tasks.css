@@ -19,6 +19,10 @@
     width: 20%;
 }
 
+.form-wrapper textarea {
+    min-height: 150px !important;
+}
+
 .task-grid-no-tasks {
     text-align: center;
     width: 100%;
