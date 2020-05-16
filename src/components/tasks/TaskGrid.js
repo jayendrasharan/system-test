@@ -9,6 +9,7 @@ import TaskModal from './TaskModal';
 const cols = Coldefs.filter(c => !c.hidden);
 
 const TaskGrid = ({
+    type,
     tasksList,
     updateTask,
     deleteTask,
@@ -147,7 +148,7 @@ const TaskGrid = ({
                                     return <div
                                         key={`row-col-${col.key}-${t.id}`}
                                         className={`task-grid-col task-grid-data-col ` +
-                                            `${t.currentState === 'open' ? '' : 'task-grid-data-row-done'}`}
+                                            `${t.currentState === 'open' ? '' : `task-grid-data-row-${type}`}`}
                                         style={{ maxWidth: col.width || '200px' }}
                                     >
                                         {getColumnContent(t, col.key)}

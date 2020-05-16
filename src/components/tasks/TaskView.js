@@ -34,10 +34,10 @@ const TaskView = (props) => {
 
     const getTasks = tasks => {
         if (!searchText) {
-            return tasksList;
+            return tasks;
         }
         const cols = Coldefs.filter(c => c.allowSearch);
-        let filteredTasks = tasksList.filter(t => {
+        let filteredTasks = tasks.filter(t => {
             for (let c of cols) {
                 if (t[c.key] && t[c.key].toLowerCase().includes(searchText.toLowerCase())) {
                     return true;
@@ -80,6 +80,7 @@ const TaskView = (props) => {
             <Tabs id="tasks-tabs" fill>
                 <Tab eventKey="allTasks" title="All tasks">
                     <TaskGrid
+                        type='all'
                         {...props}
                         tasksList={getTasks(tasksList)}
                         sortEle={sortEle}
@@ -89,6 +90,7 @@ const TaskView = (props) => {
                 </Tab>
                 <Tab eventKey="completed" title="Completed">
                     <TaskGrid
+                        type='completed'
                         {...props}
                         tasksList={getTasks(completedTasks)}
                         sortEle={sortEle}
@@ -98,6 +100,7 @@ const TaskView = (props) => {
                 </Tab>
                 <Tab eventKey="pending" title="Pending">
                     <TaskGrid
+                        type='pending'
                         {...props}
                         tasksList={getTasks(pendingTasks)}
                         sortEle={sortEle}
