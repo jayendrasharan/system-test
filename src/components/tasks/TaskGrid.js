@@ -173,7 +173,7 @@ const TaskGrid = ({
                                         <div
                                             key={`group-value-${g}`}
                                             className="task-grid-groupby-row"
-                                        >{typeof g === 'object' ? g.toISOString() : g}</div>
+                                        >{typeof g === 'object' ? g.toISOString() : (g || 'No Value')}</div>
                                         {getRowData(tasksList.filter(t => t[groupBy] === g))}
                                     </>
                                 })}

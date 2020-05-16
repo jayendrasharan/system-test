@@ -31,6 +31,14 @@ const TaskModal = ({
     const handlePriorityChange = ({ target: { value }}) => setState(prevState => ({...prevState, priority: value}));
 
     const saveTask = () => {
+        if (!summary || summary.length < 10) {
+            alert('Summary should not be empty or less than 10 characters');
+            return;
+        }
+        if (!description || description.length < 10) {
+            alert('Description should not be empty or less than 10 characters');
+            return;
+        }
         const taskObj = {
             id: row && row.id ? row.id : v4(),
             summary,
@@ -65,6 +73,7 @@ const TaskModal = ({
                         <label>Summary</label>
                         <input
                             type="text"
+                            placeholder='Must be 10 characters or above'
                             className="form-control"
                             aria-label="summary"
                             aria-describedby="input-summary"
@@ -80,6 +89,7 @@ const TaskModal = ({
                         <textarea
                             className="form-control"
                             aria-label="description"
+                            placeholder='Must be 10 characters or above'
                             aria-describedby="input-description"
                             value={description}
                             onChange={handleDescChange}
