@@ -39,3 +39,4 @@ export const fetchTodos = payload => ({
     type: GLOBAL_SEARCH,
     payload
   })
+

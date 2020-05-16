@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { tabs } from '../../config';
 import { updateActiveTab } from '../../store/Action';
 import { TabsBars, TabsBar } from './TabsBar';
+import { selectorsActiveTabs } from './../../store/Selector';
 
 const Tabs = props => {
   const { setActiveTab, activeTab } = props;
@@ -23,7 +24,7 @@ const Tabs = props => {
 }
 
 const mapStateToPorps = state => ({
-  activeTab: state.todos.activeTab
+  activeTab: selectorsActiveTabs(state)
 });
 
 const mapDispatchToProps = dispatch =>({
@@ -31,3 +32,5 @@ const mapDispatchToProps = dispatch =>({
 });
 
 export default connect(mapStateToPorps, mapDispatchToProps)(Tabs);
+
+

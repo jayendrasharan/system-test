@@ -45,7 +45,7 @@ export const rootReducer = (state = initialState, action) =>{
         }
       case GLOBAL_SEARCH:
         return {...state,
-          todos: state.alltodos.filter(x=> {return x.summary && x.summary.toLowerCase().includes(action.payload.search) || x.description.toLowerCase().includes(action.payload.search)})
+          todos: state.alltodos.filter(x=> {return x.title && x.title.toLowerCase().includes(action.payload.search) || x.title.toLowerCase().includes(action.payload.search)})
         }
       default:
         return state;

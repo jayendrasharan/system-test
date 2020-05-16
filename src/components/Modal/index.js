@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import './style.css';
 import { priority } from '../../config';
 
+
 const ModalPopup = props => {
   const { type, title, row, addNewRow, updateRow } = props;  
   const [modal, setModal] = useState(false);
@@ -24,6 +25,13 @@ const ModalPopup = props => {
       return false;
     }
   };
+
+  const resetForm=()=>{
+    setSummary("");
+    setDesc("");
+    setPri(-1);
+    setDueDate(new Date());
+  }
 
   const handleDesc = e =>{
     if(e.target.value.length < 500){
@@ -55,7 +63,10 @@ const ModalPopup = props => {
     <React.Fragment>
       {type === "new" ? (
         <div className="justify-content-end row">
-          <button className="btn" onClick={toggle}>
+          <button className="btn" onClick={()=>{
+             resetForm();
+            toggle()}
+            }>
             <i className="fa fa-plus-circle fa-2x" style={{color:"#003166"}} aria-hidden="true"></i>
           </button>
         </div>

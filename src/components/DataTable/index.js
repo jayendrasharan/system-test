@@ -21,8 +21,8 @@ const DataGrid = props =>{
 
   const columns = [
     {
-      name: "Description",
-      selector: "description",
+      name: "Summary",
+      selector: "title",
       sortable: true,
     },
     {
