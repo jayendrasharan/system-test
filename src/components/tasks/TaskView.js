@@ -39,7 +39,7 @@ const TaskView = (props) => {
         const cols = Coldefs.filter(c => c.allowSearch);
         let filteredTasks = tasksList.filter(t => {
             for (let c of cols) {
-                if (t[c.key].toLowerCase().includes(searchText.toLowerCase())) {
+                if (t[c.key] && t[c.key].toLowerCase().includes(searchText.toLowerCase())) {
                     return true;
                 }
             }

@@ -140,13 +140,14 @@ const TaskGrid = ({
                         {tasksList.map(t => {
                             return <div
                                 key={`row-${t.id}`}
-                                className='task-grid-data-row'
+                                className="task-grid-data-row"
                                 onClick={() => handleRowSelection(t)}
                             >
                                 {cols.map(col => {
                                     return <div
                                         key={`row-col-${col.key}-${t.id}`}
-                                        className='task-grid-col task-grid-data-col'
+                                        className={`task-grid-col task-grid-data-col ` +
+                                            `${t.currentState === 'open' ? '' : 'task-grid-data-row-done'}`}
                                         style={{ maxWidth: col.width || '200px' }}
                                     >
                                         {getColumnContent(t, col.key)}
