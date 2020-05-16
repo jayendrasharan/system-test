@@ -5,6 +5,13 @@ export const Coldefs = [{
     allowGroup: true,
     allowSearch: true
 }, {
+    header: 'Description',
+    key: 'description',
+    allowSort: false,
+    allowGroup: false,
+    allowSearch: true,
+    hidden: true
+}, {
     header: 'Priority',
     key: 'priority',
     allowSort: true,
@@ -13,7 +20,6 @@ export const Coldefs = [{
 }, {
     header: 'Created On',
     key: 'createdOn',
-    hidden: true,
     allowSort: true,
     allowGroup: true,
     allowSearch: false

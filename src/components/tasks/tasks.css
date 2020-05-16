@@ -65,3 +65,31 @@
     font-weight: bold;
     margin-top: 20px;
 }
+
+.task-header {
+    width: 100%;
+    display: flex;
+    height: 60px;
+    background: #0466d6;
+}
+
+.task-header-input {
+    margin: 10px;
+    height: 40px;
+}
+
+.task-header-input  input {
+    padding: 5px;
+}
+
+.task-header-group-by {
+    width: 200px !important;
+    padding: 10px;
+    height: 40px;
+}
+
+.task-header-btn {
+    width: 200px;
+    height: 40px;
+    margin: 10px;
+}

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button } from 'react-bootstrap';
 import { get, orderBy } from 'lodash';
 import { Coldefs } from './coldefs';
 import TaskModal from './TaskModal';
-import { getOrderedTasks } from '../../utils/taskHelper';
+
+const cols = Coldefs.filter(c => !c.hidden);
 
 const TaskGrid = ({
     tasksList,
@@ -125,7 +126,7 @@ const TaskGrid = ({
             {tasksList.length
                 ? <div className='task-grid'>
                     <div className='task-grid-col-wrapper'>
-                        {Coldefs.map(col => {
+                        {cols.map(col => {
                             return <div
                                 key={`col-${col.key}`}
                                 className='task-grid-col'
@@ -142,7 +143,7 @@ const TaskGrid = ({
                                 className='task-grid-data-row'
                                 onClick={() => handleRowSelection(t)}
                             >
-                                {Coldefs.map(col => {
+                                {cols.map(col => {
                                     return <div
                                         key={`row-col-${col.key}-${t.id}`}
                                         className='task-grid-col task-grid-data-col'
