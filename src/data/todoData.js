@@ -1,6 +1,6 @@
 export const Data = [
     {
-      id: "1",
+      id: 1,
       currentState: true,
       title: "React Intro",
       description: "React js is good view library",
@@ -9,7 +9,7 @@ export const Data = [
       priority: "low"
     },
     {
-      id: "2",
+      id: 2,
       currentState: true,
       title: "Angular",
       description: "Angular is a masive heavy framework",
@@ -18,7 +18,7 @@ export const Data = [
       priority: "high"
     },
     {
-      id: "3",
+      id: 3,
       currentState: false,
       title: "Vue.js",
       description: "Its also nice framework",

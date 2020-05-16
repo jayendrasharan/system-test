@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import DataTable from "react-data-table-component";
 
-import { deleteTodo, updateTodo, markDone, markPending } from './../../store/Action/index';
+import { asyncDeleteTodo, asyncMarkDone, asyncMarkPending, asyncUpdateTodos } from './../../store/Action/index';
 import CustomModal from '../Modal';
 
 import { 
@@ -130,10 +130,10 @@ const mapStateToProps = state =>({
 })
 
 const mapDispatchToProps = dispatch =>({
-  removeRow: row => dispatch(deleteTodo(row)),
-  updateRow : row => dispatch(updateTodo(row)),
-  tickDone: rows => dispatch(markDone(rows)),
-  tickPending: rows => dispatch(markPending(rows))
+  removeRow: row => dispatch(asyncDeleteTodo(row)),
+  updateRow : row => dispatch(asyncUpdateTodos(row)),
+  tickDone: rows => dispatch(asyncMarkDone(rows)),
+  tickPending: rows => dispatch(asyncMarkPending(rows))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);

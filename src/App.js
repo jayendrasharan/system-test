@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { GlobalStyle } from './styled/GlobalStyle';
 import Todo from './components/Todo/index';
-import { fetchTodos } from './store/Action/index';
+import { asyncFetchTodos } from './store/Action/index';
 import { Data } from './data/todoData';
 
 function App({ dispatch, setData}) {
@@ -21,7 +21,7 @@ function App({ dispatch, setData}) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setData : data => dispatch(fetchTodos(data))
+  setData : data => dispatch(asyncFetchTodos(data))
 })
 
 export default connect(null, mapDispatchToProps)(App);

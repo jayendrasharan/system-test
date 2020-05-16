@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { updateTodo, addTodo } from './../../store/Action/index';
+import { updateTodo, addTodo, asyncAddTodo } from './../../store/Action/index';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -44,7 +44,7 @@ const ModalPopup = props => {
   const handleSave = () =>{
     const rec = {
       currentState: true,
-      summary: summary,
+      title: summary,
       description: desc,
       createdAt: moment(new Date()).format('L'),
       dueDate: moment(new Date(dueDate)).format('L'),
@@ -64,7 +64,7 @@ const ModalPopup = props => {
       {type === "new" ? (
         <div className="justify-content-end row">
           <button className="btn" onClick={()=>{
-             resetForm();
+            resetForm();
             toggle()}
             }>
             <i className="fa fa-plus-circle fa-2x" style={{color:"#003166"}} aria-hidden="true"></i>
@@ -140,7 +140,7 @@ const ModalPopup = props => {
                       {priority.map(opt => {
                         return (
                           <option
-                            defaultValue={opt}
+                            defaultValue={opt === pri ? true : false}
                             key={opt}
                             selected={opt === pri ? true : false}
                           >
@@ -187,7 +187,7 @@ const ModalPopup = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addNewRow : row => dispatch(addTodo(row)),
+  addNewRow : row => dispatch(asyncAddTodo(row)),
   updateRow : row => dispatch(updateTodo(row))
 });
 
