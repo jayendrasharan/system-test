@@ -147,7 +147,7 @@ const TaskGrid = ({
                                 {cols.map(col => {
                                     return <div
                                         key={`row-col-${col.key}-${t.id}`}
-                                        className={`task-grid-col task-grid-data-col ` +
+                                        className={`task-grid-col ${col.key} task-grid-data-col ` +
                                             `${t.currentState === 'open' ? '' : `task-grid-data-row-${type}`}`}
                                         style={{ maxWidth: col.width || '200px' }}
                                     >

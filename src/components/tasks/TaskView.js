@@ -24,9 +24,31 @@ const TaskView = (props) => {
 
     const handleClose = () => setShowModal(false);
 
-    const handleSearch = ({ target: { value } }) => setSearchText(value);
+    const handleSearch = ({ target: { value } }) => {
+        setSearchText(value);
+        // delete all nodes with highlight class.
+        document.querySelectorAll('.highlight').forEach(a => {
+            // dirty work around to remove highlighted span
+            a.parentElement.innerText = a.parentElement.innerText;
+        });
+        if (value) {
+            const elementsToHighlight = [
+                ...document.getElementsByClassName('summary'),
+                ...document.getElementsByClassName('description'),
+            ];
+            for (let ele of elementsToHighlight) {
+                var innerHTML = ele.innerHTML;
+                var index = innerHTML.toLowerCase().indexOf(value.toLowerCase());
+                if (index >= 0) {
+                    innerHTML = innerHTML.substring(0, index) + "<span class='highlight'>" +
+                        innerHTML.substring(index, index + value.length) + "</span>" + innerHTML.substring(index + value.length);
+                    ele.innerHTML = innerHTML;
+                }
+            }
+        }
+    };
 
-    const handleGroupBy = ({ target: { value } }) => {};
+    const handleGroupBy = ({ target: { value } }) => { };
 
     const handleClearFilters = () => {
         setSearchText('');
