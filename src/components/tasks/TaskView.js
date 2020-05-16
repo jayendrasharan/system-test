@@ -18,6 +18,16 @@ const TaskView = (props) => {
     const [groupBy, setGroupBy] = useState('');
     const [searchText, setSearchText] = useState('');
 
+    // Adding key board shortcut for search
+    document.onkeyup = function(e) {
+        if (e.ctrlKey && e.shiftKey && e.which === 70) {
+            const searchNode = document.getElementById('global-search');
+            if (searchNode) {
+                searchNode.focus();
+            }
+        }
+    }
+
     useEffect(() => {
         setTasks(getOrderedTasks(tasks, sortEle));
     }, [tasks, sortEle]);
@@ -85,6 +95,7 @@ const TaskView = (props) => {
             <div className='task-header'>
                 <div className="input-group mb-3 task-header-input">
                     <input
+                        id='global-search'
                         placeholder='Search tasks'
                         onChange={handleSearch}
                         value={searchText}
