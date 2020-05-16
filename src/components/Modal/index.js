@@ -11,7 +11,7 @@ import { priority } from '../../config';
 const ModalPopup = props => {
   const { type, title, row, addNewRow, updateRow } = props;  
   const [modal, setModal] = useState(false);
-  const [summary, setSummary] = useState((row && row.summary) || '');
+  const [summary, setSummary] = useState((row && row.title) || '');
   const [desc, setDesc] = useState(row && row.description || '');
   const [pri, setPri] = useState( (row && row.priority) || -1);
   const [dueDate, setDueDate] = useState((row && new Date(row.dueDate)) || new Date());
@@ -56,7 +56,7 @@ const ModalPopup = props => {
       {type === "new" ? (
         <div className="justify-content-end row">
           <button className="btn" onClick={toggle}>
-            <i className="fa fa-plus-circle fa-2x" style={{color:"blue"}} aria-hidden="true"></i>
+            <i className="fa fa-plus-circle fa-2x" style={{color:"#003166"}} aria-hidden="true"></i>
           </button>
         </div>
       ) : (

@@ -12,8 +12,11 @@ export const TabsBar = styled.li`
     border-width: 1px 1px 0 1px;
     margin: 0 5px 0 0;
     padding: 5px 5px 11px 5px;
+    background: #003166;
+    color: #fff;
     :active {
         padding-bottom: 12px;
         background: #fff;
+        color: yellow;  
     }
 `

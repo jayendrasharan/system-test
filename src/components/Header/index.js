@@ -18,7 +18,6 @@ const Header = props =>{
     document.onkeyup = function(e){
       console.log('keyup', e.which); 
       if(e.ctrlKey && e.shiftKey && e.which == 70){
-        console.log('Focus man');
         inputEl.current.focus();
       }
     }
