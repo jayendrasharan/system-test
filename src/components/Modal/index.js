@@ -18,6 +18,10 @@ const ModalPopup = props => {
   const [dueDate, setDueDate] = useState((row && new Date(row.dueDate)) || new Date());
   const toggle = () => setModal(!modal);
 
+  const elDescription = React.useRef();
+  const elSummary = React.useRef();
+
+
   const handleSummary = e =>{
     if(e.target.value.length < 140){
       setSummary(e.target.value);
@@ -41,7 +45,24 @@ const ModalPopup = props => {
     }
   };
 
+  const isFormValidate=()=>{
+    if(summary.length<10 || summary.length>140){
+      alert("Summary should between 10 and 140 character length");
+      elSummary.current.focus();
+      return false;
+    }
+
+    if(desc.length<10 || desc.length>500){
+      alert("Description should between 10 and 140 character length");
+      elDescription.current.focus();
+      return false;
+    }
+
+    return true;
+  }
+
   const handleSave = () =>{
+    if(isFormValidate()){
     const rec = {
       currentState: true,
       title: summary,
@@ -56,7 +77,8 @@ const ModalPopup = props => {
       updateRow({...rec, id: row.id})
     }
       
-    setModal(false)
+    setModal(false);
+  }
   };
 
   return (
@@ -104,6 +126,7 @@ const ModalPopup = props => {
                     value={summary}
                     onChange={handleSummary}
                     className="w-75 form-control"
+                    ref={elSummary}
                   />
                 )}
               </div>
@@ -120,6 +143,7 @@ const ModalPopup = props => {
                     className='form-control w-100'
                     value={desc}
                     onChange={handleDesc}
+                    ref={elDescription}
                   />
                 )}
               </div>
