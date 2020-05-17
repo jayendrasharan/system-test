@@ -1,0 +1,25 @@
+.form-header {
+    padding-bottom: 15px;
+    font-weight: bold;
+}
+
+.add-task {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    svg {
+        cursor: pointer;
+    }
+}
+
+.modal-button-section {
+    float: right;
+}
+
+.btn-save {
+    margin-right: 5px;
+}
+
+.mandatory {
+    color: red;
+}
