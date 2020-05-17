@@ -16,7 +16,6 @@ const AddTaskForm = props => {
     prefilledValues,
     deleteTaskhandler,
   } = props;
-  console.log(modeContext, prefilledValues, 'Add task in');
   const [isFormValid, setIsFormValid] = useState(false);
   const [taskFormConfig, setTaskFormConfig] = useState({
     summary: {
