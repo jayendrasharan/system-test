@@ -5,6 +5,7 @@ import { updateObject, checkValidity } from '../../../shared/Utilities/utility';
 
 import './AddTaskForm.scss';
 import { VersatileInput } from '../../atoms/VersatileInput';
+import DatePicker from '../../atoms/DatePicker';
 
 const AddTaskForm = props => {
   const {
@@ -65,8 +66,13 @@ const AddTaskForm = props => {
       validation: {},
       valid: true,
     },
+    pendingDate: {
+      type: 'pendingDate',
+      value: '',
+      elementConfig: { initialDate: new Date(), dateFormat: 'MMMM d, yyyy' },
+    },
   });
-
+  const [pendingOn, setPendingDate] = useState(new Date());
   useEffect(() => {
     checkModes();
   }, []);
@@ -120,19 +126,6 @@ const AddTaskForm = props => {
       setTaskFormConfig(updateObject(taskFormConfig, updatedTaskForm));
     }
   };
-
-  // currentDate: 1589364984248;
-  // description: 'HARISH';
-  // isCompleted: false;
-  // priority: 0;
-  // summary: 'HELLO';
-
-  // const clearInputValues = () => {
-  //   for(let key in taskFormConfig) {
-  //     taskFormConfig[key].value = '';
-  //   }
-  // }
-
   const addTaskInitiate = () => {
     if (modeContext === 'ADD_MODE') {
       addTaskHandler({
@@ -141,6 +134,7 @@ const AddTaskForm = props => {
         priority: taskFormConfig.priority.value,
         isCompleted: false,
         currentDate: new Date().getTime(),
+        pendingDate: pendingOn.getTime(),
       });
     } else {
       editTaskHandler({
@@ -152,10 +146,32 @@ const AddTaskForm = props => {
     }
     modalClosed();
   };
-  const deleteTaskInitiate = (taskId) => {
+  const deleteTaskInitiate = taskId => {
     deleteTaskhandler(taskId);
-    modalClosed()
+    modalClosed();
+  };
+  const getEditButtons = () => {
+    return (<React.Fragment>
+          <div className="btn-section">
+            <Button
+              onClick={modalClosed}
+              type="submit"
+              className="flex-inline cancel-btn flex-center mt3 p0"
+            >
+              <span className="cancel-form-btn">Cancel</span>
+            </Button>
+            <Button
+              // disabled={!isFormValid}
+              onClick={addTaskInitiate}
+              type="submit"
+              className="flex-inline save-btn flex-center mt3 p0"
+            >
+              <span className="save-form-btn">Save</span>
+            </Button>
+          </div>
+        </React.Fragment>)
   }
+
   const inputChangedHandler = (event, elementId) => {
     const newElement = updateObject(taskFormConfig[elementId], {
       value: event.target.value,
@@ -183,7 +199,7 @@ const AddTaskForm = props => {
       element: taskFormConfig[key],
     });
   }
-  const getDeletedModeDisplay = () =>{
+  const getDeletedModeDisplay = () => {
     return (
       <React.Fragment>
         <VersatileInput
@@ -194,7 +210,7 @@ const AddTaskForm = props => {
         />
         <div className="">Do you want to delete this Task</div>
         <Button
-          onClick={() =>deleteTaskInitiate(prefilledValues.currentDate)}
+          onClick={() => deleteTaskInitiate(prefilledValues.currentDate)}
           type="submit"
           className="flex-inline refresh flex-center mt3 p0"
         >
@@ -209,65 +225,38 @@ const AddTaskForm = props => {
         </Button>
       </React.Fragment>
     );
-  }
+  };
 
   return (
-    <form onSubmit={e => e.preventDefault()}>
-      <div className="task-handler-buttons">
-        {modeContext !== 'DELETE_MODE' &&
-          formElements.map(item => (
-            <VersatileInput
-              key={item.id}
-              elementType={item.element.elementType}
-              elementConfig={item.element.elementConfig}
-              disabled={item.element.disabled}
-              value={item.element.value}
-              changed={e => inputChangedHandler(e, item.id)}
-              invalid={!item.element.valid}
-              shouldValidate={item.element.validation}
-              touched={item.element.touched}
-            />
-          ))}
-        {modeContext === 'DELETE_MODE' && getDeletedModeDisplay()}
-        {modeContext === 'ADD_MODE' && (
-          <React.Fragment>
-            <Button
-              onClick={modalClosed}
-              type="submit"
-              className="flex-inline refresh flex-center mt3 p0"
-            >
-              <span className="cancel-form-btn">Cancel</span>
-            </Button>
-            <Button
-              disabled={!isFormValid}
-              onClick={addTaskInitiate}
-              type="submit"
-              className="flex-inline refresh flex-center mt3 p0"
-            >
-              <span className="save-form-btn">Save</span>
-            </Button>
-          </React.Fragment>
-        )}
-        {modeContext === 'EDIT_MODE' && (
-          <React.Fragment>
-            <Button
-              onClick={modalClosed}
-              type="submit"
-              className="flex-inline refresh flex-center mt3 p0"
-            >
-              <span className="cancel-form-btn">Cancel</span>
-            </Button>
-            <Button
-              disabled={!isFormValid}
-              onClick={addTaskInitiate}
-              type="submit"
-              className="flex-inline refresh flex-center mt3 p0"
-            >
-              <span className="save-form-btn">Save</span>
-            </Button>
-          </React.Fragment>
-        )}
-      </div>
+    <form className="task-form" onSubmit={e => e.preventDefault()}>
+      {modeContext !== 'DELETE_MODE' &&
+        formElements.map(item => {
+          if (item.element.type === 'pendingDate') {
+            return (
+              <DatePicker
+                getDateSelected={date => setPendingDate(date)}
+                {...item.element.elementConfig}
+              ></DatePicker>
+            );
+          } else {
+            return (
+              <VersatileInput
+                key={item.id}
+                elementType={item.element.elementType}
+                elementConfig={item.element.elementConfig}
+                disabled={item.element.disabled}
+                value={item.element.value}
+                changed={e => inputChangedHandler(e, item.id)}
+                invalid={!item.element.valid}
+                shouldValidate={item.element.validation}
+                touched={item.element.touched}
+              />
+            );
+          }
+        })}
+      {modeContext === 'DELETE_MODE' && getDeletedModeDisplay()}
+      {modeContext === 'ADD_MODE' && getEditButtons()}
+      {modeContext === 'EDIT_MODE' && getEditButtons()}
     </form>
   );
 };

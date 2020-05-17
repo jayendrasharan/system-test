@@ -51,6 +51,17 @@ console.log(props.elementType,props,'disabled check');
         </select>
       );
       break;
+    case 'checkbox':
+      inputElement = (
+        <input
+          className={inputClasses}
+          {...props.elementConfig}
+          disabled={props.disabled}
+          value={props.value}
+          onChange={props.changed}
+        />
+      );
+      break;
     default:
       inputElement = (
         <input

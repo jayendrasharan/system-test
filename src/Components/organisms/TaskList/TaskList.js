@@ -3,9 +3,19 @@ import PropTypes from 'prop-types';
 import Tabs from '../../molecules/Tabs';
 import TaskTable from '../../molecules/TaskTable';
 import './TaskList.scss';
+import Button from '../../atoms/Button';
 
 const TaskList = props => {
-  const { taskList, actionOnTask,toggleTaskStatus } = props;
+  const {
+    taskList,
+    actionOnTask,
+    toggleTaskStatus,
+    globalDeleteAction,
+    globalCompleteAction,
+    toggleTaskCheckedHandler,
+  } = props;
+  const checkedTasks = taskList.filter(item => item.isChecked);
+  const checkedTaskIds = checkedTasks.map(item => item.currentDate);
 
   const createEachTab = (tabId, tabTitle, taskList) => {
     return {
@@ -16,6 +26,14 @@ const TaskList = props => {
       panelContent: renderTabContent(tabId, tabTitle, taskList),
     };
   };
+  const completeAction = (e) => {
+    e.stopPropagation();
+    globalCompleteAction(checkedTaskIds);
+  }
+  const deleteAction = (e) => {
+    e.stopPropagation();
+    globalDeleteAction(checkedTaskIds);
+  }
 
   const renderTabContent = (tabId, tabTitle, taskList) => {
     return (
@@ -26,6 +44,7 @@ const TaskList = props => {
           taskList={taskList}
           actionOnTask={actionOnTask}
           toggleTaskStatus={toggleTaskStatus}
+          toggleTaskCheckedHandler={toggleTaskCheckedHandler}
         />
       </div>
     );
@@ -58,6 +77,16 @@ const TaskList = props => {
   };
   return (
     <div className="task-list-wrapper">
+      {checkedTasks.length > 1 && (
+        <div className="">
+          <Button className="" type="" onClick={completeAction}>
+            Gloabal Complete Task
+          </Button>
+          <Button className="" type="" onClick={deleteAction}>
+            Gobal Delete Task
+          </Button>
+        </div>
+      )}
       <Tabs {...defaultTabs} />
     </div>
   );
@@ -66,6 +95,9 @@ TaskList.propTypes = {
   taskList: PropTypes.array.isRequired,
   actionOnTask: PropTypes.func.isRequired,
   toggleTaskStatus: PropTypes.func.isRequired,
+  globalDeleteAction: PropTypes.func.isRequired,
+  globalCompleteAction: PropTypes.func.isRequired,
+  toggleTaskCheckedHandler: PropTypes.func.isRequired,
 };
 
 export default TaskList;

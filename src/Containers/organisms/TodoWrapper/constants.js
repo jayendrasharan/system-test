@@ -6,5 +6,8 @@ export const todoActions = {
   deleteTask: 'TO-DO-LIST-DELETE-TASK',
   deleteTaskSucess: 'TO-DO-LIST-DELETE-TASK-SUCESS',
   toggleTaskStatus: 'TO-DO-LIST-TOGGLE-TASK',
-  toggleTaskStatusSucess: 'TO-DO-LIST-TOGGLE-TASK-SUCESSs',
+  toggleTaskStatusSucess: 'TO-DO-LIST-TOGGLE-TASK-SUCESS',
+  globalCompleteAction: 'TO-DO-LIST-GLOBAL-COMPLETE-ACTIONS',
+  globalDeleteAction: 'TO-DO-LIST-GLOBAL-DELETE-ACTIONS',
+  toggleTaskCheckedStatus: 'TO-DO-LIST-TOGGLE-TASK-CHECKED-SUCESS',
 };

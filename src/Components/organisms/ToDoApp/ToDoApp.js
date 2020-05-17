@@ -4,6 +4,7 @@ import Button from '../../atoms/Button';
 import TaskList from '../../organisms/TaskList';
 import Modal from '../../molecules/Modal';
 import AddTaskForm from '../../molecules/AddTaskForm';
+import './ToDoApp.scss';
 
 const ToDoApp = ({
   taskList,
@@ -11,6 +12,9 @@ const ToDoApp = ({
   toggleTaskStatus,
   editTask,
   deleteTask,
+  globalCompleteAction,
+  globalDeleteAction,
+  toggleTaskCheckedStatus,
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [modeContext, setModeContext] = useState('ADD_MODE');
@@ -26,14 +30,22 @@ const ToDoApp = ({
     setModeContext('ADD_MODE');
     setModalVisible(true);
   };
+  const keyPressHanler = e => {
+    if (e.key == 'Escape') {
+      setModalVisible(false);
+    }
+  };
 
   console.log(taskList, taskList);
   return (
-    <React.Fragment>
+    <div className="todo-app-wrapper" onKeyDown={keyPressHanler}>
       <TaskList
         taskList={taskList}
         actionOnTask={actionOnTask}
         toggleTaskStatus={toggleTaskStatus}
+        globalDeleteAction={globalDeleteAction}
+        globalCompleteAction={globalCompleteAction}
+        toggleTaskCheckedHandler={toggleTaskCheckedStatus}
       ></TaskList>
       <Modal show={isModalVisible} modalClosed={() => setModalVisible(false)}>
         <AddTaskForm
@@ -48,11 +60,11 @@ const ToDoApp = ({
       <Button
         onClick={addTaskBtnHandler}
         type="submit"
-        className="flex-inline refresh flex-center mt3 p0"
+        className="add-task-btn"
       >
-        <span className="add-task-button">+</span>
+        <span className="">+</span>
       </Button>
-    </React.Fragment>
+    </div>
   );
 };
 export default ToDoApp;
@@ -62,4 +74,5 @@ ToDoApp.propTypes = {
   toggleTaskStatus: PropTypes.func.isRequired,
   editTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
+  toggleTaskCheckedStatus: PropTypes.func.isRequired,
 };

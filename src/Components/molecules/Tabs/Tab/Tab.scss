@@ -4,28 +4,27 @@
   .tab-title {
     list-style: none;
   }
-
-  .icon-only {
-    border: solid 1px $grey;
+  .tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
     padding: 0;
-
-    .cta {
+  }
+  .cta {
       box-sizing: border-box;
       display: block;
       height: 48px;
       min-width: auto;
       padding: 0.75rem;
-      @include tablet {
-        height: 72px;
-        padding: 1.5rem;
-      }
+      text-decoration: none;
+      color: $black;
+      padding-bottom: 8px;
       @include x-small {
         box-sizing: unset;
         height: 27px;
         padding: 7px;
       }
     }
-  }
 
   .selected-tab {
     .cta {

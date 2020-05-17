@@ -1,34 +1,21 @@
-.links {
-  background-color: #000;
-  display: flex;
-  justify-content: flex-end;
-  list-style: none;
-  margin: 0;
-}
-
-h4 {
-  color: yellowgreen;
-  margin: 0;
-}
-
-.nav-links {
-  background-color: black;
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-}
-
-.fa-shopping-cart {
-  color: yellowgreen;
-  font-size: 30px;
-}
-
-.link {
-  padding: 0 20px;
-
-  a {
-    color: yellowgreen;
-    font-size: 20px;
-    text-decoration: none;
+.task-form {
+  .input-conatiner {
+    padding-bottom: 16px;
+    .input-element {
+      height: 32px;
+    }
+  }
+  .btn-section {
+    display: flex;
+    justify-content: space-around;
+  }
+  .react-datepicker__input-container {
+    input {
+      height: 32px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
   }
 }

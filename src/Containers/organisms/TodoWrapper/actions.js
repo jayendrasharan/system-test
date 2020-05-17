@@ -8,6 +8,11 @@ export const completeTaskSucess = taskId => ({
   type: todoActions.completeTaskSucess,
   taskId,
 });
+export const toggleTaskCheckedStatus = (isChecked, taskId) => ({
+  type: todoActions.toggleTaskCheckedStatus,
+  taskId,
+  isChecked,
+});
 
 export const deleteTaskSucess = taskId => ({
   type: todoActions.deleteTaskSucess,
@@ -31,4 +36,13 @@ export const editTask = taskInfo => ({
 export const addTaskSucess = taskId => ({
   type: todoActions.addTaskSucess,
   taskId,
+});
+
+export const globalDeleteAction = taskIds => ({
+  type: todoActions.globalDeleteAction,
+  taskIds,
+});
+export const globalCompleteAction = taskIds => ({
+  type: todoActions.globalCompleteAction,
+  taskIds,
 });
