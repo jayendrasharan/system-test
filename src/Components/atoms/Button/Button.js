@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
 import classnames from 'classnames';
+import './Button.scss';
 
 const propTypes = {
   className: PropTypes.string,
@@ -31,7 +32,7 @@ const Button = ({
 }) => (
   <button
     aria-label={ariaLabel || null}
-    className={classnames(variation, className)}
+    className={classnames('cursor',variation, className)}
     disabled={disabled}
     aria-disabled={disabled} 
     type={type}

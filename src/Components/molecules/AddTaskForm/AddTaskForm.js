@@ -105,7 +105,6 @@ const AddTaskForm = props => {
           updatedTaskForm[key] = newElement;
         }
       }
-      console.log(updatedTaskForm, 'updated Task form');
       setTaskFormConfig(updateObject(taskFormConfig, updatedTaskForm));
     }
     if (modeContext === 'DELETE_MODE') {
@@ -121,7 +120,6 @@ const AddTaskForm = props => {
           updatedTaskForm[key] = newElement;
         }
       }
-      console.log(updatedTaskForm, 'updated Task form');
       setTaskFormConfig(updateObject(taskFormConfig, updatedTaskForm));
     }
   };
@@ -156,7 +154,7 @@ const AddTaskForm = props => {
             <Button
               onClick={modalClosed}
               type="submit"
-              className="flex-inline cancel-btn flex-center mt3 p0"
+              className="cancel-modal-btn"
             >
               <span className="cancel-form-btn">Cancel</span>
             </Button>
@@ -212,14 +210,14 @@ const AddTaskForm = props => {
         <Button
           onClick={() => deleteTaskInitiate(prefilledValues.currentDate)}
           type="submit"
-          className="flex-inline refresh flex-center mt3 p0"
+          className=""
         >
           <span className="cancel-form-btn">YES</span>
         </Button>
         <Button
           onClick={modalClosed}
           type="submit"
-          className="flex-inline refresh flex-center mt3 p0"
+          className=""
         >
           <span className="save-form-btn">NO</span>
         </Button>
@@ -256,8 +254,8 @@ const AddTaskForm = props => {
           }
         })}
       {modeContext === 'DELETE_MODE' && getDeletedModeDisplay()}
-      {modeContext === 'ADD_MODE' && getEditButtons()}
-      {modeContext === 'EDIT_MODE' && getEditButtons()}
+      {(modeContext === 'ADD_MODE'|| modeContext === 'EDIT_MODE') && getEditButtons()}
+  
     </form>
   );
 };

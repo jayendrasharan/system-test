@@ -67,14 +67,14 @@ const TaskRow = ({
         <Button
           onClick={e => actionTaskHandler(e, task, 'EDIT_MODE')}
           type="submit"
-          className="flex-inline refresh flex-center mt3 p0"
+          className="task-row-btn"
         >
           <span className="add-task-button">Edit Task</span>
         </Button>
         <Button
           onClick={e => toggleTaskHandler(e, task.currentDate)}
           type="submit"
-          className="flex-inline refresh flex-center mt3 p0"
+          className="task-row-btn"
         >
           <span className="add-task-button">
             {task.isCompleted ? 'Open Task' : 'Close Task'}
@@ -83,7 +83,7 @@ const TaskRow = ({
         <Button
           onClick={e => actionTaskHandler(e, task, 'DELETE_MODE')}
           type="submit"
-          className="flex-inline refresh flex-center mt3 p0"
+          className="task-row-btn"
         >
           <span className="add-task-button">Delete task</span>
         </Button>
@@ -99,11 +99,3 @@ TaskRow.propTypes = {
 };
 
 export default TaskRow;
-
-// {
-//   "summary": "Heello",
-//   "description": "helloo",
-//   "priority": 0,
-//   "isCompleted": false,
-//   "currentDate": 1589355704314
-// }

@@ -6,7 +6,7 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 
 export function* loadAddTaskSaga({taskInfo}) {
   try {
-    yield delay(3000);
+    yield delay(100);
     yield put(addTaskSucess(taskInfo));
   } catch (err) {
     // can add the dispatcher of error functionality

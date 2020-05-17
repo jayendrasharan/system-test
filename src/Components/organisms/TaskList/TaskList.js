@@ -79,10 +79,10 @@ const TaskList = props => {
     <div className="task-list-wrapper">
       {checkedTasks.length > 1 && (
         <div className="">
-          <Button className="" type="" onClick={completeAction}>
+          <Button className="global-task-btn" onClick={completeAction}>
             Gloabal Complete Task
           </Button>
-          <Button className="" type="" onClick={deleteAction}>
+          <Button className="global-task-btn" onClick={deleteAction}>
             Gobal Delete Task
           </Button>
         </div>
