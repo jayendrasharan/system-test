@@ -1,3 +1,6 @@
+import { cloneDeep } from 'lodash';
+import { getFilteredTasks, getUpdatedTasks } from '../utils/taskHelper';
+
 const initialState = {
     tasks: [],
     error: null
@@ -40,6 +43,16 @@ let taskReducer = (state = initialState, action = null) => {
         case 'DELETE_TASK_FAILURE':
             return Object.assign({}, state, {
                 error: action.payload
+            })
+        case 'BULK_DELETE_SUCCESS':
+            return Object.assign({}, state, {
+                tasks: getFilteredTasks(cloneDeep(state.tasks), action.payload),
+                error: null
+            })
+        case 'BULK_UPDATE_SUCCESS':
+            return Object.assign({}, state, {
+                tasks: getUpdatedTasks(cloneDeep(state.tasks), action.payload),
+                error: null
             })
         default:
             return state

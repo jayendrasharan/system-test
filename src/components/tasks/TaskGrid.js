@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button } from 'react-bootstrap';
 import { get, orderBy } from 'lodash';
 import { Coldefs } from './coldefs';
 import TaskModal from './TaskModal';
+import TaskTooltip from './TaskTooltip';
 
 const cols = Coldefs.filter(c => !c.hidden);
 
@@ -16,7 +17,12 @@ const TaskGrid = ({
     sortEle,
     setSortEle,
     setTasks,
-    groupBy
+    groupBy,
+    setCheckOnAllTasks,
+    setCheckOnTask,
+    allCheck,
+    bulkDelete,
+    bulkUpdate
 }) => {
     const [showDetails, setShowDetails] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
@@ -79,6 +85,44 @@ const TaskGrid = ({
         } else return row[key];
     }
 
+    const handleBulkDelete = (e) => {
+        e.stopPropagation();
+        const taskIdsToDelete = tasksList.filter(t => t.checked).map(a => a.id);
+        bulkDelete(taskIdsToDelete);
+    }
+
+    const handleBulkDoneOp = (e) => {
+        e.stopPropagation();
+        handleBulkStatusUpdate('done');
+    }
+
+    const handleBulkReopenOp = (e) => {
+        e.stopPropagation();
+        handleBulkStatusUpdate('open');
+    }
+
+    const handleBulkStatusUpdate = status => {
+        const tasksToUpdate = tasksList.filter(t => t.checked).map(a => {
+            a.currentState = status;
+            a.createdOn = new Date();
+            return a;
+        });
+        bulkUpdate(tasksToUpdate);
+    }
+
+    const getMenuContent = () => {
+        const allTasks = tasksList.filter(t => t.checked);
+        return (
+            <ul className='tootlip-content'>
+                <li onClick={handleBulkDelete}>Delete</li>
+                {allTasks.some(t => t.currentState === 'open') &&
+                    <li onClick={handleBulkDoneOp}>Mark as Done</li>}
+                {allTasks.some(t => t.currentState !== 'open') &&
+                    <li onClick={handleBulkReopenOp}>Mark as Re-open</li>}
+            </ul>
+        )
+    }
+
     const getRowData = (tasks) => {
         return tasks.map(t => {
             return <div
@@ -86,6 +130,24 @@ const TaskGrid = ({
                 className="task-grid-data-row"
                 onClick={() => handleRowSelection(t)}
             >
+                <div
+                    className='task-grid-check-col task-grid-task-check-col'
+                    onClick={(e) => e.stopPropagation()}>
+                    <input
+                        type='checkbox'
+                        id='task-check'
+                        checked={t.checked}
+                        onChange={(e) => handleRowItemCheck(e, t.id)}
+                    />
+                </div>
+                {t.checked
+                    ? <TaskTooltip getTooltipContent={getMenuContent} customClass='task-grid-task-check-col' />
+                    : <div
+                        className='task-grid-check-col task-grid-task-check-col'
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <FontAwesomeIcon icon={faEllipsisH} color='#CCC' />
+                    </div>}
                 {cols.map(col => {
                     return <div
                         key={`row-col-${col.key}-${t.id}`}
@@ -150,11 +212,34 @@ const TaskGrid = ({
         setSortEle({ [col.key]: order });
     }
 
+    const handleAllTasksCheck = (e) => {
+        e.stopPropagation();
+        setCheckOnAllTasks();
+    }
+
+    const handleRowItemCheck = (e, id) => {
+        e.stopPropagation();
+        setCheckOnTask(id);
+    }
+
     return (
         <>
             {tasksList.length
                 ? <div className='task-grid'>
                     <div className='task-grid-col-wrapper'>
+                        <div className='task-grid-check-col'>
+                            <input
+                                type='checkbox'
+                                id='all-tasks-check'
+                                onChange={handleAllTasksCheck}
+                                checked={allCheck}
+                            />
+                        </div>
+                        {allCheck
+                            ? <TaskTooltip getTooltipContent={getMenuContent} />
+                            : <div className='task-grid-check-col'>
+                                <FontAwesomeIcon icon={faEllipsisH} color='#CCC' />
+                            </div>}
                         {cols.map(col => {
                             return <div
                                 key={`col-${col.key}`}

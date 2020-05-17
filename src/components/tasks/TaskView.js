@@ -17,6 +17,7 @@ const TaskView = (props) => {
     const [tasksList, setTasks] = useState(getOrderedTasks(tasks, sortEle));
     const [groupBy, setGroupBy] = useState('');
     const [searchText, setSearchText] = useState('');
+    const [allCheck, setAllCheck] = useState(false);
 
     // Adding key board shortcut for search
     document.onkeyup = function(e) {
@@ -30,6 +31,10 @@ const TaskView = (props) => {
 
     useEffect(() => {
         setTasks(getOrderedTasks(tasks, sortEle));
+        if (tasksList.length === 0) {
+            setAllCheck(false);
+        }
+        setAllCheck()
     }, [tasks, sortEle]);
 
     const handleClose = () => setShowModal(false);
@@ -41,6 +46,28 @@ const TaskView = (props) => {
             // eslint-disable-next-line
             a.parentElement.innerText = a.parentElement.innerText;
         });
+    }
+
+    const setCheckOnAllTasks = () => {
+        let allTasks = tasksList.map(t => {
+            t.checked = !allCheck;
+            return t;
+        });
+        setAllCheck(!allCheck);
+        setTasks(allTasks);
+    };
+
+    const setCheckOnTask = (taskId) => {
+        let taskIndex = tasksList.findIndex(t => t.id === taskId);
+        let task = tasksList[taskIndex];
+        task.checked = !task.checked;
+        const allTasks = [
+            ...tasksList.slice(0, taskIndex),
+            task,
+            ...tasksList.slice(taskIndex + 1)
+        ];
+        setAllCheck(allTasks.every(t => t.checked));
+        setTasks(allTasks);
     }
 
     const handleSearch = ({ target: { value } }) => {
@@ -127,6 +154,9 @@ const TaskView = (props) => {
                         setSortEle={setSortEle}
                         setTasks={setTasks}
                         groupBy={groupBy}
+                        setCheckOnAllTasks={setCheckOnAllTasks}
+                        setCheckOnTask={setCheckOnTask}
+                        allCheck={allCheck}
                     />
                 </Tab>
                 <Tab eventKey="completed" title="Completed">
@@ -138,6 +168,9 @@ const TaskView = (props) => {
                         setSortEle={setSortEle}
                         setTasks={setTasks}
                         groupBy={groupBy}
+                        setCheckOnAllTasks={setCheckOnAllTasks}
+                        setCheckOnTask={setCheckOnTask}
+                        allCheck={allCheck}
                     />
                 </Tab>
                 <Tab eventKey="pending" title="Pending">
@@ -149,6 +182,9 @@ const TaskView = (props) => {
                         setSortEle={setSortEle}
                         setTasks={setTasks}
                         groupBy={groupBy}
+                        setCheckOnAllTasks={setCheckOnAllTasks}
+                        setCheckOnTask={setCheckOnTask}
+                        allCheck={allCheck}
                     />
                 </Tab>
             </Tabs>

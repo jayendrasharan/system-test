@@ -5,15 +5,9 @@ import TaskView from '../components/tasks/TaskView';
 import * as actionCreators from '../actions/task';
 
 const TaskContainer = props => {
-    const { addTask, updateTask, deleteTask, tasks } = props;
     return (
         <div>
-            <TaskView
-                addTask={addTask}
-                updateTask={updateTask}
-                deleteTask={deleteTask}
-                tasks={tasks}
-            />
+            <TaskView {...props}/>
         </div>
     );
 }

@@ -30,3 +30,25 @@ export function deleteTask(id) {
         }, 1000);
     }
 }
+
+export function bulkDelete(idsArr) {
+    return function (dispatch) {
+        setTimeout(() => {
+            dispatch({
+                type: 'BULK_DELETE_SUCCESS',
+                payload: idsArr
+            });
+        }, 1000);
+    }
+}
+
+export function bulkUpdate(tasksArr) {
+    return function (dispatch) {
+        setTimeout(() => {
+            dispatch({
+                type: 'BULK_UPDATE_SUCCESS',
+                payload: tasksArr
+            });
+        }, 1000);
+    }
+}
