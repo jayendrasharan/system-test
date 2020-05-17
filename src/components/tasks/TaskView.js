@@ -31,9 +31,6 @@ const TaskView = (props) => {
 
     useEffect(() => {
         setTasks(getOrderedTasks(tasks, sortEle));
-        if (tasksList.length === 0) {
-            setAllCheck(false);
-        }
         setAllCheck()
     }, [tasks, sortEle]);
 
