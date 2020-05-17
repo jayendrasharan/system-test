@@ -26,7 +26,7 @@ export const applySearchSortGroupOnData = function(dataSource, searchVal, propsT
     dataSource = searchDataSource(dataSource, searchVal, propsToSearch);
 
     if (hasValue(sortDetails) && hasValue(sortDetails.column))
-        dataSource = sortData(dataSource, sortDetails.column, sortDetails.direction);
+        dataSource = sortData(dataSource, sortDetails);
 
     return dataSource.reduce(function(rv, x) {
         (rv[x[propToGroup]] = rv[x[propToGroup]] || []).push(x);
@@ -63,12 +63,17 @@ export function createUUID() {
     });
 }
 
-export function sortData(dataSource, column, direction) {
+export function sortData(dataSource, sortDetails) {
 
     let sortedData = dataSource.sort((a, b) => {
-        if (column === "taskSummary" || column === "priority" || column === "state") {
-            const nameA = a[column].toUpperCase();
-            const nameB = b[column].toUpperCase();
+        if (hasValue(sortDetails.type) && sortDetails.type === "date") {
+            return (
+                convertDate(new Date(a[sortDetails.column]).toLocaleDateString()) -
+                convertDate(new Date(b[sortDetails.column]).toLocaleDateString())
+            );
+        } else {
+            const nameA = a[sortDetails.column].toUpperCase();
+            const nameB = b[sortDetails.column].toUpperCase();
             if (nameA < nameB) {
                 return -1;
             }
@@ -76,15 +81,10 @@ export function sortData(dataSource, column, direction) {
                 return 1;
             }
             return 0;
-        } else {
-            return (
-                convertDate(new Date(a[column]).toLocaleDateString()) -
-                convertDate(new Date(b[column]).toLocaleDateString())
-            );
         }
     });
 
-    if (direction === "desc") {
+    if (sortDetails.direction === "desc") {
         sortedData.reverse();
     }
     return sortedData;

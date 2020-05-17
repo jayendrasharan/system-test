@@ -24,6 +24,7 @@ const initialState = {
   selectedSort: {
     column: null,
     direction: "desc",
+    type: ""
   },
   searchVal: "",
   data: {},
@@ -52,7 +53,7 @@ const TaskList = ({ getListOfTasks, ...props }) => {
     dispatch({ type: 'data', payload: applySearchSortGroupOnData(props.tasksList, state.searchVal, getSearchPropsInGrid(), state.selectedGroupBy, state.selectedSort, state.selectedStatus) });
   }, [props.tasksList]);
 
-  const onSort = (column) => {
+  const onSort = (column, type) => {
 
     if (props.configData.GridColumns.filter(item => item.field === column && item.sortable).length === 0) return;
 
@@ -62,7 +63,8 @@ const TaskList = ({ getListOfTasks, ...props }) => {
         ? state.selectedSort.direction === "asc"
           ? "desc"
           : "asc"
-        : "desc"
+        : "desc",
+      type
     }
 
     dispatch({ type: 'selectedSort', payload: sortDetails });
@@ -148,7 +150,7 @@ const TaskList = ({ getListOfTasks, ...props }) => {
             <option value="">None</option>
             {
               props.configData.GridColumns.map((groupProp) => (
-                groupProp.groupable ? <option value={groupProp.field} key={groupProp.field}>{groupProp.title}</option> : <></>
+                groupProp.groupable ? <option key={groupProp.field} value={groupProp.field} >{groupProp.title}</option> : <></>
               ))
             }
           </Form.Control>

@@ -87,7 +87,7 @@ const Task = (props) => {
                 <fieldset {...fieldSetProps}>
                     <Form.Group controlId="Task.Summary">
                         <Form.Label>Summary</Form.Label>
-                        {props.mode !== EntryWindowMode.View && (<span class="mandatory">*</span>)}
+                        {props.mode !== EntryWindowMode.View && (<span className="mandatory">*</span>)}
                         <Form.Control name="taskSummary" value={state.taskSummary} type="text" placeholder="Summary" onChange={handleChange} required maxLength="140" minLength="10" />
                         <Form.Control.Feedback type="invalid">
                             Please enter atleast 10 characters.
@@ -95,7 +95,7 @@ const Task = (props) => {
                     </Form.Group>
                     <Form.Group controlId="Task.Description">
                         <Form.Label>Description</Form.Label>
-                        {props.mode !== EntryWindowMode.View && (<span class="mandatory">*</span>)}
+                        {props.mode !== EntryWindowMode.View && (<span className="mandatory">*</span>)}
                         <Form.Control as="textarea" placeholder="Description" name="taskDescription" value={state.taskDescription} onChange={handleChange} required rows="2" maxLength="500" minLength="10" />
                         <Form.Control.Feedback type="invalid">
                             Please enter atleast 10 characters.
@@ -107,14 +107,14 @@ const Task = (props) => {
                             <Form.Control as="select" onChange={handleChange} name="priority" value={state.priority}>
                                 {
                                     Object.keys(enumPriority).map(itemKey => {
-                                        return <option value={enumPriority[itemKey]}>{enumPriority[itemKey]}</option>
+                                        return <option key={enumPriority[itemKey]} value={enumPriority[itemKey]}>{enumPriority[itemKey]}</option>
                                     })
                                 }
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col} md="3" controlId="Task.DueDate">
                             <Form.Label>Due Date</Form.Label>
-                            {props.mode !== EntryWindowMode.View && (<span class="mandatory">*</span>)}
+                            {props.mode !== EntryWindowMode.View && (<span className="mandatory">*</span>)}
                             <Form.Control type="date" placeholder="Due Date" required onChange={handleChange} name="dueDate" value={state.dueDate} />
                             <Form.Control.Feedback type="invalid">
                                 Please select due date.

@@ -31,8 +31,7 @@ const Grid = (props) => {
                     <tr>
                         {props.gridColumns.map((header, headerIndex) => {
                             return !header.hidden ? <th key={`grid-header-${headerIndex}`}
-                                onClick={() => header.sortable ? props.onSort(header.field) : null}>
-                                {/*...(header.sortable && { onClick: props.onSort(header.field) })} */}
+                                onClick={() => header.sortable ? props.onSort(header.field, header.type) : null}>
                                 <span>{header.title}</span>
                                 {header.sortable ? <span className={props.setArrow(header.field)}></span> : <></>}
                             </th> : null
