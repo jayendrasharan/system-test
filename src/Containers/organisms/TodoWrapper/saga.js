@@ -1,31 +1,19 @@
 import { put, takeLatest } from 'redux-saga/effects';
-
-import { addTaskSucess,completeTaskSucess } from './actions';
+import { addTaskSucess } from './actions';
 import { todoActions } from './constants';
 
-export function* loadAddTaskSaga(taskId) {
-  try {
-    yield setTimeout(() => {
-      console.log('in load add task Saga');
-    }, 1000);
-    yield put(addTaskSucess(taskId));
-  } catch (err) {
-    console.log('in error');
-  }
-}
+const delay = ms => new Promise(res => setTimeout(res, ms));
 
-export function* loadCompleteTaskSaga(taskId) {
+export function* loadAddTaskSaga({taskInfo}) {
   try {
-    yield setTimeout(() => {
-      console.log('in load add task Saga');
-    }, 1000);
-    yield put(completeTaskSucess(taskId));
+    yield delay(3000);
+    yield put(addTaskSucess(taskInfo));
   } catch (err) {
-    console.log('in error');
+    // can add the dispatcher of error functionality
+    console.log('redux saga error');
   }
 }
 
 export default function* fetchToDoTaskSaga() {
-  yield takeLatest(todoActions.completeTask, loadAddTaskSaga);
-  yield takeLatest(todoActions.completeTask, loadCompleteTaskSaga);
+  yield takeLatest(todoActions.addTask, loadAddTaskSaga);
 }

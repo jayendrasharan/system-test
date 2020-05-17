@@ -70,6 +70,7 @@ const AddTaskForm = props => {
       type: 'pendingDate',
       value: '',
       elementConfig: { initialDate: new Date(), dateFormat: 'MMMM d, yyyy' },
+      placeholderText: 'Pending Date'
     },
   });
   const [pendingOn, setPendingDate] = useState(new Date());
@@ -91,7 +92,6 @@ const AddTaskForm = props => {
           updatedTaskForm[key] = newElement;
         }
       }
-      console.log(updatedTaskForm, 'updated Task form');
       setTaskFormConfig(updateObject(taskFormConfig, updatedTaskForm));
     }
     if (modeContext === 'EDIT_MODE') {
@@ -142,6 +142,7 @@ const AddTaskForm = props => {
         description: taskFormConfig.description.value,
         priority: taskFormConfig.priority.value,
         currentDate: prefilledValues.currentDate,
+        pendingDate: pendingOn.getTime(),
       });
     }
     modalClosed();
@@ -236,6 +237,7 @@ const AddTaskForm = props => {
               <DatePicker
                 getDateSelected={date => setPendingDate(date)}
                 {...item.element.elementConfig}
+                placeholderText={item.element.placeholderText}
               ></DatePicker>
             );
           } else {

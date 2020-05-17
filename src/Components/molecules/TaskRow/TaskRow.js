@@ -1,11 +1,9 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/button-has-type */
 import React from 'react';
 import dayjs from 'dayjs';
 import PropTypes, { string, number } from 'prop-types';
 import './TaskRow.scss';
 import Button from '../../atoms/Button';
+import classNames from 'classnames';
 import { VersatileInput } from '../../atoms/VersatileInput';
 
 const PriorityValue = {
@@ -34,14 +32,16 @@ const TaskRow = ({
     toggleTaskStatus(taskId);
   };
   const checkedTaskHandler = (e, taskId) => {
-    console.log(e.currentTarget, 'Hello I am clicked on checkbox row');
     e.stopPropagation();
     toggleTaskCheckedHandler(e.target.checked, taskId);
   };
 
   return (
     <tr
-      className="task-row-item"
+      className={classNames(
+        'task-row-item',
+        task.isCompleted ? 'completed' : '',
+      )}
       onClick={e => actionTaskHandler(e, task, 'VIEW_MODE')}
       onKeyPress={e => actionTaskHandler(e, task, 'VIEW_MODE')}
     >
@@ -52,7 +52,7 @@ const TaskRow = ({
           elementConfig={{
             type: 'checkbox',
           }}
-          changed={(e) =>checkedTaskHandler(e,task.currentDate)}
+          changed={e => checkedTaskHandler(e, task.currentDate)}
         ></VersatileInput>
         <span>{task.summary}</span>
       </td>

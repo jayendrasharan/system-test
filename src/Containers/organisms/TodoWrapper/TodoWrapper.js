@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => ({
 });
 const mapStateToProps = state => ({
   taskList: state.taskState.taskList,
+  isFetching: state.taskState.isFetching,
 });
 
 export default connect(

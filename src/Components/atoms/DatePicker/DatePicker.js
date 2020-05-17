@@ -4,8 +4,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateElement = props => {
-  const { getDateSelected, initialDate, dateFormat } = props;
-  const [startDate, setStartDate] = useState(initialDate);
+  const { getDateSelected, dateFormat, placeholderText } = props;
+  const [startDate, setStartDate] = useState();
   const handleDateChange = date => {
     setStartDate(date);
     getDateSelected(date);
@@ -15,6 +15,7 @@ const DateElement = props => {
       selected={startDate}
       onChange={handleDateChange}
       dateFormat={dateFormat}
+      placeholderText={placeholderText}
     />
   );
 };
@@ -23,6 +24,7 @@ DateElement.propTypes = {
   initialDate: PropTypes.string.isRequired,
   getDateSelected: PropTypes.func.isRequired,
   dateFormat: PropTypes.string.isRequired,
+  placeholderText: PropTypes.string.isRequired,
 };
 
 

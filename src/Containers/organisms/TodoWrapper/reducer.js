@@ -11,24 +11,16 @@ const taskReducer = (state = initialState, action) => {
   const { type, taskId, taskInfo,taskIds,isChecked } = action;
   switch (type) {
     case todoActions.addTask: {
-      const newTaskList = [...state.taskList];
-      newTaskList.push(taskInfo);
-      const newState = Object.assign(
-        { ...state },
-        {
-          isFetching: false,
-          taskList: newTaskList,
-        },
-      );
-      return newState;
+      return updateObject(state,{isFetching: true});
+      // const newTaskList = [...state.taskList];
+      // newTaskList.unshift(taskInfo);
+      // return updateObject(state, { taskList: newTaskList });
     }
     case todoActions.addTaskSucess: {
-      const newTaskList = [...initialState.taskList];
-      newTaskList.push(taskId);
-      return Object.assign(...state, {
-        isFetching: false,
-        taskList: newTaskList,
-      });
+     const newTaskList = [...state.taskList];
+     newTaskList.push(taskInfo);
+     console.log(newTaskList,'newTaskkust',taskInfo);
+     return updateObject(state, { taskList: newTaskList,isFetching:false });
     }
     case todoActions.editTask: {
       const index = state.taskList.findIndex(
@@ -39,7 +31,6 @@ const taskReducer = (state = initialState, action) => {
         [index]: newTask,
       });
       const updatedObject = updateObject(state, { taskList: newTaskList });
-      console.log(updatedObject, 'updateObject', 'in reducer');
       return updatedObject;
     }
     case todoActions.toggleTaskStatus: {

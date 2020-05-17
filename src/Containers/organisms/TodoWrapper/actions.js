@@ -33,9 +33,9 @@ export const editTask = taskInfo => ({
   taskInfo,
 });
 
-export const addTaskSucess = taskId => ({
+export const addTaskSucess = taskInfo => ({
   type: todoActions.addTaskSucess,
-  taskId,
+  taskInfo,
 });
 
 export const globalDeleteAction = taskIds => ({
