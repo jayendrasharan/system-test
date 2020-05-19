@@ -1,7 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-This is for Add task, edit, delte, view task with sorting, Search and priority basis (low, high, medium) also you can done task and reopen using right sigh. 
+
+Project for Add task, edit, delet, view task with sorting, Search and priority basis (low, high, medium) also you can done task and reopen using right sign and u can filter task using tabbing. 
+
 ## Command to install 
-Ruen npm install
+Run npm install
 
 ## Available Scripts
 
