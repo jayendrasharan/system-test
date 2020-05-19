@@ -65,7 +65,7 @@ function TaskAdd(props) {
                         <Button variant="secondary" onClick={props.handleClose}>
                             Close
                     </Button>
-                        <Button type="submit" variant="primary" onClick={props.onSubmit} >
+                        <Button type="button" variant="primary" onClick={props.onSubmit} >
                             Save
                     </Button>
                     </Modal.Footer>

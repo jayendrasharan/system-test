@@ -8,7 +8,7 @@ function Task() {
     const [state, setState] = useState({
         summary: '',
         description: '',
-        priority: '',
+        priority: 'Low',
         due_date: ''
     })
     const data = useSelector(state => state.tag_reducer.tags)
@@ -23,18 +23,19 @@ function Task() {
             description: state.description,
             priority: state.priority,
             due_date: state.due_date,
-            created_date: new Date()
+            created_date: new Date().toDateString(),
+            isComplete: false
         }
         if (window.confirm("Are you want to add data")) {
             data.push(new_data)
-            alert('data submittrd')
             setShow(false)
-          } 
+            setState({ summary: '', description: '', priority: 'Low', due_date: '' })
+        }
     }
 
     return (
         <div className="App">
-            <TaskShow/>
+            <TaskShow />
             <TaskAdd
                 onSubmit={onSubmit}
                 show={show}
