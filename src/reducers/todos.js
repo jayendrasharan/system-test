@@ -3,7 +3,7 @@ const todos = (state = [
   {
     "title": "Sample todo 1",
     "description": "should be completed within due date",
-    "priority": "2",
+    "priority": "High",
     "createdAt": new Date().getTime() - 115534598,
     "dueDate": new Date().getTime() + 553459854,
     id: "121212",
@@ -12,7 +12,7 @@ const todos = (state = [
   {
     "title": "Sample todo 2",
     "description": "should be completed within due date",
-    "priority": "1",
+    "priority": "Low",
     "createdAt": new Date().getTime() - 55345985,
     "dueDate": new Date().getTime() + 5534598543,
     id: "856754232",
