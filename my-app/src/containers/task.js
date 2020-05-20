@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import AddBtn from './../components/UI/add/add'
 import TaskAdd from '../components/task_add/task_add'
 import TaskShow from './../components/task_show/task_show'
+import * as actions from './../store/actions/index'
+
 function Task() {
+    const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     const [state, setState] = useState({
         summary: '',
         description: '',
-        priority: 'Low',
+        priority: 'None',
         due_date: ''
     })
     const data = useSelector(state => state.tag_reducer.tags)
@@ -18,18 +21,11 @@ function Task() {
         setState({ ...state, [itemkey]: itemvalue })
     }
     const onSubmit = () => {
-        const new_data = {
-            summary: state.summary,
-            description: state.description,
-            priority: state.priority,
-            due_date: state.due_date,
-            created_date: new Date().toDateString(),
-            isComplete: false
-        }
+        let duplicate_data = [...data]
         if (window.confirm("Are you want to add data")) {
-            data.push(new_data)
+            dispatch(actions.add_new_tag(duplicate_data, state ))
             setShow(false)
-            setState({ summary: '', description: '', priority: 'Low', due_date: '' })
+            setState({ summary: '', description: '', priority: 'None', due_date: '' })
         }
     }
 
