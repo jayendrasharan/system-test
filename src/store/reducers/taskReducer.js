@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { fetchTaskListActions, addTaskAction, editTaskAction, deleteTaskAction, changeTaskStateAction } from '../actions/toDoActions';
+import { getUpdatedResponse } from './util/ReducerUtil';
 
 const initialState = {
   apiResponse: {}
@@ -56,9 +57,3 @@ const taskReducer = handleActions(
 );
 
 export default taskReducer;
-
-function getUpdatedResponse(state, startIndex, count, elementToReplace) {
-  const newApiResponse = [...state.apiResponse];
-  newApiResponse.splice(startIndex, count, elementToReplace);
-  return newApiResponse;
-}
