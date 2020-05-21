@@ -6,8 +6,6 @@ import TaskAdd from './../task_add/task_add'
 import * as actions from './../../store/actions/index'
 import Navbar from './../navbar/navbar'
 
-
-
 function TaskShow(props) {
     const dispatch = useDispatch();
     const [key, setKey] = useState('all')
@@ -20,6 +18,7 @@ function TaskShow(props) {
         priority: 'None',
         due_date: ''
     })
+    const [groupel, setGropuel] = useState('')
     const data = useSelector(state => state.tag_reducer.tags)
     let duplicate_data = [...data]
 
@@ -33,7 +32,9 @@ function TaskShow(props) {
         if (itemkey === 'edit') {
             setEdit(true)
             setIndex(itemvalue)
-            setState(duplicate_data[itemvalue])
+            const update_item =  duplicate_data.filter(task => task.id === itemvalue)
+            console.log(update_item)
+            setState(update_item[0])
             return
         }
         dispatch(actions.list_action(duplicate_data, itemkey, itemvalue))
@@ -50,9 +51,20 @@ function TaskShow(props) {
         }
     }
 
+    const reset = () => {
+        setGropuel('')
+    }
+
+    const update_groupel = (value) => {
+        setGropuel(value)
+    }
+
     return (
         <React.Fragment>
-            <Navbar search={(item) => setSearch(item)} />
+            <Navbar search={(item) => setSearch(item)}
+                reset={reset}
+                groupel={groupel}
+                update_groupel={(value) => update_groupel(value)} />
             <TaskAdd
                 onSubmit={onSubmit}
                 show={edit}
@@ -67,18 +79,21 @@ function TaskShow(props) {
                 <Tab eventKey="all" title="All">
                     <Table data={duplicate_data}
                         isComplete="all"
+                        groupel={groupel}
                         search_ele={search}
                         clicked={(itemkey, itemvalue) => task_action(itemkey, itemvalue)} />
                 </Tab>
                 <Tab eventKey="completed" title="Completed">
                     <Table data={duplicate_data}
                         isComplete={true}
+                        groupel={groupel}
                         search_ele={search}
                         clicked={(itemkey, itemvalue) => task_action(itemkey, itemvalue)} />
                 </Tab>
                 <Tab eventKey="pending" title="Pending" >
                     <Table data={duplicate_data} isComplete={false}
                         search_ele={search}
+                        groupel={groupel}
                         clicked={(itemkey, itemvalue) => task_action(itemkey, itemvalue)} />
                 </Tab>
             </Tabs>

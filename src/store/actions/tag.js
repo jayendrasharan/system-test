@@ -4,8 +4,10 @@ export const list_action = (duplicate_data, itemkey, itemvalue) => {
     return dispatch => {
         switch (itemkey) {
             case 'delete':
-                let task = duplicate_data.filter(data => data.id !== itemvalue)
-                dispatch(onupdate_data(task))
+                if (window.confirm('are you sure,wnat to delete ?')) {
+                    let task = duplicate_data.filter(data => data.id !== itemvalue)
+                    dispatch(onupdate_data(task))
+                }
                 break;
             case 'done':
                 duplicate_data.forEach(ele => {
@@ -28,7 +30,7 @@ export const list_action = (duplicate_data, itemkey, itemvalue) => {
 }
 
 export const add_new_tag = (duplicate_data, state) => {
-    
+
     return dispatch => {
         const new_data = {
             summary: state.summary,
@@ -64,10 +66,14 @@ export const validate = (state) => {
 
 export const update_tag = (duplicate_data, state, index) => {
     return dispatch => {
-        duplicate_data[index].summary = state.summary
-        duplicate_data[index].description = state.description
-        duplicate_data[index].priority = state.priority
-        duplicate_data[index].due_date = state.due_date
+        duplicate_data.forEach(task => {
+            if (task.id === index) {
+                task.summary = state.summary
+                task.description = state.description
+                task.priority = state.priority
+                task.due_date = state.due_date
+            }
+        })
         dispatch(onupdate_data(duplicate_data))
     }
 }

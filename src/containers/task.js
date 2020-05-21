@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import AddBtn from './../components/UI/add/add'
+import AddBtn from '../components/UI/add/add'
 import TaskAdd from '../components/task_add/task_add'
-import TaskShow from './../components/task_show/task_show'
-import * as actions from './../store/actions/index'
+import TaskShow from '../components/task_show/task_show'
+import * as actions from '../store/actions/index'
 
 function Task() {
     const dispatch = useDispatch();

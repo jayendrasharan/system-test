@@ -1,0 +1,23 @@
+.no_task {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.icon_align {
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.header {
+  cursor: pointer;
+}
+
+.group_row {
+  border-radius: 10px;
+  border:1px solid #ccc;
+  background-color: #edf0f2;
+}

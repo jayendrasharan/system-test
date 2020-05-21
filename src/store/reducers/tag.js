@@ -3,7 +3,6 @@ const initialState = {
 };
 
 const Sample = (state = initialState, action) => {
-    console.log(initialState)
     switch (action.type) {
         case 'add_tag':
             return {
