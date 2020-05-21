@@ -17,13 +17,19 @@ function Task() {
     const data = useSelector(state => state.tag_reducer.tags)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true)
+
+
     const update_data = (itemkey, itemvalue) => {
-        setState({ ...state, [itemkey]: itemvalue })
+        setState({ ...state, [itemkey]: itemvalue })    
     }
+    
     const onSubmit = () => {
+        if (actions.validate(state)) {
+            return
+         }
         let duplicate_data = [...data]
         if (window.confirm("Are you want to add data")) {
-            dispatch(actions.add_new_tag(duplicate_data, state ))
+            dispatch(actions.add_new_tag(duplicate_data, state))
             setShow(false)
             setState({ summary: '', description: '', priority: 'None', due_date: '' })
         }

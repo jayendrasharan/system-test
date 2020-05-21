@@ -1,1 +1,1 @@
-export { list_action, add_new_tag } from './tag'
+export { list_action, add_new_tag,update_tag,validate,onupdate_data } from './tag'

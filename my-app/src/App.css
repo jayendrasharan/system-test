@@ -5,3 +5,7 @@
 body{
   font-size: 62.5%;
 }
+
+.nav-tabs .nav-link{
+  width: 33% !important;
+}
