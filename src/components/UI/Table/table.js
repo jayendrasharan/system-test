@@ -60,7 +60,7 @@ function Table(props) {
                 setData(tasklist)
                 dispatch(actions.onupdate_data(tasklist))
                 break;
-            case 'createdon':
+            case 'created_date':
                 if (order_local === 'asc') {
                     data.sort(function (a, b) {
                         return (a.created_date < b.created_date) ? -1 : ((b.created_date > a.created_date) ? -1 : 0);
@@ -137,7 +137,7 @@ function Table(props) {
                     <tr style={{ backgroundColor: '#ccc' }}>
                         <th className={classes.header} scope="col" onClick={() => handleSort('summary')} >Summary</th>
                         <th className={classes.header} scope="col" onClick={() => handleSort('priority')}>Priority</th>
-                        <th className={classes.header} scope="col" onClick={() => handleSort('createdon')}>Created On</th>
+                        <th className={classes.header} scope="col" onClick={() => handleSort('created_date')}>Created On</th>
                         <th className={classes.header} scope="col" onClick={() => handleSort('due_date')}>Due Date</th>
                         <th className={classes.header} scope="col" >Actions</th>
                     </tr>

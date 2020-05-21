@@ -26,7 +26,7 @@ const Navbar = (props) => {
                             <option value="summary">Summary</option>
                             <option value="priority">Priority</option>
                             <option value="due_date">Due Date</option>
-                            <option value="createdon">Created On</option>
+                            <option value="created_date">Created On</option>
                         </select>
                     </div>
                 </div>

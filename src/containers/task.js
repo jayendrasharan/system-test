@@ -28,7 +28,7 @@ function Task() {
             return
          }
         let duplicate_data = [...data]
-        if (window.confirm("Are you want to add data")) {
+        if (window.confirm("Do you want to add data")) {
             dispatch(actions.add_new_tag(duplicate_data, state))
             setShow(false)
             setState({ summary: '', description: '', priority: 'None', due_date: '' })

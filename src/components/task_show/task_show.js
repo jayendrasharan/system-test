@@ -44,7 +44,7 @@ function TaskShow(props) {
         if (actions.validate(state)) {
             return
         }
-        if (window.confirm("Are you want to update data")) {
+        if (window.confirm("Do you want to update data")) {
             dispatch(actions.update_tag(duplicate_data, state, index))
             setEdit(false)
             setState({ summary: '', description: '', priority: 'None', due_date: '' })

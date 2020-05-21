@@ -4,7 +4,7 @@ export const list_action = (duplicate_data, itemkey, itemvalue) => {
     return dispatch => {
         switch (itemkey) {
             case 'delete':
-                if (window.confirm('are you sure,wnat to delete ?')) {
+                if (window.confirm('Do you want to delete it ?')) {
                     let task = duplicate_data.filter(data => data.id !== itemvalue)
                     dispatch(onupdate_data(task))
                 }
