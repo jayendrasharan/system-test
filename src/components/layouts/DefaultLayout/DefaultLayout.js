@@ -9,8 +9,7 @@ import { Container } from 'reactstrap';
 class DefaultLayout extends Component {
   static propTypes = {
     header: PropTypes.element.isRequired,
-    content: PropTypes.element.isRequired,
-    footer: PropTypes.element.isRequired
+    content: PropTypes.element.isRequired
   };
 
   static defaultProps = {};
@@ -20,7 +19,6 @@ class DefaultLayout extends Component {
       <div className="app">
         {this.props.header}
         <Container>{this.props.content}</Container>
-        <footer className="w-100 footer">{this.props.footer}</footer>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { Table, Row } from 'antd';
-// import { filterList, setPagination, addActionColumn } from './TableUtil';
 import isEmpty from 'lodash/isEmpty';
 import isEqual from 'lodash/isEqual';
 import { FilterTableData } from './FilterTableData';
@@ -74,6 +73,7 @@ class TableWrapper extends Component {
             columns={addActionColumn(this.props.columnHeaders, this.props.actionRequired, this.props.action)}
             dataSource={this.state.displayDataSource}
             pagination={this.props.pagination ? setPagination(this.state.displayDataSource, 10) : false}
+            expandedRowRender={record => <p>{record.description}</p>}
           />
         </Row>
       </Fragment>

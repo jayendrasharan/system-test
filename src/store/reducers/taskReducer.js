@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { fetchTaskListActions, saveTaskAction } from '../actions/toDoActions';
+import { fetchTaskListActions, addTaskAction, editTaskAction, deleteTaskAction, changeTaskStateAction } from '../actions/toDoActions';
 
 const initialState = {
   apiResponse: {}
@@ -21,9 +21,31 @@ const taskReducer = handleActions(
       return { ...state, error: payload.error_description };
     },
 
-    [saveTaskAction](state, { payload }) {
+    [addTaskAction](state, { payload }) {
+      const newApiResponse = getUpdatedResponse(state, 0, 0, payload);
+      return {
+        ...state,
+        apiResponse: newApiResponse
+      };
+    },
+
+    [editTaskAction](state, { payload }) {
+      const newApiResponse = getUpdatedResponse(state, payload.key, 1, payload);
+      return {
+        ...state,
+        apiResponse: newApiResponse
+      };
+    },
+    [deleteTaskAction](state, { payload }) {
       const newApiResponse = [...state.apiResponse];
-      newApiResponse.push(payload);
+      newApiResponse.splice(payload.key, 1);
+      return {
+        ...state,
+        apiResponse: newApiResponse
+      };
+    },
+    [changeTaskStateAction](state, { payload }) {
+      const newApiResponse = getUpdatedResponse(state, payload.key, 1, payload);
       return {
         ...state,
         apiResponse: newApiResponse
@@ -34,3 +56,9 @@ const taskReducer = handleActions(
 );
 
 export default taskReducer;
+
+function getUpdatedResponse(state, startIndex, count, elementToReplace) {
+  const newApiResponse = [...state.apiResponse];
+  newApiResponse.splice(startIndex, count, elementToReplace);
+  return newApiResponse;
+}

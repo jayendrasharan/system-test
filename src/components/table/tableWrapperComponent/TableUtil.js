@@ -6,7 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export const createActionColumn = action => {
   return {
-    title: intl.get('CARRIER_GROUP.TABLE.ACTION_COLUMN_TITLE'),
+    title: intl.get('ACTION_COLUMN_TITLE'),
     dataIndex: 'actions',
     render: (text, record) => {
       return <div key={`action_${record.key}`}>{action(record)}</div>;
@@ -175,12 +175,12 @@ export const filterOnLabel = (inputValue, option) => {
 };
 export const filterData = () => {
   return {
-    filterKey: 'isActive',
+    filterKey: 'currentState',
     filterDefaultValue: '',
-    filterPrimaryValue: 'true',
-    filterSecondaryValue: 'false',
-    filterDefaultTitle: intl.get('CARRIER_GROUP.TABLE.DEFAULT_FILTER_TITLE'),
-    filterPrimaryTitle: intl.get('CARRIER_GROUP.TABLE.ACTIVE_FILTER_TITLE'),
-    filterSecondaryTitle: intl.get('CARRIER_GROUP.TABLE.INACTIVE_FILTER_TITLE')
+    filterPrimaryValue: 'open',
+    filterSecondaryValue: 'closed',
+    filterDefaultTitle: intl.get('DEFAULT_FILTER_TITLE'),
+    filterPrimaryTitle: intl.get('OPEN_FILTER_TITLE'),
+    filterSecondaryTitle: intl.get('CLOSED_FILTER_TITLE')
   };
 };
