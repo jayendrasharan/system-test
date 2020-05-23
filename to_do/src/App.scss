@@ -1,0 +1,36 @@
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+header {
+  background-color: black;
+  color: white;
+  padding: 1rem 1rem 0 1rem;
+}
+h1 {
+  margin: 0;
+  font-size: 42px;
+  margin-bottom: 1rem;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 20px;
+  td,
+  th {
+    font-size: 18px;
+    border: 1px solid grey;
+    padding: 0.5rem;
+  }
+  th {
+    text-align: left;
+  }
+}

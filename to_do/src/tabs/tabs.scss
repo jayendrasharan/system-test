@@ -1,0 +1,12 @@
+.tabs-container {
+    button {
+        border-bottom: 2px solid transparent;
+        color: currentColor;
+        font-size: 18px;
+        margin: 0.5rem 0.5rem 0 0.5rem;
+    }
+    .active {
+        font-weight: bold;
+        border-bottom-color: white;
+    }
+}
