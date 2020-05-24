@@ -44,7 +44,7 @@ function TableBody(props) {
 
   const filteredToDoListBasedOnSearchValue = searchValue.length
     ? toDoListToDisplay.filter((toDoList) => {
-        let searchValueRegex = new RegExp(searchValue)
+        let searchValueRegex = new RegExp(searchValue.toLowerCase())
         return searchValueRegex.test(toDoList.title.toLowerCase())
       })
     : toDoListToDisplay
