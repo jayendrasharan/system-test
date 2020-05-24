@@ -12,6 +12,7 @@ function TableBody(props) {
     deleteTaskMethod,
     editTaskMethod,
     activeTab,
+    searchValue,
   } = props
   const { APP_TASK_STATES } = APP_DATA
 
@@ -40,7 +41,15 @@ function TableBody(props) {
       : toDoList.filter(
           (toDoTask) => toDoTask.currentState === activeTab.toLowerCase()
         )
-  const tableBody = toDoListToDisplay.map((toDoListItem) => {
+
+  const filteredToDoListBasedOnSearchValue = searchValue.length
+    ? toDoListToDisplay.filter((toDoList) => {
+        let searchValueRegex = new RegExp(searchValue)
+        return searchValueRegex.test(toDoList.title.toLowerCase())
+      })
+    : toDoListToDisplay
+
+  const tableBody = filteredToDoListBasedOnSearchValue.map((toDoListItem) => {
     return (
       <tr
         key={toDoListItem.count}

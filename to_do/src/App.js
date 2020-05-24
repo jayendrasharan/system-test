@@ -7,6 +7,8 @@ import { APP_DATA, TASK_TO_EDIT_OR_VIEW_OBJECT } from "./app-constants"
 import ToDoContext from "./to-do-context"
 import TableBody from "./table-body/table-body"
 import ViewEditTask from "./view-edit-task/view-edit-task"
+import GroupBy from "./group-by/group-by"
+import Search from "./search/search"
 
 function App() {
   const { APP_TABS_LABELS, APP_TITLE, APP_TASK_STATES } = APP_DATA
@@ -25,6 +27,8 @@ function App() {
     createdDate: "asc",
     priority: "asc",
   })
+  const [groupedBy, setGroupedBy] = useState("")
+  const [searchValue, handleSearchValue] = useState("")
 
   const addTaskToToDoList = (toDoTask) => {
     setToDoList([...toDoList, toDoTask])
@@ -78,12 +82,12 @@ function App() {
   }
 
   const onClickTab = (tab) => {
-    setActiveTab(tab)
+    setActiveTab(tab);
   }
 
   const sortTable = (valueToSort) => {
-    let sortedToDoList = [...toDoList];
-    let sortToggleTemp = {...sortToggle};
+    let sortedToDoList = [...toDoList]
+    let sortToggleTemp = { ...sortToggle }
 
     if (sortToggleTemp[valueToSort] === "asc") {
       sortedToDoList = sortedToDoList.sort((taskToDo1, taskToDo2) => {
@@ -100,14 +104,16 @@ function App() {
       })
       sortToggleTemp[valueToSort] = "asc"
     }
-    setToDoList(sortedToDoList);
-    setSortToggle(sortToggleTemp);
+    setToDoList(sortedToDoList)
+    setSortToggle(sortToggleTemp)
   }
 
   return (
     <div className="App">
       <header>
         <h1>{APP_TITLE}</h1>
+        <GroupBy groupedBy={groupedBy} setGroupedBy={setGroupedBy} />
+        <Search searchValue={searchValue} handleSearchValue={handleSearchValue} />
         <nav>
           <Tabs
             activeTab={activeTab}
@@ -128,6 +134,7 @@ function App() {
             deleteTaskMethod={deleteTaskMethod}
             editTaskMethod={editTaskMethod}
             activeTab={activeTab}
+            searchValue={searchValue}
           />
         </tbody>
       </table>
