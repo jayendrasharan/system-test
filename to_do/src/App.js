@@ -18,6 +18,13 @@ function App() {
     TASK_TO_EDIT_OR_VIEW_OBJECT
   )
   const [readOnly, setReadOnly] = useState(false)
+  const [sortToggle, setSortToggle] = useState({
+    title: "asc",
+    dueDate: "asc",
+    description: "asc",
+    createdDate: "asc",
+    priority: "asc",
+  })
 
   const addTaskToToDoList = (toDoTask) => {
     setToDoList([...toDoList, toDoTask])
@@ -75,13 +82,26 @@ function App() {
   }
 
   const sortTable = (valueToSort) => {
-    let sortedToDoList = [...toDoList]
-    sortedToDoList = sortedToDoList.sort((taskToDo1, taskToDo2) => {
-      if (taskToDo1[valueToSort] > taskToDo2[valueToSort]) return 1
-      if (taskToDo1[valueToSort] < taskToDo2[valueToSort]) return -1
-      return 0
-    })
-    setToDoList(sortedToDoList)
+    let sortedToDoList = [...toDoList];
+    let sortToggleTemp = {...sortToggle};
+
+    if (sortToggleTemp[valueToSort] === "asc") {
+      sortedToDoList = sortedToDoList.sort((taskToDo1, taskToDo2) => {
+        if (taskToDo1[valueToSort] > taskToDo2[valueToSort]) return 1
+        if (taskToDo1[valueToSort] < taskToDo2[valueToSort]) return -1
+        return 0
+      })
+      sortToggleTemp[valueToSort] = "desc"
+    } else {
+      sortedToDoList = sortedToDoList.sort((taskToDo1, taskToDo2) => {
+        if (taskToDo1[valueToSort] < taskToDo2[valueToSort]) return 1
+        if (taskToDo1[valueToSort] > taskToDo2[valueToSort]) return -1
+        return 0
+      })
+      sortToggleTemp[valueToSort] = "asc"
+    }
+    setToDoList(sortedToDoList);
+    setSortToggle(sortToggleTemp);
   }
 
   return (
