@@ -26,7 +26,6 @@ function App() {
     createdDate: "asc",
     priority: "asc",
   })
-  const [groupedBy, setGroupedBy] = useState("");
   const [searchValue, handleSearchValue] = useState("");
   
   const addTaskToToDoList = (toDoTask) => {
