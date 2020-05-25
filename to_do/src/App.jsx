@@ -7,7 +7,6 @@ import { APP_DATA, TASK_TO_EDIT_OR_VIEW_OBJECT } from "./app-constants"
 import ToDoContext from "./to-do-context"
 import TableBody from "./table-body/table-body"
 import ViewEditTask from "./view-edit-task/view-edit-task"
-import GroupBy from "./group-by/group-by"
 import Search from "./search/search"
 
 function App() {
@@ -29,9 +28,7 @@ function App() {
   })
   const [groupedBy, setGroupedBy] = useState("");
   const [searchValue, handleSearchValue] = useState("");
-
-
-
+  
   const addTaskToToDoList = (toDoTask) => {
     const { count } = toDoTask;
     let arrayIndex;
@@ -132,7 +129,6 @@ function App() {
       <div className="App">
         <header>
           <h1>{APP_TITLE}</h1>
-          <GroupBy groupedBy={groupedBy} setGroupedBy={setGroupedBy} />
           <Search searchValue={searchValue} handleSearchValue={handleSearchValue} />
           <nav>
             <Tabs
