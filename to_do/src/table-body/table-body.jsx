@@ -10,17 +10,17 @@ function TableBody(props) {
     doneTaskMethod,
     undoTaskMethod,
     deleteTaskMethod,
-    editTaskMethod,
+    editOrViewTaskMethod,
     activeTab,
     searchValue,
   } = props
   const { APP_TASK_STATES } = APP_DATA
 
   const openModal = (count) => {
-    console.log("OPEN MODAL", count)
+    editOrViewTaskMethod(count)
   }
   const editTask = (count) => {
-    editTaskMethod(count)
+    editOrViewTaskMethod(count, "readOnly")
   }
 
   const deleteTask = (count) => {
@@ -39,26 +39,29 @@ function TableBody(props) {
     activeTab.toLowerCase() === "all"
       ? toDoList
       : toDoList.filter(
-          (toDoTask) => toDoTask.currentState === activeTab.toLowerCase()
-        )
+        (toDoTask) => toDoTask.currentState === activeTab.toLowerCase()
+      )
 
   const filteredToDoListBasedOnSearchValue = searchValue.length
     ? toDoListToDisplay.filter((toDoList) => {
-        let searchValueRegex = new RegExp(searchValue.toLowerCase())
-        return searchValueRegex.test(toDoList.title.toLowerCase())
-      })
+      let searchValueRegex = new RegExp(searchValue.toLowerCase())
+      return searchValueRegex.test(toDoList.title.toLowerCase())
+    })
     : toDoListToDisplay
 
   const tableBody = filteredToDoListBasedOnSearchValue.map((toDoListItem) => {
     return (
       <tr
         key={toDoListItem.count}
-        onClick={() => openModal(toDoListItem.count)}
+        onClick={(e) => {
+          openModal(toDoListItem.count)
+          e.stopPropagation();
+        }}
         className={`${
           toDoListItem.currentState === APP_TASK_STATES.PENDING
             ? ""
             : "task-completed"
-        }`}
+          }`}
       >
         <td>{toDoListItem.title}</td>
         <td>{toDoListItem.priority.slice(1)}</td>
@@ -91,15 +94,15 @@ function TableBody(props) {
               <Icon className={AVAILABLE_ICONS_CLASS.DONE_ICON} fontSize="14px" />
             </button>
           ) : (
-            <button
-              onClick={(e) => {
-                undoTask(toDoListItem.count)
-                e.stopPropagation()
-              }}
-            >
-              <Icon className={AVAILABLE_ICONS_CLASS.UNDO_ICON} fontSize="14px" />
-            </button>
-          )}
+              <button
+                onClick={(e) => {
+                  undoTask(toDoListItem.count)
+                  e.stopPropagation()
+                }}
+              >
+                <Icon className={AVAILABLE_ICONS_CLASS.UNDO_ICON} fontSize="14px" />
+              </button>
+            )}
         </td>
       </tr>
     )

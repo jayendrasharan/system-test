@@ -4,7 +4,8 @@ import ToDoContext from "../to-do-context"
 import "./task-form.scss"
 import { APP_DATA, TASK_TO_EDIT_OR_VIEW_OBJECT } from "../app-constants"
 
-function TaskForm(props) {
+function 
+TaskForm(props) {
   const { FORM_LABELS, FORM_PRIORITY_DROPDOWN_LABELS } = FORM_CONSTANTS
   const { APP_TASK_STATES } = APP_DATA
   const { readOnly, taskToEditOrView } = props
@@ -13,6 +14,7 @@ function TaskForm(props) {
     description: descriptionOfTask,
     dueDate: dueDateOfTask,
     priority: priorityOfTask,
+    count:countOfTaskToEditOrView
   } = taskToEditOrView ? taskToEditOrView : TASK_TO_EDIT_OR_VIEW_OBJECT
 
   const [summary, setSummary] = useState(() => {
@@ -22,10 +24,10 @@ function TaskForm(props) {
     return descriptionOfTask ? descriptionOfTask : ""
   })
   const [priority, setPriority] = useState(() => {
-    return dueDateOfTask ? dueDateOfTask : ""
+    return priorityOfTask ? priorityOfTask : ""
   })
   const [dueDate, setDueDate] = useState(() => {
-    return priorityOfTask ? priorityOfTask : ""
+    return dueDateOfTask ? dueDateOfTask : ""
   })
   const [error, setError] = useState({
     summaryError: "",
@@ -69,7 +71,7 @@ function TaskForm(props) {
           date.getUTCMonth() + 1
         }-${date.getUTCDate()}`,
         priority: priority,
-        count: parseInt(count) + 1,
+        count: countOfTaskToEditOrView ? countOfTaskToEditOrView : parseInt(count) + 1 ,
       }
       addTaskToToDoList(task)
       clearFormValues()
@@ -123,7 +125,7 @@ function TaskForm(props) {
           id="priority"
           value={priority}
           onChange={(event) => setPriority(event.target.value)}
-          readOnly={readOnly}
+          disabled={readOnly}
         >
           <option value="" disabled>
             none

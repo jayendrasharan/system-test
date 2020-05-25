@@ -27,13 +27,31 @@ function App() {
     createdDate: "asc",
     priority: "asc",
   })
-  const [groupedBy, setGroupedBy] = useState("")
-  const [searchValue, handleSearchValue] = useState("")
+  const [groupedBy, setGroupedBy] = useState("");
+  const [searchValue, handleSearchValue] = useState("");
+
+
 
   const addTaskToToDoList = (toDoTask) => {
-    setToDoList([...toDoList, toDoTask])
-    const { count } = toDoTask
-    setCount(count)
+    const { count } = toDoTask;
+    let arrayIndex;
+    const countIndexArray = toDoList.filter((toDoTaskItem, index) => {
+      if (toDoTaskItem.count === count) {
+        arrayIndex = index;
+        return true;
+      }
+      return false;
+    });
+    if (countIndexArray.length > 0) {
+      const newToDoList = [...toDoList];
+      newToDoList.splice(arrayIndex, 1, toDoTask);
+      setToDoList(newToDoList);
+    } else {
+      setToDoList([...toDoList, toDoTask])
+      const { count } = toDoTask
+      setCount(count)
+    }
+
   }
 
   const doneTaskMethod = (count) => {
@@ -74,11 +92,12 @@ function App() {
     setToDoList([...toDoListToEditRestItems])
   }
 
-  const editTaskMethod = (count) => {
-    const toDoListToEdit = [...toDoList]
-    const taskTOEdit = toDoListToEdit.filter((item) => item.count === count)
-    setTaskToEditOrView(taskTOEdit)
-    setReadOnly(false)
+  const editOrViewTaskMethod = (count, readOnlyParam) => {
+    const toDoListToEdit = [...toDoList];
+    let readOnly = readOnlyParam ? false : true;
+    const taskToEdit = toDoListToEdit.filter((item) => item.count === count)
+    setTaskToEditOrView(taskToEdit[0]);
+    setReadOnly(readOnly);
   }
 
   const onClickTab = (tab) => {
@@ -109,49 +128,51 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header>
-        <h1>{APP_TITLE}</h1>
-        <GroupBy groupedBy={groupedBy} setGroupedBy={setGroupedBy} />
-        <Search searchValue={searchValue} handleSearchValue={handleSearchValue} />
-        <nav>
-          <Tabs
-            activeTab={activeTab}
-            setActiveTab={onClickTab}
-            tabs={APP_TABS_LABELS}
-          />
-        </nav>
-      </header>
-      <table>
-        <thead>
-          <TableHeading sortTable={sortTable} />
-        </thead>
-        <tbody>
-          <TableBody
-            toDoList={toDoList}
-            doneTaskMethod={doneTaskMethod}
-            undoTaskMethod={undoTaskMethod}
-            deleteTaskMethod={deleteTaskMethod}
-            editTaskMethod={editTaskMethod}
-            activeTab={activeTab}
-            searchValue={searchValue}
-          />
-        </tbody>
-      </table>
-      <ToDoContext.Provider
-        value={{ addTaskToToDoList, setTaskToEditOrView, count }}
-      >
-        <AddTask />
-        {/*taskTOEdit && (
-          <ViewEditTask
-            initialModalState="modal-open"
-            setTaskToEditOrView={setTaskToEditOrView}
-            taskToEditOrView={taskToEditOrView}
-            readOnly={readOnly}
-          />
-        )*/}
-      </ToDoContext.Provider>
-    </div>
+    <>
+      <div className="App">
+        <header>
+          <h1>{APP_TITLE}</h1>
+          <GroupBy groupedBy={groupedBy} setGroupedBy={setGroupedBy} />
+          <Search searchValue={searchValue} handleSearchValue={handleSearchValue} />
+          <nav>
+            <Tabs
+              activeTab={activeTab}
+              setActiveTab={onClickTab}
+              tabs={APP_TABS_LABELS}
+            />
+          </nav>
+        </header>
+        <table>
+          <thead>
+            <TableHeading sortTable={sortTable} />
+          </thead>
+          <tbody>
+            <TableBody
+              toDoList={toDoList}
+              doneTaskMethod={doneTaskMethod}
+              undoTaskMethod={undoTaskMethod}
+              deleteTaskMethod={deleteTaskMethod}
+              editOrViewTaskMethod={editOrViewTaskMethod}
+              activeTab={activeTab}
+              searchValue={searchValue}
+            />
+          </tbody>
+        </table>
+        <ToDoContext.Provider
+          value={{ addTaskToToDoList, count }}
+        >
+          <AddTask />
+          {taskToEditOrView.title.length > 0 && (
+            <ViewEditTask
+              initialModalState="modal-open"
+              setTaskToEditOrView={setTaskToEditOrView}
+              taskToEditOrView={taskToEditOrView}
+              readOnly={readOnly}
+            />
+          )}
+        </ToDoContext.Provider>
+      </div>
+    </>
   )
 }
 

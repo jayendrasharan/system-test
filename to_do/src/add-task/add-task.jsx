@@ -4,6 +4,7 @@ import { AVAILABLE_ICONS_CLASS } from "../icon/icon-constants"
 import "./add-task.scss"
 import Modal from "../modal/modal"
 import TaskForm from "../task-form/task-forms"
+import { TASK_TO_EDIT_OR_VIEW_OBJECT } from "../app-constants"
 
 function AddTask(props) {
   const { ADD_ICON } = AVAILABLE_ICONS_CLASS
@@ -20,7 +21,7 @@ function AddTask(props) {
       </button>
       {
         <Modal modalState={modalState} setModalState={setModalState}>
-          <TaskForm readOnly={false} taskToEditOrViewtask={undefined} />
+          <TaskForm readOnly={false} taskToEditOrViewtask={TASK_TO_EDIT_OR_VIEW_OBJECT} />
         </Modal>
       }
     </div>
