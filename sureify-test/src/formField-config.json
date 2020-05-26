@@ -1,0 +1,49 @@
+{
+
+    "GridColumns": [{
+            "field": "taskSummary",
+            "title": "Summary",
+            "sortable": true,
+            "filterable": true,
+            "hidden": false
+        },
+        {
+            "field": "taskDescription",
+            "title": "Description",
+            "sortable": true,
+            "filterable": true,
+            "hidden": true
+        },
+        {
+            "field": "priority",
+            "title": "Priority",
+            "sortable": true,
+            "groupable": true,
+            "hidden": false
+        },
+        {
+            "field": "createdAt",
+            "title": "Created On",
+            "sortable": true,
+            "groupable": true,
+            "hidden": false,
+            "type": "date"
+        },
+        {
+            "field": "dueDate",
+            "title": "Due Date",
+            "sortable": true,
+            "groupable": true,
+            "hidden": false,
+            "type": "date"
+        },
+        {
+            "field": "state",
+            "title": "Actions",
+            "sortable": true,
+            "filterable": false,
+            "hidden": false,
+            "template": true
+        }
+    ]
+}
