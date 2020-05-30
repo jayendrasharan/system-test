@@ -41,6 +41,7 @@ const TaskForm = (props) => {
                         id="summary"
                         name={'summary'}
                         placeholder="Summary"
+                        maxLength="140"
                         value={task.summary}
                         onChange={handleChange}
                     />
@@ -52,6 +53,7 @@ const TaskForm = (props) => {
                         className="form-control"
                         placeholder="Description"
                         rows="5"
+                        maxLength="500"
                         name={'description'}
                         value={task.description}
                         onChange={handleChange}

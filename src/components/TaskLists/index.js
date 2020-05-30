@@ -5,7 +5,6 @@ import { clearAddTaskState } from '../../store/actions';
 const TaskList = (props) => {
     const { newTask, clearAddTaskState, taskAddSuccess } = props;
     const [list, setList] = React.useState([]);
-    console.log("-----list******", list)
 
     const taskList = [
         {
@@ -24,7 +23,7 @@ const TaskList = (props) => {
 
     React.useEffect(() => {
         if (newTask) {
-            setList([...list, newTask])
+            setList([newTask, ...list])
         }
     }, [newTask, setList, list])
 

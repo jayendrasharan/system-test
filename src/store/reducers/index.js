@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export const task = (state = initialState, action) => {
-    console.log("reducer called", action)
     switch (action.type) {
         case types.ADD_TASK:
             return {
