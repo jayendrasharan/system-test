@@ -7,3 +7,9 @@ export const addTaskToList = (data) => {
         payload: data
     }
 }
+
+export const clearAddTaskState = () => {
+    return {
+        type: types.CLEAR_ADD_TASK_STATE
+    }
+}

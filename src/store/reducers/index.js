@@ -1,7 +1,8 @@
 import { types } from "../constants"
 
 const initialState = {
-    taskList: []
+    taskList: "",
+    taskAdded: false
 }
 
 export const task = (state = initialState, action) => {
@@ -9,7 +10,13 @@ export const task = (state = initialState, action) => {
     switch (action.type) {
         case types.ADD_TASK:
             return {
-                taskList: action.payload
+                taskList: action.payload,
+                taskAdded: true
+            }
+        case types.CLEAR_ADD_TASK_STATE:
+            return {
+                taskList: "",
+                taskAdded: false
             }
         default:
             return state

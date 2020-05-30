@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.all-tasks-list {
+  padding: 50px;
+}
+
+.add-task-btn {
+  display: flex !important;
+  margin-left: auto;
+  margin-top: 25px;
+}

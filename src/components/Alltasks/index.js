@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import TaskForm from '../AddTaskForm';
 import TaskList from '../TaskLists';
 
 
-const ListOfAllTasks = () => {
+const ListOfAllTasks = (props) => {
+    const { addTaskSuccess } = props;
+
     const [show, setShow] = React.useState(false);
     const [save, setSave] = React.useState(false);
 
@@ -20,10 +23,16 @@ const ListOfAllTasks = () => {
         setShow(false);
     }
 
+    React.useEffect(() => {
+        if (addTaskSuccess) {
+            setSave(false)
+        }
+    }, [addTaskSuccess, setSave])
+
     return (
-        <div>
+        <div className="all-tasks-list">
             <TaskList />
-            <Button type="button" className="btn btn-info" onClick={handleShow}>
+            <Button type="button" className="add-task-btn" onClick={handleShow}>
                 <i className="fa fa-plus" aria-hidden="true"></i>
             </Button>
             <Modal show={show} onHide={handleClose}>
@@ -42,4 +51,10 @@ const ListOfAllTasks = () => {
     )
 }
 
-export default ListOfAllTasks
+const mapStateToProps = state => {
+    return {
+        addTaskSuccess: state.taskAdded
+    }
+}
+
+export default connect(mapStateToProps, null)(ListOfAllTasks)

@@ -1,7 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { clearAddTaskState } from '../../store/actions';
 
-const TaskList = () => {
+const TaskList = (props) => {
+    const { newTask, clearAddTaskState, taskAddSuccess } = props;
+    const [list, setList] = React.useState([]);
+    console.log("-----list******", list)
+
     const taskList = [
         {
             "summary": "Morning Walk",
@@ -16,8 +21,23 @@ const TaskList = () => {
             "date": "31-01-2020"
         }
     ]
+
+    React.useEffect(() => {
+        if (newTask) {
+            setList([...list, newTask])
+        }
+    }, [newTask, setList, list])
+
+    React.useEffect(() => {
+        if (taskAddSuccess) {
+            clearAddTaskState()
+        }
+    }, [taskAddSuccess, clearAddTaskState])
+
+
     return (
-        <div className="p-5 table-responsive">
+        <div>
+            <h5 className="text-left">Click on the plus button at the bottom right corner of the table to add a task.</h5>
             <table className="table table-striped" style={{ "textAlign": "left" }}>
                 <thead>
                     <tr>
@@ -30,12 +50,12 @@ const TaskList = () => {
                 </thead>
                 <tbody>
                     {
-                        taskList.map((obj, index) => (
+                        [...new Set(list)].map((obj, index) => (
                             <tr key={index}>
                                 <td>{obj.summary}</td>
                                 <td>{obj.priority}</td>
-                                <td>30-05-2020</td>
-                                <td>{obj.date}</td>
+                                <td>{obj.createdOn.toLocaleDateString()}</td>
+                                <td>{obj.dueDate.toLocaleDateString()}</td>
                                 <td>Edit</td>
                             </tr>
                         ))
@@ -47,10 +67,16 @@ const TaskList = () => {
 }
 
 const mapStateStateToProps = state => {
-    console.log("--state--", state)
     return {
-
+        newTask: state.taskList,
+        taskAddSuccess: state.taskAdded
     }
 }
 
-export default connect(mapStateStateToProps, null)(TaskList)
+const mapDispatchToProps = dispatch => {
+    return {
+        clearAddTaskState: () => dispatch(clearAddTaskState())
+    }
+}
+
+export default connect(mapStateStateToProps, mapDispatchToProps)(TaskList)
