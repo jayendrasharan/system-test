@@ -31,7 +31,7 @@ const TaskList = () => {
                     {
                         taskList.map((obj, index) => (
                             <tr key={index}>
-                                <td scope="row">{obj.summary}</td>
+                                <td>{obj.summary}</td>
                                 <td>{obj.priority}</td>
                                 <td>30-05-2020</td>
                                 <td>{obj.date}</td>
