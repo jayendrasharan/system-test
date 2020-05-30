@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 const TaskList = () => {
     const taskList = [
@@ -45,4 +46,11 @@ const TaskList = () => {
     )
 }
 
-export default TaskList
+const mapStateStateToProps = state => {
+    console.log("--state--", state)
+    return {
+
+    }
+}
+
+export default connect(mapStateStateToProps, null)(TaskList)

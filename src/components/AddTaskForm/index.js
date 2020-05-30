@@ -1,9 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { addTaskToList } from '../../store/actions';
 
 const TaskForm = (props) => {
-    const { saveChanges } = props;
+    const { saveChanges, addNewTask } = props;
     const [task, setTask] = React.useState({
         currentState: true,
         summary: "",
@@ -14,22 +16,19 @@ const TaskForm = (props) => {
     })
 
     React.useEffect(() => {
-
         if (saveChanges) {
-
+            addNewTask(task)
         }
 
-    }, [saveChanges])
+    }, [saveChanges, addNewTask, task])
 
     const handleChange = (event) => {
-        console.log("---event----", event)
         let fields = {
             ...task,
             [event.target.name]: event.target.value
         };
         setTask(fields)
     }
-    console.log(task)
 
     return (
         <div>
@@ -88,4 +87,10 @@ const TaskForm = (props) => {
     )
 }
 
-export default TaskForm
+const mapDispatchToProps = dispatch => {
+    return {
+        addNewTask: (data) => dispatch(addTaskToList(data))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TaskForm)
