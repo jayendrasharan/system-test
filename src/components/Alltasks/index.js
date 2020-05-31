@@ -30,8 +30,8 @@ const ListOfAllTasks = (props) => {
     }, [addTaskSuccess, setSave])
 
     return (
-        <div className="all-tasks-list">
-            <TaskList />
+        <div className="tasks-list">
+            <TaskList typeOfTasks={'alltasks'} heading={'List of all the tasks'} />
             <Button type="button" className="add-task-btn" onClick={handleShow}>
                 <i className="fa fa-plus" aria-hidden="true"></i>
             </Button>

@@ -12,8 +12,13 @@ code {
     monospace;
 }
 
-.all-tasks-list {
+.tasks-list {
   padding: 50px;
+}
+
+.subheading {
+  font-weight: normal;
+  font-size: 14px;
 }
 
 .add-task-btn {
