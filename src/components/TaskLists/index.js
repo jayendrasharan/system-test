@@ -1,89 +1,94 @@
 import React from 'react'
+import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { clearAddTaskState } from '../../store/actions';
+import TaskForm from '../AddTaskForm';
 
 const TaskList = (props) => {
     const { newTask, clearAddTaskState, taskAddSuccess, typeOfTasks, heading } = props;
+    const [viewTask, setViewTask] = React.useState(false);
+    const [viewTaskData, setViewTaskData] = React.useState({});
+
     const [list, setList] = React.useState([
         {
             "currentState": true,
             "summary": "Morning Walk",
             "description": "Early morning walk Keep you active and energetic for the rest of the day",
             "priority": "High",
-            "createdOn": "31-05-2020",
-            "dueDate": "1-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "1/06/2020"
         },
         {
             "currentState": true,
             "summary": "Break Fast",
             "desciption": "Breakfast is an important meal of the day. Never skip breakfast.",
             "priority": "High",
-            "createdOn": "31-05-2020",
-            "dueDate": "1-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "1/06/2020"
         },
         {
             "currentState": false,
             "summary": "Washing Clothes",
             "description": "Need to use washing machine atleast once a weel. For washing all the clothes.",
             "priority": "Medium",
-            "createdOn": "31-05-2020",
-            "dueDate": "6-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "6/06/2020"
         },
         {
             "currentState": true,
             "summary": "Monthly Medical Checkup",
             "description": "Includes all the necessary routine body checkups to ensure good health.",
             "priority": "High",
-            "createdOn": "31-05-2020",
-            "dueDate": "7-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "7/06/2020"
         },
         {
             "currentState": false,
-            "summary": "Reapiring faulty electrical appliances",
+            "summary": "Repairing faulty electrical appliances",
             "description": "Check for the faulty appliances in the entire house.",
             "priority": "Medium",
-            "createdOn": "31-05-2020",
-            "dueDate": "5-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "5/06/2020"
         },
         {
             "currentState": true,
             "summary": "Evening Snacks",
             "description": "Prepare evening snacks for guests.",
             "priority": "High",
-            "createdOn": "31-05-2020",
-            "dueDate": "6-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "6/06/2020"
         },
         {
             "currentState": true,
             "summary": "Buy Groceries",
             "description": "Need to buy groceries for the entire week.",
             "priority": "High",
-            "createdOn": "31-05-2020",
-            "dueDate": "7-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "7/06/2020"
         },
         {
             "currentState": false,
             "summary": "Office work",
             "description": "Need to complete all the pending tasks.",
             "priority": "High",
-            "createdOn": "31-05-2020",
-            "dueDate": "5-06-2020"
+            "createdOn": "31/05/2020",
+            "dueDate": "5/06/2020"
         },
         {
             "currentState": true,
             "summary": "Entire waste renmoval",
             "description": "Proper cleaning of the house, which includes removing of all unnecessary items.",
             "priority": "Low",
-            "createdOn": "1-06-2020",
-            "dueDate": "28-06-2020"
+            "createdOn": "1/06/2020",
+            "dueDate": "28/06/2020"
         },
         {
             "currentState": true,
             "summary": "Gardening",
             "description": "Once in a month check condition of all the plants in the garden.",
             "priority": "Low",
-            "createdOn": "1-06-2020",
-            "dueDate": "29-06-2020"
+            "createdOn": "1/06/2020",
+            "dueDate": "29/06/2020"
         }
     ]);
 
@@ -96,13 +101,13 @@ const TaskList = (props) => {
     React.useEffect(() => {
         if (typeOfTasks === "completed") {
             let newList = list.filter((obj) => (
-                obj.currentState === true
+                obj.currentState === false
             ))
             setList(newList)
         }
         if (typeOfTasks === "pending") {
             let newList = list.filter((obj) => (
-                obj.currentState === false
+                obj.currentState === true
             ))
             setList(newList)
         }
@@ -114,6 +119,14 @@ const TaskList = (props) => {
         }
     }, [taskAddSuccess, clearAddTaskState])
 
+    const viewTaskDetail = (data) => {
+        setViewTaskData(data)
+        setViewTask(true)
+    }
+
+    const handleClose = () => {
+        setViewTask(false)
+    }
 
     return (
         <div>
@@ -136,7 +149,7 @@ const TaskList = (props) => {
                 <tbody>
                     {
                         [...new Set(list)].map((obj, index) => (
-                            <tr key={index}>
+                            <tr key={index} onClick={() => viewTaskDetail(obj)}>
                                 <td>{obj.summary}</td>
                                 <td>{obj.priority} </td>
                                 <td>{typeof obj.createdOn === "string" ? obj.createdOn : obj.createdOn.toLocaleDateString()}</td>
@@ -152,6 +165,17 @@ const TaskList = (props) => {
                     }
                 </tbody>
             </table>
+            <Modal show={viewTask} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>View task Details</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <TaskForm taskDetails={viewTaskData} view={true} />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>close</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

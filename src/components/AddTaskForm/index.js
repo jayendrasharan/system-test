@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addTaskToList } from '../../store/actions';
 
 const TaskForm = (props) => {
-    const { saveChanges, addNewTask } = props;
+    const { saveChanges, addNewTask, taskDetails, view } = props;
     const [task, setTask] = React.useState({
         currentState: true,
         summary: "",
@@ -19,7 +19,6 @@ const TaskForm = (props) => {
         if (saveChanges) {
             addNewTask(task)
         }
-
     }, [saveChanges, addNewTask, task])
 
     const handleChange = (event) => {
@@ -29,6 +28,12 @@ const TaskForm = (props) => {
         };
         setTask(fields)
     }
+
+    React.useEffect(() => {
+        if (taskDetails) {
+            setTask(taskDetails)
+        }
+    }, [taskDetails])
 
     return (
         <div>
@@ -44,6 +49,7 @@ const TaskForm = (props) => {
                         maxLength="140"
                         value={task.summary}
                         onChange={handleChange}
+                        disabled={view}
                     />
                 </div>
                 <div className="form-group">
@@ -57,6 +63,7 @@ const TaskForm = (props) => {
                         name={'description'}
                         value={task.description}
                         onChange={handleChange}
+                        disabled={view}
                     />
                 </div>
                 <div className="form-row">
@@ -68,6 +75,7 @@ const TaskForm = (props) => {
                             name={'priority'}
                             value={task.priority}
                             onChange={handleChange}
+                            disabled={view}
                         >
                             <option>None</option>
                             <option>Low</option>
@@ -75,15 +83,53 @@ const TaskForm = (props) => {
                             <option>High</option>
                         </select>
                     </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="date">Due Date</label>
-                        <DatePicker
-                            selected={task.dueDate}
-                            name={'dueDate'}
-                            onSelect={(date) => setTask({ ...task, dueDate: date })}
-                        />
-                    </div>
+                    {
+                        !view && <div className="form-group col-md-6">
+                            <label htmlFor="date">Due Date</label>
+                            <DatePicker
+                                selected={task.dueDate}
+                                name={'dueDate'}
+                                onSelect={(date) => setTask({ ...task, dueDate: date })}
+                            />
+                        </div>
+                    }
+                    {
+                        view && <div className="form-group col-md-6">
+                            <label htmlFor="status">Current State</label>
+                            <input
+                                id="status"
+                                className="form-control"
+                                name={'currentState'}
+                                value={task.currentState ? "Open" : "Close"}
+                                disabled
+                            />
+                        </div>
+                    }
                 </div>
+                {
+                    view && <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label htmlFor="createddate"> Created On</label>
+                            <input
+                                id="createddate"
+                                className="form-control"
+                                name={'createdOn'}
+                                value={task.createdOn}
+                                disabled
+                            />
+                        </div>
+                        <div className="form-group col-md-6">
+                            <label htmlFor="duedate"> Due Date</label>
+                            <input
+                                id="duedate"
+                                className="form-control"
+                                name={'dueDate'}
+                                value={task.dueDate}
+                                disabled
+                            />
+                        </div>
+                    </div>
+                }
             </form>
         </div>
     )

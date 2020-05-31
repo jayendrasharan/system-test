@@ -40,7 +40,7 @@ const ListOfAllTasks = (props) => {
                     <Modal.Title>Add Task</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <TaskForm saveChanges={save} />
+                    <TaskForm saveChanges={save} view={false} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Cancel</Button>
