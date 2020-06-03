@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import theme from "./theme/main_theme";
+import {ThemeProvider} from '@material-ui/styles';
+import ToastMessageProvider from "./lib/contexts/message_context";
+import {Planets} from "react-preloaders";
 import './App.css';
+import Todo from "./views/ToDo";
+import Header from "./components/header";
+import TodoDataProvider from "./lib/contexts/todo_action_context";
+import ToastMessage from "./components/toast_message";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <ThemeProvider theme={theme}>
+            <ToastMessageProvider>
+                <Header/>
+                <TodoDataProvider>
+                    <Todo/>
+                </TodoDataProvider>
+                <ToastMessage/>
+            </ToastMessageProvider>
+        </ThemeProvider>
   );
 }
 

@@ -1,38 +1,24 @@
-.App {
-  text-align: center;
+body {
+    background-image: url("/productive.png");
+    background-position: center;
+    background-size:contain;
+    background-repeat: repeat;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.align-right {
+    text-align: right;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.none {
+    text-transform: capitalize;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.low {
+    text-transform: capitalize;
+    color: #f7aa5b;
 }
-
-.App-link {
-  color: #61dafb;
+.medium {
+    text-transform: capitalize;
+    color: #de7428;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.high {
+    text-transform: capitalize;
+    color: #f11313;
 }
