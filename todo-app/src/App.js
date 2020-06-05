@@ -25,48 +25,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // todolist: [
-      //   {
-      //     id: "sRsHiw3kCr3fchkUJ6dCMt",
-      //     summary: "cs",
-      //     priority: "Low",
-      //     createdon: "2020-06-03T21:18:06+05:30",
-      //     dueDate: "2020-06-23T18:30:00.000Z",
-      //     isTodoOpen: true,
-      //   },
-      //   {
-      //     id: "6KMKSu4GC2yCbW1WM7aF2X",
-      //     summary: "er",
-      //     priority: "Low",
-      //     createdon: "2020-06-03T21:17:59+05:30",
-      //     dueDate: "2020-06-21T18:30:00.000Z",
-      //     isTodoOpen: true,
-      //   },
-      //   {
-      //     id: "7WY5sxYhqVUGJToNAUbe2f",
-      //     summary: "wret",
-      //     priority: "High",
-      //     createdon: "2020-06-03T21:17:51+05:30",
-      //     dueDate: "2020-06-24T18:30:00.000Z",
-      //     isTodoOpen: true,
-      //   },
-      //   {
-      //     id: "oKboNxffaDwqZCYJwJ9SoB",
-      //     summary: "wr",
-      //     priority: "Medium",
-      //     createdon: "2020-06-03T21:17:44+05:30",
-      //     dueDate: "2020-06-24T18:30:00.000Z",
-      //     isTodoOpen: true,
-      //   },
-      //   {
-      //     id: "kgd85KkfHzCz8DwUQKREn7",
-      //     summary: "Su",
-      //     priority: "High",
-      //     createdon: "2020-06-03T21:17:20+05:30",
-      //     dueDate: "2020-06-07T18:30:00.000Z",
-      //     isTodoOpen: true,
-      //   },
-      // ],
       todolist: [],
       modalOpen: false,
       summary: "",
