@@ -1,0 +1,75 @@
+$red: rgb(14, 50, 212);
+$anim-length:0.2s;
+
+.vertical {
+  position: relative;
+  left: 26px;
+  top: 19px;
+  width: 2px;
+  height: 16px;
+  background-color: white;
+}
+
+.horizontal {
+  @extend .vertical;
+  position: relative;
+  top: 3px;
+  transform: rotate(90deg);
+}
+.circle {
+  float: left;
+  zoom:2;
+  margin:1em;
+  width: 54px;
+  height: 54px;
+  background-color: $red;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px #b2b2b2;
+  .vertical{
+    transition: 
+      transform $anim-length, 
+      width $anim-length, 
+      height $anim-length, 
+      top $anim-length, 
+      left $anim-length;
+  }
+  .horizontal{
+    transition: 
+      transform $anim-length, 
+      width $anim-length, 
+      height $anim-length, 
+      top $anim-length, 
+      left $anim-length;
+  }
+  &:hover{
+    .vertical{
+      width:4px;
+      height:4px;
+      top:17px;
+      left:32px;
+      transform:rotate(220deg);
+    }
+    .horizontal{
+      width:4px;
+      height:19px;
+      top:15px;
+      left:24px;
+      transform:rotate(220deg);
+       &:before{
+      content: "";
+      display: block;
+      width: 0px;
+      height: 0px;
+      border-left: 2px solid transparent;
+      border-right: 2px solid transparent;
+      border-bottom: 4px solid white;
+      position: relative;
+      top: -5px;
+      
+    }
+
+    }
+    
+  }
+}
+
