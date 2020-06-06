@@ -1,12 +1,51 @@
-.square {
-    background-color: red;
-    width: 100px;
-    height: 100px;
+@import '~bootstrap/scss/bootstrap.scss';
 
-    .circle {
-        width: 20px;
-        height: 20px;
-        background-color: blue;
-        border-radius: 50px;
+body {
+    .db {
+        display: block!important;
+    }
+    .flex {
+        display: flex;
+    }
+    .modal-form {
+        .modal-dialog {
+            max-width: 600px;
+        } 
+    }
+    .modal {
+        background: #00000052;
+    }
+    .spinner {
+        position: absolute;
+        z-index: 9;
+        left: 50%;
+    }
+    .red-bg {
+        background: #eac8c8;
+    }
+    .green-bg {
+        background: #f2ffe4;
+    }
+    #root {
+        height: 100vh;
+        .search {
+            height: 80px;
+            background: #cccccc;
+        }
+        .todos {
+            height: calc(100vh - 160px);
+            background: #fdfdfd;
+        }
+        .footer {
+            background: #d6d9e7;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            button {
+                align-self: flex-end;
+            }             
+        }
     }
 }
