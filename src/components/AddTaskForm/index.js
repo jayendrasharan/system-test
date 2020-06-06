@@ -114,7 +114,7 @@ const TaskForm = (props) => {
                                 id="createddate"
                                 className="form-control"
                                 name={'createdOn'}
-                                value={task.createdOn}
+                                value={typeof task.createdOn === 'string' ? task.createdOn : task.createdOn.toLocaleDateString()}
                                 disabled
                             />
                         </div>
@@ -124,7 +124,7 @@ const TaskForm = (props) => {
                                 id="duedate"
                                 className="form-control"
                                 name={'dueDate'}
-                                value={task.dueDate}
+                                value={typeof task.dueDate === 'string' ? task.dueDate : task.dueDate.toLocaleDateString()}
                                 disabled
                             />
                         </div>

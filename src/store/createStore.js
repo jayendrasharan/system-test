@@ -31,7 +31,7 @@ if (typeof composeWithDevToolsExtension === 'function') {
 }
 
 // ======================================================
-// Store Instantiation and HMR Setup
+// Store Instantiation and React-todo app Setup
 // ======================================================
 const configStore = (initialState = {}) => {
     const store = createStore(reducer,
