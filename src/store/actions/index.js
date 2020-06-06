@@ -12,3 +12,10 @@ export const clearAddTaskState = () => {
         type: types.CLEAR_ADD_TASK_STATE
     }
 }
+
+export const deleteTaskFromList = (data) => {
+    return {
+        type: types.DELETE_TASK,
+        payload: data
+    }
+}

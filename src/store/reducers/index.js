@@ -21,6 +21,15 @@ export const task = (state = initialState, action) => {
                 taskList: "",
                 taskAdded: false
             }
+        case types.DELETE_TASK:
+            return {
+                ...state,
+                taskList: "",
+                taskAdded: false,
+                list: [...state.list.filter((obj) => {
+                    return obj.summary != action.payload.summary
+                })]
+            }
         default:
             return state
 

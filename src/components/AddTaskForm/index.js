@@ -51,7 +51,11 @@ const TaskForm = (props) => {
                         onChange={handleChange}
                         disabled={view}
                     />
+                    {
+                        (task.summary.length < 10) && <div>summary cannot be less than 10 letters</div>
+                    }
                 </div>
+
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <textarea
@@ -65,6 +69,9 @@ const TaskForm = (props) => {
                         onChange={handleChange}
                         disabled={view}
                     />
+                    {
+                        (task.description.length < 10) && <div>Description cannot be less than 10 letters</div>
+                    }
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-6">
@@ -137,7 +144,7 @@ const TaskForm = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNewTask: (data) => dispatch(addTaskToList(data))
+        addNewTask: (data) => dispatch(addTaskToList(data)),
     }
 }
 

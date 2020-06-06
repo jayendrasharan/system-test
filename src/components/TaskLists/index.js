@@ -90,14 +90,9 @@ const TaskList = (props) => {
             "dueDate": "29/6/2020"
         }
     ]);
-    const [pendingList, setPendingList] = React.useState([]);
-    const [completedList, setCompletedList] = React.useState([]);
-    console.log("pendingList", pendingList)
 
-    console.log("list-------", list)
     React.useEffect(() => {
         if (listOfTasks) {
-            console.log("fired")
             setList([...listOfTasks, ...list])
         }
     }, [newTask, setList, listOfTasks])
@@ -162,8 +157,8 @@ const TaskList = (props) => {
                 <tbody>
                     {
                         [...new Set(list)].map((obj, index) => (
-                            <tr key={index} onClick={() => viewTaskDetail(obj)}>
-                                <td>{obj.summary}</td>
+                            <tr key={index}>
+                                <td onClick={() => viewTaskDetail(obj)}>{obj.summary}</td>
                                 <td>{obj.priority} </td>
                                 <td>{typeof obj.createdOn === "string" ? obj.createdOn : obj.createdOn.toLocaleDateString()}</td>
                                 <td>{typeof obj.dueDate === "string" ? obj.dueDate : obj.dueDate.toLocaleDateString()}</td>
