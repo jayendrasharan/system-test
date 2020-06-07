@@ -1,4 +1,8 @@
 
+export const loader = () => ({
+    type: 'LOADER',
+})
+
 export const addTodo = (todo) => ({
     type: 'ADD_TODO',
     payload: todo
@@ -40,6 +44,16 @@ export const addTodoModal = () => ({
 export const toggleTodoStatus = (todo) => ({
     type: 'TOGGLE_TODO_STATUS',
     payload: todo
+})
+
+export const searchTodo = (keyword) => ({
+    type: 'TODO_SEARCH',
+    payload: keyword
+})
+
+export const groupBy = (keyword) => ({
+    type: 'TODO_GROUPS',
+    payload: keyword
 })
 
 

@@ -1,6 +1,24 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 body {
+    .loader {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: #607d8b57;
+        vertical-align: middle;
+        display: flex;
+        justify-content: space-evenly;
+        z-index: 99999;
+    }
+    .nav-link {
+        &.active {
+            background-color: #d6d9e724!important;
+        }
+    }
+    mark {
+        background: yellow;
+    }
     .db {
         display: block!important;
     }
@@ -30,7 +48,7 @@ body {
         height: 100vh;
         .search {
             height: 80px;
-            background: #cccccc;
+            background: #d6d9e7;
         }
         .todos {
             height: calc(100vh - 160px);

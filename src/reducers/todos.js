@@ -1,23 +1,19 @@
+import { v4 as uuidv4 } from 'uuid';
 
 const Todo = () => ({
     title: '',
     description: '',
     dueDate: '',
     priority: '',
-    currentState: 'open',
+    currentState: true,
     createdAt: new Date()
 })
 
 const intialState = {
-    tasks: [{
-        id: 1,
-        title: 'Interview',
-        description: 'React Interview',
-        dueDate: '2020-10-10',
-        priority: 'Low',
-        currentState: 'open',
-        createdAt: new Date()
-    }],
+    isLoading: false,
+    searchKeyword: '',
+    groupBy: '',
+    tasks: [],
     modal: {
         isOpen: false,
         isReadOnly: false,
@@ -25,22 +21,26 @@ const intialState = {
         isDeleteModal: false,
         title: '',
         todo: null
-    } 
+    }       
 }
 
 const reducer = (state = intialState, action) => {
     switch (action.type) {
+        case 'LOADER': 
+            return {
+                ...state,
+                isLoading: true
+            }
         case "ADD_TODO":
-            let length = state.tasks.length-1;
-            let lastId = length>0 ? state.tasks[length].id : 1;
-            let id = isNaN(lastId) ? 1 : lastId+1;
-            let todo = { ...action.payload, createdAt: new Date(), id: id }
+            let todo = { ...action.payload, createdAt: new Date(), id: uuidv4() }
+            console.log(todo)
             return { 
                 ...state, 
+                isLoading: false,
                 tasks: [ ...state.tasks, todo ],
                 modal: {
                     ...state.modal,
-                    isOpen: !state.modal.isOpen
+                    isOpen: !state.modal.isOpen,                    
                 }
             }
 
@@ -56,9 +56,10 @@ const reducer = (state = intialState, action) => {
             return { 
                 ...state, 
                 tasks: tasks,
+                isLoading: false,
                 modal: {
                     ...state.modal,
-                    isOpen: !state.modal.isOpen
+                    isOpen: !state.modal.isOpen,
                 }
             }
         
@@ -139,11 +140,23 @@ const reducer = (state = intialState, action) => {
                 ...state,
                 tasks: state.tasks.map((task)=>{
                     if(task.id === action.payload.id) {
-                        return { ...task, currentState: task.currentState === 'open' ? 're-open' : 'open' };
+                        return { ...task, currentState: !task.currentState };
                     } else {
                         return task;
                     }
                 }) 
+            }
+        }
+        case "TODO_SEARCH": {
+            return {
+                ...state,
+                searchKeyword: action.payload
+            }
+        }
+        case "TODO_GROUPS": {
+            return {
+                ...state,
+                groupBy: action.payload
             }
         }
         default:

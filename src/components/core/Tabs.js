@@ -8,7 +8,7 @@ const Tabs = ({ tabs, updateActiveIndex, defaultIndex = 0 }) => {
         {
             tabs.map((tab, index) => {
                 let activeClass = index === activeIndex ? 'active' : '';
-                return (<li className="nav-item col-4" key={tab.name} onClick={
+                return (<li className="nav-item col-4 p-0" key={tab.name} onClick={
                     () => {
                         if(updateActiveIndex){
                             updateActiveIndex(index);

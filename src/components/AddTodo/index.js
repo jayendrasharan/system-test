@@ -5,7 +5,6 @@ import { addTodoModal } from '../../actions';
 const AddTodo = () => {
     const dispatch = useDispatch();
     const toggleModal = () => {
-        console.log("HI")
         dispatch(addTodoModal());
     }
     return (

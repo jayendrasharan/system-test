@@ -1,7 +1,8 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Modal from './Modal';
-import { addTodo, editTodo, toggleModal, confirmDelete } from '../../actions';
+import { addTodo, editTodo, toggleModal, confirmDelete, loader } from '../../actions';
+import { priorities } from '../../constants';
 
 const TodoForm = (props) => {
     const dispatch = useDispatch();
@@ -15,11 +16,14 @@ const TodoForm = (props) => {
     const onCancel = () => setTodo(intialState)
 
     const onSave = () => {
-        if(todos.modal.isEdit) {
-            dispatch(editTodo(todo))
-        } else {
-            dispatch(addTodo(todo))
-        }        
+        dispatch(loader());
+        setTimeout(()=>{
+            if(todos.modal.isEdit) {
+                dispatch(editTodo(todo))
+            } else {
+                dispatch(addTodo(todo))
+            } 
+        }, 1000);               
     }
 
     const onDelete = (flag) => {
@@ -41,7 +45,7 @@ const TodoForm = (props) => {
         >
             {
                 todos.modal.isDeleteModal && <React.Fragment>
-                    <button type="button" className="btn btn-primary" onClick={() => onDelete(true)}>Yes</button>
+                    <button type="button" className="btn btn-danger mr-2" onClick={() => onDelete(true)}>Yes</button>
                     <button type="button" className="btn btn-primary" onClick={() => onDelete(false)}>No</button>
                 </React.Fragment>
             }
@@ -63,10 +67,9 @@ const TodoForm = (props) => {
                     <div className="form-group col-6 flex">
                         <label for="Priority" className="col-form-label mr-2 col-sm-4 pl-0">Priority</label>
                         <select className="form-control" id="Priority" value={todo.priority} onChange={(e) => updateTodo('priority', e)}>
-                            <option>None </option>
-                            <option>Low</option>
-                            <option>Medium</option>
-                            <option>High</option>
+                           {
+                               priorities.map((priority) => <option>{priority}</option>)
+                           }
                         </select>
                     </div>
                     <div className="form-group col-6 flex pl-0">
@@ -80,8 +83,8 @@ const TodoForm = (props) => {
                         <label for="Priority" className="col-form-label col-sm-10 mr-2 pl-0">{todo.createdAt.toString()}</label>
                     </div>
                     <div className="form-group col-12 flex pl-0">
-                        <label for="Duedate" className="col-form-label col-sm-2 pr-0">Status</label>
-                        <label for="Duedate" className="col-form-label col-sm-10 pr-0">{todo.currentState.toString()} </label>
+                        <label for="status" className="col-form-label col-sm-2 pr-0">Status</label>
+                        <label for="status" className="col-form-label col-sm-10 pr-0">{todo.currentState} </label>
                     </div>
                 </div> }
             </form> }
