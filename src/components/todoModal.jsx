@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import validate from './formValidations';
 import './style.css';
+
 Modal.setAppElement('#root');
 const TodoModal = (props) => {
     const [values, setValues] = useState({ summary: '', description: '', dueDate: '', priority: 0 });
