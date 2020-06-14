@@ -2,7 +2,7 @@ import validator from 'validator';
 
 export default function validate(values) {
     let errors = {};
-
+// Validations
     if (!values.summary) {
         errors.summary = 'Summary is required';
     } else if (!(validator.isLength(values.summary, { min: 10, max: 140 }))) {
