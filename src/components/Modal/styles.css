@@ -1,0 +1,20 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 100px;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-view {
+    background-color: #fff;
+    min-width: 600px;
+    max-width: 800px;
+    border-radius: 3px;
+    padding: 16px;
+}

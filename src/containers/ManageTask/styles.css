@@ -1,0 +1,26 @@
+.add-task-header {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.add-task-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.add-task .add-task-fields {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-error {
+  font-size: small;
+  color: brown;
+  margin-bottom: 12px;
+}
