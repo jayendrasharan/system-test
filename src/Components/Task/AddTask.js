@@ -11,8 +11,8 @@ export default class AddTask extends Component {
     let { summary, description } = this.props
     summary = summary && summary.trim();
     description = description && description.trim();
-    if (summary && summary.length < 10) return alert("Summary : Required min 10 Chars");
-    if (summary && description.length < 10) return alert("Description: Required min 10 Chars");
+    if (summary && summary.length < 10) return alert("Required min 10 Chars");
+    if (summary && description.length < 10) return alert("Required min 10 Chars");
     return true
   }
 
@@ -56,7 +56,7 @@ export default class AddTask extends Component {
               </label>
             <div className="actions">
               <span> </span><input type="button" id="cancel" onClick={closeModal} value="Cancel" />
-              <span> </span><input type="submit" value={_id ? "Edit" : "Save"} />
+              <span> </span><input type="submit" id="save" value={_id ? "Edit" : "Save"} />
             </div>
           </form>
         </div>

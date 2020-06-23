@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { AddTask, TaskList, Modal } from './'
 import { v4 as uuidv4 } from 'uuid';
+import CONFIG from './../Config'
 
 export default class Task extends Component {
 
@@ -259,6 +260,15 @@ export default class Task extends Component {
           <button className={page && page === "all" ? "tablinks active" : "tablinks"} onClick={this.groupBy.bind(this, 'all')}>All Tasks</button>
           <button className={page && page === "completed" ? "tablinks active" : "tablinks"} onClick={this.groupBy.bind(this, 'completed')}>Completed</button>
           <button className={page && page === "pending" ? "tablinks active" : "tablinks"} onClick={this.groupBy.bind(this, 'pending')}>Pending</button>
+        </div>
+
+        <div className="header">
+          <div className="search">Search : <input type="text" id="search" ref={(input) => { this.searchInput = input; }} onChange={this.handleSearch} value={searchVal} /></div>
+          <div className="search">Group By :
+          <select id="groupBy" value={groupBy} onChange={this.handleGroupBy}>
+              {CONFIG.GROUP_BY.map((item) => item.show && <option key={item.key}>{item.value}</option>)}
+            </select>
+          </div>
         </div>
                
         <TaskList taskList={currentList} groupBy={groupBy} action={this.action} checked={checked} handleCheck={this.handleCheck} />
