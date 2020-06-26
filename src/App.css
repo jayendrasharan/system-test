@@ -1,0 +1,354 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.App{
+	max-width: 100%;
+    overflow-x: hidden;	
+}
+
+.App-logo {
+	animation: App-logo-spin infinite 20s linear;
+	height: 80px;
+}
+
+.App-header {
+	background-color: chocolate;
+    height: 50px;
+    padding: 5px;
+    color: white;
+    text-align: center;
+    font-size: 10px;
+}
+
+.column1 {
+	float: left;
+	width: 20%;
+	padding: 10px;
+}
+
+.column2 {
+	float: left;
+	width: 60%;
+	padding: 10px;
+}
+
+.column3 {
+	float: left;
+	width: 20%;
+	padding: 10px;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
+/* Add Task Form */
+.modal-title{
+	font-weight: bold;
+	font-size: 28px;
+}
+.form {
+	font-size: 16px;
+	background: #F6F8FA;
+}
+
+.form input[type=submit],
+.form input[type=reset],
+.form input[type=button],
+.form input[type=text],
+.form input[type=email],
+.form textarea,
+.form label {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 16px;
+}
+
+.form label {
+	display: flex;
+	color: #000;
+	margin-bottom: 5%;
+	padding-top: calc(.375rem + 1px);
+	padding-bottom: calc(.375rem + 1px);
+	margin-bottom: 0;
+	font-size: inherit;
+	line-height: 1.5;
+}
+
+.form label>span {
+	float: left;
+	margin-right: 3%;
+	width: 20%;
+}
+
+.form input[type=text],
+.form input[type=email],
+.form input[type=date] {
+	display: block;
+	width: 100%;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form textarea {
+	display: block;
+	width: 100%;
+	height: calc(1.5em + .75rem + 2px);
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+button,
+.form input[type=submit],
+.form input[type=reset],
+.form input[type=button] {
+	background: black;
+	border: none;
+	padding: 8px 10px 8px 10px;
+	height: 30px;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* COLOUMN  2 CSS */
+
+.column2 .header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.actions {
+	float: right;
+}
+
+select {
+	width: 100%;
+	height: calc(1.5em + .75rem + 2px);
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #0976e2;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+#groupBy, #bulkActions {
+	width: auto;
+	height: 30px;
+    margin-bottom: 15px;
+}
+
+.topNav {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Modal Styles */
+
+.modal-close {
+	float: right;
+	/* background-color: red; */
+}
+
+.modal-close button {
+	margin-top: -20px;
+	padding: 6px 6px 6px 6px;
+	border-radius: 10px;
+	width: 25px;
+	background-color: red;
+
+}
+
+
+/* Style the tab */
+
+.tabs {
+	float: left;
+	/* border: 1px solid #ccc; */
+	/* background-color: #f1f1f1; */
+	margin-right: 15px;
+	display:flex;
+ 	justify-content: space-evenly;
+  	font-weight: bold;
+  	position: relative;
+	
+}
+
+
+/* Style the buttons that are used to open the tab content */
+
+/* .tabs button {
+	display: block;
+	background-color: inherit;
+	color: black;
+	padding: 15px;
+	width: 100%;
+	border: none;
+	outline: none;
+	text-align: left;
+	cursor: pointer;
+	height: 45px;
+	transition: 0.3s;
+} */
+
+
+/* Change background color of buttons on hover */
+
+.tabs button:hover {
+	background-color: #4ca0af;
+	color: #fff;
+}
+
+
+/* Create an active/current "tab button" class */
+
+.tabs button.active {
+	color: #fff;
+	background-color: #7e61c4;
+}
+
+#title {
+	margin-bottom: 1%;
+	font-family: arial, sans-serif;
+}
+
+#table {
+	text-align: center;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	border: 3px solid #ddd;
+	width: 87%;
+}
+
+#table td,
+#table th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#table tr:nth-child(even) {
+	background-color: #fff;
+}
+
+#table tr:hover {
+	background-color: rgb(85, 130, 214);
+}
+
+#table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	background-color: #ebbd25;
+	color: white;
+}
+
+#table td>span {
+	background: #4CAF50;
+	padding: 4px;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	margin-right: 5px;
+	font-size: 12px;
+}
+
+#table tr.re-open {
+	background-color: #b66161;
+}
+
+.modal {
+	width: 50%;
+}
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.form-label {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.addNew{
+  height: 50px;
+  width: 50px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  text-align:center;
+  font-size:36px;
+  color:brown;
+  position: absolute;
+  bottom: 0px;
+  right: center; 
+  font-weight:bolder;
+  cursor: pointer;
+  margin-bottom: 30px;
+  margin-left: 300px;
+  border: 2px solid black;
+}
+
+.edit{
+	background-color: darkseagreen;
+}
+.delete{
+	background-color: darkred;
+}
+#cancel{
+	background-color: red;
+}
+#save{
+	background-color: green;
+}
