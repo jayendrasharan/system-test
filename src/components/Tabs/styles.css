@@ -1,0 +1,15 @@
+  .tab-list {
+    color: #fff;
+    background-color: #000;
+  }
+  
+  .tab-list-item {
+    display: inline-block;
+    list-style: none;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+  
+  .tab-list-active {
+    background-color: var(--primary-color);
+  }
