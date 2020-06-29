@@ -1,0 +1,135 @@
+.add-task {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 2em;
+    cursor: pointer;
+}
+
+.task-grid {
+    font-size: 14px;
+}
+
+.tasks-wrapper {
+    position: relative;
+    height: 100vh;
+}
+
+.form-wrapper label {
+    width: 20%;
+}
+
+.form-wrapper textarea {
+    min-height: 150px !important;
+}
+
+.task-grid-no-tasks {
+    text-align: center;
+    width: 100%;
+    line-height: 80vh;
+    font-size: 1.5em;
+    color: #8a8a8a;
+}
+
+.task-grid-col-wrapper,
+.task-grid-data-row {
+    display: flex;
+}
+
+.task-grid-data-row-all {
+    background: #55a846;
+}
+
+.task-grid-col {
+    padding: 5px;
+    min-width: 200px;
+    border: 1px solid #000;
+    border-left: none;
+}
+
+.task-grid-check-col {
+    padding: 5px;
+    min-width: 30px;
+    border: 1px solid #000;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+}
+
+.task-grid-task-check-col {
+    border-top: none;
+}
+
+.task-grid-data-col {
+    border-top: none;
+}
+
+.action-icons span {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.action-icons button {
+    font-size: 10px;
+}
+
+.details-wrapper div > label{
+    margin-right: 20px;
+    width: 20%
+}
+
+.confirm-delete-question {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.task-header {
+    width: 100%;
+    display: flex;
+    height: 60px;
+    background: #0466d6;
+}
+
+.task-header-input {
+    margin: 10px;
+    height: 40px;
+}
+
+.task-header-input  input {
+    padding: 5px;
+}
+
+.task-header-group-by {
+    width: 200px !important;
+    padding: 10px;
+    height: 40px;
+}
+
+.task-header-btn {
+    width: 200px;
+    height: 40px;
+    margin: 10px;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.task-grid-groupby-row {
+    width: 1060px;
+    padding: 5px;
+    border: 1px solid #000;
+    border-top: none;
+    background: #CCC;
+}
+
+.tootlip-content {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.tootlip-content li {
+    padding: 5px;
+    cursor: pointer;
+}
