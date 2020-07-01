@@ -1,0 +1,68 @@
+@import "../style-constants.scss";
+form {
+    .field {
+        display: flex;
+        margin: 2rem;
+    }
+
+    label {
+        color: black;
+        font-size: 24px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea {
+        margin-left: 1rem;
+        &.error {
+            border-bottom-color: red;
+        }
+    }
+
+    select {
+        margin-left: 1rem;
+        &.error {
+            border-color: red;
+        }
+    }
+
+    input[type="text"],
+    textarea {
+        flex-grow: 1;
+        outline: none;
+        border-width: 0;
+        border-bottom-color: grey;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        font-size: 24px;
+        transition: border-bottom-width 3s ease;
+        font-weight: 300;
+        &:active,
+        &:focus {
+            border-bottom-width: 2px;
+            border-bottom-color: blue;
+        }
+    }
+
+    input[type="date"],
+    select {
+        width: 50%;
+    }
+    button {
+        margin-top: 2rem;
+        margin-left: 2rem;
+        background-color: $theme-color;
+        border-radius: 20px;
+        font-size: 18px;
+        color: white;
+        padding: 0.5rem;
+        &:hover {
+            color: $theme-color;
+            background-color: lightblue;
+        }
+    }
+}
+
+button ~ button {
+    margin-left: 1rem;
+}

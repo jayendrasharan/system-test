@@ -1,0 +1,23 @@
+tbody {
+    tr {
+        cursor: pointer;
+        background-color: white;
+        &:hover {
+            background-color: lightgrey;
+        }
+        &.task-completed {
+            background-color: lightgreen;
+            &:hover {
+                background-color: limegreen;
+            }
+        }
+    }
+
+    i {
+        color: black;
+        cursor: pointer;
+        &:hover {
+            color: grey;
+        }
+    }
+}
