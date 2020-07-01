@@ -1,0 +1,22 @@
+$primary-color: #007bff;
+$secondary-color: #fff;
+
+.tab-section {
+  ul {
+    text-align: center;
+    li {
+      list-style: none;
+      display: inline-flex;
+    }
+  }
+  .tab-button {
+    background-color: $secondary-color;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    &.active {
+      background-color: $primary-color;
+      color: $secondary-color;
+      border: $secondary-color;
+    }
+  }
+}

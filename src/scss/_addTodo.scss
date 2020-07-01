@@ -1,0 +1,17 @@
+$bg-color: #282c33;
+
+.add-todo {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  .todo-btn {
+    background-color: $bg-color;
+    font-size: 2rem;
+    padding: 0.4rem 0.6em;
+    border-radius: 50%;
+    border: none;
+    &:hover {
+      background-color: darken($color: $bg-color, $amount: 20%);
+    }
+  }
+}
