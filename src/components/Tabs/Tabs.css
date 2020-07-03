@@ -1,0 +1,19 @@
+.custom-tabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top:10px;
+}
+.custom-tab{
+    cursor: pointer;
+    width: 33%;
+    text-align: center;
+    border: 2px solid black;
+
+}
+.custom-tab.active{
+    background-color: rgb(84, 163, 84);
+    color: white;
+    border-bottom: 2px solid black;
+}
