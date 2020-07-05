@@ -1,0 +1,16 @@
+[
+    {
+        "title": "Learn node",
+        "description": "Practice node this weekend",
+        "currentState": "Open",
+        "priority": "Medium",
+        "dueDate": "2020-07-13"
+    },
+    {
+        "title": "Shopping",
+        "description": "Buy shoes for trekking",
+        "currentState": "Done",
+        "priority": "Low",
+        "dueDate": "2020-07-01"
+    }
+]
