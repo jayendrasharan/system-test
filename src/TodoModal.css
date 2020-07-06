@@ -1,0 +1,44 @@
+label {
+  font-size: 20px;
+  font-weight: 500;
+  float: left;
+  margin: 10px;
+}
+p.err {
+  color: red;
+}
+input,
+textarea,
+select {
+  width: 100%;
+}
+
+.closeBtn {
+  float: left;
+}
+.modal-footer {
+  float: right;
+  padding: 10px;
+}
+button{
+  border: 1px solid;
+  border-radius: 2px ;
+}
+.submitBtn {
+  margin: 10px;
+}
+.modalContainer {
+  margin-top: 50px;
+}
+.title{
+  display: flex;
+  justify-content: center;
+}
+
+.submitBtn:disabled{
+  opacity: 1;
+  cursor: not-allowed;
+}
+.submitBtn:enabled {
+  background-color: mediumturquoise;
+}

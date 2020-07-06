@@ -1,25 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Provider } from "react-redux";
+import store from "./store/store";
+import Tabs from './Components/Tabs/Tabs';
+import TodoContainer from './Modules/ToDoContainer/ToDoContainer';
+import SearchBar from './Modules/SearchBar/searchBar';
+import TaskBar from './Modules/TaskBar/TaskBar';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="todoapp">
+        <header className='header'>
+          <h1>todos</h1>
+
+        </header>
+        <TaskBar />
+        <SearchBar />
+        <Tabs>
+          <div label="All Tasks">
+            {/* <TodoContainer tabName="all" /> */}
+            <TodoContainer tabName="all" />
+          </div>
+          <div label="Completed">
+            <TodoContainer tabName="completed" />
+          </div>
+          <div label="Pending">
+            <TodoContainer tabName="pending" />
+          </div>
+        </Tabs>
+
+        {/* <ModalButton /> */}
+
+      </div>
+    </Provider>
   );
 }
 
