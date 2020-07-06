@@ -1,0 +1,49 @@
+[{
+    "taskId": "1",
+    "taskSummary": "Task1",
+    "taskDescription": "This is a  task1",
+    "priority": "High",
+    "dueDate": "2020-05-15",
+    "createdAt": "2020-05-13T11:00:25.450Z",
+    "state": "Open"
+}, {
+    "taskId": "2",
+    "taskSummary": "task2",
+    "taskDescription": "This is a task2",
+    "priority": "Low",
+    "dueDate": "2020-05-14",
+    "createdAt": "2020-05-12T11:00:25.450Z",
+    "state": "Done"
+}, {
+    "taskId": "3",
+    "taskSummary": "task3",
+    "taskDescription": "This is a  task 3",
+    "priority": "Medium",
+    "dueDate": "2020-05-09",
+    "createdAt": "2020-05-14T11:00:25.450Z",
+    "state": "Open"
+}, {
+    "taskId": "4",
+    "taskSummary": "task4",
+    "taskDescription": "This is a task4",
+    "priority": "None",
+    "dueDate": "2020-05-21",
+    "createdAt": "2020-05-15T11:00:25.450Z",
+    "state": "Done"
+}, {
+    "taskId": "5",
+    "taskSummary": "Task 5",
+    "taskDescription": "This is a  task 5",
+    "priority": "Medium",
+    "dueDate": "2020-05-22",
+    "createdAt": "2020-05-14T11:00:25.450Z",
+    "state": "Open"
+}, {
+    "taskId": "6",
+    "taskSummary": "Task6",
+    "taskDescription": "This is a task 6",
+    "priority": "None",
+    "dueDate": "2020-05-20",
+    "createdAt": "2020-05-16T11:00:25.450Z",
+    "state": "Done"
+}]

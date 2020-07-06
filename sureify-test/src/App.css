@@ -1,0 +1,140 @@
+.App {
+    text-align: center;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #ec7f37;
+  padding: 20px 10px;
+}
+
+.header > a {
+  text-decoration: none;
+}
+
+.header > a > h3 {
+  color: white;
+  display: inline;
+  font-family: serif;
+  font-weight: bolder;
+  margin-left:30px;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.custom-modal-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    opacity: 1;
+    animation: custom-show .5s ease;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@keyframes custom-show {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    1% {
+        display: flex;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.bg-sureify {
+    background: #f4f7fc !important;
+  }
+  .f-s-13 {
+    font-size: 13px !important;
+  }
+  .f-w-500 {
+    font-weight: 500 !important;
+  }
+  .w-30 {
+    width:30px !important;
+  }
+  .h-30 {
+    height: 30px !important;
+  }
+  .m-t-50 {
+    margin-top: 45% !important;
+  }
+  .m-l-50{
+    margin-left:80% !important
+  }
+  .w-100 {
+    width:100% !important;
+  }
+  .m-t-30 {
+    margin-top: 30px !important;
+  }
+  .p-l-8 {
+    padding-left: 8px;
+  }
+  .f-s-14 {
+    font-size: 14px;
+  }
+  .f-w-400 {
+    font-weight: 400;
+  }
+  .w-30-p {
+    width: 30%;
+  }
+  .m-l-7 {
+    margin-left: 7px !important;
+  }
+    
+  .m-l-12 {
+    margin-left:12px;
+  }
+
+  
+  
+  
