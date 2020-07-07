@@ -39,9 +39,9 @@ export default function TabBody({header, data = [] , onClick ,statusFilter,onSor
   const data1 = groupByMap(data);
     return (
       <>
-        {state && state.length >1 && 
+        {data.length > 0 && 
         <Container style={{paddingTop: '10px', paddingBottom:'10px'}}>
-          <Row><Col sm={12} style={{textAlign: 'center'}}>
+          <Row><Col sm={12}>
             <button onClick={onDelete} className="btn btn-danger">Delete Selected</button>
             </Col></Row>
         </Container>
@@ -71,7 +71,7 @@ export default function TabBody({header, data = [] , onClick ,statusFilter,onSor
              groupBy && ( Object.keys(data1) && Object.keys(data1).length > 0 && Object.keys(data1).map(key => {
               return (
                 <>
-              <h4>{groupBy == 'priority' ? key :new Date(key).toLocaleString()}</h4>
+              <h5>{groupBy == 'priority' ? key :new Date(key).toLocaleString()}</h5>
               {
                 data1[key].map(x => {
                   return (
