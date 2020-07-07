@@ -43,8 +43,16 @@ function CustomDailog(props) {
   const [description, setDescription] = useState("");
   const [duedate, setDuedate] = useState("");
   const [priority, setPriority] = useState("none");
+  const [actionStatus, setActionStatus] = useState(false);
 
   useEffect(() => {
+    if (props.action !== undefined) {
+      if (props.action === "view") {
+        setActionStatus(true);
+      } else {
+        setActionStatus(false);
+      }
+    }
     if (props.data !== undefined) {
       if (props.data.summary !== undefined) {
         setSummary(props.data.summary);
@@ -109,6 +117,7 @@ function CustomDailog(props) {
 
   return (
     <React.Fragment>
+      {console.log("action status", actionStatus)}
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper>
@@ -156,6 +165,9 @@ function CustomDailog(props) {
                           id="summary"
                           label="Summary"
                           name="summary"
+                          InputProps={{
+                            readOnly: actionStatus,
+                          }}
                           onChange={handleSummary}
                           value={summary}
                         />
@@ -168,6 +180,9 @@ function CustomDailog(props) {
                           placeholder="Placeholder"
                           onChange={handleDescription}
                           value={description}
+                          InputProps={{
+                            readOnly: actionStatus,
+                          }}
                           multiline
                         />
                       </Grid>
@@ -180,6 +195,9 @@ function CustomDailog(props) {
                           name="priprity"
                           value={priority}
                           onChange={handleChange}
+                          InputProps={{
+                            readOnly: actionStatus,
+                          }}
                           helperText="Please select your priority"
                         >
                           {prioritiesList.map((option) => (
@@ -195,6 +213,9 @@ function CustomDailog(props) {
                           name="duedate"
                           value={duedate}
                           onChange={handleDuedate}
+                          InputProps={{
+                            readOnly: actionStatus,
+                          }}
                           InputLabelProps={{
                             shrink: true,
                           }}
