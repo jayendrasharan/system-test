@@ -1,0 +1,15 @@
+.custom-tabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top:10px;
+}
+.custom-tab{
+    cursor: pointer;
+    width: 30%;
+    text-align: center;
+}
+.custom-tab.active{
+    border-bottom: 2px solid black;
+}
