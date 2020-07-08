@@ -1,71 +1,84 @@
 import React from 'react';
-import MaterialTable from "material-table";
+
 import Dropdown from '../../Components/Dropdown';
-import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
-const groupByFields = ["createdAt", "dueDate", "priority"].map(item => ({value: item, label: item}));
+import { connect } from 'react-redux';
+// import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
+import Table from './Table';
+const groupByFields = ['none', "createdAt", "dueDate", "priority"].map(item => ({ value: item, label: item }));
 
 const TodoList = props => {
     //Summary | Priority | Created On | Due Date | Actions
-    const [state, setState] = React.useState({
-        columns: [
-            { title: 'Summary', field: 'summary' },
-            { title: 'Priority', field: 'priority' },
-            { title: 'Created On', field: 'createdOn', type: 'datetime' },
-            {
-                title: 'Due Date',
-                field: 'dueDate',
-                type: 'datetime'
+    const [columns, setColumns] = React.useState([
+        { title: 'Summary', field: 'summary' },
+        { title: 'Priority', field: 'priority' },
+        { title: 'Created On', field: 'createdOn', type: 'datetime' },
+        {
+            title: 'Due Date',
+            field: 'dueDate',
+            type: 'datetime'
+        }
+    ]);
+    const [currentGrouping, setCurrentGrouping] = React.useState('none');
+    const tabView = props.tabView;
+    const [tableComp, setTableComp] = React.useState(null);
+
+    React.useEffect(() => {
+        let viewData = null;
+        if(tabView === "all"){
+            viewData = props.todoData;
+            
+        }else if(tabView === "completed"){
+            viewData = props.todoData.filter(record => record.status === "completed");
+            
+        }else if(tabView === "pending"){
+            viewData = props.todoData.filter(record => record.status === "pending"); 
+        }
+        console.log("data ::", viewData);
+        setTableComp(<Table 
+            columns={columns}
+            data={viewData}
+        />);
+    }, [tabView, props.todoData.length, columns])
+
+    const handleGrouping = (e) => {
+        const value = e.target.value;
+        setCurrentGrouping(value);
+        const updatedColumns = columns.map(col => {
+            if (col.field === value) {
+                col.tableData.groupOrder = 0;
+            } else {
+                delete col.tableData.groupOrder;
             }
-        ],
-        data: [{
-            summary: "test 1",
-            priority: "High",
-            createdOn: new Date(),
-            dueDate: new Date() + 12
-        }],
-    });
+            return col;
+        });
+        setColumns(updatedColumns);
+    }
 
     return (
         <React.Fragment>
-            <br/>
-            <Dropdown 
+            <br />
+            <Dropdown
                 isDisabled={false}
                 data={groupByFields}
-                selectedValue={groupByFields[0].value}
+                selectedValue={currentGrouping}
                 valueColumn="value"
                 displayColumn="label"
                 displayLabel="Group By"
+                handleChange={handleGrouping}
             />
-            <MaterialTable
-                title=""
-                columns={state.columns}
-                data={state.data}
-                options={{
-                    search: false,
-                    paging: false,
-                    showTitle: false,
-                    toolbar: false,
-                    actionsColumnIndex: Infinity
-                }}
-                actions={[
-                    {
-                        icon: 'assignment_turned_in',
-                        tooltip: 'Mark as complete',
-                        onClick: (e, rowData) => alert("Done")
-                    },{
-                      icon: 'edit',
-                      tooltip: 'Edit User',
-                      onClick: (event, rowData) => alert('You are editing ' + rowData.name)
-                    },
-                    {
-                      icon: 'delete',
-                      tooltip: 'Delete User',
-                      onClick: (event, rowData) => confirm('You want to delete ' + rowData.name)
-                    }
-                  ]}
-            />
+            {tableComp}
         </React.Fragment>
     );
 };
 
-export default TodoList;
+
+const mapStatetoProps = state => {
+    return {
+        todoData: state.todos.data
+    }
+}
+const options = {
+    areOwnPropsEqual: () => false
+}
+
+export default connect(mapStatetoProps, undefined, undefined, options)(TodoList);

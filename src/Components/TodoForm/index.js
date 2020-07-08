@@ -1,5 +1,5 @@
 import React from "react";
-
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -31,6 +31,28 @@ const TodoForm = props => {
 
     const classes = useStyles();
     const {isFormOpen, isEditMode} = props;
+
+    const [priority, setPriority] = React.useState('low');
+    const [summary, setSummary] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [dueDate, setDueDate] = React.useState(new Date());
+
+    const handlePriority = (e) => {
+        setPriority(e.target.value);
+    }
+
+    const handleSaveTodo = () => {
+        const values = {
+            summary,
+            description,
+            dueDate,
+            priority,
+            createdOn: new Date()
+        };
+        props.saveTodoItem(values);
+        props.handleClose();
+    }
+
     return (
         <Dialog open={isFormOpen}
             maxWidth="md"
@@ -42,11 +64,15 @@ const TodoForm = props => {
                     autoFocus
                     margin="dense"
                     id="todo-title"
-                    label="Title"
+                    label="Summary"
                     type="text"
                     fullWidth
                     autoFocus
                     disabled={!isEditMode}
+                    value={summary}
+                    onChange={(e) => {
+                        setSummary(e.target.value);
+                    }}
                 />
                 <TextField
                     id="todo-description"
@@ -55,8 +81,8 @@ const TodoForm = props => {
                     rowsMax={4}
                     fullWidth
                     disabled={!isEditMode}
-                // value={value}
-                // onChange={handleChange}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                 />
                 <br /><br />
                 <div>
@@ -65,22 +91,23 @@ const TodoForm = props => {
                         isDisabled={!isEditMode}
                         valueColumn="value"
                         displayColumn="label"
-                        selectedValue={priorities[0].value}
+                        selectedValue={priority}
                         data={priorities}
                         displayLabel="Priority"
-                        // handleChange
+                        handleChange={handlePriority}
                     />
 
                     <TextField
                         id="todo-duedate"
                         label="Due Date"
                         type="datetime-local"
-                        // defaultValue="2017-05-24T10:30"
+                        defaultValue={dueDate}
                         disabled={!isEditMode}
                         className={classes.dueDate}
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        onChange={e => setDueDate(e.target.value)}
                     />
 
                 </div>
@@ -89,7 +116,7 @@ const TodoForm = props => {
                 <Button onClick={props.handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={props.handleSaveTodo} color="primary">
+                <Button onClick={handleSaveTodo} color="primary">
                     Save
                 </Button>
             </DialogActions>
@@ -97,4 +124,13 @@ const TodoForm = props => {
     )
 };
 
-export default TodoForm;
+const mapDispatchToProps = dispatch => {
+    return {
+        saveTodoItem: (values) => dispatch({
+            type: "ADD_TODO_LIST",
+            values
+        })
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TodoForm);
