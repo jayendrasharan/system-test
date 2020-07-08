@@ -16,7 +16,7 @@ const Dropdown = props => {
                 id="todoform-dropdown-select"
                 value={selectedValue}
                 disabled={isDisabled}
-            // onChange={props.handleChange}
+                onChange={handleChange}
             >
                 {
                     data.map((item, i) => (

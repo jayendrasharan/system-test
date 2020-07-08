@@ -20,7 +20,6 @@ const TodoTabs = (props) => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
     return (
         <React.Fragment>
             <Paper className={classes.root}>
@@ -37,16 +36,17 @@ const TodoTabs = (props) => {
                 </Tabs>
             </Paper>
             <TabPanel value={value} index={0}>
-                <TodoList />
+                <TodoList tabView="all"  />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TodoList />
+                <TodoList tabView="completed" />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <TodoList />
+                <TodoList tabView="pending" />
             </TabPanel>
         </React.Fragment>
     );
 }
 
-export default TodoTabs;
+
+export default (TodoTabs);
