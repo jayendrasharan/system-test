@@ -1,26 +1,47 @@
 import React from 'react';
-
 import Dropdown from '../../Components/Dropdown';
 import { connect } from 'react-redux';
-// import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 import Table from './Table';
-const groupByFields = ['none', "createdAt", "dueDate", "priority"].map(item => ({ value: item, label: item }));
+import * as todoActionreators from '../../store/actionCreators/todoActions';
+import { groupByFields, gridColumns } from '../../config';
+import { Button } from '@material-ui/core';
 
 const TodoList = props => {
-    //Summary | Priority | Created On | Due Date | Actions
-    const [columns, setColumns] = React.useState([
-        { title: 'Summary', field: 'summary' },
-        { title: 'Priority', field: 'priority' },
-        { title: 'Created On', field: 'createdOn', type: 'datetime' },
-        {
-            title: 'Due Date',
-            field: 'dueDate',
-            type: 'datetime'
-        }
-    ]);
+    const [columns, setColumns] = React.useState(gridColumns);
     const [currentGrouping, setCurrentGrouping] = React.useState('none');
     const tabView = props.tabView;
     const [tableComp, setTableComp] = React.useState(null);
+    const [selectedRows, setSelectedRows] = React.useState([]);
+
+    const handleDeleteTodo = (event, rowData) => {
+        props.toggleAlertBox({
+            title: rowData.summary,
+            alertMessage: "Do you want to delete this task?",
+            yesAction: () => {
+                props.deleteTodo(rowData.id);
+                props.toggleAlertBox();
+            },
+            noAction: () => {
+                props.toggleAlertBox();
+            }
+        });
+    }
+
+    const handleRowClick = (e, rowData) => {
+        props.openTodoForm(rowData.id, false);
+    };
+
+    const handleEditTodo = (e, rowData) => {
+        props.openTodoForm(rowData.id, true);
+    }
+
+    const toggleCompleteTask = (e, rowData) => {
+        props.toggleTaskStatus(rowData.id);
+    }
+
+    const onSelectionChange = (rows) => {
+        setSelectedRows(rows.map(row => row.id));
+    }
 
     React.useEffect(() => {
         let viewData = null;
@@ -33,12 +54,19 @@ const TodoList = props => {
         }else if(tabView === "pending"){
             viewData = props.todoData.filter(record => record.status === "pending"); 
         }
-        console.log("data ::", viewData);
-        setTableComp(<Table 
-            columns={columns}
-            data={viewData}
-        />);
-    }, [tabView, props.todoData.length, columns])
+        // console.log("data ::", viewData);
+        setTableComp(
+            <Table 
+                columns={columns}
+                data={viewData}
+                handleDeleteTodo={handleDeleteTodo}
+                handleRowClick={handleRowClick}
+                handleEditTodo={handleEditTodo}
+                toggleCompleteTask={toggleCompleteTask}
+                onSelectionChange={onSelectionChange}
+            />
+        );
+    }, [props.todoData.length, props.lastEditTimestamp, columns])
 
     const handleGrouping = (e) => {
         const value = e.target.value;
@@ -57,6 +85,11 @@ const TodoList = props => {
     return (
         <React.Fragment>
             <br />
+            <div style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center"
+            }}>
             <Dropdown
                 isDisabled={false}
                 data={groupByFields}
@@ -66,6 +99,36 @@ const TodoList = props => {
                 displayLabel="Group By"
                 handleChange={handleGrouping}
             />
+
+            <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
+                props.toggleAlertBox({
+                    title: `Delete ${selectedRows.length} record(s)`,
+                    alertMessage: "Do you want to delete this task?",
+                    yesAction: () => {
+                        selectedRows.forEach(row => props.deleteTodo(row))
+                        props.toggleAlertBox();
+                    },
+                    noAction: () => {
+                        props.toggleAlertBox();
+                    }
+                });
+            }}>
+                Delete Selected
+            </Button>
+
+            <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
+                props.markListAsPending(selectedRows);
+            }}>
+                Mark as Pending
+            </Button>
+
+            <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
+                props.markListAsDone(selectedRows);
+            }}>
+                Mark as Done
+            </Button>
+            </div>
+
             {tableComp}
         </React.Fragment>
     );
@@ -74,11 +137,23 @@ const TodoList = props => {
 
 const mapStatetoProps = state => {
     return {
-        todoData: state.todos.data
+        todoData: state.todos.filteredData,
+        lastEditTimestamp: state.todos.lastEditTimestamp,
+        isAlertBoxOpen: state.ui.isAlertOpen
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteTodo: (todoId) => dispatch(todoActionreators.deleteTodo(todoId)),
+        toggleAlertBox: (info) => dispatch(todoActionreators.toggleAlertBox(info)),
+        openTodoForm: (id, isEditable) => dispatch(todoActionreators.openTodoForm(id, isEditable)),
+        toggleTaskStatus: (id) => dispatch(todoActionreators.toggleTaskStatus(id)),
+        markListAsDone: (ids) => dispatch(todoActionreators.markListAsDone(ids)),
+        markListAsPending: ids => dispatch(todoActionreators.markListAsPending(ids))
     }
 }
 const options = {
     areOwnPropsEqual: () => false
 }
 
-export default connect(mapStatetoProps, undefined, undefined, options)(TodoList);
+export default connect(mapStatetoProps, mapDispatchToProps, undefined, options)(TodoList);

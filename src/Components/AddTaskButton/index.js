@@ -1,8 +1,8 @@
 import React from "react";
 
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
     addtaskButton: {
@@ -18,9 +18,9 @@ const AddTaskButton = props => {
 
     return (
         <div className={classes.addtaskButton}>
-            <IconButton color="secondary" aria-label="Add todo" component="span" onClick={props.handleOpenForm} >
-                <AddCircleOutlinedIcon fontSize="large" />
-            </IconButton>
+            <Fab onClick={props.handleOpenForm} size="large" color="secondary" aria-label="add" className={classes.margin}>
+                <AddIcon />
+            </Fab>
         </div>
     );
 };

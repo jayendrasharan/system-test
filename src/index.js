@@ -5,12 +5,12 @@ import { ThemeProvider } from "@material-ui/core";
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
-
+import thunk from 'redux-thunk';
 import App from './App.jsx';
 import theme from './theme';
 import rootReducer from './store/reducers';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>
