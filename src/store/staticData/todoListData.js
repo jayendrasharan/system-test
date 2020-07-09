@@ -4,7 +4,7 @@ const todoListData = [{
     createdOn: new Date(2020, 4, 2),
     dueDate: new Date(2020, 4, 6)
 },{
-    id: 2, summary: "Use React, Redux, Webpack", description: "description for todo 2", status: "completed",
+    id: 2, summary: "Use React, Redux, Webpack", description: "description for todo 2", status: "pending",
     priority: "medium",
     createdOn: new Date(2020, 4, 3),
     dueDate: new Date(2020, 4, 7)

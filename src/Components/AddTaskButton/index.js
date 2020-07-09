@@ -7,8 +7,8 @@ import AddIcon from '@material-ui/icons/Add';
 const useStyles = makeStyles(theme => ({
     addtaskButton: {
         position: 'absolute',
-        bottom: 0,
-        right: 0
+        bottom: 10,
+        right: 10
     }
 }));
 
