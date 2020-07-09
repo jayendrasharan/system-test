@@ -77,7 +77,7 @@ const TodoForm = props => {
             maxWidth="md"
             onClose={props.handleClose}
         >
-            <DialogTitle>Add / Edit Todo</DialogTitle>
+            <DialogTitle>Add Task</DialogTitle>
             <DialogContent>
                 <TextField
                     autoFocus
@@ -110,6 +110,7 @@ const TodoForm = props => {
                     error={descriptionError}
                     multiline
                     required
+                    rows={2}
                     rowsMax={4}
                     fullWidth
                     disabled={!isEditMode}

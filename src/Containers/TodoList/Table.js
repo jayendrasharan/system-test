@@ -1,6 +1,6 @@
 import React from 'react';
 import MaterialTable, { MTableBodyRow } from "material-table";
-
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 const Table = props => {
     const { columns, data, handleDeleteTodo, handleRowClick,
@@ -57,14 +57,14 @@ const Table = props => {
                         onClick: toggleCompleteTask,
                         position: "row"
                     }, {
-                        icon: 'edit',
-                        tooltip: 'Edit User',
+                        icon: 'edit_outline',
+                        tooltip: 'Edit',
                         onClick: handleEditTodo,
                         position: "row"
                     },
                     {
-                        icon: 'delete',
-                        tooltip: 'Delete User',
+                        icon: 'delete_outline',
+                        tooltip: 'Delete',
                         onClick: handleDeleteTodo,
                         position: "row"
                     }

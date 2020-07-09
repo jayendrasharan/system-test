@@ -34,6 +34,7 @@ export const gridColumns = [
     { title: 'Priority', field: 'priority', sorting: sortableFields.includes('priority') ? true : false },
     { title: 'Created On', 
         defaultSort: 'desc',
+        format: "%d%m%Y - %hh:%mm",
         field: 'createdOn', type: 'datetime', sorting: sortableFields.includes('createdOn') ? true : false },
     {
         title: 'Due Date',

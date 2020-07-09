@@ -36,7 +36,7 @@ const App = props => {
             }}>
                 <InputSearchBox handleSearch={handleSearch}/>
                 <div style={{
-                    fontSize: '1.2rem',
+                    fontSize: '1.6rem',
                     color: "#03a9f4",
                     fontWeight: "500",
                     lineHeight: '10px',
@@ -48,7 +48,7 @@ const App = props => {
 
                         <sub style={{
                             color: "grey",
-                            fontSize: '0.8rem',
+                            fontSize: '0.9rem',
                         }}>
                             Better to do, than to say
                         </sub>
