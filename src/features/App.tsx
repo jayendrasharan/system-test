@@ -18,16 +18,7 @@ const rootStore = Sf.store.initStore(AppReducer, {});
 export class App extends React.Component<AppProps, AppState>
 {
 
-    public componentDidMount()
-    {
-        Sf.store.dispatch({
-            type: 'Service_GetNewRecord_Success',
-            object: 'addedstore',
-            record: "praveen",
-        });
-      
-        window.store = Sf.store.getState();
-    }
+   
 
     public render() {
         console.log(Sf.store.getState());

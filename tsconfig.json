@@ -2,7 +2,7 @@
     "compileOnSave": true,
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
-     
+        "experimentalDecorators": true,
         "declaration": true,
         "baseUrl": "./src",
         "outDir": "./dist",

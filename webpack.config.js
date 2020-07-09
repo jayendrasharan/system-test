@@ -1,5 +1,6 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
     filename: 'index.html',
@@ -22,7 +23,8 @@ module.exports = {
     },
 
     plugins: [
-        HtmlWebpackPluginConfig
+        HtmlWebpackPluginConfig,
+        new MiniCssExtractPlugin()
     ],
 
     devServer: {
@@ -49,11 +51,16 @@ module.exports = {
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
-
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    'css-loader',
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.js$/,
