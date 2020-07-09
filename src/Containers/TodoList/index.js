@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Table from './Table';
 import * as todoActionreators from '../../store/actionCreators/todoActions';
 import { groupByFields, gridColumns } from '../../config';
-import { Button } from '@material-ui/core';
+import { Button, Tooltip } from '@material-ui/core';
 
 const TodoList = props => {
     const [columns, setColumns] = React.useState(gridColumns);
@@ -85,11 +85,15 @@ const TodoList = props => {
     return (
         <React.Fragment>
             <br />
+            
             <div style={{
                 display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center"
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "0 20px"
             }}>
+            
+            <div>
             <Dropdown
                 isDisabled={false}
                 data={groupByFields}
@@ -99,34 +103,49 @@ const TodoList = props => {
                 displayLabel="Group By"
                 handleChange={handleGrouping}
             />
+            </div>
 
-            <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
-                props.toggleAlertBox({
-                    title: `Delete ${selectedRows.length} record(s)`,
-                    alertMessage: "Do you want to delete this task?",
-                    yesAction: () => {
-                        selectedRows.forEach(row => props.deleteTodo(row))
-                        props.toggleAlertBox();
-                    },
-                    noAction: () => {
-                        props.toggleAlertBox();
-                    }
-                });
-            }}>
-                Delete Selected
-            </Button>
+            <div>
+                <Tooltip title="Mark selected tasks pending">
+                    <span>
+                    <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
+                        props.markListAsPending(selectedRows);
+                    }}>
+                        Pending
+                    </Button>
+                    </span>
+                </Tooltip>
 
-            <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
-                props.markListAsPending(selectedRows);
-            }}>
-                Mark as Pending
-            </Button>
+                <Tooltip title="Mark selected tasks Done">
+                    <span>
+                        <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
+                            props.markListAsDone(selectedRows);
+                        }}>
+                            Done
+                        </Button>
+                    </span>
+                </Tooltip>
 
-            <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
-                props.markListAsDone(selectedRows);
-            }}>
-                Mark as Done
-            </Button>
+                <Tooltip title="Delete Selected">
+                    <span>
+                    <Button disabled={selectedRows.length === 0 ? true : false} onClick={() => {
+                        props.toggleAlertBox({
+                            title: `Delete ${selectedRows.length} record(s)`,
+                            alertMessage: "Do you want to delete this task?",
+                            yesAction: () => {
+                                selectedRows.forEach(row => props.deleteTodo(row))
+                                props.toggleAlertBox();
+                            },
+                            noAction: () => {
+                                props.toggleAlertBox();
+                            }
+                        });
+                    }}>
+                        Delete
+                    </Button>
+                    </span>
+                </Tooltip>
+            </div>
             </div>
 
             {tableComp}

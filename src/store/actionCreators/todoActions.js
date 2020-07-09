@@ -1,3 +1,20 @@
+import todoListData from '../staticData/todoListData';
+
+export const getAllTodos = () => {
+    return dispatch => {
+        dispatch(toggleBackdrop());
+        setTimeout(() => {
+            dispatch({
+                type: "GET_TODO_LIST",
+                values: {
+                    data: todoListData
+                }
+            });
+            dispatch(toggleBackdrop());
+        }, 1000)
+    }
+}
+
 export const searchTodoItems = value => {
     return {
         type: "SEARCH_TODO_ITEMS",

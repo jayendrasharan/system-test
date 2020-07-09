@@ -45,9 +45,9 @@ const InputSearchBox = props => {
   const debouncedSearch = debounce(value => props.handleSearch(value), 200)
   return (
     <TextField
-      label="Global Search"
+      // label="Global Search"
       id="global-searchbox"
-      placeholder="Press Ctrl + Shift + F"
+      placeholder="Search (Ctrl + Shift + F)"
       className={clsx(classes.margin, classes.textField)}
       InputProps={{
         startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,

@@ -1,15 +1,15 @@
-import todoListData from '../staticData/todoListData';
 import { searchableFields } from '../../config';
 
 
 const initialState = {
-    data: todoListData,
+    isDataLoaded: false,
+    data: [],
     isFormOpen: false,
     isEditMode: true,
     selectedTodoId: null,
     selectedTodoItem: {},
     lastEditTimestamp: null,
-    filteredData: todoListData
+    filteredData: []
 };
 
 
@@ -17,7 +17,9 @@ export default function (state = initialState, action) {
     const updatedState = { ...state };
     switch (action.type) {
         case "GET_TODO_LIST":
-
+            updatedState.data = action.values.data;
+            updatedState.filteredData = action.values.data;
+            updatedState.isDataLoaded = true;
             break;
 
         case "TOGGLE_COMPLETE":
@@ -73,7 +75,7 @@ export default function (state = initialState, action) {
             } else {
                 updatedState.filteredData = updatedState.data.filter(item => {
                     for (let field of searchableFields) {
-                        if (item[field].includes(searchText)) {
+                        if (item[field] && item[field].toLowerCase().includes(searchText.toLowerCase())) {
                             return item;
                         }
                     }
