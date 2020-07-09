@@ -9,10 +9,12 @@ Sureify - Front end system test
     
 3. If at any point, you feel like the requirement is not clear, call one of us and let us know your concern. Try not to speculate, each of us think differently.
 4. Ideally we will receive notifications when you raise a PR and assign us as code reviewers, but if you feel we haven't acknowledged it, call one of us us and let us know.
+5. Please note, we scan all the PRs carefully. If we find your code to be same as any other PR, we will reject your application and you will be prohibited from participating in any future opprotunities. We take plagiarism very seriously.
 
 # Code submission
 1. Fork this repository [see the fork icon on the top right corner of this page].
 2. Add regular commits and regular pushes to your forked repository.
+3. All the requirements i.e., among all the **Must Haves** and any extra features added **must be** mentioned in your          README.md file. Other wise    your pull request **will not be reviewed /    accepted.**
 3. Once you are done, raise a pull request against `codes` branch and assign following people as code reviewers.
 - jayendrasharan
 - wasib-sureify
