@@ -1,0 +1,53 @@
+@import "~@blueprintjs/datetime/lib/css/blueprint-datetime.css";
+
+.task-grid {
+
+    .bp3-input-group {
+        width: 30%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    td.actions {
+        span {
+            margin-right: 5px;
+            text-decoration: underline;
+            cursor: pointer;
+            color: navy;
+        }
+    }
+
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+}
+
+
+.bp3-form-group {
+    select {
+        width: 100%;
+        height: 30px;
+        ;
+    }
+}
+
+
+
+#btndisclaimer {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
