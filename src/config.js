@@ -32,7 +32,9 @@ export const gridColumns = [
     { title: 'Id', field: 'id', hidden: true },
     { title: 'Summary', field: 'summary', sorting: sortableFields.includes('summary') ? true : false },
     { title: 'Priority', field: 'priority', sorting: sortableFields.includes('priority') ? true : false },
-    { title: 'Created On', field: 'createdOn', type: 'datetime', sorting: sortableFields.includes('createdOn') ? true : false },
+    { title: 'Created On', 
+        defaultSort: 'desc',
+        field: 'createdOn', type: 'datetime', sorting: sortableFields.includes('createdOn') ? true : false },
     {
         title: 'Due Date',
         field: 'dueDate',

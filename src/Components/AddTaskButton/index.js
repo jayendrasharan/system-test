@@ -18,7 +18,7 @@ const AddTaskButton = props => {
 
     return (
         <div className={classes.addtaskButton}>
-            <Fab onClick={props.handleOpenForm} size="large" color="secondary" aria-label="add" className={classes.margin}>
+            <Fab onClick={props.handleOpenForm} size="large" color="primary" aria-label="add" className={classes.margin}>
                 <AddIcon />
             </Fab>
         </div>

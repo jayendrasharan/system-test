@@ -8,10 +8,11 @@ import InputSearchBox from './Components/InputSearchBox';
 
 import * as todoActionCreators from './store/actionCreators/todoActions';
 import CustomBackdrop from './Components/Backdrop';
+import { Typography } from '@material-ui/core';
 
 const App = props => {
     // const [isFormOpen, setIsFormOpen] = React.useState(false);
-    const {isFormOpen} = useSelector(state => state.todos);
+    const {isFormOpen, data, isDataLoaded} = useSelector(state => state.todos);
     const dispatch = useDispatch();
 
     // const [isEditMode, setIsEditMode] = React.useState(true);
@@ -19,10 +20,40 @@ const App = props => {
 
     const handleSearch = value =>  dispatch(todoActionCreators.searchTodoItems(value));
 
+    React.useEffect(() => {
+        if(isDataLoaded === false){
+            dispatch(todoActionCreators.getAllTodos())
+        }
+    }, []);
+
+    if(isDataLoaded === false) return <CustomBackdrop />;
     return (
         <div>
             {/* render tabs */}
-            <InputSearchBox handleSearch={handleSearch}/>
+            <div style={{
+                display: "flex",
+                justifyContent: "space-between"
+            }}>
+                <InputSearchBox handleSearch={handleSearch}/>
+                <div style={{
+                    fontSize: '1.2rem',
+                    color: "#03a9f4",
+                    fontWeight: "500",
+                    lineHeight: '10px',
+                    padding: '10px'
+                }}>                        
+                        <div>
+                            My Tasks
+                        </div>
+
+                        <sub style={{
+                            color: "grey",
+                            fontSize: '0.8rem',
+                        }}>
+                            Better to do, than to say
+                        </sub>
+                </div>
+            </div>
             <TodoTabs />
             <AddTaskButton handleOpenForm={toggleOpenForm} />
             <TodoForm 

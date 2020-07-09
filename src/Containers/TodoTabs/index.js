@@ -28,7 +28,6 @@ const TodoTabs = (props) => {
                     onChange={handleChange}
                     indicatorColor="primary"
                     textColor="primary"
-                    centered
                 >
                     <Tab label="All Task" />
                     <Tab label="Completed" />
