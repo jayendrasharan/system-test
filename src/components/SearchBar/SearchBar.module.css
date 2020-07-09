@@ -1,0 +1,23 @@
+.Search{
+    background-color: #d6eeee;
+    margin: .5rem 0 .5rem .5rem;
+    border: 1px solid #98d6ea;
+    border-radius: 5px;    
+    display: flex;
+    align-items: flex-end;
+    padding: .5rem;
+    width: 20%;
+}
+.SearchIcon{
+    color: inherit;
+    font-size: 1.2rem;
+}
+.SearchInput{
+    flex-grow: 1;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 700;
+}

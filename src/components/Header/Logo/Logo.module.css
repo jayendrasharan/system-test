@@ -1,0 +1,10 @@
+.Logo{
+    padding: 0 2rem;
+    display: flex;
+}
+.LogoText{
+    font-size: 2rem;
+    color: #98d6ea;
+    font-weight: 800;
+    padding: 1rem;
+  }
