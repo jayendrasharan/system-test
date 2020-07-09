@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Dialog, Classes, Button, Intent } from '@blueprintjs/core';
 import { FormGroup, InputGroup, TextArea } from '@blueprintjs/core';
 import { DateInput, IDateFormatProps } from "@blueprintjs/datetime";
-import { Task } from '../../models';
+import { Task, UIOption, Priority } from '../../models';
 import { StoreUtils } from '../../store';
 import { Sf } from '../../services';
+
 export interface AddTaskFormProps {
     openModal?: boolean;
     onClose?: (value?: any) => any;
@@ -183,20 +184,7 @@ export class AddTaskForm extends React.Component<AddTaskFormProps, AddTaskFormSt
     }
 
 
-   
+
 }
 
 
-
-export type UIOption =
-    {
-        label?: string;
-        value?: string;
-    }
-
-export const Priority: UIOption[] = [
-    { label: 'None', value: 'none' },
-    { label: 'Low', value: 'low' },
-    { label: 'Medium', value: 'medium' },
-    { label: 'High', value: 'high' },
-]

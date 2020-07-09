@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Task } from '../../models/Task';
+import { Task, Priority } from '../../models';
 import { InputGroup, ButtonGroup, Dialog, Classes, Checkbox, Toaster } from '@blueprintjs/core';
 import { Tooltip, Button, Intent } from '@blueprintjs/core';
 import { StoreUtils } from '../../store';
@@ -9,6 +9,7 @@ export interface TaskGridProps {
     rows: Task[];
     onEdit?: (value: Task, index: number) => void;
     onView?: (value: Task) => void;
+    statusFilter?: boolean;
 }
 
 
@@ -17,7 +18,8 @@ export interface TaskGridState {
     searchText?: string;
     selectedIndex?: number;
     confirm?: boolean;
-    sort?: { column: string, order: "asc" | "desc" }
+    sort?: { column: string, order: "asc" | "desc" };
+
 }
 
 export class TaskGrid extends React.Component<TaskGridProps, TaskGridState>  {
@@ -41,7 +43,9 @@ export class TaskGrid extends React.Component<TaskGridProps, TaskGridState>  {
             rows = this.sortRows(rows);
         }
 
-
+        if (this.props.statusFilter != undefined) {
+            rows = rows.filter(x => x.currentState === this.props.statusFilter);
+        }
 
         return (
             <div className='task-grid'>
@@ -110,7 +114,7 @@ export class TaskGrid extends React.Component<TaskGridProps, TaskGridState>  {
                                         }} />
                                     </td>
                                     <td>{row.title}</td>
-                                    <td>{row.priority}</td>
+                                    <td>{Priority.find(x => x.value === row.priority)?.label}</td>
                                     <td>{row.createdAt}</td>
                                     <td>{row.dueDate}</td>
                                     <td className='actions'>

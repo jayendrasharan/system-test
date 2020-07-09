@@ -15,10 +15,14 @@ export interface TaskListState {
     mode?: 'view' | 'add' | 'edit'
 }
 
-@connect((state: any) => { return { state }; })
-export class TaskList extends React.Component<{}, TaskListState>
+export interface TaskListProps {
+    state?: any;
+}
+
+@(connect((state:TaskListProps) => state) as any)
+export default class TaskList extends React.Component<TaskListProps, TaskListState>
 {
-    constructor(props: any) {
+    constructor(props: TaskListProps) {
         super(props);
         this.state = {
             selectedTab: 'all',
@@ -33,12 +37,24 @@ export class TaskList extends React.Component<{}, TaskListState>
             <>
                 <Tabs className='main-tabs' id="TaskList" onChange={this.handleTabChange} renderActiveTabPanelOnly selectedTabId={this.state.selectedTab}>
                     <Tab id="all" title="All Tasks" panel={
-                    <TaskGrid rows={this.getTaskList()}
-                        onEdit={(row: Task, index: number) => this.handleOnEditTask(row, index)}
-                        onView={(row: Task) => this.handleOnEditTask(row, undefined, 'view')}
-                    />} />
-                    <Tab id="completed" title="Completed" panel={<div>Tab2</div>} />
-                    <Tab id="pending" title="Pending" panel={<div>Tab3</div>} />
+                        <TaskGrid rows={this.getTaskList()}
+                            onEdit={(row: Task, index: number) => this.handleOnEditTask(row, index)}
+                            onView={(row: Task) => this.handleOnEditTask(row, undefined, 'view')}
+                        />} />
+                    <Tab id="pending" title="Pending" panel={
+                        <TaskGrid rows={this.getTaskList()}
+                            onEdit={(row: Task, index: number) => this.handleOnEditTask(row, index)}
+                            onView={(row: Task) => this.handleOnEditTask(row, undefined, 'view')}
+                            statusFilter
+                        />}
+                    />
+                    <Tab id="completed" title="Completed" panel={
+                        <TaskGrid rows={this.getTaskList()}
+                            onEdit={(row: Task, index: number) => this.handleOnEditTask(row, index)}
+                            onView={(row: Task) => this.handleOnEditTask(row, undefined, 'view')}
+                            statusFilter={false}
+                        />}
+                    />
                 </Tabs>
                 <Button icon="add" onClick={() => this.setState({ openModal: true })} intent="warning" large id='btndisclaimer' />
                 <AddTaskForm mode={this.state.mode} taskRecord={this.state.taskRecord} openModal={this.state.openModal} onClose={() => this.setState({ openModal: false, taskRecord: undefined, mode: undefined })} />

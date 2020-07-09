@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TaskList } from '../components';
+import TaskList from '../components/tasks/TaskList';
 
 export const Home: React.FC = () => {
     return (

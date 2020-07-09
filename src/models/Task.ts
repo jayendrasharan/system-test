@@ -17,3 +17,17 @@ export class Task {
         this.priority = 'none';
     }
 }
+
+
+export type UIOption =
+    {
+        label?: string;
+        value?: string;
+    }
+
+export const Priority: UIOption[] = [
+    { label: 'None', value: 'none' },
+    { label: 'Low', value: 'low' },
+    { label: 'Medium', value: 'medium' },
+    { label: 'High', value: 'high' },
+]
