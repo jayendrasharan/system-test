@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useForm from "../../customHooks/useForm";
 import { TODO_STATUS, TODO_PRIORITY } from "../../constants";
 import Input from "../../components/Input";
@@ -26,6 +26,36 @@ const Todo = (props) => {
         };
     }
   });
+
+  const [errors, setErrorrs] = useState({});
+
+  const onSaveClickHandler = () => {
+    let error = false,
+      errorObj = {};
+    if (
+      !values.title ||
+      values.title.length < 10 ||
+      values.title.length > 140
+    ) {
+      error = true;
+      errorObj["title"] = "Title length must be between 10 and 140.";
+    }
+    if (
+      !values.description ||
+      values.description.length < 10 ||
+      values.description.length > 500
+    ) {
+      error = true;
+      errorObj["description"] =
+        "Description length must be between 10 and 500.";
+    }
+    if (error) {
+      setErrorrs(errorObj);
+      return;
+    }
+    onSave(values);
+  };
+
   return (
     <div className={classes.main}>
       <h1>Create Todo</h1>
@@ -42,6 +72,9 @@ const Todo = (props) => {
               value={values.title}
             />
           )}
+          {errors.title && (
+            <label className={classes.error}>{errors.title}</label>
+          )}
         </div>
         <div>
           <label>Description</label>
@@ -55,6 +88,9 @@ const Todo = (props) => {
               value={values.description}
               rows={5}
             />
+          )}
+          {errors.description && (
+            <label className={classes.error}>{errors.description}</label>
           )}
         </div>
         {mode == "view" && (
@@ -112,7 +148,7 @@ const Todo = (props) => {
           {mode == "view" ? "Close" : "Cancel"}
         </Button>
         {mode != "view" && (
-          <Button onClick={() => onSave(values)}>
+          <Button onClick={onSaveClickHandler}>
             {mode == "create" ? "Create" : "Save"}
           </Button>
         )}
