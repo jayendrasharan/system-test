@@ -7,6 +7,7 @@ import {
   HIDE_SPINNER,
 } from "./actionTypes";
 import { filterHandler } from "../utils/utils";
+import tableConfig from "../config/tableConfig";
 
 const initialState = {
   todoList: [],
@@ -15,78 +16,7 @@ const initialState = {
   tabs: ["ALL", "PENDING", "COMPLETED"],
   activeTab: "ALL",
   activeSortColumn: null,
-  columns: [
-    {
-      title: "Description",
-      key: "description",
-      sort: false,
-      active: false,
-      asc: false,
-      allowGroupBy: false,
-      allowSearch: true,
-      display: false,
-    },
-    {
-      title: "Summary",
-      key: "title",
-      sort: true,
-      active: true,
-      asc: false,
-      allowGroupBy: false,
-      allowSearch: true,
-      display: true,
-    },
-    {
-      title: "Status",
-      key: "currentState",
-      sort: true,
-      active: false,
-      asc: false,
-      allowGroupBy: false,
-      allowSearch: false,
-      display: true,
-    },
-    {
-      title: "Priority",
-      key: "priority",
-      sort: true,
-      active: false,
-      asc: false,
-      allowGroupBy: true,
-      allowSearch: false,
-      display: true,
-    },
-    {
-      title: "Created on",
-      key: "createdAt",
-      sort: true,
-      active: false,
-      asc: false,
-      allowGroupBy: true,
-      allowSearch: false,
-      display: true,
-    },
-    {
-      title: "Due Date",
-      key: "dueDate",
-      sort: true,
-      active: false,
-      asc: false,
-      allowGroupBy: true,
-      allowSearch: false,
-      display: true,
-    },
-    {
-      title: "Actions",
-      key: "actions",
-      sort: false,
-      active: false,
-      asc: false,
-      allowGroupBy: false,
-      allowSearch: false,
-      display: true,
-    },
-  ],
+  columns: tableConfig,
 };
 
 const sortByColumn = (state, action) => {
