@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.main div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+  justify-content: flex-end;
+}
+
+.footer > * {
+  margin-left: 0.5rem;
+}
