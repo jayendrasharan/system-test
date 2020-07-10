@@ -2,7 +2,7 @@
 ## All the below features are implemented
 ---
 
-## You access webapp on below URL, which is deployed on firebase
+## Webapp can be accessed on below URL, which is deployed on firebase
 
 https://sureify-32da6.web.app/
 
