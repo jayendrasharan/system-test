@@ -29,23 +29,6 @@ import { formatDate } from "../../utils/utils";
 import Spinner from "../../components/Spinner";
 
 const Home = (props) => {
-  const {
-    columns,
-    todoList,
-    pendingList,
-    completedList,
-    tabs,
-    groupByOptions,
-    sortColumn,
-    fetchTodoItems,
-    fetchCompletedTodoItems,
-    fetchPendingTodoItems,
-    createTodo,
-    modifyTodo,
-    removeTodo,
-    markDone,
-    markPending,
-  } = props;
   const [showModal, setShowModal] = useState(false);
   const [modal, setModal] = useState(null);
   const [groupBy, setGroupBy] = useState("None");
@@ -93,7 +76,7 @@ const Home = (props) => {
     return data;
   };
 
-  const mapData = (data = []) => {
+  const mapData = (data = [], columns) => {
     return data.map((item, ind) => {
       if (item.type == "section") {
         return (
@@ -200,6 +183,7 @@ const Home = (props) => {
     }
   };
   const getTableHeadings = (columns) => {
+    const { sortColumn } = props;
     return columns
       .filter((col) => col.display)
       .map((item, ind) => (
@@ -219,6 +203,7 @@ const Home = (props) => {
   const onModalCloseHandler = useCallback(() => setShowModal(false), []);
 
   const loadData = () => {
+    const { fetchTodoItems } = props;
     fetchTodoItems();
   };
 
@@ -227,6 +212,7 @@ const Home = (props) => {
   }, []);
 
   const onCreateTodo = (todo) => {
+    const { createTodo } = props;
     createTodo(todo, () => {
       loadData();
       setShowModal(false);
@@ -243,6 +229,7 @@ const Home = (props) => {
   };
 
   const onModifyTodo = (todo) => {
+    const { modifyTodo } = props;
     modifyTodo(todo, () => {
       loadData();
       setShowModal(false);
@@ -250,12 +237,14 @@ const Home = (props) => {
   };
 
   const doneClickHandler = (todo) => {
+    const { markDone } = props;
     markDone(todo.id, () => {
       loadData();
     });
   };
 
   const reOpenClickHandler = (todo) => {
+    const { markPending } = props;
     markPending(todo.id, () => {
       loadData(currentTab);
     });
@@ -290,6 +279,7 @@ const Home = (props) => {
   };
 
   const onDeleteTodo = (todo) => {
+    const { removeTodo } = props;
     removeTodo(todo.id, () => {
       loadData();
       setShowModal(false);
@@ -326,6 +316,7 @@ const Home = (props) => {
   };
 
   const bulkDeletedClickHandler = () => {
+    const { removeTodo } = props;
     const selectedTodoItems = getSelectedTodoItems();
     setModal(
       <Modal onClose={onModalCloseHandler}>
@@ -348,6 +339,7 @@ const Home = (props) => {
     setShowModal(true);
   };
   const bulkDoneClickHandler = () => {
+    const { markDone } = props;
     const selectedTodoItems = getSelectedTodoItems();
     markDone(
       selectedTodoItems.map((todo) => todo.id),
@@ -357,6 +349,7 @@ const Home = (props) => {
     );
   };
   const bulkReopenClickHandler = () => {
+    const { markPending } = props;
     const selectedTodoItems = getSelectedTodoItems();
     markPending(
       selectedTodoItems.map((todo) => todo.id),
@@ -375,6 +368,7 @@ const Home = (props) => {
   };
 
   let dataToBeMapped = [];
+  const { todoList, tabs, columns } = props;
   switch (currentTab) {
     case "ALL":
       dataToBeMapped = todoList;
@@ -471,7 +465,8 @@ const Home = (props) => {
                     props.activeSortColumn
                   ),
                   groupBy
-                )
+                ),
+                columns
               )}
             </tbody>
           </table>
