@@ -7,7 +7,7 @@ const SearchBar = (props) => {
       <input
         type="text"
         class={classes.SearchInput}
-        placeholder="Search for transactions..."
+        placeholder="Search..."
         value={props.searchText}
         onChange={props.onSearchTextChange}
       />

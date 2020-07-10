@@ -1,22 +1,18 @@
 import {
   FETCH_ALL_TODO_LIST,
-  FETCH_OPEN_TODO_LIST,
-  FETCH_COMPLETED_TODO_LIST,
   SORT_ACTION,
+  SELECT_ACTION,
+  SELECT_ALL_ACTION,
+  SHOW_SPINNER,
+  HIDE_SPINNER,
 } from "./actionTypes";
 import { filterHandler } from "../utils/utils";
 
 const initialState = {
   todoList: [],
-  pendingList: [],
-  completedList: [],
   loading: false,
   error: true,
-  tabs: {
-    ALL: "ALL",
-    PENDING: "PENDING",
-    COMPLETED: "COMPLETED",
-  },
+  tabs: ["ALL", "PENDING", "COMPLETED"],
   activeTab: "ALL",
   activeSortColumn: null,
   selectedGroupBy: null,
@@ -36,11 +32,24 @@ const initialState = {
   ],
   columns: [
     {
+      title: "Description",
+      key: "description",
+      sort: false,
+      active: false,
+      asc: false,
+      allowGroupBy: false,
+      allowSearch: true,
+      display: false,
+    },
+    {
       title: "Summary",
       key: "title",
       sort: true,
       active: true,
       asc: false,
+      allowGroupBy: false,
+      allowSearch: true,
+      display: true,
     },
     {
       title: "Status",
@@ -48,6 +57,9 @@ const initialState = {
       sort: true,
       active: false,
       asc: false,
+      allowGroupBy: false,
+      allowSearch: false,
+      display: true,
     },
     {
       title: "Priority",
@@ -55,6 +67,9 @@ const initialState = {
       sort: true,
       active: false,
       asc: false,
+      allowGroupBy: true,
+      allowSearch: false,
+      display: true,
     },
     {
       title: "Created on",
@@ -62,6 +77,9 @@ const initialState = {
       sort: true,
       active: false,
       asc: false,
+      allowGroupBy: true,
+      allowSearch: false,
+      display: true,
     },
     {
       title: "Due Date",
@@ -69,6 +87,9 @@ const initialState = {
       sort: true,
       active: false,
       asc: false,
+      allowGroupBy: true,
+      allowSearch: false,
+      display: true,
     },
     {
       title: "Actions",
@@ -76,6 +97,9 @@ const initialState = {
       sort: false,
       active: false,
       asc: false,
+      allowGroupBy: false,
+      allowSearch: false,
+      display: true,
     },
   ],
 };
@@ -87,15 +111,25 @@ const sortDataByColumn = (data, column) => {
   return data;
 };
 
+const applySearch = (data, searchString, columns) => {
+  if (searchString && searchString.trim()) {
+    return data.filter((item) => {
+      let found = false;
+      columns.forEach((col) => {
+        if (col.allowSearch) {
+          if (item[col.key] && item[col.key].includes(searchString)) {
+            found = true;
+          }
+        }
+      });
+      return found;
+    });
+  }
+  return data;
+};
+
 const sortByColumn = (state, action) => {
-  const {
-    tabs,
-    activeTab,
-    columns,
-    todoList,
-    completedList,
-    pendingList,
-  } = state;
+  const { columns } = state;
   const { payload } = action;
   let columnsNew = columns.map((rec, ind) => {
     if (rec.key == payload.key) {
@@ -112,49 +146,57 @@ const sortByColumn = (state, action) => {
       };
     }
   });
-  let data = {};
-  switch (activeTab) {
-    case tabs.ALL:
-      data = { todoList: [...sortDataByColumn(todoList, payload)] };
-      break;
-    case tabs.COMPLETED:
-      data = { completedList: [...sortDataByColumn(completedList, payload)] };
-      break;
-    case tabs.PENDING:
-      data = { pendingList: [...sortDataByColumn(pendingList, payload)] };
-      break;
-    default:
-      data = {};
-  }
   return {
     ...state,
     activeSortColumn: action.payload,
     columns: columnsNew,
-    ...data,
   };
 };
 
 const loadTodoItems = (state, action) => {
-  const { activeSortColumn } = state;
+  const { activeSortColumn, columns } = state;
   return {
     ...state,
-    todoList: sortDataByColumn(action.payload, activeSortColumn),
+    todoList: action.payload,
+    loading: false,
   };
 };
 
-const loadCompletedTodoItems = (state, action) => {
-  const { activeSortColumn } = state;
+const selectTodoItem = (state, action) => {
+  let index = state.todoList.findIndex((todo) => todo.id == action.payload.id);
+  let updatedTodoList = [...state.todoList];
+  updatedTodoList[index] = {
+    ...updatedTodoList[index],
+    selected: !updatedTodoList[index].selected,
+  };
   return {
     ...state,
-    pendingList: sortDataByColumn(action.payload, activeSortColumn),
+    todoList: updatedTodoList,
   };
 };
 
-const loadOpenTodoItems = (state, action) => {
-  const { activeSortColumn } = state;
+const selectAllTodoItems = (state, action) => {
+  let updatedTodoList = state.todoList.map((todo) => ({
+    ...todo,
+    selected: !todo.selected,
+  }));
   return {
     ...state,
-    completedList: sortDataByColumn(action.payload, activeSortColumn),
+    todoList: updatedTodoList,
+  };
+};
+
+const showSpinner = (state) => {
+  return {
+    ...state,
+    loading: true,
+  };
+};
+
+const hideSpinner = (state) => {
+  return {
+    ...state,
+    loading: false,
   };
 };
 
@@ -162,12 +204,16 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ALL_TODO_LIST:
       return loadTodoItems(state, action);
-    case FETCH_OPEN_TODO_LIST:
-      return loadOpenTodoItems(state, action);
-    case FETCH_COMPLETED_TODO_LIST:
-      return loadCompletedTodoItems(state, action);
     case SORT_ACTION:
       return sortByColumn(state, action);
+    case SELECT_ACTION:
+      return selectTodoItem(state, action);
+    case SELECT_ALL_ACTION:
+      return selectAllTodoItems(state, action);
+    case SHOW_SPINNER:
+      return showSpinner(state);
+    case HIDE_SPINNER:
+      return hideSpinner(state);
     default:
       return state;
   }

@@ -1,0 +1,35 @@
+.main {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.main h1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.main div {
+  width: 100%;
+}
+
+.main div div {
+  margin: 1rem auto;
+}
+
+.main div div label {
+  padding: 0 1rem 1rem 0;
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer button {
+  margin-left: 1rem;
+}

@@ -14,73 +14,72 @@ code {
     monospace;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
-:root{
+:root {
   --black: #000000;
-  --primary-dark: #30231d;
-  --primary-medium: #6a5750;
-  --transperent-black: rgba(0,0,0,.3);
   --grey-dark: #333333;
   --grey-medium: #555555;
   --grey-light: #999999;
   --white: #ffffff;
+  --primary: #0e3758;
+  --secondary: #98d6ea;
+}
 
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--black);
+  padding: 8px 0px;
+}
 
+label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--grey-medium);
+  padding: 8px 0;
+}
 
-  --primary-dark: #30231d;
-  --primary-medium: #6a5750;
-  --header-background: #000;
-  --color-dark: #000;
-  --color-light: #fff;
-  --color-accent: rgb(255,46,115);
-  --color-grey-dark: #808080;
-  --color-grey-medium: #A9A9A9;
-  --color-grey-light: #D3D3D3;
-  --color-grey-white: #F5F5F5;
-  --color-positive: green;
-
-  
-  --color-google:rgb(224,83,67);
-  --color-facebook: rgb(62,88,164);
-  
+p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--grey-medium);
+  padding: 8px 0px;
 }
 
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 html {
-    font-size: 62.5%; 
-    scroll-behavior: smooth;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
 }
-@media screen and (max-width: 700px) { 
+@media screen and (max-width: 700px) {
   html {
-    font-size: 48.25%; 
+    font-size: 48.25%;
   }
 }
 
-@media screen and (max-width: 1200px) { 
+@media screen and (max-width: 1200px) {
   html {
-    font-size: 56.25%; 
+    font-size: 56.25%;
   }
 }
 
-
-
-@media screen and (max-width: 900px) { 
+@media screen and (max-width: 900px) {
   html {
-    font-size: 50%; 
+    font-size: 50%;
   }
 }
 
 @media screen and (min-width: 1350px) {
   html {
-    font-size: 75%; 
+    font-size: 75%;
   }
 }

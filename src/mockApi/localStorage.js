@@ -14,6 +14,7 @@ const getItem = (key) => {
 if (!getItem("todoList")) {
   setItem("todoList", [
     {
+      id: getUUID(),
       currentState: TODO_STATUS.OPEN,
       title: "Workout",
       description: "I have to do gym workout today.",
@@ -43,13 +44,28 @@ export const getCompletedTodoList = () => {
 export const addTodo = (todo) => {
   let todoList = getTodoList();
   let newTodo = { ...todo, id: getUUID() };
-  setItem("todoList", [...todoList, { ...todo, id: getUUID() }]);
+  setItem("todoList", [...todoList, newTodo]);
   return newTodo;
 };
 
-export const deleteTodo = (id) => {
+export const deleteTodoList = (listIds) => {
   let todoList = getTodoList();
-  let index = todoList.findIndex((todo) => todo.id === id) || -1;
+  for (let id of listIds) {
+    let index = todoList.findIndex((todo) => todo.id === id);
+    if (index == -1) {
+      continue;
+    }
+    todoList.splice(index, 1);
+  }
+  setItem("todoList", [...todoList]);
+};
+
+export const deleteTodo = (id) => {
+  if (Array.isArray(id)) {
+    return deleteTodoList(id);
+  }
+  let todoList = getTodoList();
+  let index = todoList.findIndex((todo) => todo.id === id);
   if (index == -1) {
     throw new Error("Todo doesn't exist with id:" + id);
   }
@@ -65,16 +81,42 @@ export const updateTodo = (todo) => {
   return todo;
 };
 
-export const markTodoOpen = (id) => {
+export const markTodoListOpen = (listIds) => {
   let todoList = getTodoList();
-  let todo = todoList.find((todo) => todo.id === id) || null;
+  for (let id of listIds) {
+    let todo = todoList.find((todo) => todo.id === id);
+    todo.currentState = TODO_STATUS.OPEN;
+    updateTodo(todo);
+  }
+  return;
+};
+
+export const markTodoOpen = (id) => {
+  if (Array.isArray(id)) {
+    return markTodoListOpen(id);
+  }
+  let todoList = getTodoList();
+  let todo = todoList.find((todo) => todo.id === id);
   todo.currentState = TODO_STATUS.OPEN;
   return updateTodo(todo);
 };
 
-export const markTodoCompleted = (id) => {
+export const markTodoListCompleted = (listIds) => {
   let todoList = getTodoList();
-  let todo = todoList.find((todo) => todo.id === id) || null;
+  for (let id of listIds) {
+    let todo = todoList.find((todo) => todo.id === id);
+    todo.currentState = TODO_STATUS.COMPLETED;
+    updateTodo(todo);
+  }
+  return;
+};
+
+export const markTodoCompleted = (id) => {
+  if (Array.isArray(id)) {
+    return markTodoListCompleted(id);
+  }
+  let todoList = getTodoList();
+  let todo = todoList.find((todo) => todo.id === id);
   todo.currentState = TODO_STATUS.COMPLETED;
   return updateTodo(todo);
 };

@@ -20,6 +20,9 @@ import {
   MARK_TODO_COMPLETE,
   SHOW_SPINNER,
   SORT_ACTION,
+  SELECT_ACTION,
+  SELECT_ALL_ACTION,
+  HIDE_SPINNER,
 } from "./actionTypes";
 
 const handleError = (err, dispatch) => {
@@ -27,6 +30,7 @@ const handleError = (err, dispatch) => {
     type: SHOW_ERROR,
     payload: err.msg,
   });
+  dispatch(hideSpinner());
 };
 
 const showSpinner = (dispatch) => {
@@ -35,10 +39,29 @@ const showSpinner = (dispatch) => {
   });
 };
 
+const hideSpinner = () => {
+  return {
+    type: HIDE_SPINNER,
+  };
+};
+
 export const sortByColumn = (column) => {
   return {
     type: SORT_ACTION,
     payload: column,
+  };
+};
+
+export const selectTodoItem = (todo) => {
+  return {
+    type: SELECT_ACTION,
+    payload: todo,
+  };
+};
+
+export const selectAllTodoItems = () => {
+  return {
+    type: SELECT_ALL_ACTION,
   };
 };
 
@@ -67,6 +90,7 @@ export const loadCompletedTodoItems = () => {
           type: FETCH_COMPLETED_TODO_LIST,
           payload: res,
         });
+        dispatch(hideSpinner());
       })
       .catch((err) => {
         handleError(err, dispatch);
@@ -83,6 +107,7 @@ export const loadOpenTodoItems = () => {
           type: FETCH_OPEN_TODO_LIST,
           payload: res,
         });
+        dispatch(hideSpinner());
       })
       .catch((err) => {
         handleError(err, dispatch);
@@ -96,6 +121,7 @@ export const addTodo = (todo, callback) => {
     addTodoItem(todo)
       .then((res) => {
         callback(res);
+        dispatch(hideSpinner());
       })
       .catch((err) => {
         handleError(err, dispatch);
@@ -113,6 +139,7 @@ export const updateTodo = (todo, callback) => {
           payload: res,
         });*/
         callback(res);
+        dispatch(hideSpinner());
       })
       .catch((err) => {
         handleError(err, dispatch);
@@ -130,6 +157,7 @@ export const deleteTodo = (id, callback) => {
           payload: res,
         });*/
         callback(res);
+        dispatch(hideSpinner());
       })
       .catch((err) => {
         handleError(err, dispatch);
@@ -147,6 +175,7 @@ export const markTodoOpen = (id, callback) => {
           payload: res,
         });*/
         callback(res);
+        dispatch(hideSpinner());
       })
       .catch((err) => {
         handleError(err, dispatch);
@@ -164,6 +193,7 @@ export const markTodoCompleted = (id, callback) => {
           payload: res,
         });*/
         callback(res);
+        dispatch(hideSpinner());
       })
       .catch((err) => {
         handleError(err, dispatch);

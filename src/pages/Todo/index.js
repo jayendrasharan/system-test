@@ -3,6 +3,9 @@ import useForm from "../../customHooks/useForm";
 import { TODO_STATUS, TODO_PRIORITY } from "../../constants";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import TextArea from "../../components/TextArea";
+import Dropdown from "../../components/Dropdown";
+import classes from "./styles.module.css";
 
 const Todo = (props) => {
   const { mode = "create", todo, onCancel, onSave } = props;
@@ -24,51 +27,86 @@ const Todo = (props) => {
     }
   });
   return (
-    <div>
-      <div>Create Todo</div>
+    <div className={classes.main}>
+      <h1>Create Todo</h1>
       <div>
         <div>
-          <p>Summary</p>
-          <Input
-            type="text"
-            name="title"
-            onChange={handleChange}
-            value={values.title}
-          />
+          <label>Summary</label>
+          {mode == "view" ? (
+            <p>{values.title}</p>
+          ) : (
+            <Input
+              type="text"
+              name="title"
+              onChange={handleChange}
+              value={values.title}
+            />
+          )}
         </div>
         <div>
-          <p>Description</p>
-          <textarea
-            type="textarea"
-            name="description"
-            onChange={handleChange}
-            value={values.description}
-          />
+          <label>Description</label>
+          {mode == "view" ? (
+            <p>{values.description}</p>
+          ) : (
+            <TextArea
+              type="textarea"
+              name="description"
+              onChange={handleChange}
+              value={values.description}
+              rows={5}
+            />
+          )}
+        </div>
+        {mode == "view" && (
+          <div>
+            <label>Created On</label>
+            <p>{values.createdAt}</p>
+          </div>
+        )}
+        <div>
+          <label>Due Date</label>
+          {mode == "view" ? (
+            <p>{values.dueDate}</p>
+          ) : (
+            <Input
+              type="date"
+              name="dueDate"
+              onChange={handleChange}
+              value={values.dueDate}
+            />
+          )}
         </div>
         <div>
-          <p>Due Date</p>
-          <Input
-            type="date"
-            name="dueDate"
-            onChange={handleChange}
-            value={values.dueDate}
-          />
-        </div>
-        <div>
-          <p>Priority</p>
-          <select
-            name="priority"
-            onChange={handleChange}
-            value={values.priority}
-          >
-            <option>None</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-          </select>
+          <label>Priority</label>
+          {mode == "view" ? (
+            <p>{values.priority}</p>
+          ) : (
+            <Dropdown
+              onChange={handleChange}
+              value={values.priority}
+              options={[
+                {
+                  key: "None",
+                  value: "None",
+                },
+                {
+                  key: "Low",
+                  value: "Low",
+                },
+                {
+                  key: "Medium",
+                  value: "Medium",
+                },
+                {
+                  key: "High",
+                  value: "High",
+                },
+              ]}
+            />
+          )}
         </div>
       </div>
-      <div>
+      <div className={classes.footer}>
         <Button onClick={onCancel}>
           {mode == "view" ? "Close" : "Cancel"}
         </Button>

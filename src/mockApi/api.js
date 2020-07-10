@@ -11,16 +11,16 @@ import {
 
 const Promisify = (func, ...args) =>
   new Promise((resolve, reject) => {
+    let res = func(...args);
     setTimeout(() => {
       try {
-        let res = func(...args);
         resolve(res);
       } catch (error) {
         reject({
           msg: error.message,
         });
       }
-    }, 3000);
+    }, 0);
   });
 
 export const fetchAllTodoList = () => {
