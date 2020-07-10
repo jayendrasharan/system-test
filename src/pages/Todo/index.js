@@ -84,6 +84,7 @@ const Todo = (props) => {
             <Dropdown
               onChange={handleChange}
               value={values.priority}
+              name="priority"
               options={[
                 {
                   key: "None",

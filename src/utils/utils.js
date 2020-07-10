@@ -9,23 +9,16 @@ const filterHandler = (prop, asc) => (i1 = {}, i2 = {}) => {
 };
 
 const formatDate = (dateStr) => {
-  let months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
   let date = new Date(dateStr);
+  let getFormatedNum = (num) => {
+    return num < 10 ? "0" + num : num;
+  };
   return (
-    months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear()
+    date.getFullYear() +
+    "-" +
+    getFormatedNum(date.getMonth() + 1) +
+    "-" +
+    getFormatedNum(date.getDate())
   );
 };
 

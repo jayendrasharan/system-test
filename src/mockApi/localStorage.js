@@ -1,5 +1,6 @@
 import { TODO_STATUS, TODO_PRIORITY } from "../constants";
 import { getUUID } from "./utils";
+import sampleDate from "./testData";
 
 const setItem = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
@@ -12,17 +13,7 @@ const getItem = (key) => {
 };
 
 if (!getItem("todoList")) {
-  setItem("todoList", [
-    {
-      id: getUUID(),
-      currentState: TODO_STATUS.OPEN,
-      title: "Workout",
-      description: "I have to do gym workout today.",
-      createdAt: new Date(),
-      dueDate: new Date(),
-      priority: TODO_PRIORITY.HIGH,
-    },
-  ]);
+  setItem("todoList", sampleDate);
 }
 
 export const getTodoList = () => {
