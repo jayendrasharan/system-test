@@ -25,6 +25,7 @@ import ConfirmAlert from "../../components/ConfirmAlert";
 import Dropdown from "../../components/Dropdown";
 import Checkbox from "../../components/Checkbox";
 import { sortDataByColumn } from "./utils";
+import { formatDate } from "../../utils/utils";
 import Spinner from "../../components/Spinner";
 
 const Home = (props) => {
@@ -45,17 +46,10 @@ const Home = (props) => {
     markDone,
     markPending,
   } = props;
-  const [searchText, setSearchText] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modal, setModal] = useState(null);
   const [groupBy, setGroupBy] = useState("None");
   const [currentTab, setCurrentTab] = useState("ALL");
-  const onSearchTextChange = (event) => {
-    setSearchText(event.target.value);
-    searchData(event.target.value);
-  };
-
-  const searchData = (searchString) => {};
 
   const groupData = (data = [], groupBy) => {
     if (groupBy == "None") {
@@ -80,23 +74,40 @@ const Home = (props) => {
     return newData;
   };
 
+  const applySearch = (data) => {
+    const { searchText, columns } = props;
+    if (!searchText) return data;
+    if (searchText && searchText.trim()) {
+      return data.filter((item) => {
+        let found = false;
+        columns.forEach((col) => {
+          if (col.allowSearch) {
+            if (item[col.key] && item[col.key].includes(searchText)) {
+              found = true;
+            }
+          }
+        });
+        return found;
+      });
+    }
+    return data;
+  };
+
   const mapData = (data = []) => {
     return data.map((item, ind) => {
       if (item.type == "section") {
         return (
-          <div
-            className={
-              classes.row_item + " " + classes.item + " " + classes.actions
-            }
+          <tr
+            className={classes.row + " " + classes.sectionRow}
+            key={ind}
+            onClick={() => onRowClickHandler(item)}
           >
-            <div className={classes.row_item + " " + classes.item}>
-              <p>{item.title}</p>
-            </div>
-          </div>
+            <p className={classes.sectionTitle}>{item.title}</p>
+          </tr>
         );
       }
       return (
-        <div
+        <tr
           className={classes.row}
           key={ind}
           onClick={() => onRowClickHandler(item)}
@@ -155,11 +166,12 @@ const Home = (props) => {
                 : classes.completed
             }`}
           ></div>
-        </div>
+        </tr>
       );
     });
   };
   const mapItem = (item, col) => {
+    const { searchText } = props;
     let val = item[col.key] == "" ? "-" : item[col.key];
     if (col.allowSearch) {
       val = val.replace(searchText, `$${searchText}$`).split("$");
@@ -171,9 +183,9 @@ const Home = (props) => {
       });
     }
     return (
-      <div className={classes.row_item + " " + classes.item}>
+      <td className={classes.row_item + " " + classes.item}>
         <p>{val}</p>
-      </div>
+      </td>
     );
   };
 
@@ -191,7 +203,7 @@ const Home = (props) => {
     return columns
       .filter((col) => col.display)
       .map((item, ind) => (
-        <p
+        <th
           className={classes.row_item + " " + classes.header}
           key={ind}
           onClick={() => sortColumn(item)}
@@ -200,7 +212,7 @@ const Home = (props) => {
           {item.sort ? (
             <i class={getSortIconClass(item) + " " + classes.sort_icon}></i>
           ) : null}
-        </p>
+        </th>
       ));
   };
 
@@ -354,6 +366,14 @@ const Home = (props) => {
     );
   };
 
+  const formatData = (data = []) => {
+    return data.map((item) => ({
+      ...item,
+      createdAt: formatDate(item.createdAt),
+      dueDate: formatDate(item.dueDate),
+    }));
+  };
+
   let dataToBeMapped = [];
   switch (currentTab) {
     case "ALL":
@@ -388,16 +408,41 @@ const Home = (props) => {
       {showModal && modal}
       {props.loading && <Spinner />}
       <div className={classes.Content}>
-        {tabs.map((tab) => (
-          <Button onClick={() => setCurrentTab(tab)}>{tab}</Button>
-        ))}
         <div className={classes.flex}>
-          <div className={classes.search}>
-            <SearchBar
-              searchText={searchText}
-              onSearchTextChange={onSearchTextChange}
-            />
-            <Button onClick={addTodoClickHandler}>Add Todo</Button>
+          <div className={classes.tabs}>
+            {tabs.map((tab) => (
+              <Button
+                className={
+                  tab == currentTab ? classes.activeTab : classes.inactiveTab
+                }
+                onClick={() => setCurrentTab(tab)}
+              >
+                {tab}
+              </Button>
+            ))}
+          </div>
+          <div className={classes.tableActions}>
+            <div
+              style={{
+                marginRight: "auto",
+                display: "flex",
+                alignItems: "center",
+                marginLeft: "0",
+              }}
+            >
+              {selectedRowsCount > 0 && (
+                <React.Fragment>
+                  <p>{selectedRowsCount} items selected</p>
+                  <DeleteIcon
+                    className={classes.icon}
+                    onClick={bulkDeletedClickHandler}
+                  />
+                  <Button onClick={bulkDoneClickHandler}>Done</Button>
+                  <Button onClick={bulkReopenClickHandler}>Re-Open</Button>
+                </React.Fragment>
+              )}
+            </div>
+            <label>Group By:</label>
             <Dropdown
               options={[
                 { key: "None", value: "None" },
@@ -408,28 +453,28 @@ const Home = (props) => {
               value={groupBy}
               onChange={(e) => setGroupBy(e.target.value)}
             />
+            <Button onClick={addTodoClickHandler}>Add Todo</Button>
           </div>
-          {selectedRowsCount > 0 && (
-            <div>
-              <p>{selectedRowsCount} items selected</p>
-              <DeleteIcon
-                className={classes.icon}
-                onClick={bulkDeletedClickHandler}
+          <table>
+            <thead className={classes.row_header}>
+              <Checkbox
+                onChange={onSelectAllClickHandler}
+                checked={allChecked}
               />
-              <Button onClick={bulkDoneClickHandler}>Done</Button>
-              <Button onClick={bulkReopenClickHandler}>Re-Open</Button>
-            </div>
-          )}
-          <div className={classes.row_header}>
-            <Checkbox onChange={onSelectAllClickHandler} checked={allChecked} />
-            {getTableHeadings(columns)}
-          </div>
-          {mapData(
-            groupData(
-              sortDataByColumn(dataToBeMapped, props.activeSortColumn),
-              groupBy
-            )
-          )}
+              {getTableHeadings(columns)}
+            </thead>
+            <tbody>
+              {mapData(
+                groupData(
+                  sortDataByColumn(
+                    applySearch(formatData(dataToBeMapped)),
+                    props.activeSortColumn
+                  ),
+                  groupBy
+                )
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

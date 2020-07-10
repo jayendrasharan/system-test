@@ -15,21 +15,6 @@ const initialState = {
   tabs: ["ALL", "PENDING", "COMPLETED"],
   activeTab: "ALL",
   activeSortColumn: null,
-  selectedGroupBy: null,
-  groupByOptions: [
-    {
-      key: "createdAt",
-      title: "Created On",
-    },
-    {
-      key: "dueDate",
-      title: "Due Date",
-    },
-    {
-      key: "priority",
-      title: "Priority",
-    },
-  ],
   columns: [
     {
       title: "Description",
@@ -102,30 +87,6 @@ const initialState = {
       display: true,
     },
   ],
-};
-
-const sortDataByColumn = (data, column) => {
-  if (column) {
-    return data.sort(filterHandler(column.key, !column.asc));
-  }
-  return data;
-};
-
-const applySearch = (data, searchString, columns) => {
-  if (searchString && searchString.trim()) {
-    return data.filter((item) => {
-      let found = false;
-      columns.forEach((col) => {
-        if (col.allowSearch) {
-          if (item[col.key] && item[col.key].includes(searchString)) {
-            found = true;
-          }
-        }
-      });
-      return found;
-    });
-  }
-  return data;
 };
 
 const sortByColumn = (state, action) => {

@@ -13,7 +13,7 @@
 }
 .Content {
   position: absolute;
-  top: 1.5rem;
+  top: 6rem;
   width: 100%;
 }
 
@@ -34,19 +34,16 @@
 .row_header {
   display: flex;
   justify-content: space-between;
-  background-color: #98d6ea;
+  background-color: var(--primary);
   border-radius: 10px 10px 0 0;
   color: white;
-}
-.row:nth-child(even) {
-  background-color: #d6eeee;
 }
 .row_item {
   display: flex;
   flex: 1 1 0;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0.3rem 1rem;
 }
 .header {
   font-size: 1.2rem;
@@ -58,35 +55,6 @@
   font-weight: 600;
 }
 
-.pagenation_main {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 1rem;
-}
-.pagenation {
-  display: flex;
-  border-radius: 5px;
-  background-color: #98d6ea;
-  border: 1px solid #f1f1f1;
-}
-.btn {
-  border: none;
-  padding: 5px;
-  background-color: transparent;
-  outline: none;
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 1rem 1rem;
-  cursor: pointer;
-}
-.btn:active {
-  background-color: #c1e2ec;
-}
-.btn:first-child {
-  border-right: 1px solid #f1f1f1;
-}
 .lbl {
   background-color: white;
   color: #98d6ea;
@@ -136,4 +104,63 @@
 
 .completed {
   background-color: green;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 2rem;
+}
+
+.inactiveTab {
+  padding: 5px 8px;
+  border-radius: 20px;
+  border: 2px solid var(--primary);
+  background-color: transparent;
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all ease;
+  cursor: pointer;
+  outline: none;
+  margin: 0.3rem 0.5rem;
+}
+.inactiveTab:hover {
+  border: 2px solid var(--primary);
+  background-color: var(--primary);
+  color: var(--white);
+}
+.activeTab {
+  padding: 5px 8px;
+  border-radius: 20px;
+  border: 2px solid var(--primary);
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all ease;
+  cursor: pointer;
+  outline: none;
+  margin: 0.3rem 0.5rem;
+}
+
+.tableActions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.3rem 0;
+}
+.tableActions div > * {
+  margin-right: 0.5rem;
+}
+.tableActions > * {
+  margin-right: 0.5rem;
+}
+.sectionRow {
+  background-color: #d6eeee;
+}
+.sectionTitle {
+  font-weight: bold;
+  padding: 0.3rem 1.5rem;
 }
