@@ -1,9 +1,6 @@
----
 ## All the below features are implemented
----
 
-## Webapp can be accessed on below URL, which is deployed on firebase
-
+Webapp can be accessed on below URL, which is deployed on firebase
 https://sureify-32da6.web.app/
 
 ## Must haves - I
@@ -111,31 +108,3 @@ Click the re-open button available in the Actions column.
 1. If you are implementing your own modals, make sure we can close it by pressing escape key.
 2. Add a short-cut for focusing user on global search. For example, if user presses Shift + Ctrl + F, focus on global search input text field.
 3. Bulk action: Add checkbox in front of each row. Select multiple rows and perform bulk actions like delete and mark as done, mark as pending or any other applicable action.
-
-# Who are we looking for?
-
-- We are looking for someone who can join our front-end team and get started in no time.
-
-- The more you showcase your knowledge on React JS and its ecosystem, the happier we will feel about you.
-
-- Have you used React hooks in your applications yet? If no, don’t worry about it, if yes, give it a try today. We will be glad to see it. But again, if you are not aware of it, we like the class-based components the same.
-
-- While we wouldn’t mind if you include bootstrap or any other library for creating UI elements like button, input, textarea etc, we would really want you to build your own components like tabs, list, modal, etc.
-
-* First impression is the last impression. It might not be true, but the first page we see when we run your application, will tell a lot of things about the application. So please give some time to it, and add all the required components on the page (see the list mentioned in previous sections).
-
-- First try to create the bare-minimum (concentrate on Must haves - I), then go on to pick and complete items listed in the next section (Must haves - II).
-
-* Think dynamic, low or no hardcode - we can and will go and update the values of the attributes listed in the structure in the page 1. You should save these configuration somewhere in your source code. So, if we mark “Priority => Group by => false”, the dropdown for the group by should not list Priority as an option.
-
-Similar behaviour will be expected for other configuration items, like allow search, allow sort, etc.
-
-Hint: Create a config file to store the configuration provided in the first section and refer to it while making a decision on searching/sorting etc.
-
-- We would want you to use Redux and possibly showcase the knowledge of middlewares you have.
-
-- Even though we are not asking you to integrate any API calls, consider the CRUD operations to be asynchronous actions. Use a redux middleware of your choice, redux-thunk, redux-saga, redux-observables, and so on.
-
-Hint: Use setTimeout in your action creators to simulate the side-effect and asynchronous behaviour.
-
-See an example here: [Simulate async actions using setTimeout](https://gist.github.com/jayendrasharan/981f2931dd52836fd92b960e736c05bf#file-simulate-async-js-L16)
