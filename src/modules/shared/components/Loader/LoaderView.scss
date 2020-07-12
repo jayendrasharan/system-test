@@ -1,0 +1,30 @@
+@keyframes rotating {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.loader-wrapper{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    .loading-item{
+        position: fixed;
+        top: 50%;
+        right: 50%;
+        width: 80px;
+        height: 80px;
+        // background-size: cover;
+        // background: url('../../../../assets/logo.svg') no-repeat;
+        animation: rotating 2s linear infinite;
+    }
+}

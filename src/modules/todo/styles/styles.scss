@@ -1,0 +1,23 @@
+.form-wapper{
+    margin-left: 10px;
+    margin-top: 5px;
+    .form{
+        .item-input{
+            textarea{
+                resize: none;
+            }
+        }
+    }
+    .form-actions{
+        .app-button.raised{
+            &.add-button{
+                width: 100px;
+                height: 30px;
+            }
+            &.cancel-button{
+                width: 100px;
+                height: 30px;
+            }
+        }
+    }
+}

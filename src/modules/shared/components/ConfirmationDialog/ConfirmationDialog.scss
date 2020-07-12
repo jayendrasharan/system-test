@@ -1,0 +1,35 @@
+
+
+.dialog-wrapper{
+    display: flex;
+    // align-items: center;
+    flex-direction: column;
+    .confirmation-message{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100px;
+    }
+    .actions-wrapper{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        .app-button.raised{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            &.confirm-button{
+                width: 100px;
+                height: 30px;
+            }
+            &.cancel-button{
+                width: 100px;
+                height: 30px;
+            }
+        }
+    }
+}

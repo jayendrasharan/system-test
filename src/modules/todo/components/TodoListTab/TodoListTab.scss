@@ -1,0 +1,56 @@
+.tab-switch{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    .tab{
+        margin: 2px 5px 2px 0px;
+        padding: 2px 5px 2px 5px;
+        border: 1px solid;
+        border-width: 1px 1px 0px 1px;
+        border-color: rgb(185, 178, 178);
+        border-radius: 3px;
+        color: grey;
+        cursor: pointer;
+        &:hover{
+            color: black;
+            transform: translateY(-2px);
+        }
+        &.active{
+            transform: translateY(-3px);
+            border: 3px solid;
+            border-width: 1px 1px 0px 1px;
+            border-color: rgb(201, 18, 18);
+            font-weight: bold;
+            color: rgb(105, 95, 95);
+        }
+    }
+}
+
+.task-searcher{
+    input{
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 70vw;
+        height: 40px;
+        font-weight: bold;
+        &:focus{
+            outline: none;
+            box-shadow: 20px 20px 50px grey;;
+            background: #fff;
+            transition: box-shadow 0.5s ease-in-out;
+            &::placeholder {
+                color: red;
+            }
+        }
+        &::placeholder {
+            font-weight: bold;
+        }
+    }
+}
+
+.task-grouper{
+    margin-left: 40vw;
+    select{
+        margin-left: 10px;
+    }
+}

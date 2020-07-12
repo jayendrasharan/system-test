@@ -1,0 +1,31 @@
+.form-wrapper{
+    margin-left: 10px;
+    margin-top: 5px;
+    .form{
+        display: flex;
+        flex-direction: row;
+        .column{
+            display: flex;
+            flex-direction: column;
+            &:nth-child(2){
+                margin: 0px 0px 0px 30px;
+            }
+        }
+        .item-input{
+            margin-bottom: 15px;
+            textarea{
+                resize: none;
+                width: 300px;
+                height: 150px;
+            }
+            select:disabled{
+                opacity: 1;
+                border-color: black;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                text-indent: 1px;
+                text-overflow: '';
+            }
+        }
+    }
+}
