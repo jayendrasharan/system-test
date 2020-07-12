@@ -15,6 +15,12 @@ function TasksList({ onAction, location, selectedTodos }) {
     let todos = useSelector(state => orderBy(state.todos, [properties.sortBy], [properties.sortOrder]));
     let dispatch = useDispatch();
 
+    if(isEmpty(todos)){
+        return <div className="no-tasks-msg">
+            {"There are no tasks yet. Start Adding by clicking Add Icon"}
+        </div>
+    }
+
     if (get(location, "pathname", "").indexOf("pending") > -1) {
         todos = todos.filter(todo => todo.currentState === 0);
     } else if (get(location, "pathname", "").indexOf("completed") > -1) {

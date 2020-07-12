@@ -6,7 +6,7 @@ export let TodoReducer = (state = todos, action) => {
     let todosTemp = [...state];
     switch (action.type) {
         case ADD_TODO:
-            todosTemp.push(action.payload);
+            todosTemp = [action.payload, ...todosTemp];
             return todosTemp;
         case UPDATE_TODO:
             todosTemp = todosTemp.map(todo => (

@@ -14,10 +14,20 @@
 }
 
 .completed-todo {
-    background-color: yellowgreen;
+    background-color: lightgreen;
 }
 .field-highlight {
     background-color: yellow;
+}
+
+.no-tasks-msg {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+    opacity: 0.5;
 }
 
 .sort-field {
