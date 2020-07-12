@@ -20,7 +20,6 @@ function TaskItem({ todo, onAction, checked }) {
         <div className={cn("table-row", {
             "completed-todo": todo.currentState === 1,
         })}>
-            {/* {todo.currentState === 1 && <i className="material-icons done-icon">done</i>} */}
             <span className="checkbox-field">
                 <input
                     checked={checked}

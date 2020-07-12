@@ -8,15 +8,13 @@ class App extends React.Component {
     let redirect;
     const { location } = this.props;
 
-    if (location.pathname === "/") {
+    if (location.pathname === "/" || location.pathname === "/tasks") {
       redirect = <Redirect to={`all`} />;
     }
 
     return (
       <div className="App">
         <Switch>
-          {/* <Route path="/" exact component={TaskPage} /> */}
-          <Route path="/tasks" exact component={TaskPage} />
           <Route path="/all" component={TaskPage} />
           <Route path="/completed" component={TaskPage} />
           <Route path="/pending" component={TaskPage} />
