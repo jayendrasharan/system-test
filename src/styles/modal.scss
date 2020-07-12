@@ -33,6 +33,14 @@
         .btn {
             margin-left: 20px;
         }
+        .loading {
+            display: none;
+            margin-right: 10px;
+        }
+        .loading-visible {
+            visibility: visible;
+            margin-right: 10px;
+        }
     }
 }
 
@@ -74,6 +82,14 @@
         margin-top: 50px;
         .btn {
             margin-left: 20px;
+            .loading {
+                display: none;
+                margin-right: 10px;
+            }
+            .loading-visible {
+                visibility: visible;
+                margin-right: 10px;
+            }
         }
     }
     .error-msg {

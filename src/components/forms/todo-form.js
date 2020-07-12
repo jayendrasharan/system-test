@@ -1,16 +1,17 @@
+import cn from "classnames";
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { Col, Row } from "react-flexbox-grid";
 import Select from "react-select";
 import Modal from "../modal/modal";
 import { useDispatch } from "react-redux";
 import { addTodo, deleteTodo, updateTodo } from "../../redux/actions";
 import { CrudActions, priorityOptions, CurrentStates } from "../../constants";
-import { isEmpty, map } from "lodash";
+import { isEmpty, map, isEqual } from "lodash";
 
 function TaskForm(props) {
     const [todo, setTodo] = useState(props.todo);
     const [errors, setErrors] = useState([]);
+    const [loader, setLoader] = useState(false);
     const dispatch = useDispatch();
     const isViewMode = props.action === CrudActions.View;
 
@@ -64,16 +65,39 @@ function TaskForm(props) {
 
 
     const onSubmit = () => {
-        if (!validateFields()) {
-            if (props.action === CrudActions.Add && window.confirm("You want to save the changes?")) {
-                dispatch(addTodo(todo));
-                props.onCancel();
-            } else if (props.action === CrudActions.Update && window.confirm("You want to save the changes?")) {
-                dispatch(updateTodo(todo));
-                props.onCancel();
-            } else if (props.action === CrudActions.Delete) {
-                dispatch(deleteTodo(todo.id));
-                props.onCancel();
+        if (props.action === CrudActions.Update) {
+            if (isEqual(props.todo, todo)) {
+                alert("There is no need to update. You didn't make any change");
+                setLoader(false);
+                return;
+            }
+        }
+        if (!validateFields() && window.confirm("You want to save the changes?")) {
+            setLoader(true);
+            switch (props.action) {
+                case CrudActions.Add:
+                    setTimeout(function () {
+                        dispatch(addTodo(todo));
+                        setLoader(false);
+                        props.onCancel();
+                    }, 5000);
+                    break;
+                case CrudActions.Update:
+                    setTimeout(function () {
+                        dispatch(updateTodo(todo));
+                        setLoader(false);
+                        props.onCancel();
+                    }, 5000);
+                    break;
+                case CrudActions.Delete:
+                    setTimeout(function () {
+                        dispatch(deleteTodo(todo.id));
+                        setLoader(false);
+                        props.onCancel();
+                    }, 5000);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -221,13 +245,17 @@ function TaskForm(props) {
                                 <Col lg={12} className="buttons">
                                     <button
                                         className="btn btn-link"
-                                        onClick={props.onCancel}
+                                        onClick={() => setTodo(props.todo)}
                                     >
                                         Cancel
                                     </button>
                                     <button
                                         className="btn btn-primary"
                                         onClick={onSubmit}>
+                                        <i className={cn("fa fa-spinner fa-spin", {
+                                            "loading-visible": loader,
+                                            "loading": !loader,
+                                        })}></i>
                                         {props.action} Task
                                     </button>
                                 </Col>
@@ -250,7 +278,14 @@ function TaskForm(props) {
                                 >
                                     No
                                 </button>
-                                <button className="btn btn-danger" onClick={onSubmit}>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={onSubmit}
+                                >
+                                    <i className={cn("fa fa-spinner fa-spin", {
+                                        "loading-visible": loader,
+                                        "loading": !loader,
+                                    })}></i>
                                     Yes
                                 </button>
                             </Col>
@@ -260,15 +295,5 @@ function TaskForm(props) {
         </React.Fragment>
     );
 }
-
-TaskForm.propTypes = {
-    todo: PropTypes.object,
-    onCancel: PropTypes.func
-};
-
-TaskForm.defaultProps = {
-    todo: {},
-    onCancel: () => { }
-};
 
 export default TaskForm;
