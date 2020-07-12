@@ -1,0 +1,79 @@
+.field-heading {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    height: 50px;
+    width: 150px;
+    font-weight: bold;
+    padding: 10px 0px;
+}
+
+.group-heading {
+    margin: 10px;
+    font-weight: bold;
+}
+
+.completed-todo {
+    background-color: yellowgreen;
+}
+.field-highlight {
+    background-color: yellow;
+}
+
+.sort-field {
+    cursor: pointer;
+}
+
+.table-row {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid gray;
+}
+
+.checkbox-field {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    min-height: 50px;
+    width: 0px !important;
+}
+
+.field-item {
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    min-height: 50px;
+    width: 150px;
+    .edit-icon {
+        margin-right: 25px;
+    }
+    .delete-icon {
+        color: #dc3545;
+        margin-right: 25px;
+    }
+    .status-btn {
+        width: 100px;
+    }
+}
+
+.quick-action-header {
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    margin-left: 24px;
+}
+
+.quick-btn {
+    width: 100px;
+    margin: 24px 35px;
+    height: 46px;
+}
+
+.done-icon {
+    position: absolute;
+    left: 5px;
+    color: green;
+    font-size: 50px !important;
+}

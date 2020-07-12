@@ -1,0 +1,84 @@
+.todo-header {
+    font-family: "Georgia", "Times New Roman", "Times", "serif";
+    font-size: 35px;
+    margin: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.search-input {
+    margin: 20px;
+    display: inline-block;
+}
+
+.search-icon {
+    position: absolute;
+    right: 20px;
+    top: 7px;
+    color: black;
+    opacity: 0.5;
+}
+
+.add-task-div {
+    justify-content: right;
+    border: 1px solid;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 70px;
+    border-radius: 50%;
+    height: 70px;
+    margin: 20px;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1000;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.add-btn {
+    padding: 20px;
+    color: white;
+    font-size: 30px !important;
+    width: 30px !important;
+}
+
+.groupby-dropdown {
+    display: inline-block;
+    z-index: 1000;
+    padding: 0 !important;
+}
+
+.material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    width: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: "liga";
+}
