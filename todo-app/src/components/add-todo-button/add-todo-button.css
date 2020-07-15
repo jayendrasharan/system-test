@@ -1,0 +1,10 @@
+.add-btn-cls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    font-size: 3rem;
+    cursor: pointer;
+   }
