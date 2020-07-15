@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
 export default function AddDueDate(props) {
     const classes = useStyles();
     const [dueDate, setDueDate] = React.useState(props.editFlag ? props.editRow.dueDate : '');
+    const handleChangeInDueDate = (event) => {
+        setDueDate(event.target.value);
+        props.addDueDate(event);
+    }
     return (
         <form className={classes.container} noValidate>
             <TextField
@@ -29,7 +33,7 @@ export default function AddDueDate(props) {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                onChange={props.addDueDate}
+                onChange={handleChangeInDueDate}
             />
         </form>
     );

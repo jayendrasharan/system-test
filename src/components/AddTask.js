@@ -66,6 +66,7 @@ export default function AddTask(props) {
       setDescription('');
       setDueDate('');
       setPriority('');
+      props.handleEditFlag();
   };
 
     const addSummary = (event) => {
@@ -118,15 +119,17 @@ export default function AddTask(props) {
     };
 
     const handleEdit = () => {
-        if (!summary) {
+
+        if (!summary&&!props.editRow.summary) {
             alert("Enter Summary");
             return;
         }
-        //if (summary.length < 10) {
-        //    alert("Summary should be more than 10 characters");
-        //    return;
-        //}
-        if (summary.length > 141) {
+        
+        if (summary && summary.length < 10) {
+            alert("Summary should be more than 10 characters");
+            return;
+        }
+        if (summary && summary.length > 141) {
             alert("Summary should be less than 140 characters");
             return;
         }
@@ -141,8 +144,26 @@ export default function AddTask(props) {
                 return;
             }
         }
+        var par1, par2, par3, par4;
+        if (!summary)
+            par1 = props.editRow.summary;
+        else
+            par1 = summary;
+        if (!description)
+            par2 = props.editRow.description;
+        else
+            par2 = description;
+        if (!dueDate)
+            par3 = props.editRow.dueDate;
+        else
+            par3 = dueDate;
+        if (!priority)
+            par4 = props.editRow.priority;
+        else
+            par4 = priority;
 
-        props.edit(summary, description, dueDate, priority);
+            props.edit(par1, par2, par3, par4);
+
         setOpen(false);
         setSummary('');
         setDescription('');
@@ -156,7 +177,7 @@ export default function AddTask(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-          <h2 id="simple-modal-title">Add Task</h2>
+          <h2 id="simple-modal-title">{props.editFlag ? 'Edit Task' : 'Add Task'}</h2>
           <AddTaskField addSummary={addSummary} addDescription={addDescription} editRow={props.editRow} editFlag={props.editFlag}/>
           <AddDueDate addDueDate={addDueDate} editRow={props.editRow} editFlag={props.editFlag}/>
           <AddPriority addPriority={addPriority} editRow={props.editRow} editFlag={props.editFlag}/>

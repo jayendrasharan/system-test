@@ -84,7 +84,7 @@ function NavBar(props) {
                         aria-label="open drawer"
                         size="small"
                     >
-                        <AddTask addSummary={props.addSummary} addDescription={props.addDescription} addDueDate={props.addDueDate} addPriority={props.addPriority} submit={props.submit} editRow={props.editRow} editFlag={props.editFlag} edit={props.edit}/>
+                        <AddTask addSummary={props.addSummary} addDescription={props.addDescription} addDueDate={props.addDueDate} addPriority={props.addPriority} submit={props.submit} editRow={props.editRow} editFlag={props.editFlag} edit={props.edit} handleEditFlag={props.handleEditFlag}/>
                    </IconButton>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>

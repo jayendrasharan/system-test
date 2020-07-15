@@ -8,12 +8,12 @@ export class App extends React.Component {
         super();
         this.state = {
             title: 'All Tasks', listOfTasks: [
-                { key: 1, summary: 'Personal', description: 'personalDesc', dueDate: '2020-07-20', priority: 'Low', createdDate: '2020-07-15', status: 'Close' },
-                { key: 2, summary: 'Work', description: 'workDesc', dueDate: '2020-07-20', priority: 'High', createdDate: '2020-07-15', status: 'Open' },
+                { key: 1, summary: 'PersonalWork', description: 'personalDesc', dueDate: '2020-07-20', priority: 'Low', createdDate: '2020-07-15', status: 'Close' },
+                { key: 2, summary: 'OfficeWork', description: 'workDesc', dueDate: '2020-07-20', priority: 'High', createdDate: '2020-07-15', status: 'Open' },
                 { key: 3, summary: 'GroceryList', description: 'groceryListDesc', dueDate: '2020-07-20', priority: 'Medium', createdDate: '2020-07-15', status: 'Close' }],
             filteredTasks: [
-                { key: 1, summary: 'Personal', description: 'personalDesc', dueDate: '2020-07-20', priority: 'Low', createdDate: '2020-07-15', status: 'Close' },
-                { key: 2, summary: 'Work', description: 'workDesc', dueDate: '2020-07-20', priority: 'High', createdDate: '2020-07-15', status: 'Open' },
+                { key: 1, summary: 'PersonalWork', description: 'personalDesc', dueDate: '2020-07-20', priority: 'Low', createdDate: '2020-07-15', status: 'Close' },
+                { key: 2, summary: 'OfficeWork', description: 'workDesc', dueDate: '2020-07-20', priority: 'High', createdDate: '2020-07-15', status: 'Open' },
                 { key: 3, summary: 'GroceryList', description: 'groceryListDesc', dueDate: '2020-07-20', priority: 'Medium', createdDate: '2020-07-15', status: 'Close' }
             ],
             editRow:'',editFlag:false
@@ -219,6 +219,10 @@ export class App extends React.Component {
         });
     }
 
+    handleEditFlag() {
+        this.setState({ editFlag: false });
+    }
+
     render() {
         return (<div className="App">
             <NavBar
@@ -228,6 +232,7 @@ export class App extends React.Component {
                 submit={this.addTaskIntoList.bind(this)}
                 edit={this.editTaskInList.bind(this)}
                 updateSearch={this.updateSearch.bind(this)}
+                handleEditFlag={this.handleEditFlag.bind(this)}
             />
             <Todo
                 title={this.state.title}

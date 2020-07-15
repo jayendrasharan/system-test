@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleSelect(props) {
   const classes = useStyles();
     const [priority, setPriority] = React.useState(props.editFlag ? props.editRow.priority : '');
-  const handleChange = event => {
+
+  const handleChangeInPriority = event => {
       setPriority(event.target.value);
       props.addPriority(event);
   };
@@ -31,7 +32,7 @@ export default function SimpleSelect(props) {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={priority}
-                  onChange={handleChange}
+                  onChange={handleChangeInPriority}
               >
           <MenuItem value={"None"}>None</MenuItem>
           <MenuItem value={"Low"}>Low</MenuItem>
