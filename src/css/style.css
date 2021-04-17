@@ -1,0 +1,38 @@
+.nav-link{
+    width: 33.3%;
+}
+
+.popup {  
+    position: absolute;
+    width: 100%;
+    padding: 28px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);; 
+}  
+
+.popup_inner {  
+    position: absolute;
+    padding: 20px;
+    left: 23%;
+    top: 15%;
+    right: 23%;
+    margin: auto;
+    border-radius: 20px;
+    background: white;  
+}
+
+.btn{
+    margin-right: 10px;
+}
+
+.table tbody span{
+    margin-right: 10px;
+}
+
+i, input[type='radio']{
+    cursor: pointer;
+}
