@@ -1,0 +1,35 @@
+@import '../../../shared/styles/base/src/index.scss';
+.task-list-wrapper {
+  min-width: 600px;
+  padding: 32px;
+  @include tablet {
+    max-width: 90%;
+    margin: auto;
+  }
+  @include desktop {
+    max-width: 1280px;
+    margin: auto;
+    padding: 32px;
+  }
+  .tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 0;
+  }
+  .task-list-container {
+    @include mobile {
+      margin: 32px 0;
+    }
+  }
+  li.tab-title {
+    padding: 0 20px;
+  }
+  .global-task-btn {
+    padding: 16px;
+    margin: 8px;
+    font-size: 15px;
+    background-color: $grey;
+    color: $black;
+  }
+}

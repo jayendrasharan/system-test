@@ -1,4 +1,4 @@
-# system-test
+# system-tests
 Sureify - Front end system test
 
 # General Instructions

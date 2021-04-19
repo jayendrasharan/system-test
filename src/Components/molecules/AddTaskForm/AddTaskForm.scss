@@ -1,0 +1,52 @@
+.task-form {
+  .input-conatiner {
+    padding-bottom: 16px;
+    .input-element {
+      height: 32px;
+    }
+  }
+  .btn-section {
+    display: flex;
+    justify-content: space-around;
+  }
+  .react-datepicker__input-container {
+    input {
+      height: 32px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+  }
+  .input-container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+    .label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+
+  .input-element {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      background-color: #ccc;
+    }
+    &.invalid {
+      border: 1px solid red;
+      background-color: #fda49a;
+    }
+  }
+}

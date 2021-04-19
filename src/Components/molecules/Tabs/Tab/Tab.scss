@@ -1,0 +1,46 @@
+@import '../../../../shared/styles/base/src/index.scss';
+
+.tabs-wrapper {
+  .tab-title {
+    list-style: none;
+  }
+  .tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 0;
+  }
+  .cta {
+      box-sizing: border-box;
+      display: block;
+      height: 48px;
+      min-width: auto;
+      padding: 0.75rem;
+      text-decoration: none;
+      color: $black;
+      padding-bottom: 8px;
+      @include x-small {
+        box-sizing: unset;
+        height: 27px;
+        padding: 7px;
+      }
+    }
+
+  .selected-tab {
+    .cta {
+      border-bottom: 2px solid $yellow;
+    }
+
+    &.icon-only {
+      background-color: $heathrow-purple;
+
+      .icon {
+        fill: $white;
+      }
+
+      .cta {
+        border-bottom: 0;
+      }
+    }
+  }
+}
