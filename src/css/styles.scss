@@ -1,0 +1,69 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+    .loader {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: #607d8b57;
+        vertical-align: middle;
+        display: flex;
+        justify-content: space-evenly;
+        z-index: 99999;
+    }
+    .nav-link {
+        &.active {
+            background-color: #d6d9e724!important;
+        }
+    }
+    mark {
+        background: yellow;
+    }
+    .db {
+        display: block!important;
+    }
+    .flex {
+        display: flex;
+    }
+    .modal-form {
+        .modal-dialog {
+            max-width: 600px;
+        } 
+    }
+    .modal {
+        background: #00000052;
+    }
+    .spinner {
+        position: absolute;
+        z-index: 9;
+        left: 50%;
+    }
+    .red-bg {
+        background: #eac8c8;
+    }
+    .green-bg {
+        background: #f2ffe4;
+    }
+    #root {
+        height: 100vh;
+        .search {
+            height: 80px;
+            background: #d6d9e7;
+        }
+        .todos {
+            height: calc(100vh - 160px);
+            background: #fdfdfd;
+        }
+        .footer {
+            background: #d6d9e7;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            button {
+                align-self: flex-end;
+            }             
+        }
+    }
+}
